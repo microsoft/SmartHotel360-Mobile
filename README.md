@@ -24,7 +24,7 @@ The SmartHotel app is available for three platforms:
 
 The SmartHotel Maintenance app is available only for iOS.
 
-## Xamarin.Forms App (SmartHotel)
+## Xamarin.Forms App (SmartHotel360)
 
 Xamarin.Forms allows you to build native UIs for iOS, Android, macOS, Linux and Windows from a single, shared codebase. You can dive into mobile development with Xamarin.Forms by following our free self-guided learning from Xamarin University. This project exercises the following patterns and features:
 
@@ -52,17 +52,17 @@ Xamarin.Forms allows you to build native UIs for iOS, Android, macOS, Linux and 
 
 ## Screens
 
-**SmartHotel**
+**SmartHotel360 Mobile Apps**
 
 <img src="images/home.png" Width="210" /> <img src="images/menu.png" Width="210" /> <img src="images/suggestions.png" Width="210" /> <img src="images/myroom.png" Width="210" />
 
 <img src="images/home-desktop.png" Width="420" /> <img src="images/suggestions-desktop.png" Width="420" />
 
-**SmartHotel Maintenance**
+**SmartHotel360 Maintenance**
 
 <img src="images/maintenance.png" Width="210" />
 
-**SmartHotel NFC**
+**SmartHotel360 NFC**
 
 <img src="images/nfc.png" Width="210" />
 
