@@ -2,7 +2,7 @@
 
 During our **Connect(); 2017** event this year we presented beautiful Xamarin demos.
 
-This year, we built the technology stack for a fictional company named SmartHotel, which allows users to manage their stay at the hotel.
+This year, we built the technology stack for a fictional company named SmartHotel360, which allows users to manage their stay at the hotel.
 
 **Note:** This document is about the **Xamarin** apps.
 
