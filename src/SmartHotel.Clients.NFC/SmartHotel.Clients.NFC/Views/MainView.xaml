@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.NFC.Views.MainView"     
+    xmlns:controls="clr-namespace:SmartHotel.Clients.NFC.Controls;assembly=SmartHotel.Clients.NFC"
+    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <xamanimation:StoryBoard
+                x:Key="NfcImageAnimation"           
+                Target="{x:Reference NfcImage}">
+                <xamanimation:ShakeAnimation />
+            </xamanimation:StoryBoard>
+
+            <Color x:Key="CardBackgroundColor">#F8F8F8</Color>
+            <Color x:Key="ChartDefaultColor">#66E7E7E7</Color>
+            <Color x:Key="ChartValueColor">#328C92</Color>
+
+            <Style x:Key="TitleTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsLightLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="HorizontalOptions" 
+                        Value="Center" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource HugeSize}" />
+            </Style>
+
+            <Style x:Key="SubTitleTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource TitleTextStyle}">
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MidMediumSize}" />
+                <Setter Property="Margin" 
+                        Value="0, -18, 0, 12" />
+            </Style>
+
+            <Style x:Key="LogoStyle" 
+                   TargetType="Image">
+                <Setter Property="Aspect" 
+                        Value="AspectFit" />
+                <Setter Property="WidthRequest" 
+                        Value="150" />
+                <Setter Property="Margin" 
+                        Value="24, 12, 24, 0" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Triggers>
+        <EventTrigger Event="Appearing">
+            <xamanimation:BeginAnimation 
+                Animation="{StaticResource NfcImageAnimation}" />
+        </EventTrigger>
+    </ContentPage.Triggers>
+    <ContentPage.Content>
+        <Grid>
+            <ffimageloading:CachedImage   
+                Aspect="AspectFill"
+                DownsampleToViewSize="True">
+                <ffimageloading:CachedImage.Source>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="bg_splash" />
+                        <On Platform="UWP" Value="Assets/bg_splash.png" />
+                    </OnPlatform>
+                </ffimageloading:CachedImage.Source>
+            </ffimageloading:CachedImage>
+            <Grid 
+                BackgroundColor="{StaticResource BlackTextColor}"
+                Opacity="0.5"/>
+            <controls:CustomFrame
+                HasShadow="True"
+                CornerRadius="4"
+                Margin="48, 60">
+                <Grid
+                    RowSpacing="0"
+                    BackgroundColor="{StaticResource CardBackgroundColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="12" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="1"
+                        Text="{Binding Title}"
+                        Style="{StaticResource TitleTextStyle}"/>
+                    <Label 
+                        Grid.Row="2"
+                        Text="{Binding SubTitle}"
+                        Style="{StaticResource SubTitleTextStyle}"/>
+                    <Grid
+                        Grid.Row="3">
+                        <Image  
+                            Aspect="AspectFit"
+                            Margin="24">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="bg_1" />
+                                    <On Platform="UWP" Value="Assets/bg_1.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Image  
+                            Aspect="AspectFit"
+                            Margin="24">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="bg_2" />
+                                    <On Platform="UWP" Value="Assets/bg_2.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Image  
+                            x:Name="NfcImage"
+                            Aspect="AspectFit"
+                            Margin="24">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="i_nfc" />
+                                    <On Platform="UWP" Value="Assets/i_nfc.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <!-- AVATAR -->
+                        <ffimageloading:CachedImage 
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            Source="{Binding Avatar}"
+                            Margin="80">
+                            <ffimageloading:CachedImage.Transformations>
+                                <transformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+                        <!-- DONUT CHART -->
+                        <controls:AnimatedDonutChart
+                            DefaultColor="{StaticResource ChartDefaultColor}"
+                            ValueColor="{StaticResource ChartValueColor}"
+                            StrokeHeight="12"
+                            Percentage="{Binding Percentage}"
+                            Speed="5"/>
+                    </Grid>
+                    <Image  
+                        Grid.Row="4"
+                        Style="{StaticResource LogoStyle}">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="logo" />
+                                <On Platform="UWP" Value="Assets/logo.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+                <controls:CustomFrame.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        NumberOfTapsRequired="2"
+                        Command="{Binding ResetCommand}" />
+                </controls:CustomFrame.GestureRecognizers>
+            </controls:CustomFrame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

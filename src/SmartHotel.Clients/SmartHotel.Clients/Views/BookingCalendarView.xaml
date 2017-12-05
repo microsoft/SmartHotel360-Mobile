@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.BookingCalendarView"      
+    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation" 
+    xmlns:utils="clr-namespace:SmartHotel.Clients.Core.Utils;assembly=SmartHotel.Clients.Core"  
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core" 
+    BackgroundColor="{StaticResource WhiteColor}"
+    utils:NavigationBarAttachedProperty.TextColor="{StaticResource WhiteColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <xamanimation:StoryBoard 
+                x:Key="CalendarTranslationAnimation" 
+                Target="{x:Reference Calendar}">
+                <xamanimation:TranslateToAnimation 
+                    TranslateY="0"
+                    Easing="CubicOut" 
+                    Duration="750" />
+            </xamanimation:StoryBoard>
+
+            <Style x:Key="WhenTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsMediumLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource BigSize}" />
+                <Setter Property="VerticalOptions" 
+                        Value="End" />
+                <Setter Property="Margin" 
+                        Value="24, 0, 0, 18" />
+            </Style>
+
+            <Style x:Key="CityTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource WhenTextStyle}">
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MediumSize}" />
+                <Setter Property="Margin" 
+                        Value="24, 0, 0, 60" />
+            </Style>
+
+            <Style x:Key="SearchPanelStyle" 
+                   TargetType="Grid">
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="HorizontalOptions" 
+                        Value="FillAndExpand" />
+                <Setter Property="HeightRequest" 
+                        Value="48" />
+            </Style>
+
+            <Style x:Key="RangeTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource GreenColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MidMediumSize}" />
+                <Setter Property="VerticalOptions" 
+                        Value="Center" />
+                <Setter Property="Margin" 
+                        Value="0" />
+            </Style>
+
+            <Color x:Key="NextButtonColor">#BD4B14</Color>
+
+            <Style x:Key="NextTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansSemiBoldLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Color x:Key="SelectedDateColor">#48989D</Color>
+            
+            <Style x:Key="DateRangeFrameStyle" 
+                   TargetType="Frame">
+                <Setter Property="Margin"
+                    Value="32, 0" />
+                <Setter Property="HasShadow"
+                    Value="True" />
+                <Setter Property="CornerRadius"
+                    Value="4" />
+                <Setter Property="HeightRequest" 
+                        Value="48" />
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="VerticalOptions"
+                        Value="Start" />
+                <Setter Property="VerticalOptions"
+                        Value="Start" />
+                <Setter Property="TranslationY"
+                        Value="-14" />
+                <Setter Property="Padding">
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android, iOS" Value="10, 0" />
+                    </OnPlatform>
+                </Setter>
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Triggers>
+        <EventTrigger Event="Appearing">
+            <xamanimation:BeginAnimation 
+                Animation="{StaticResource CalendarTranslationAnimation}" />
+        </EventTrigger>
+    </ContentPage.Triggers>
+    <ContentPage.Content>
+        <Grid    
+            AutomationId="calendar">
+            <Grid     
+                BackgroundColor="{StaticResource WhiteColor}"
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.4*" />
+                    <RowDefinition Height="7.6*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <controls:iOSStatusBarBackground />
+                <!-- Top image -->
+                <Image 
+                    Grid.Row="0"
+                    Aspect="AspectFill">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="img_header_background_1" />
+                            <On Platform="UWP" Value="Assets/img_header_background_1.png" />
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+                <Label 
+                    Grid.Row="0"
+                    Text="{Binding City.Name}"
+                    Style="{StaticResource CityTextStyle}"/>
+                <Label 
+                    Grid.Row="0"
+                    Text="When"
+                    Style="{StaticResource WhenTextStyle}"/>
+                <StackLayout   
+                    Grid.Row="1">
+                    <StackLayout.Spacing>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="1" />
+                            <On Platform="iOS, UWP" Value="8" />
+                        </OnPlatform>
+                    </StackLayout.Spacing>
+                    <controls:ButtonFrame
+                        Style="{StaticResource DateRangeFrameStyle}">
+                        <Grid
+                            Style="{StaticResource SearchPanelStyle}">
+                            <StackLayout
+                                Orientation="Horizontal">
+                                <Label
+                                    Text="{Binding From, StringFormat='{0:ddd, MMM dd}'}"
+                                    Margin="12, 0, 0, 0"
+                                    Style="{StaticResource RangeTextStyle}"/>
+                                <Label
+                                    Text="-"  
+                                    Style="{StaticResource RangeTextStyle}"/>
+                                <Label
+                                    Text="{Binding Until, StringFormat='{0:ddd, MMM dd}'}"
+                                    Style="{StaticResource RangeTextStyle}"/>
+                            </StackLayout>
+                        </Grid>
+                    </controls:ButtonFrame>
+                </StackLayout>
+                <!-- Calendar -->
+                <Grid
+                    Grid.Row="1"
+                    Margin="12, 48, 12, 12">
+                    <controls:Calendar 
+                        x:Name="Calendar"
+                        TranslationY="150"
+                        SelectedDates="{Binding Dates, Mode=TwoWay}"
+                        StartDay="Sunday" 
+                        DatesFontSize="12"
+                        SelectedFontSize="12"
+                        WeekdaysFontSize="12"
+                        TitleLabelFontSize="20"
+                        SelectedBorderWidth="0"
+                        BorderWidth="0"
+                        DisabledFontSize="12"
+                        DisabledBorderWidth="6"
+                        EnableTitleMonthYearView="True"
+                        WeekdaysShow="True"
+                        WeekdaysFontAttributes="Bold"
+                        DisabledBorderColor="{StaticResource WhiteColor}"
+                        DisabledBackgroundColor="{StaticResource WhiteColor}"
+                        BorderColor="{StaticResource WhiteColor}"
+                        DatesBackgroundColor="{StaticResource WhiteColor}"
+                        TitleLeftArrowTextColor="{StaticResource DarkGrayColor}"
+                        TitleRightArrowTextColor="{StaticResource DarkGrayColor}"
+                        SelectedTextColor="{StaticResource SelectedDateColor}"
+                        SelectedBorderColor="{StaticResource WhiteColor}"
+                        MultiSelectDates="True" 
+                        SelectRange="True"
+                        DateCommand="{Binding SelectedDateCommand}"
+                        HorizontalOptions="Center">
+                        <controls:Calendar.SelectedBackgroundImage>
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android, iOS" Value="ball" />
+                                <On Platform="UWP" Value="Assets/ball.png" />
+                            </OnPlatform>
+                        </controls:Calendar.SelectedBackgroundImage>
+                        <controls:Calendar.SelectedRangeBackgroundImage>
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android, iOS" Value="selected" />
+                                <On Platform="UWP" Value="Assets/selected.png" />
+                            </OnPlatform>
+                        </controls:Calendar.SelectedRangeBackgroundImage>
+                        <controls:Calendar.FirstSelectedBackgroundImage>
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android, iOS" Value="ball_left" />
+                                <On Platform="UWP" Value="Assets/ball_left.png" />
+                            </OnPlatform>
+                        </controls:Calendar.FirstSelectedBackgroundImage>
+                        <controls:Calendar.LastSelectedBackgroundImage>
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android, iOS" Value="ball_right" />
+                                <On Platform="UWP" Value="Assets/ball_right.png" />
+                            </OnPlatform>
+                        </controls:Calendar.LastSelectedBackgroundImage>
+                    </controls:Calendar>
+                </Grid>
+                <!-- Next button -->
+                <Grid 
+                    AutomationId="continue"
+                    Grid.Row="2"
+                    BackgroundColor="{StaticResource NextButtonColor}"                 
+                    HeightRequest="{Binding IsNextEnabled, Converter={StaticResource EnabledToHeightConverter}}">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding NextCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label 
+                        Text="NEXT"
+                        Style="{StaticResource NextTextStyle}"/>
+                </Grid>
+            </Grid>
+            <ActivityIndicator 
+                Color="{StaticResource AccentColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

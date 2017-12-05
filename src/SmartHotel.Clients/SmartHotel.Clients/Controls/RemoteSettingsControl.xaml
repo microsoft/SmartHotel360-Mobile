@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartHotel.Clients.Core.Controls.RemoteSettingsControl"
+             BackgroundColor="{StaticResource WhiteColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <!-- COLORS -->
+            <Color x:Key="BlackTextColor">#253748</Color>
+            <Color x:Key="OrangeColor">#BC4C1B</Color>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            
+            <!-- FONTS -->
+            <OnPlatform x:Key="PoppinsBold"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Bold"
+                        Android="Poppins-Bold.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Bold.ttf#Poppins"/>
+
+            <OnPlatform x:Key="PoppinsRegular"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Regular"
+                        Android="Poppins-Regular.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Regular.ttf#Poppins"/>
+
+            <OnPlatform x:Key="PoppinsSemiBold"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-SemiBold"
+                        Android="Poppins-SemiBold.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-SemiBold.ttf#Poppins"/>
+
+            <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double"
+                        iOS="11"
+                        Android="12"
+                        WinPhone="12"/>
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="12"
+                        Android="14"
+                        WinPhone="14"/>
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="14"
+                        Android="16"
+                        WinPhone="16"/>
+
+            <!-- STYLES -->
+            <Style x:Key="BaseLabelStyle" TargetType="{x:Type Label}">
+            </Style>
+
+            <Style TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}" />
+
+            <Style x:Key="PoppinsBoldLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                 Value="{StaticResource PoppinsBold}" />
+            </Style>
+
+            <Style x:Key="PoppinsRegularLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+            </Style>
+
+            <Style x:Key="PoppinsSemiBoldLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource PoppinsSemiBold}" />
+            </Style>
+
+            <Style x:Key="SettingsTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsBoldLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MediumSize}" />
+            </Style>
+
+            <Style x:Key="SettingsValueTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsSemiBoldLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MidMediumSize}" />
+            </Style>
+
+            <Style x:Key="SettingsValueStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource OrangeColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource LittleSize}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+</ContentView>

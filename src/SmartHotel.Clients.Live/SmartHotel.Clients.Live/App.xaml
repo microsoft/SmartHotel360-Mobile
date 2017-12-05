@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartHotel.Clients.Live.App">
+	<Application.Resources>
+        <ResourceDictionary>
+
+            <!-- COLORS -->
+            <Color x:Key="AccentColor">#BC4C1B</Color>
+            <Color x:Key="BackgroundColor">#212C37</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="BlackTextColor">#253748</Color>
+            <Color x:Key="BlueColor">#0072C6</Color>
+            <Color x:Key="OrangeColor">#BC4C1B</Color>
+            <Color x:Key="LightOrangeColor">#D87E56</Color>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            <Color x:Key="ValidationErrorColor">#FF204F</Color>
+            <Color x:Key="GrayColor">#F6F1E9</Color>
+            
+            <!-- FONT SIZES -->
+            <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double"
+                        iOS="11"
+                        Android="12"
+                        WinPhone="12"/>
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="12"
+                        Android="14"
+                        WinPhone="14"/>
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="14"
+                        Android="16"
+                        WinPhone="16"/>
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double"
+                        iOS="16"
+                        Android="18"
+                        WinPhone="18"/>
+
+            <OnPlatform x:Key="LargerSize"
+                        x:TypeArguments="x:Double"
+                        iOS="18"
+                        Android="20"
+                        WinPhone="20"/>
+
+            <OnPlatform x:Key="BigSize"
+                        x:TypeArguments="x:Double"
+                        iOS="20"
+                        Android="24"
+                        WinPhone="24"/>
+
+            <OnPlatform x:Key="ExtraBigSize"
+                      x:TypeArguments="x:Double"
+                      iOS="24"
+                      Android="32"
+                      WinPhone="32"/>
+
+            <OnPlatform x:Key="HugeSize"
+                        x:TypeArguments="x:Double"
+                        iOS="32"
+                        Android="48"
+                        WinPhone="48"/>
+            
+            <!-- STYLES -->
+            <Style x:Key="BaseButtonStyle"
+                   TargetType="{x:Type Button}">
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="HeightRequest" Value="73" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource MidMediumSize}" />
+            </Style>
+
+            <Style TargetType="{x:Type Button}"
+                   BasedOn="{StaticResource BaseButtonStyle}" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

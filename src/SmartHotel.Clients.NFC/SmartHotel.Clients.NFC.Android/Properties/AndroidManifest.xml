@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest 
+  xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:versionCode="1" 
+  android:versionName="1.0" 
+  package="com.microsoft.smarthotel.NFC" 
+  android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="15" />
+	<application android:label="SmartHotel NFC"></application>
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.NFC" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.INTERNET" />
+</manifest>

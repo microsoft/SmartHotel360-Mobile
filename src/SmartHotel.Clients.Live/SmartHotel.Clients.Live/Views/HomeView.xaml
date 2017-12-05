@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Live.Views.HomeView"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    Title="SmartHotel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            
+            <Style x:Key="BookTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="24, 0" />
+            </Style>
+
+            <Style x:Key="BookConferenceTextStyle" 
+                   TargetType="Label" 
+                   BasedOn="{StaticResource BookTextStyle}">
+                <Setter Property="TextColor" Value="{StaticResource OrangeColor}" />
+            </Style>
+
+            <Style x:Key="ChartTextStyle" 
+                   TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Margin" Value="16, 16, 0, 0" />
+            </Style>
+
+            <Style x:Key="SuggestionsTextStyle" 
+                   TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource OrangeColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="Margin" Value="16, 16, 0, 0" />
+            </Style>
+
+            <Style x:Key="RestaurantTextStyle" 
+                   TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="Margin" Value="16, 0" />
+            </Style>
+
+            <Style x:Key="RestaurantDetailTextStyle" 
+                   TargetType="Label" 
+                   BasedOn="{StaticResource RestaurantTextStyle}">
+                <Setter Property="FontSize" 
+                        Value="{StaticResource LittleSize}" />
+            </Style>
+
+            <Style x:Key="SeeAllTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource SuggestionsTextStyle}">
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+                <Setter Property="Margin" Value="0, 16, 16, 0" />
+            </Style>
+            
+            <Style x:Key="NotificationsStyle" 
+                   TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+            </Style>
+            
+            <Style x:Key="NotificationTitleStyle" 
+                   TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+            </Style>
+
+            <Style x:Key="NotificationSubTitleStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="Opacity" Value="0.8" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid     
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4.6*" />
+                    <RowDefinition Height="5.4*" />
+                </Grid.RowDefinitions>
+                <Grid
+                    Grid.Row="0">
+                    <Image  
+                        Aspect="AspectFill">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="hero_image.png" />
+                                <On Platform="UWP" Value="Assets/hero_image.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    <Image 
+                        Margin="0, 30, 0, 12"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        HeightRequest="74"
+                        Aspect="AspectFit">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="simbol_logo.png" />
+                                <On Platform="UWP" Value="Assets/simbol_logo.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+                <Grid
+                    Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*" />
+                        <RowDefinition Height="6*" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <Image
+                        Grid.RowSpan="3"
+                        Aspect="AspectFill">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="hero_image" />
+                                <On Platform="UWP" Value="Assets/hero_image.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    <Grid 
+                        Grid.Row="1"
+                        VerticalOptions="Center">
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            Spacing="0">
+                            <Image
+                                HeightRequest="48"
+                                Aspect="AspectFit"
+                                VerticalOptions="Center"
+                                Margin="20">
+                                <Image.Source>
+                                    <OnPlatform x:TypeArguments="ImageSource">
+                                        <On Platform="Android, iOS" Value="ic_be_green" />
+                                        <On Platform="UWP" Value="Assets/ic_be_green.png" />
+                                    </OnPlatform>
+                                </Image.Source>
+                            </Image>
+                            <BoxView 
+                                VerticalOptions="Fill"
+                                BackgroundColor="{StaticResource WhiteColor}"
+                                WidthRequest="1" />
+                            <StackLayout
+                                Spacing="0"
+                                Margin="12, 4, 16, 4"
+                                VerticalOptions="Center">
+                                <Label 
+                                    Text="Notifications"
+                                    VerticalOptions="End"
+                                    Margin="0, 8, 0, 0"
+                                    Style="{StaticResource NotificationsStyle}"/>
+                                <Label 
+                                    VerticalOptions="Start"
+                                    Margin="0"
+                                    Text="Be Green"
+                                    Style="{StaticResource NotificationTitleStyle}"/>
+                                <Label 
+                                    VerticalOptions="EndAndExpand"
+                                    Margin="0, 5, 0, 0"
+                                    Text="Cleaning services have finished refreshing your room."
+                                    Style="{StaticResource NotificationSubTitleStyle}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+                <Grid
+                    ColumnSpacing="0"
+                    RowSpacing="0"
+                    Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5.5*" />
+                        <RowDefinition Height="4.5*" />
+                    </Grid.RowDefinitions>
+                    <!--BOOK A ROOM-->
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource WhiteColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75*" />
+                            <RowDefinition Height="25*" />
+                        </Grid.RowDefinitions>
+                        <Image 
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Aspect="AspectFill">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="img_1.png" />
+                                    <On Platform="UWP" Value="Assets/img_1.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Grid   
+                            Grid.Row="1"
+                            BackgroundColor="{StaticResource OrangeColor}">
+                            <Label
+                                Text="BOOK A ROOM"
+                                Style="{StaticResource BookTextStyle}"/>
+                        </Grid>
+                    </Grid>
+                    <!--BOOK CONFERENCE ROOM-->
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        BackgroundColor="{StaticResource WhiteColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75*" />
+                            <RowDefinition Height="25*" />
+                        </Grid.RowDefinitions>
+                        <Image  
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Source="img_2" 
+                            Aspect="AspectFill">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="img_2.png" />
+                                    <On Platform="UWP" Value="Assets/img_2.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Grid   
+                            Grid.Row="1"
+                            BackgroundColor="{StaticResource WhiteColor}">
+                            <Label
+                                Text="BOOK A&#x0a;CONFERENCE ROOM"
+                                Style="{StaticResource BookConferenceTextStyle}"/>
+                        </Grid>
+                    </Grid>
+                    <!--RESTAURANT-->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource WhiteColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25*" />
+                            <RowDefinition Height="75*" />
+                        </Grid.RowDefinitions>
+                        <StackLayout
+                            Grid.Row="0"
+                            Orientation="Horizontal">
+                            <Label
+                                Text="Suggestions"
+                                Style="{StaticResource SuggestionsTextStyle}"/>
+                            <Label 
+                                Text="See all +"
+                                HorizontalOptions="EndAndExpand"
+                                Style="{StaticResource SeeAllTextStyle}"/>
+                        </StackLayout>
+                        <StackLayout
+                            Grid.Row="1">
+                            <Label
+                                Text="Restaurant"
+                                Style="{StaticResource RestaurantTextStyle}"/>
+                            <Label
+                                Text="Lorem ipsum dolor sit amet, consectetur." 
+                                Style="{StaticResource RestaurantDetailTextStyle}"/>
+                        </StackLayout>
+                    </Grid>
+                    <!--MORE INFO-->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="1">
+                        <Image  
+                        Aspect="AspectFill">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="img_3.png" />
+                                    <On Platform="UWP" Value="Assets/img_3.png" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <ActivityIndicator 
+                Color="{StaticResource AccentColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center">
+                <ActivityIndicator.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS" Value="100" />
+                        <On Platform="UWP" Value="300" />
+                    </OnPlatform>
+                </ActivityIndicator.WidthRequest>
+            </ActivityIndicator>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

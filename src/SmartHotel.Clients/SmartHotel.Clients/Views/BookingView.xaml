@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"  
+    xmlns:templates="clr-namespace:SmartHotel.Clients.Core.Views.Templates;assembly=SmartHotel.Clients.Core"
+    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation" 
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"
+    xmlns:utils="clr-namespace:SmartHotel.Clients.Core.Utils;assembly=SmartHotel.Clients.Core"      
+    xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions"
+    x:Class="SmartHotel.Clients.Core.Views.BookingView" 
+    utils:NavigationBarAttachedProperty.TextColor="{StaticResource WhiteColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            
+            <xamanimation:StoryBoard 
+                x:Key="SuggestionsTranslationAnimation" 
+                Target="{x:Reference Suggestions}">
+                <xamanimation:TranslateToAnimation 
+                    TranslateY="0"
+                    Easing="CubicOut" 
+                    Duration="750" />
+            </xamanimation:StoryBoard>
+            
+            <Color x:Key="SearchTextColor">#48959B</Color>
+
+            <Style x:Key="WhereTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsMediumLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource BigSize}" />
+                <Setter Property="VerticalOptions" 
+                        Value="End" />
+                <Setter Property="Margin" 
+                        Value="24, 0, 0, 18" />
+
+            </Style>
+
+            <Style x:Key="SearchFrameStyle" 
+                   TargetType="Frame">
+                <Setter Property="Margin"
+                    Value="32, 0" />
+                <Setter Property="HasShadow"
+                    Value="True" />
+                <Setter Property="CornerRadius"
+                    Value="4" />
+                <Setter Property="HeightRequest" 
+                        Value="48" />
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="VerticalOptions"
+                        Value="Start" />
+                <Setter Property="VerticalOptions"
+                        Value="Start" />
+                <Setter Property="TranslationY"
+                        Value="-14" />
+                <Setter Property="Padding">
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="Android, iOS" Value="10, 0" />
+                    </OnPlatform>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SearchTextStyle" 
+                   TargetType="Entry">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+                <Setter Property="FontSize"
+                    Value="{StaticResource MidMediumSize}" />
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="TextColor" 
+                        Value="{StaticResource SearchTextColor}" />
+                <Setter Property="HorizontalOptions" 
+                        Value="Fill" />
+                <Setter Property="Opacity" 
+                        Value="1" />
+            </Style>
+
+            <Style x:Key="SuggestionsTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsMediumLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource OrangeColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MidMediumSize}" />
+                <Setter Property="Margin" 
+                        Value="34, 52, 0, 0" />
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource WhiteColor}" />
+            </Style>
+
+            <Style x:Key="SuggestionsListStyle" 
+                   TargetType="ListView">
+                <Setter Property="HasUnevenRows" 
+                        Value="True" />
+                <Setter Property="SeparatorVisibility" 
+                        Value="None" />
+                <Setter Property="VerticalOptions" 
+                        Value="Start" />
+            </Style>
+            
+            <Color x:Key="NextButtonColor">#BD4B14</Color>
+
+            <Style x:Key="NextTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansSemiBoldLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            
+            <Style x:Key="SuggestionTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MediumSize}" />
+                <Setter Property="VerticalOptions" 
+                        Value="Center" />
+                <Setter Property="Margin" 
+                        Value="36, 17" />
+            </Style>
+
+            <Color x:Key="SelectedBackgroundColor">#D7E8E9</Color>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Triggers>
+        <EventTrigger Event="Appearing">
+            <xamanimation:BeginAnimation 
+                Animation="{StaticResource SuggestionsTranslationAnimation}" />
+        </EventTrigger>
+    </ContentPage.Triggers>
+    <ContentPage.Content>
+        <Grid   
+            AutomationId="booking"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <controls:iOSStatusBarBackground 
+                Grid.Row="0" />
+            <Grid
+                Grid.Row="1"
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.4*" />
+                    <RowDefinition Height="7.6*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- Top image -->
+                <Image 
+                    Grid.Row="0"
+                    Aspect="AspectFill">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="img_header_background_1" />
+                            <On Platform="UWP" Value="Assets/img_header_background_1.png" />
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+                <Label 
+                    Grid.Row="0"
+                    Text="{extensions:Translate Where}"
+                    Style="{StaticResource WhereTextStyle}"/>
+                <!-- Search results -->
+                <Grid
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0" 
+                        Text="{extensions:Translate Suggestions}"
+                        Style="{StaticResource SuggestionsTextStyle}"/>
+                    <Grid
+                        Grid.Row="1">
+                        <ListView 
+                            x:Name="Suggestions" 
+                            AutomationId="suggestions"
+                            TranslationY="150"
+                            ItemsSource="{Binding Suggestions}"          
+                            SelectedItem="{Binding Suggestion, Mode=TwoWay}"
+                            Style="{StaticResource SuggestionsListStyle}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid 
+                                            x:Name="SuggestionCell"
+                                            ColumnSpacing="0"
+                                            BackgroundColor="{StaticResource WhiteColor}">
+                                            <Grid.HeightRequest>
+                                                <OnPlatform x:TypeArguments="x:Double">
+                                                    <On Platform="Android, iOS" Value="60" />
+                                                    <On Platform="UWP" Value="64" />
+                                                </OnPlatform>
+                                            </Grid.HeightRequest>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="12" />
+                                            </Grid.ColumnDefinitions>
+                                            <Image
+                                                Grid.Column="1" 
+                                                x:Name="SuggestionCorner" 
+                                                Aspect="AspectFit"
+                                                IsVisible="{Binding Source={x:Reference Suggestions}, Path=SelectedItem, 
+                                                Converter={StaticResource SelectedToBoolConverter},
+                                                ConverterParameter={x:Reference SuggestionCell}}"
+                                                Margin="0, 2">
+                                                <Image.Source>
+                                                    <OnPlatform x:TypeArguments="ImageSource">
+                                                        <On Platform="Android, iOS" Value="ball_left" />
+                                                        <On Platform="UWP" Value="Assets/ball_left.png" />
+                                                    </OnPlatform>
+                                                </Image.Source>
+                                            </Image>
+                                            <Grid
+                                                Grid.Column="2" 
+                                                HeightRequest="{Binding Source={x:Reference SuggestionCorner}, Path=HeightRequest}"
+                                                BackgroundColor="{StaticResource SelectedBackgroundColor}"
+                                                IsVisible="{Binding Source={x:Reference Suggestions}, Path=SelectedItem, 
+                                                Converter={StaticResource SelectedToBoolConverter},
+                                                ConverterParameter={x:Reference SuggestionCell}}">
+                                                <Grid.Margin>
+                                                    <OnPlatform x:TypeArguments="Thickness">
+                                                        <On Platform="Android" Value="0, 6" />
+                                                        <On Platform="iOS, UWP" Value="0, 2" />
+                                                    </OnPlatform>
+                                                </Grid.Margin>
+                                            </Grid>
+                                            <Image
+                                                Grid.Column="3" 
+                                                Aspect="AspectFit"
+                                                IsVisible="{Binding Source={x:Reference Suggestions}, Path=SelectedItem, 
+                                                Converter={StaticResource SelectedToBoolConverter},
+                                                ConverterParameter={x:Reference SuggestionCell}}"
+                                                Margin="0, 2">
+                                                <Image.Source>
+                                                    <OnPlatform x:TypeArguments="ImageSource">
+                                                        <On Platform="Android, iOS" Value="ball_right" />
+                                                        <On Platform="UWP" Value="Assets/ball_right.png" />
+                                                    </OnPlatform>
+                                                </Image.Source>
+                                            </Image>
+                                            <Label 
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="3"
+                                                Text="{Binding}"
+                                                Style="{StaticResource SuggestionTextStyle}"/>
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </Grid>
+                <!-- Search box -->
+                <ctrls:ButtonFrame   
+                    Grid.Row="1"
+                    Style="{StaticResource SearchFrameStyle}">
+                    <ctrls:ExtendedEntry
+                        Text="{Binding Search, Mode=TwoWay}"
+                        Style="{StaticResource SearchTextStyle}" 
+                        LineColor="{StaticResource WhiteColor}"
+                        FocusLineColor="{StaticResource WhiteColor}" />
+                </ctrls:ButtonFrame>
+                <!-- Next button -->
+                <Grid
+                    Grid.Row="2"  
+                    AutomationId="continue"
+                    BackgroundColor="{StaticResource NextButtonColor}"              
+                    HeightRequest="{Binding IsNextEnabled, Converter={StaticResource EnabledToHeightConverter}}">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding NextCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label   
+                        Text="{extensions:Translate NextMayus}"
+                        Style="{StaticResource NextTextStyle}"/>
+                </Grid>
+            </Grid>
+            <ActivityIndicator 
+                Grid.RowSpan="2"
+                Color="{StaticResource AccentColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.Templates.HotelItemTemplate"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"   
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"
+    xmlns:templates="clr-namespace:SmartHotel.Clients.Core.Views.Templates;assembly=SmartHotel.Clients.Core">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="HotelImageStyle" 
+                   TargetType="ffimageloading:CachedImage">
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="CacheType" Value="Disk" />
+                <Setter Property="CacheDuration" Value="30" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HeightRequest" Value="84" />
+                <Setter Property="WidthRequest" Value="84" />
+            </Style>
+            
+            <Style x:Key="HotelTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+                <Setter Property="Margin" Value="12, -6, 12, 0" />
+            </Style>
+
+            <Style x:Key="HotelSubTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+                <Setter Property="Margin" Value="12, 0" />
+            </Style>
+            
+            <Style x:Key="HotelRatingTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource HotelTitleStyle}">
+                <Setter Property="TextColor" Value="{StaticResource GreenColor}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+            
+            <Style x:Key="HotelRatingSubTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource HotelSubTitleStyle}">
+                <Setter Property="TextColor" Value="{StaticResource GreenColor}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+            
+            <Style x:Key="RatingStyle" 
+                   TargetType="controls:RatingControl">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="HeightRequest" Value="12" />
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="Margin" Value="6, 0, 0, 0" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <Grid
+            RowSpacing="0" 
+            HeightRequest="84"
+            Margin="24, 24, 24, 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ffimageloading:CachedImage
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.RowSpan="5"
+                Source="{Binding Picture, Converter={StaticResource HotelImageConverter}}"
+                Style="{StaticResource HotelImageStyle}">
+                <ffimageloading:CachedImage.LoadingPlaceholder>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="placeholder_2" />
+                        <On Platform="UWP" Value="Assets/placeholder_2.png" />
+                    </OnPlatform>
+                </ffimageloading:CachedImage.LoadingPlaceholder>
+                <ffimageloading:CachedImage.ErrorPlaceholder>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="placeholder_2" />
+                        <On Platform="UWP" Value="Assets/placeholder_2.png" />
+                    </OnPlatform>
+                </ffimageloading:CachedImage.ErrorPlaceholder>
+            </ffimageloading:CachedImage>
+            <Label
+                Grid.Column="1"
+                Grid.Row="0"
+                Text="{Binding City}"
+                Style="{StaticResource HotelTitleStyle}"/>
+            <Label
+                Grid.Column="1"
+                Grid.Row="1"
+                Text="{Binding Name}"
+                Style="{StaticResource HotelSubTitleStyle}"/>
+            <StackLayout
+                Grid.Column="1"
+                Grid.Row="2"
+                Orientation="Horizontal"
+                Margin="12, 0">
+                <Label
+                    Text="$"
+                    Style="{StaticResource HotelRatingTitleStyle}"/>
+                <Label
+                    Text="{Binding Price}"
+                    Style="{StaticResource HotelRatingTitleStyle}"/>
+                <Label
+                    Text="/"     
+                    Style="{StaticResource HotelRatingSubTitleStyle}"/>
+                <Label
+                    Text="Night"  
+                    Style="{StaticResource HotelRatingSubTitleStyle}"/>
+            </StackLayout>
+            <controls:RatingControl
+                Grid.Column="1"
+                Grid.Row="3"
+                Rating="{Binding Rating}"
+                Precision="Full"
+                Style="{StaticResource RatingStyle}">
+                <controls:RatingControl.ImageFullStar>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="ic_star_active" />
+                        <On Platform="UWP" Value="Assets/ic_star_active.png" />
+                    </OnPlatform>
+                </controls:RatingControl.ImageFullStar>
+                <controls:RatingControl.ImageEmptyStar>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="ic_star_normal" />
+                        <On Platform="UWP" Value="Assets/ic_star_normal.png" />
+                    </OnPlatform>
+                </controls:RatingControl.ImageEmptyStar>
+            </controls:RatingControl>
+        </Grid>
+  </ContentView.Content>
+</ContentView>

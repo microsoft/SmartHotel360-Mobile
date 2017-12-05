@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartHotel.Clients.Core.Views.Templates.NotificationDetailItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            
+            <Style x:Key="SuggestionTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+            </Style>
+
+            <Style x:Key="SuggestionDescriptionStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource SuggestionTitleStyle}">
+                <Setter Property="TextColor" Value="#959BA1" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            Margin="12"
+            BackgroundColor="{StaticResource WhiteColor}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid 
+                Grid.Column="0"
+                Padding="12"
+                ColumnSpacing="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.Column="0"
+                    Grid.RowSpan="2"
+                    Source="{Binding Type, Converter={StaticResource NotificationTypeToIconConverter}, ConverterParameter=_2}"
+                    HeightRequest="32"
+                    Aspect="AspectFit"
+                    VerticalOptions="Start"
+                    Margin="5" />
+                <Label 
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Text="{Binding Type, Converter={StaticResource NotificationTypeToTitleConverter}}"
+                    Style="{StaticResource SuggestionTitleStyle}"/>
+                <Label 
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Text="{Binding Text}"
+                    Style="{StaticResource SuggestionDescriptionStyle}"/>
+            </Grid>
+            <Grid
+                x:Name="DeleteContainer"
+                Grid.Column="1"
+                VerticalOptions="Fill"
+                BackgroundColor="#F2F2F2">
+                <Image
+                    x:Name="DeleteImage"
+                    Aspect="AspectFit"
+                    VerticalOptions="Center"
+                    Margin="5">
+                    <Image.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="36" />
+                            <On Platform="UWP" Value="32" />
+                            <On Platform="iOS" Value="28" />
+                        </OnPlatform>
+                    </Image.HeightRequest>
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="ic_paperbin_red" />
+                            <On Platform="UWP" Value="Assets/ic_paperbin_red.png" />
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.Templates.MenuItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="MenuTextColor">#566572</Color>
+            
+            <Style x:Key="MenuIconStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="48" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            
+            <Style x:Key="MenuTextStyle" TargetType="Label" BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource MenuTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            ColumnSpacing="12"
+            Padding="44, 12, 0, 12">
+            <Grid.Triggers>
+                <DataTrigger
+                    TargetType="Grid"
+                    Binding="{Binding IsEnabled, Mode=TwoWay}"
+                    Value="False">
+                    <Setter Property="Opacity"     
+                            Value="0.5" />
+                </DataTrigger>
+            </Grid.Triggers>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image 
+                Grid.Column="0"
+                Source="{Binding MenuItemType, Converter={StaticResource MenuItemTypeConverter}}"
+                Style="{StaticResource MenuIconStyle}"/>
+            <Label
+                Grid.Column="1"
+                Text="{Binding Title}"
+                Style="{StaticResource MenuTextStyle}"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

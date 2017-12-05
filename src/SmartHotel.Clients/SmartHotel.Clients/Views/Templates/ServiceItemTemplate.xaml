@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.Templates.ServiceItemTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="ServiceIconStyle" 
+                   TargetType="Image">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            
+            <Style x:Key="ServiceTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource GreenColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            Margin="0, 0, 12, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Image 
+                Grid.Row="0"
+                Source="{Binding Name, Converter={StaticResource ServiceNameToIconConverter}}"
+                Style="{StaticResource ServiceIconStyle}"/>
+            <Label
+                Grid.Row="1"
+                Text="{Binding Name}"
+                Style="{StaticResource ServiceTextStyle}"/>
+        </Grid>
+  </ContentView.Content>
+</ContentView>

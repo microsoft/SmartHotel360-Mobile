@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    x:Name="Self"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.Templates.UwpNotificationItemTemplate"    
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="NotificationsStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsSemiBoldLabelStyle}">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="Margin" Value="0, 24, 0, 0" />
+            </Style>
+
+            <Style x:Key="NotificationTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsSemiBoldLabelStyle}">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+            </Style>
+
+            <Style x:Key="NotificationSubTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="Opacity" Value="0.8" />
+            </Style>
+
+            <Style x:Key="NotificationIconStyle" 
+                   TargetType="ffimageloading:CachedImage">
+                <Setter Property="HeightRequest" Value="48" />
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0, 20" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <ffimageloading:CachedImage
+                Grid.RowSpan="3"
+                Aspect="AspectFill">
+                <ffimageloading:CachedImage.Source>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="hero_image" />
+                        <On Platform="UWP" Value="Assets/hero_image.png" />
+                    </OnPlatform>
+                </ffimageloading:CachedImage.Source>
+            </ffimageloading:CachedImage>
+            <Grid 
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                VerticalOptions="Center">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding TapCommand, Source={x:Reference Self}}" />
+                </Grid.GestureRecognizers>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Text="Notifications" 
+                        Style="{StaticResource NotificationsStyle}"/>
+                    <ffimageloading:CachedImage
+                        Grid.Row="1"
+                        Source="{Binding Type, Converter={StaticResource NotificationTypeToIconConverter}}"
+                        Style="{StaticResource NotificationIconStyle}"/>
+                    <StackLayout
+                        Grid.Row="2"
+                        Spacing="0"
+                        Margin="12, 4, 16, 12"
+                        VerticalOptions="Center">
+                        <Label 
+                            VerticalOptions="Start"
+                            Margin="0"
+                            Text="{Binding Type, Converter={StaticResource NotificationTypeToTitleConverter}}"
+                            Style="{StaticResource NotificationTitleStyle}"/>
+                        <Label 
+                            VerticalOptions="EndAndExpand"
+                            Margin="0, 5, 0, 0"
+                            Text="{Binding Text}"
+                            WidthRequest="500"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource NotificationSubTitleStyle}"/>
+                    </StackLayout>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

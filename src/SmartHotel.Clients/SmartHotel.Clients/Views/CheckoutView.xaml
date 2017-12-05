@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.CheckoutView"  
+    xmlns:core="clr-namespace:SmartHotel.Clients.Core;assembly=SmartHotel.Clients.Core"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"   
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup" 
+    xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions">
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            
+            <Style x:Key="LogoImageStyle" 
+                   TargetType="Image">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="CheckoutTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsLightLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0, 6" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+            </Style>
+
+            <Style x:Key="CheckoutTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource CheckoutTitleStyle}">
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="Margin" Value="0, 48, 0, 6" />
+                <Setter Property="LineBreakMode" Value="NoWrap" />
+            </Style>
+            
+                <Style x:Key="CheckoutButtonPanelStyle" 
+                   TargetType="StackLayout">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="BackgroundColor" Value="{StaticResource OrangeColor}" />
+            </Style>
+
+            <Style x:Key="CheckoutButtonTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+                       
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+          PositionIn="Center"
+          PositionOut="Center"
+          ScaleIn="1.2"
+          ScaleOut="1"
+          DurationIn="400"
+          DurationOut="100"
+          EasingIn="SinOut"
+          EasingOut="SinIn"
+          HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <pages:PopupPage.Content>
+        <Grid
+            HeightRequest="650"
+            WidthRequest="500"
+            RowSpacing="0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            BackgroundColor="{StaticResource WhiteColor}"
+            Margin="12, 48">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer            
+                    Command="{Binding ClosePopupCommand}" />
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Grid
+                Grid.Row="0"
+                BackgroundColor="{StaticResource BackgroundColor}">
+                <Image
+                    Style="{StaticResource LogoImageStyle}">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="simbol_logo" />
+                            <On Platform="UWP" Value="Assets/simbol_logo.png" />
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+            </Grid>
+            <Grid
+                Grid.Row="1">
+                <ffimageloading:CachedImage
+                    Aspect="AspectFill"
+                    Source="{Binding UserAvatar}"
+                    CacheType="Disk"
+                    CacheDuration="30">
+                    <ffimageloading:CachedImage.LoadingPlaceholder>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="avatar" />
+                            <On Platform="UWP" Value="Assets/avatar.png" />
+                        </OnPlatform>
+                    </ffimageloading:CachedImage.LoadingPlaceholder>
+                </ffimageloading:CachedImage>
+                <Grid 
+                    BackgroundColor="#293849"
+                    Opacity="0.75"/>    
+            </Grid>
+            <Grid
+                Grid.Row="2">
+                <Label 
+                    Text="{Binding UserName, StringFormat='Thanks {0:N}!'}"
+                    Style="{StaticResource CheckoutTitleStyle}"/>
+                <Label   
+                    Text="{extensions:Translate SeeYou}"
+                    Style="{StaticResource CheckoutTextStyle}"/>
+            </Grid>
+            <Grid
+                Grid.Row="3"
+                Style="{StaticResource CheckoutButtonPanelStyle}">
+                <Label  
+                    Text="{extensions:Translate NewBookingMayus}"
+                    Style="{StaticResource CheckoutButtonTextStyle}"/>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer            
+                        Command="{Binding CheckoutCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Grid>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

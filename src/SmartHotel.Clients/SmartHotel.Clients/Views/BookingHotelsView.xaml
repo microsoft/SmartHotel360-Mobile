@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.BookingHotelsView"      
+    xmlns:templates="clr-namespace:SmartHotel.Clients.Core.Views.Templates;assembly=SmartHotel.Clients.Core"
+    xmlns:behaviors="clr-namespace:SmartHotel.Clients.Core.Behaviors;assembly=SmartHotel.Clients.Core"
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core" 
+    xmlns:utils="clr-namespace:SmartHotel.Clients.Core.Utils;assembly=SmartHotel.Clients.Core"  
+    BackgroundColor="{StaticResource WhiteColor}"    
+    utils:NavigationBarAttachedProperty.TextColor="{StaticResource GreenColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="RangeTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsSemiBoldLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource GreenColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource LittleSize}" />
+                <Setter Property="HorizontalOptions" 
+                        Value="Start" />
+                <Setter Property="VerticalOptions" 
+                        Value="Start" />
+            </Style>
+            
+            <Style x:Key="SeparatorStyle" 
+                   TargetType="Grid">
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="Opacity" 
+                        Value="0.25" />
+                <Setter Property="HeightRequest" 
+                        Value="1" />
+            </Style>
+            
+            <Style x:Key="FilterIconStyle" 
+                   TargetType="Grid">
+                <Setter Property="HorizontalOptions" 
+                        Value="Start" />
+                <Setter Property="VerticalOptions" 
+                        Value="Center" />
+                <Setter Property="Margin" 
+                        Value="12, 0" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid 
+            AutomationId="hotels"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <controls:iOSStatusBarBackground 
+                Grid.Row="0"/>
+            <Grid 
+                Grid.Row="1"
+                BackgroundColor="{StaticResource WhiteColor}"
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="48" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    Margin="24, 12">
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android, UWP" Value="24, 12" />
+                            <On Platform="iOS" Value="24, 36, 24, 12" />
+                        </OnPlatform>
+                    </StackLayout.Margin>
+                    <Label 
+                        Grid.Row="0"
+                        Text="{Binding City.Name}"
+                        Style="{StaticResource RangeTextStyle}"/>
+                    <StackLayout 
+                        Grid.Row="1"
+                        VerticalOptions="Center"
+                        Orientation="Horizontal">
+                        <Label  
+                            Text="{Binding From, StringFormat='{0:ddd, MMM dd}'}" 
+                            Style="{StaticResource RangeTextStyle}"/>
+                        <Label
+                            Text="-"
+                            Style="{StaticResource RangeTextStyle}"/>
+                        <Label
+                            Text="{Binding Until, StringFormat='{0:ddd, MMM dd}'}" 
+                            Style="{StaticResource RangeTextStyle}"/>
+                    </StackLayout>
+                    <Label 
+                        Grid.Row="2"
+                        Text="1 Room"   
+                        Style="{StaticResource RangeTextStyle}"/>
+                </StackLayout>
+                <Grid 
+                    Grid.Row="1"
+                    Style="{StaticResource SeparatorStyle}"/>
+                <Grid 
+                    Grid.Row="2"
+                    Padding="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Column="0"
+                        Style="{StaticResource FilterIconStyle}">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="ic_sort" />
+                                <On Platform="UWP" Value="Assets/ic_sort.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    <Image
+                        Grid.Column="1"
+                        Style="{StaticResource FilterIconStyle}">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="ic_filter" />
+                                <On Platform="UWP" Value="Assets/ic_filter.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    <Image
+                        Grid.Column="3"
+                        Style="{StaticResource FilterIconStyle}">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="ic_map" />
+                                <On Platform="UWP" Value="Assets/ic_map.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+                <Grid 
+                    Grid.Row="3"
+                    Style="{StaticResource SeparatorStyle}"/>
+                <Grid 
+                    Grid.Row="4">
+                    <ListView 
+                        AutomationId="list"
+                        ItemsSource="{Binding Hotels}"  
+                        CachingStrategy="RecycleElement"
+                        SeparatorVisibility="None"
+                        HasUnevenRows="True" 
+                        behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding HotelSelectedCommand}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <templates:HotelItemTemplate />
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+            <ActivityIndicator 
+                Grid.RowSpan="2"
+                Color="{StaticResource AccentColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

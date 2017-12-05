@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{0D0C7A31-009A-4A19-9663-0F99791FAAC5}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartHotel.Clients.UWP</RootNamespace>
+    <AssemblyName>SmartHotel.Clients.UWP</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>SmartHotel.Clients.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>F2F4DD2A1981BDBC4C77C128FEA81488F5EF78F5</PackageCertificateThumbprint>
+    <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="..\CommonResources\Fonts\poppins\Poppins-Bold.ttf">
+      <Link>Assets\Fonts\Poppins-Bold.ttf</Link>
+    </Content>
+    <Content Include="..\CommonResources\Fonts\poppins\Poppins-Light.ttf">
+      <Link>Assets\Fonts\Poppins-Light.ttf</Link>
+    </Content>
+    <Content Include="..\CommonResources\Fonts\poppins\Poppins-Medium.ttf">
+      <Link>Assets\Fonts\Poppins-Medium.ttf</Link>
+    </Content>
+    <Content Include="..\CommonResources\Fonts\poppins\Poppins-Regular.ttf">
+      <Link>Assets\Fonts\Poppins-Regular.ttf</Link>
+    </Content>
+    <Content Include="..\CommonResources\Fonts\poppins\Poppins-SemiBold.ttf">
+      <Link>Assets\Fonts\Poppins-SemiBold.ttf</Link>
+    </Content>
+    <Content Include="..\CommonResources\Fonts\firasans\FiraSans-Bold.ttf">
+      <Link>Assets\Fonts\FiraSans-Bold.ttf</Link>
+    </Content>
+    <Content Include="..\CommonResources\Fonts\firasans\FiraSans-Regular.ttf">
+      <Link>Assets\Fonts\FiraSans-Regular.ttf</Link>
+    </Content>
+    <Content Include="Assets\ambient_light.png" />
+    <Content Include="Assets\avatar.png" />
+    <Content Include="..\CommonResources\Fonts\firasans\FiraSans-SemiBold.ttf">
+      <Link>Assets\Fonts\FiraSans-SemiBold.ttf</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\ButtonFrameRenderer.cs" />
+    <Compile Include="Renderers\CalendarButtonRenderer.cs" />
+    <Compile Include="Renderers\CustomMapRenderer.cs" />
+    <Compile Include="Renderers\CustomSliderRenderer.cs" />
+    <Compile Include="Renderers\ExtendedEntryRenderer.cs" />
+    <Compile Include="Services\DismissKeyboard\DismissKeyboardService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="SmartHotel.Clients.UWP_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\ball.png" />
+    <Content Include="Assets\ball_2.png" />
+    <Content Include="Assets\ball_left.png" />
+    <Content Include="Assets\ball_right.png" />
+    <Content Include="Assets\be_green.png" />
+    <Content Include="Assets\bg_slider_01.png" />
+    <Content Include="Assets\bg_slider_02.png" />
+    <Content Include="Assets\bg_slider_03.png" />
+    <Content Include="Assets\bg_slider_04.png" />
+    <Content Include="Assets\hero_image.png" />
+    <Content Include="Assets\hero_image_room.png" />
+    <Content Include="Assets\ic_airport_shutle.png" />
+    <Content Include="Assets\ic_air_conditioning.png" />
+    <Content Include="Assets\ic_arrow_left_normal.png" />
+    <Content Include="Assets\ic_arrow_right_normal.png" />
+    <Content Include="Assets\ic_bath.png" />
+    <Content Include="Assets\ic_beach.png" />
+    <Content Include="Assets\ic_bed.png" />
+    <Content Include="Assets\ic_be_green_2.png" />
+    <Content Include="Assets\ic_bot.png" />
+    <Content Include="Assets\ic_bot_2.png" />
+    <Content Include="Assets\ic_breakfast.png" />
+    <Content Include="Assets\ic_card.png" />
+    <Content Include="Assets\ic_check_out.png" />
+    <Content Include="Assets\ic_dryer.png" />
+    <Content Include="Assets\ic_elevator.png" />
+    <Content Include="Assets\ic_filter.png" />
+    <Content Include="Assets\ic_fitness_centre.png" />
+    <Content Include="Assets\ic_green.png" />
+    <Content Include="Assets\ic_gym.png" />
+    <Content Include="Assets\ic_home.png" />
+    <Content Include="Assets\ic_hotel.png" />
+    <Content Include="Assets\ic_hotel_2.png" />
+    <Content Include="Assets\ic_hot_tub.png" />
+    <Content Include="Assets\ic_ice.png" />
+    <Content Include="Assets\ic_ice_off.png" />
+    <Content Include="Assets\ic_ice_on.png" />
+    <Content Include="Assets\ic_indoor_fireplace.png" />
+    <Content Include="Assets\ic_key.png" />
+    <Content Include="Assets\ic_leak_off.png" />
+    <Content Include="Assets\ic_leak_on.png" />
+    <Content Include="Assets\ic_logout.png" />
+    <Content Include="Assets\ic_be_green.png" />
+    <Content Include="Assets\ic_map.png" />
+    <Content Include="Assets\ic_others.png" />
+    <Content Include="Assets\ic_others_2.png" />
+    <Content Include="Assets\ic_paperbin.png" />
+    <Content Include="Assets\ic_paperbin_red.png" />
+    <Content Include="Assets\ic_parking.png" />
+    <Content Include="Assets\ic_pool.png" />
+    <Content Include="Assets\ic_room.png" />
+    <Content Include="Assets\ic_room_2.png" />
+    <Content Include="Assets\ic_sort.png" />
+    <Content Include="Assets\ic_star_active.png" />
+    <Content Include="Assets\ic_star_normal.png" />
+    <Content Include="Assets\ic_table.png" />
+    <Content Include="Assets\ic_toothbrush_off.png" />
+    <Content Include="Assets\ic_toothbrush_on.png" />
+    <Content Include="Assets\ic_towels_off.png" />
+    <Content Include="Assets\ic_towels_on.png" />
+    <Content Include="Assets\ic_tv.png" />
+    <Content Include="Assets\ic_wheelchair_accessible.png" />
+    <Content Include="Assets\ic_wifi.png" />
+    <Content Include="Assets\illustratrion_bot.png" />
+    <Content Include="Assets\img_1.png" />
+    <Content Include="Assets\img_2.png" />
+    <Content Include="Assets\img_3.png" />
+    <Content Include="Assets\img_4.png" />
+    <Content Include="Assets\img_5.png" />
+    <Content Include="Assets\img_6.png" />
+    <Content Include="Assets\img_header_background_1.png" />
+    <Content Include="Assets\img_header_background_2.png" />
+    <Content Include="Assets\i_door_nfc.png" />
+    <Content Include="Assets\i_hotel_1.jpg" />
+    <Content Include="Assets\i_hotel_2.jpg" />
+    <Content Include="Assets\i_hotel_3.jpg" />
+    <Content Include="Assets\i_hotel_4.jpg" />
+    <Content Include="Assets\i_hotel_5.jpg" />
+    <Content Include="Assets\i_hotel_6.jpg" />
+    <Content Include="Assets\i_hotel_7.jpg" />
+    <Content Include="Assets\i_hotel_8.jpg" />
+    <Content Include="Assets\logo_splash.png" />
+    <Content Include="Assets\map.png" />
+    <Content Include="Assets\map_desktop.png" />
+    <Content Include="Assets\notification_icon.png" />
+    <Content Include="Assets\placeholder_2.png" />
+    <Content Include="Assets\pushpin_01.png" />
+    <Content Include="Assets\pushpin_02.png" />
+    <Content Include="Assets\rating.png" />
+    <Content Include="Assets\room_temperature.png" />
+    <Content Include="Assets\selected.png" />
+    <Content Include="Assets\simbol_logo.png" />
+    <Content Include="Assets\switch_off.png" />
+    <Content Include="Assets\switch_on.png" />
+    <Content Include="Assets\thumb_slider.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-100.png" />
+    <Content Include="Assets\LockScreenLogo.scale-125.png" />
+    <Content Include="Assets\LockScreenLogo.scale-150.png" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\LockScreenLogo.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsDesktop, Version=10.0.14393.0">
+      <Name>Windows Desktop Extensions for the UWP</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SmartHotel.Clients\SmartHotel.Clients.csproj">
+      <Project>{7ada23cf-cb3d-4898-822f-915e251ed8f1}</Project>
+      <Name>SmartHotel.Clients</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>6.5.1</Version>
+    </PackageReference>
+    <PackageReference Include="Autofac">
+      <Version>4.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin">
+      <Version>4.4.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microcharts">
+      <Version>0.7.1-pre</Version>
+    </PackageReference>
+    <PackageReference Include="Microcharts.Forms">
+      <Version>0.7.1-pre</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Azure.Mobile.Analytics">
+      <Version>0.15.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Azure.Mobile.Crashes">
+      <Version>0.15.2</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Identity.Client">
+      <Version>1.0.304142221-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>5.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>10.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp">
+      <Version>1.59.1</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp.Views">
+      <Version>1.59.1</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp.Views.Forms">
+      <Version>1.59.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Geolocator">
+      <Version>4.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Settings">
+      <Version>3.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading">
+      <Version>2.2.20</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.2.17</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.4.0.282</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.Maps">
+      <Version>2.4.0.282</Version>
+    </PackageReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+</Project>

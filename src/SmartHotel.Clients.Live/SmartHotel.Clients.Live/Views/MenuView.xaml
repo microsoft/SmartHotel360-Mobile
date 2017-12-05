@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Live.Views.MenuView"
+    Title=" ">
+    <ContentPage.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource">
+            <On Platform="Android, iOS" Value="ic_menu.png" />
+            <On Platform="UWP" Value="Assets/ic_menu.png" />
+        </OnPlatform>
+    </ContentPage.Icon>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="UsernamePanelStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
+
+            <Style x:Key="HelloTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="48,0,0,12" />
+            </Style>
+
+            <Style x:Key="UsernameTextStyle" TargetType="Label"
+                   BasedOn="{StaticResource HelloTextStyle}">
+                <Setter Property="Margin" Value="0,0,0,12" />
+            </Style>
+            
+            <Color x:Key="MenuTextColor">#566572</Color>
+
+            <Style x:Key="MenuIconStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="48" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="MenuTextStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource MenuTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*" />
+                <RowDefinition Height="75*" />
+            </Grid.RowDefinitions>
+            <Grid 
+                Grid.Row="0">
+                <Image
+                    Aspect="AspectFill">
+                    <Image.Source>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="avatar.png" />
+                            <On Platform="UWP" Value="Assets/avatar.png" />
+                        </OnPlatform>
+                    </Image.Source>
+                </Image>
+                <Grid 
+                    BackgroundColor="#293849"
+                    Opacity="0.6"/>
+                <StackLayout 
+                    Style="{StaticResource UsernamePanelStyle}">
+                    <Label 
+                        Text="Hello,"
+                        Style="{StaticResource HelloTextStyle}"/>
+                    <Label 
+                        Text="John Doe"
+                        Style="{StaticResource UsernameTextStyle}"/>
+                </StackLayout>
+            </Grid>
+            <Grid
+                Grid.Row="1">
+                <ListView 
+                    ItemsSource="{Binding MenuItems}" 
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid
+                                    Padding="48, 16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding Title}"
+                                        Style="{StaticResource MenuTextStyle}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

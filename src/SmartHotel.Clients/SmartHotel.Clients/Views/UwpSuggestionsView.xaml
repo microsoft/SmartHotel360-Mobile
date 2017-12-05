@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.UwpSuggestionsView"  
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core" 
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"  
+    xmlns:utils="clr-namespace:SmartHotel.Clients.Core.Utils;assembly=SmartHotel.Clients.Core"  
+    xmlns:templates="clr-namespace:SmartHotel.Clients.Core.Views.Templates;assembly=SmartHotel.Clients.Core"
+    utils:NavigationBarAttachedProperty.TextColor="{StaticResource BlackTextColor}">
+    <ContentPage.Content>
+        <Grid
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="240" />
+            </Grid.RowDefinitions>
+            <Grid  
+                x:Name="LeftSuggestionList"
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.RowSpan="2">
+                <ListView  
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    ItemsSource="{Binding Suggestions}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <templates:UwpSuggestionItemTemplate />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <AbsoluteLayout
+                x:Name="Map"
+                Grid.Column="1" 
+                Grid.Row="0"
+                Grid.RowSpan="2">
+                <controls:CustomMap  
+                    x:Name="MapControl"
+                    CustomPins="{Binding CustomPins}"
+                    AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                    AbsoluteLayout.LayoutFlags="All"/>
+            </AbsoluteLayout>
+            <ActivityIndicator 
+                Grid.Column="1"   
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Color="{StaticResource AccentColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}" />
+            <Grid  
+                x:Name="BottomSuggestionList"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="1"
+                BackgroundColor="{StaticResource WhiteColor}"
+                IsVisible="False">
+                <controls:HorizontalList  
+                    ListOrientation="Horizontal" 
+                    Margin="0, 5, 0, 0"
+                    ItemsSource="{Binding Suggestions}">
+                    <controls:HorizontalList.ItemTemplate>
+                        <DataTemplate>
+                            <templates:SuggestionItemTemplate />
+                        </DataTemplate>
+                    </controls:HorizontalList.ItemTemplate>
+                </controls:HorizontalList>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

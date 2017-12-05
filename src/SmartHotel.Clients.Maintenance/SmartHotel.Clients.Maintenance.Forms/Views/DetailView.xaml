@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Maintenance.Forms.Views.DetailView"        
+    xmlns:converters="clr-namespace:SmartHotel.Clients.Maintenance.Forms.Converters;assembly=SmartHotel.Clients.Maintenance.Forms"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!-- COLORS -->
+            <Color x:Key="AccentColor">#BD4B14</Color>
+            <Color x:Key="BlackOpacityColor">#99253748</Color>
+            <Color x:Key="BlackTextColor">#253748</Color>
+            <Color x:Key="BackgroundColor">#F8F8F8</Color>
+            <Color x:Key="PinkColor">#ED0241</Color>
+            <Color x:Key="GrayColor">#ACB1B4</Color>
+            <Color x:Key="DarkColor">#203446</Color>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            <Color x:Key="GreenColor">#368F95</Color>
+            
+            <!-- CONVERTERS -->
+            <converters:TaskStatusToColorConverter x:Key="TaskStatusToColorConverter" />
+            <converters:TaskStatusToImageConverter x:Key="TaskStatusToImageConverter" />
+            <converters:TaskStatusToStringConverter x:Key="TaskStatusToStringConverter" />
+            <converters:TaskTypeToIconConverter x:Key="TaskTypeToIconConverter" />
+            <converters:TaskTypeToSubtitleConverter x:Key="TaskTypeToSubtitleConverter" />
+            <converters:FactorConverter x:Key="FactorConverter" />
+            
+            <!-- FONTS -->
+            <OnPlatform x:Key="FiraSansBold"
+                        x:TypeArguments="x:String"
+                        iOS="FiraSans-Bold"
+                        Android="FiraSans-Bold.ttf#Fira Sans"
+                        WinPhone="/Assets/Fonts/FiraSans-Bold.ttf#Fira Sans"/>
+
+            <OnPlatform x:Key="FiraSansSemiBold"
+                        x:TypeArguments="x:String"
+                        iOS="FiraSans-SemiBold"
+                        Android="FiraSans-SemiBold.ttf#Fira Sans"
+                        WinPhone="/Assets/Fonts/FiraSans-SemiBold.ttf#Fira Sans"/>
+
+            <OnPlatform x:Key="FiraSansRegular"
+                        x:TypeArguments="x:String"
+                        iOS="FiraSans-Regular"
+                        Android="FiraSans-Regular.ttf#Fira Sans"
+                        WinPhone="/Assets/Fonts/FiraSans-Regular.ttf#Fira Sans"/>
+
+            <OnPlatform x:Key="PoppinsLight"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Light"
+                        Android="Poppins-Light.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Light.ttf#Poppins" />
+
+            <OnPlatform x:Key="PoppinsMedium"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Medium"
+                        Android="Poppins-Medium.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Medium.ttf#Poppins" />
+
+            <OnPlatform x:Key="PoppinsRegular"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Regular"
+                        Android="Poppins-Regular.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Regular.ttf#Poppins"/>
+
+            <OnPlatform x:Key="PoppinsSemiBold"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-SemiBold"
+                        Android="Poppins-SemiBold.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-SemiBold.ttf#Poppins"/>
+
+            <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double"
+                        iOS="11"
+                        Android="12"
+                        WinPhone="12"/>
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="12"
+                        Android="14"
+                        WinPhone="14"/>
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="14"
+                        Android="16"
+                        WinPhone="16"/>
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double"
+                        iOS="16"
+                        Android="18"
+                        WinPhone="18"/>
+
+            <OnPlatform x:Key="LargerSize"
+                        x:TypeArguments="x:Double"
+                        iOS="18"
+                        Android="20"
+                        WinPhone="20"/>
+
+            <OnPlatform x:Key="BigSize"
+                        x:TypeArguments="x:Double"
+                        iOS="20"
+                        Android="24"
+                        WinPhone="24"/>
+
+            <OnPlatform x:Key="ExtraBigSize"
+                      x:TypeArguments="x:Double"
+                      iOS="24"
+                      Android="32"
+                      WinPhone="32"/>
+
+            <OnPlatform x:Key="HugeSize"
+                        x:TypeArguments="x:Double"
+                        iOS="32"
+                        Android="48"
+                        WinPhone="48"/>
+
+            <!-- STYLES -->
+            <Style x:Key="PoppinsMediumLabelStyle"
+                   TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsMedium}" />
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+            </Style>
+
+            <Style x:Key="TitleStyle" TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource HugeSize}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="12, 0, 0, 0" />
+            </Style>
+
+            <Style x:Key="SubTitleStyle" TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource TitleStyle}">
+                <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+            </Style>
+
+            <Style x:Key="IconStyle" TargetType="{x:Type Image}">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="Margin" Value="12" />
+            </Style>
+
+            <Style x:Key="StatusTextStyle" TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource PoppinsMediumLabelStyle}">
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="12, 0, 2, 0" />
+            </Style>
+
+            <Style x:Key="SeparatorStyle" TargetType="{x:Type Grid}">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="BackgroundColor" Value="#F2F2F2" />
+            </Style>
+
+            <Style x:Key="TextStyle" TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="Margin" Value="28, 12" />
+            </Style>
+
+            <Style x:Key="DescriptionTextStyle" TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource TextStyle}">
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="TextColor" Value="#959BA1" />
+                <Setter Property="FontFamily" Value="{StaticResource FiraSansRegular}" />
+                <Setter Property="Margin" Value="28, -2" />
+            </Style>
+
+            <Style x:Key="CompleteTaskStyle" TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsSemiBold}" />
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="PopupTitleStyle" TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource CompleteTaskStyle}">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraBigSize}" />
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+            </Style>
+
+            <Style x:Key="PopupStatusTextStyle" TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource PoppinsMediumLabelStyle}">
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
+                <Setter Property="TextColor" Value="{StaticResource DarkColor}" />
+                <Setter Property="FontSize" Value="{StaticResource ExtraBigSize}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0, 0" />
+            </Style>
+
+            <Style x:Key="PopupStatusTitleStyle" TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource PopupStatusTextStyle}">
+                <Setter Property="Margin" Value="0, 0" />
+                <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+            </Style>
+            
+            <Style x:Key="PopupDateStyle" TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource PopupStatusTextStyle}">
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="TextColor" Value="{StaticResource GreenColor}" />
+            </Style>
+            
+            <Style x:Key="StatusImageStyle" TargetType="{x:Type Image}">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="WidthRequest" Value="13" />
+                <Setter Property="Margin" Value="0, 0, 12, 0" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="85" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!-- HEADER -->
+                <Grid
+                    Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Grid.Column="0"     
+                        Text="{Binding Task.Room, StringFormat='Room {0:N}'}"
+                        Style="{StaticResource TitleStyle}"/>
+                    <Label   
+                        Grid.Column="1"  
+                        Text="{Binding Task.Resolved, Converter={StaticResource TaskStatusToStringConverter}}"
+                        TextColor="{Binding Task.Resolved, Converter={StaticResource TaskStatusToColorConverter}}"
+                        Style="{StaticResource StatusTextStyle}"/>
+                    <Image
+                        Grid.Column="2"
+                        Source="{Binding Task.Resolved, Converter={StaticResource TaskStatusToImageConverter}}"
+                        Style="{StaticResource StatusImageStyle}"/>
+                </Grid>
+                <!-- CONTENT -->
+                <Grid
+                    Grid.Row="1">
+                    <Frame
+                        CornerRadius="4"
+                        HasShadow="True"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        Padding="0"
+                        Margin="12">
+                        <Grid
+                            RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid
+                                Grid.Row="0"
+                                Padding="18, 12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image 
+                                    Grid.Column="0"
+                                    Source="{Binding Task.TaskType, Converter={StaticResource TaskTypeToIconConverter}}"
+                                    Style="{StaticResource IconStyle}"/>
+                                <Label 
+                                    Grid.Column="1"
+                                    Text="{Binding Task.TaskType, Converter={StaticResource TaskTypeToSubtitleConverter}}"
+                                    Style="{StaticResource SubTitleStyle}"/>
+                            </Grid>
+                            <Grid 
+                                Grid.Row="1"
+                                Style="{StaticResource SeparatorStyle}"/>
+                            <Grid
+                                Grid.Row="2"
+                                Margin="0, 12, 0, 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="60" />
+                                </Grid.RowDefinitions>
+                                <Label 
+                                    Grid.Row="0"
+                                    Text="Description"
+                                    FontAttributes="Bold"
+                                    Style="{StaticResource TextStyle}"/>
+                                <Label 
+                                    Grid.Row="1"
+                                    Style="{StaticResource DescriptionTextStyle}"
+                                    Text="{Binding Task.Description}"/>
+                                <Grid
+                                    IsVisible="{Binding CanClose}"
+                                    Grid.Row="2"
+                                    BackgroundColor="{StaticResource AccentColor}">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding CloseTaskCommand}" />
+                                    </Grid.GestureRecognizers>
+                                    <Label 
+                                        Text="COMPLETE TASK"
+                                        Style="{StaticResource CompleteTaskStyle}"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <!-- POPUP -->
+            <Grid  
+                x:Name="Popup"
+                IsVisible="{Binding Popup}"
+                BackgroundColor="{StaticResource BlackOpacityColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid
+                    x:Name="PopupContent"
+                    Grid.Column="1"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center"
+                    HeightRequest="{Binding Width, Source={x:Reference PopupContent}, Converter={StaticResource FactorConverter}, ConverterParameter=1.5}}"
+                    RowSpacing="0"
+                    BackgroundColor="{StaticResource WhiteColor}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <Grid
+                        Grid.Row="0"
+                        BackgroundColor="#e8e1d6">
+                        <Label 
+                            Text="{Binding Task.Room, StringFormat='Room {0:N}'}"
+                            Style="{StaticResource PopupTitleStyle}"/>
+                    </Grid>
+                    <Image
+                        Grid.Row="1"
+                        Aspect="AspectFill">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="ImageSource">
+                                <On Platform="Android, iOS" Value="hero_image_room.png" />
+                                <On Platform="UWP" Value="Assets/hero_image_room.png" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    <StackLayout
+                        Grid.Row="2"
+                        Spacing="0"
+                        Padding="12, 24">
+                        <Label
+                            Text="Task"
+                            Style="{StaticResource PopupStatusTitleStyle}"/>
+                        <Label
+                            Text="Resolved"
+                            Style="{StaticResource PopupStatusTextStyle}"/>
+                        <Label 
+                            Text="{Binding ResolvedDate, StringFormat='{0:dddd, MMMM dd, yyyy}'}"     
+                            Style="{StaticResource PopupDateStyle}"/>
+                    </StackLayout>
+                    <Grid
+                        Grid.Row="3"
+                        BackgroundColor="{StaticResource DarkColor}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding BackToTasksCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label 
+                            Text="GO TO TASKS"
+                            Style="{StaticResource CompleteTaskStyle}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

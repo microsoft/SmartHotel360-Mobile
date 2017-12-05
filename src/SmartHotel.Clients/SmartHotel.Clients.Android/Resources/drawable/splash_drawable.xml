@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <bitmap
+        android:src="@drawable/bg_splash"
+        android:gravity="fill"
+        android:scaleType="fitXY" />
+  </item>
+  <item>
+    <bitmap
+        android:src="@drawable/logo_splash"
+        android:gravity="center"
+        android:scaleType="fitXY" />
+  </item>
+</layer-list>

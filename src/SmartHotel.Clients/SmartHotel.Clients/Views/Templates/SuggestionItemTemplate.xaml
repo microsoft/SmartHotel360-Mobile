@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.Templates.SuggestionItemTemplate"  
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"   
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SuggestionTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+            </Style>
+
+            <Style x:Key="SuggestionDescriptionStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="FontSize" Value="{StaticResource LittleSize}" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+            </Style>
+            
+        </ResourceDictionary>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <Grid
+            RowSpacing="0"
+            WidthRequest="200"
+            Padding="24, 24, 0, 24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid 
+                Grid.Row="0"
+                BackgroundColor="{Binding SuggestionType, Converter={StaticResource SuggestionTypeToColorConverter}}"/>
+            <ffimageloading:CachedImage
+                Grid.Row="1"
+                Source="{Binding Picture, Converter={StaticResource HotelImageConverter}}"
+                Aspect="AspectFill"
+                CacheType="Disk"
+                CacheDuration="30">
+                <ffimageloading:CachedImage.LoadingPlaceholder>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="placeholder_2" />
+                        <On Platform="UWP" Value="Assets/placeholder_2.png" />
+                    </OnPlatform>
+                </ffimageloading:CachedImage.LoadingPlaceholder>
+                <ffimageloading:CachedImage.ErrorPlaceholder>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="placeholder_2" />
+                        <On Platform="UWP" Value="Assets/placeholder_2.png" />
+                    </OnPlatform>
+                </ffimageloading:CachedImage.ErrorPlaceholder>
+            </ffimageloading:CachedImage>
+            <Label
+                Grid.Row="2"
+                Text="{Binding Name}"
+                Style="{StaticResource SuggestionTitleStyle}"/>
+            <Label
+                Grid.Row="3"
+                Text="{Binding Description}"
+                Style="{StaticResource SuggestionDescriptionStyle}"/>
+            <Grid
+                Grid.Row="4"
+                Margin="0, 6, 0, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <controls:RatingControl
+                    Grid.Column="0"
+                    Rating="{Binding Rating}"
+                    Precision="Full"
+                    HorizontalOptions="Start"
+                    WidthRequest="150">
+                    <controls:RatingControl.ImageFullStar>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="ic_star_active" />
+                            <On Platform="UWP" Value="Assets/ic_star_active.png" />
+                        </OnPlatform>
+                    </controls:RatingControl.ImageFullStar>
+                    <controls:RatingControl.ImageEmptyStar>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="ic_star_normal" />
+                            <On Platform="UWP" Value="Assets/ic_star_normal.png" />
+                        </OnPlatform>
+                    </controls:RatingControl.ImageEmptyStar>
+                </controls:RatingControl>
+                <Label 
+                    Grid.Column="1"
+                    Text="{Binding Votes}"
+                    Style="{StaticResource SuggestionDescriptionStyle}"/>
+                <Label 
+                    Grid.Column="2"
+                    Text="votes"
+                    Style="{StaticResource SuggestionDescriptionStyle}"/>
+            </Grid>
+        </Grid>
+  </ContentView.Content>
+</ContentView>

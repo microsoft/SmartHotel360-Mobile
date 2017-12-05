@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:core="clr-namespace:SmartHotel.Clients.Core;assembly=SmartHotel.Clients.Core"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"  
+             xmlns:templates="clr-namespace:SmartHotel.Clients.Core.Views.Templates;assembly=SmartHotel.Clients.Core"
+             xmlns:behaviors="clr-namespace:SmartHotel.Clients.Core.Behaviors;assembly=SmartHotel.Clients.Core" 
+             xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions"
+             x:Class="SmartHotel.Clients.Core.Views.MenuView"      
+             Title=" ">
+    <ContentPage.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource">
+            <On Platform="iOS" Value="ic_menu" />
+        </OnPlatform>
+    </ContentPage.Icon>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="UsernamePanelStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
+
+            <Style x:Key="HelloTextStyle" TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize" Value="{StaticResource LargeSize}" />
+                <Setter Property="VerticalOptions" Value="End" />
+            </Style>
+
+            <Style x:Key="UsernameTextStyle" TargetType="Label"
+                   BasedOn="{StaticResource HelloTextStyle}">
+                <Setter Property="FontSize" Value="{StaticResource LargerSize}" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25*" />
+                <RowDefinition Height="75*" />
+            </Grid.RowDefinitions>
+            <Grid 
+                Grid.Row="0">
+                <ffimageloading:CachedImage
+                    Aspect="AspectFill"
+                    Source="{Binding UserAvatar}"
+                    CacheType="Disk"
+                    CacheDuration="30">>
+                    <ffimageloading:CachedImage.LoadingPlaceholder>
+                        <OnPlatform x:TypeArguments="ImageSource">
+                            <On Platform="Android, iOS" Value="avatar" />
+                            <On Platform="UWP" Value="Assets/avatar.png" />
+                        </OnPlatform>
+                    </ffimageloading:CachedImage.LoadingPlaceholder>
+                </ffimageloading:CachedImage>
+                <Grid 
+                    BackgroundColor="#293849"
+                    Opacity="0.6"/>
+                <StackLayout 
+                    Padding="44, 0, 0, 10"
+                    Spacing="0"
+                    Style="{StaticResource UsernamePanelStyle}">
+                    <Label   
+                        Text="{extensions:Translate Hello}"  
+                        Style="{StaticResource HelloTextStyle}"/>
+                    <Label 
+                        Text="{Binding UserName}"
+                        Style="{StaticResource UsernameTextStyle}"/>
+                </StackLayout>
+            </Grid>
+            <Grid
+                Grid.Row="1">
+                <ListView 
+                    AutomationId="menu"
+                    ItemsSource="{Binding MenuItems}" 
+                    CachingStrategy="RecycleElement"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    behaviors:ItemTappedCommandListView.ItemTappedCommand="{Binding MenuItemSelectedCommand}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <templates:MenuItemTemplate />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

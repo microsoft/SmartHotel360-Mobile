@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="235">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--TASKS-->
+        <scene sceneID="225">
+            <objects>
+                <tableViewController id="226" customClass="TaskTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="228">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TaskCell" rowHeight="100" id="231" customClass="TaskTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="231" id="232" customClass="TaskTableCell">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="469">
+                                            <rect key="frame" x="32" y="34" width="32" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="32" id="1422"/>
+                                                <constraint firstAttribute="height" constant="32" id="1423"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TaskTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="489">
+                                            <rect key="frame" x="88" y="26" width="89" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TaskDetail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2373">
+                                            <rect key="frame" x="88" y="54" width="95" height="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TaskStatus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5128">
+                                            <rect key="frame" x="258" y="18" width="75" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pending-status.png" translatesAutoresizingMaskIntoConstraints="NO" id="J4c-VB-bOx" userLabel="Task Status Icon">
+                                            <rect key="frame" x="339" y="20" width="14" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="14" id="2T5-BO-kuZ"/>
+                                                <constraint firstAttribute="width" constant="14" id="Q9w-Cq-EbZ"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="5128" secondAttribute="trailing" constant="42" id="5129"/>
+                                        <constraint firstItem="5128" firstAttribute="top" secondItem="232" secondAttribute="top" constant="18" id="5130"/>
+                                        <constraint firstItem="489" firstAttribute="leading" secondItem="469" secondAttribute="trailing" constant="24" id="2sa-Aw-SsV"/>
+                                        <constraint firstItem="469" firstAttribute="bottom" secondItem="2373" secondAttribute="bottom" constant="-8" id="48d-Vl-igN"/>
+                                        <constraint firstItem="469" firstAttribute="leading" secondItem="232" secondAttribute="leading" constant="32" id="C55-nL-hFJ"/>
+                                        <constraint firstItem="469" firstAttribute="centerY" secondItem="232" secondAttribute="centerY" id="FG0-nM-ktb"/>
+                                        <constraint firstItem="J4c-VB-bOx" firstAttribute="top" secondItem="5128" secondAttribute="top" constant="2" id="TIL-zn-rPY"/>
+                                        <constraint firstItem="2373" firstAttribute="leading" secondItem="489" secondAttribute="leading" id="hZj-8g-GWv"/>
+                                        <constraint firstItem="J4c-VB-bOx" firstAttribute="leading" secondItem="5128" secondAttribute="trailing" constant="6" id="n1U-09-gzn"/>
+                                        <constraint firstItem="489" firstAttribute="top" secondItem="469" secondAttribute="top" constant="-8" id="weZ-Zv-qKy"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="5129"/>
+                                            <exclude reference="5130"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="5128"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="5129"/>
+                                            <include reference="5130"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="TaskDetail" destination="2373" id="name-outlet-2373"/>
+                                    <outlet property="TaskImage" destination="469" id="name-outlet-469"/>
+                                    <outlet property="TaskStatus" destination="5128" id="name-outlet-5128"/>
+                                    <outlet property="TaskStatusIcon" destination="J4c-VB-bOx" id="Rgp-QP-hyf"/>
+                                    <outlet property="TaskTitle" destination="489" id="name-outlet-489"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="226" id="229"/>
+                            <outlet property="delegate" destination="226" id="230"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="TASKS" id="227">
+                        <barButtonItem key="backBarButtonItem" title="TASK DETAIL" id="1430"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="233" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="173.59999999999999" y="-19.340329835082461"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="234">
+            <objects>
+                <navigationController id="235" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="237">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.12549019607843137" green="0.20392156862745098" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="226" kind="relationship" relationship="rootViewController" id="236"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="238" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-365" y="-19"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="pending-status.png" width="24" height="24"/>
+    </resources>
+</document>

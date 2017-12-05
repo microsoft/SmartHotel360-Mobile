@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SmartHotel.Clients.Core.Views.BookingHotelView"   
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"    
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"
+    xmlns:templates="clr-namespace:SmartHotel.Clients.Core.Views.Templates;assembly=SmartHotel.Clients.Core"
+    xmlns:utils="clr-namespace:SmartHotel.Clients.Core.Utils;assembly=SmartHotel.Clients.Core"  
+    xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions"
+    BackgroundColor="{StaticResource WhiteColor}"  
+    utils:NavigationBarAttachedProperty.TextColor="{StaticResource GreenColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="HotelTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="VerticalOptions" 
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="12, 12, 12, 0" />
+            </Style>
+
+            <Style x:Key="HotelSubTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource MediumSize}" />
+                <Setter Property="LineBreakMode" 
+                        Value="TailTruncation" />
+                <Setter Property="HeightRequest" 
+                        Value="36" />
+                <Setter Property="Margin"
+                        Value="12, 0" />
+            </Style>
+
+            <Style x:Key="HotelPriceBigStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource GreenColor}" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS" Value="{StaticResource LargerSize}" />
+                            <On Platform="UWP" Value="{StaticResource BigSize}" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="VerticalOptions" 
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="0, 12, 0, 0" />
+            </Style>
+
+            <Style x:Key="HotelPriceSmallStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource HotelPriceBigStyle}">
+                <Setter Property="FontSize"
+                        Value="{StaticResource MidMediumSize}" />
+            </Style>
+
+            <Style x:Key="TabTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalTextAlignment" 
+                        Value="Center" />
+                <Setter Property="HorizontalOptions" 
+                        Value="Center" />
+                <Setter Property="VerticalOptions" 
+                        Value="Center" />
+                <Setter Property="Margin" 
+                        Value="24, 0" />
+            </Style>
+
+            <Color x:Key="AccentTabColor">#378D93</Color>
+
+            <Color x:Key="TabSeparatorColor">#F4F5F5</Color>
+
+            <Style x:Key="TabSeparatorStyle" 
+                   TargetType="Label">
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource TabSeparatorColor}" />
+                <Setter Property="HeightRequest" 
+                        Value="1" />
+                <Setter Property="VerticalOptions" 
+                        Value="End" />
+            </Style>
+
+            <Style x:Key="SelectedTabStyle" 
+                   TargetType="Label">
+                <Setter Property="BackgroundColor" 
+                        Value="{StaticResource AccentTabColor}" />
+                <Setter Property="HeightRequest" 
+                        Value="2" />
+                <Setter Property="VerticalOptions" 
+                        Value="End" />
+                <Setter Property="Margin" 
+                        Value="24, 1" />
+            </Style>
+
+            <Style x:Key="HotelDescriptionStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource MediumSize}" />
+                <Setter Property="LineBreakMode" 
+                        Value="WordWrap" />
+                <Setter Property="Margin" 
+                        Value="24, 12, 24, 0" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" 
+                        Value="{StaticResource BigSize}" />
+                <Setter Property="Margin" 
+                        Value="24, 12, 24, 0" />
+            </Style>
+
+            <Style x:Key="ServicesStyle" 
+                   TargetType="controls:HorizontalList">
+                <Setter Property="Margin" 
+                        Value="24, 0" />
+            </Style>
+
+            <Style x:Key="RatingStyle" 
+                   TargetType="controls:RatingControl">
+                <Setter Property="HorizontalOptions"
+                        Value="End" />
+                <Setter Property="HeightRequest" 
+                        Value="12" />
+                <Setter Property="WidthRequest">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS" Value="80" />
+                            <On Platform="UWP" Value="100" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Margin">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android, iOS" Value="0, 0, 12, 22" />
+                            <On Platform="UWP" Value="0, 0, 12, 20" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Color x:Key="NextButtonColor">#BD4B14</Color>
+
+            <Style x:Key="ParallaxScrollStyle" 
+                   TargetType="ScrollView">
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" 
+                        Value="FillAndExpand" />
+                <Setter Property="Margin" 
+                        Value="0, 0, 0, 60" />
+            </Style>
+
+            <Style x:Key="NextTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansSemiBoldLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource MediumSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+
+            <Style x:Key="CheckInOutStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansSemiBoldLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="Margin" 
+                        Value="24, 0, 24, 24" />
+            </Style>
+
+            <Style x:Key="CheckInOutPanelStyle" 
+                   TargetType="StackLayout">
+                <Setter Property="Orientation" 
+                        Value="Horizontal" />
+                <Setter Property="HorizontalOptions" 
+                        Value="End" />
+                <Setter Property="Margin" 
+                        Value="24, 0, 24, 24" />
+            </Style>
+
+            <Style x:Key="CheckInTextStyle" 
+                   TargetType="Label"
+                   BasedOn="{StaticResource FiraSansRegularLabelStyle}">
+                <Setter Property="TextColor" 
+                        Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LittleSize}" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid    
+            AutomationId="hotel"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <controls:iOSStatusBarBackground 
+                Grid.Row="0"/>
+            <Grid
+                Grid.Row="1">
+                <ContentView
+                    x:Name="HeaderView"
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand">
+                    <Grid>
+                        <ffimageloading:CachedImage 
+                            Source="{Binding Hotel.DefaultPicture, Converter={StaticResource HotelImageConverter}}" 
+                            Aspect="AspectFill"
+                            DownsampleToViewSize="true"
+                            HeightRequest="420"
+					        HorizontalOptions="FillAndExpand"
+					        VerticalOptions="Start">
+                            <ffimageloading:CachedImage.LoadingPlaceholder>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="placeholder_2" />
+                                    <On Platform="UWP" Value="Assets/placeholder_2.png" />
+                                </OnPlatform>
+                            </ffimageloading:CachedImage.LoadingPlaceholder>
+                            <ffimageloading:CachedImage.ErrorPlaceholder>
+                                <OnPlatform x:TypeArguments="ImageSource">
+                                    <On Platform="Android, iOS" Value="placeholder_2" />
+                                    <On Platform="UWP" Value="Assets/placeholder_2.png" />
+                                </OnPlatform>
+                            </ffimageloading:CachedImage.ErrorPlaceholder>
+                        </ffimageloading:CachedImage>
+                        <Grid
+                            x:Name="SubHeaderView"
+                            BackgroundColor="{StaticResource WhiteColor}"
+                            HeightRequest="80"
+                            VerticalOptions="Start"
+                            Opacity="1">
+                            <Grid.Padding>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="Android, UWP" Value="12, 0" />
+                                    <On Platform="iOS" Value="12, 24, 12, 0" />
+                                </OnPlatform>
+                            </Grid.Padding>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Text="{Binding Hotel.City}"
+                                Style="{StaticResource HotelTitleStyle}"/>
+                            <Label
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Text="{Binding Hotel.Name}"
+                                Style="{StaticResource HotelSubTitleStyle}"/>
+                            <StackLayout
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                HorizontalOptions="End"
+                                Margin="0, 0, 12, 0">
+                                <Label
+                                    Text="$"
+                                    Style="{StaticResource HotelPriceBigStyle}"/>
+                                <Label 
+                                    Text="{Binding Hotel.PricePerNight}"
+                                    Style="{StaticResource HotelPriceBigStyle}"
+                                    Margin="-6, 12, 0, 0"/>
+                                <Label 
+                                    Text="/"
+                                    Style="{StaticResource HotelPriceBigStyle}"
+                                    Margin="-6, 12, 0, 0"/>
+                                <Label 
+                                    Text="Night"
+                                    Style="{StaticResource HotelPriceSmallStyle}"
+                                    Margin="-6, 12, 0, 0"/>
+                            </StackLayout>
+                            <controls:RatingControl
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                Rating="{Binding Hotel.Rating}"
+                                Precision="Full"
+                                Style="{StaticResource RatingStyle}">
+                                <controls:RatingControl.ImageFullStar>
+                                    <OnPlatform x:TypeArguments="ImageSource">
+                                        <On Platform="Android, iOS" Value="ic_star_active" />
+                                        <On Platform="UWP" Value="Assets/ic_star_active.png" />
+                                    </OnPlatform>
+                                </controls:RatingControl.ImageFullStar>
+                                <controls:RatingControl.ImageEmptyStar>
+                                    <OnPlatform x:TypeArguments="ImageSource">
+                                        <On Platform="Android, iOS" Value="ic_star_normal" />
+                                        <On Platform="UWP" Value="Assets/ic_star_normal.png" />
+                                    </OnPlatform>
+                                </controls:RatingControl.ImageEmptyStar>
+                            </controls:RatingControl>
+                        </Grid>
+                    </Grid>
+                </ContentView>
+                <controls:ParallaxControl
+                    x:Name="ParallaxScroll" 
+                    Style="{StaticResource ParallaxScrollStyle}">
+                    <Grid   
+                        ColumnSpacing="0"
+                        RowSpacing="0"
+                        VerticalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition>
+                                <RowDefinition.Height>
+                                    <OnPlatform x:TypeArguments="GridLength">
+                                        <On Platform="iOS" Value="370" />
+                                        <On Platform="Android, UWP" Value="400" />
+                                    </OnPlatform>
+                                </RowDefinition.Height>
+                            </RowDefinition>
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            BackgroundColor="{StaticResource WhiteColor}">
+                            <Label   
+                                Text="{extensions:Translate TheHotel}"
+                                Style="{StaticResource TabTextStyle}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding MyHotel}" Value="true" >
+                                        <Setter Property="TextColor" Value="{StaticResource AccentTabColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Grid 
+                                Style="{StaticResource TabSeparatorStyle}"/>
+                            <Grid   
+                                IsVisible="{Binding MyHotel}"
+                                Style="{StaticResource SelectedTabStyle}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding MyHotelCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <Grid
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            BackgroundColor="{StaticResource WhiteColor}">
+                            <Label   
+                                Text="{extensions:Translate Rooms}"
+                                Style="{StaticResource TabTextStyle}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Rooms}" Value="true" >
+                                        <Setter Property="TextColor" Value="{StaticResource AccentTabColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Grid 
+                                Style="{StaticResource TabSeparatorStyle}"/>
+                            <Grid  
+                                IsVisible="{Binding Rooms}"
+                                Style="{StaticResource SelectedTabStyle}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding RoomsCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <Grid
+                            Grid.Column="2"
+                            Grid.Row="1" 
+                            BackgroundColor="{StaticResource WhiteColor}">
+                            <Label   
+                                Text="{extensions:Translate Reviews}"
+                                Style="{StaticResource TabTextStyle}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Reviews}" Value="true" >
+                                        <Setter Property="TextColor" Value="{StaticResource AccentTabColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Grid 
+                                Style="{StaticResource TabSeparatorStyle}"/>
+                            <Grid     
+                                IsVisible="{Binding Reviews}"
+                                Style="{StaticResource SelectedTabStyle}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding ReviewsCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <Grid
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            Grid.Row="2" 
+                            BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid  
+                                IsVisible="{Binding MyHotel}">
+                                <StackLayout>
+                                    <Label 
+                                        Text="{Binding Hotel.Description}"
+                                        Style="{StaticResource HotelDescriptionStyle}"/>
+                                    <Label    
+                                        Text="{extensions:Translate Services}"
+                                        Style="{StaticResource SectionTitleStyle}"/>
+                                    <controls:HorizontalList     
+                                        ListOrientation="Horizontal" 
+                                        ItemsSource="{Binding Hotel.Services}"
+                                        Style="{StaticResource ServicesStyle}">
+                                        <controls:HorizontalList.ItemTemplate>
+                                            <DataTemplate>
+                                                <templates:ServiceItemTemplate />
+                                            </DataTemplate>
+                                        </controls:HorizontalList.ItemTemplate>
+                                    </controls:HorizontalList>
+                                    <Label    
+                                        Text="{extensions:Translate Information}"
+                                        Style="{StaticResource SectionTitleStyle}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            Grid.Column="0"
+                                            Text="{extensions:Translate CheckInOut}"
+                                            Style="{StaticResource CheckInOutStyle}"/>
+                                        <StackLayout
+                                            Grid.Column="1"
+                                            Style="{StaticResource CheckInOutPanelStyle}">
+                                            <Label 
+                                                Text="{Binding Hotel.CheckInTime, Converter={StaticResource CheckInTimeConverter}}"
+                                                Style="{StaticResource CheckInTextStyle}"/>
+                                            <Label 
+                                                Text="/"
+                                                Style="{StaticResource CheckInTextStyle}"/>
+                                            <Label 
+                                                Text="{Binding Hotel.CheckOutTime, Converter={StaticResource CheckInTimeConverter}}"
+                                                Style="{StaticResource CheckInTextStyle}"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </Grid>
+                            <Grid  
+                                IsVisible="{Binding Rooms}">
+                                <StackLayout>
+                                    <Label   
+                                        Text="{extensions:Translate DoubleRoom}"
+                                        Style="{StaticResource SectionTitleStyle}"/>
+                                    <Label 
+                                        Text="Our recently renovated comfort double rooms are equipped with two separate beds (100 x 200 cm) and with a desk where you can devote your attention to work. As in all the rooms of the Hotel Central, there is free, high-speed Internet service. The size of a room is 21 m²."
+                                        Style="{StaticResource HotelDescriptionStyle}"/>
+                                    <controls:HorizontalList     
+                                        ListOrientation="Horizontal" 
+                                        ItemsSource="{Binding RoomServices}"
+                                        Style="{StaticResource ServicesStyle}">
+                                        <controls:HorizontalList.ItemTemplate>
+                                            <DataTemplate>
+                                                <templates:ServiceItemTemplate />
+                                            </DataTemplate>
+                                        </controls:HorizontalList.ItemTemplate>
+                                    </controls:HorizontalList>
+                                    <Label  
+                                        Text="{extensions:Translate IndividualRoom}"
+                                        Style="{StaticResource SectionTitleStyle}"/>
+                                    <Label 
+                                        Text="The single standard room is functionally furnished – perfect for one person during a business or tourist visit to Zagreb. Single rooms are air-conditioned and have an LCD SAT TV like all other rooms in the hotel. There is also a desk that can be used for work. The size of a room is 13 m2."
+                                        Style="{StaticResource HotelDescriptionStyle}"/>
+                                    <controls:HorizontalList     
+                                        ListOrientation="Horizontal" 
+                                        ItemsSource="{Binding RoomServices}"
+                                        Style="{StaticResource ServicesStyle}">
+                                        <controls:HorizontalList.ItemTemplate>
+                                            <DataTemplate>
+                                                <templates:ServiceItemTemplate />
+                                            </DataTemplate>
+                                        </controls:HorizontalList.ItemTemplate>
+                                    </controls:HorizontalList>
+                                </StackLayout>
+                            </Grid>
+                            <Grid  
+                                IsVisible="{Binding Reviews}">
+                                <ListView
+                                    ItemsSource="{Binding HotelReviews}" 
+                                    CachingStrategy="RecycleElement"
+                                    SeparatorVisibility="None"
+                                    HasUnevenRows="True"
+                                    HeightRequest="{Binding HotelReviews.Count, {StaticResource CountToHeightConverter}}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <templates:ReviewItemTemplate />
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </controls:ParallaxControl>
+                <Grid   
+                    AutomationId="complete"
+                    HeightRequest="60"
+                    VerticalOptions="End"
+                    BackgroundColor="{StaticResource NextButtonColor}">
+                    <Label 
+                        Text="BOOK NOW"
+                        Style="{StaticResource NextTextStyle}"/>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding BookingCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <ActivityIndicator 
+                    Color="{StaticResource AccentColor}"
+                    IsRunning="{Binding IsBusy}" 
+                    IsVisible="{Binding IsBusy}" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

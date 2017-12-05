@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ctrls="clr-namespace:SmartHotel.Clients.Core.Controls"
+    xmlns:converters="clr-namespace:SmartHotel.Clients.Core.Converters"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Class="SmartHotel.Clients.Core.Views.SettingsView"  
+    xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- COLORS -->
+            <Color x:Key="AccentColor">#BC4C1B</Color>
+            <Color x:Key="BackgroundColor">#212C37</Color>
+            <Color x:Key="BlackTextColor">#253748</Color>
+            <Color x:Key="OrangeColor">#BC4C1B</Color>
+            <Color x:Key="LightOrangeColor">#D87E56</Color>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            <Color x:Key="ValidationErrorColor">#FF204F</Color>
+
+            <!-- CONVERTERS -->
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+
+            <!-- FONTS -->
+            <OnPlatform x:Key="PoppinsRegular"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Regular"
+                        Android="Poppins-Regular.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Regular.ttf#Poppins"/>
+
+            <OnPlatform x:Key="PoppinsSemiBold"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-SemiBold"
+                        Android="Poppins-SemiBold.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-SemiBold.ttf#Poppins"/>
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="12"
+                        Android="14"
+                        WinPhone="14"/>
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double"
+                        iOS="16"
+                        Android="18"
+                        WinPhone="18"/>
+
+            <!-- STYLES -->
+            <Style x:Key="BaseLabelStyle" TargetType="{x:Type Label}">
+            </Style>
+
+            <Style TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}" />
+
+            <Style x:Key="BaseEntryStyle"
+                   TargetType="{x:Type ctrls:ExtendedEntry}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="HeightRequest"
+                        Value="44" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+                <Setter Property="FocusLineColor"
+                        Value="{StaticResource LightOrangeColor}" />
+                <Setter Property="InvalidLineColor"
+                        Value="{StaticResource ValidationErrorColor}" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry"
+                             Property="IsFocused" 
+                             Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="{x:Type ctrls:ExtendedEntry}"
+                   BasedOn="{StaticResource BaseEntryStyle}" />
+
+            <Style x:Key="BaseButtonStyle"
+                   TargetType="{x:Type Button}">
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="HeightRequest" Value="73" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource MidMediumSize}" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource PoppinsSemiBold}" />
+            </Style>
+
+            <Style TargetType="{x:Type Button}"
+                   BasedOn="{StaticResource BaseButtonStyle}" />
+
+            <Style TargetType="{x:Type ctrls:ButtonFrame}">
+                <Setter Property="Padding" Value="0" />
+            </Style>
+
+            <Style TargetType="{x:Type ActivityIndicator}">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="WidthRequest">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS" Value="100" />
+                            <On Platform="UWP" Value="300" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <ffimageloading:CachedImage 
+                Aspect="AspectFill">
+                <ffimageloading:CachedImage.Source>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS" Value="img_header_background_1" />
+                        <On Platform="UWP" Value="Assets/img_header_background_1.png" />
+                    </OnPlatform>
+                </ffimageloading:CachedImage.Source>
+            </ffimageloading:CachedImage>
+            <ScrollView>
+                <StackLayout
+                    Spacing="10">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android, iOS" Value="10, 60, 10, 10" />
+                            <On Platform="UWP" Value="10" />
+                        </OnPlatform>
+                    </StackLayout.Padding>
+                    <Label   
+                        Text="{extensions:Translate Settings}"  
+                        TextColor="{StaticResource OrangeColor}"
+                        FontSize="{StaticResource LargeSize}"/>
+                    <Label 
+                        Text="{extensions:Translate CurrentJson}"  
+                        FontSize="{StaticResource MidMediumSize}"
+                        TextColor="{StaticResource WhiteColor}" />
+                    <ctrls:ExtendedEntry
+                        Grid.Row="2"    
+                        Placeholder="{extensions:Translate RemoteJson}"  
+                        FontSize="{StaticResource MidMediumSize}"
+                        Text="{Binding SettingsFileUrl.Value, Mode=TwoWay}"
+                        TextColor="{StaticResource BlackTextColor}"
+                        BackgroundColor="{StaticResource WhiteColor}" />
+                    <ctrls:ButtonFrame>
+                        <Button  
+                            Text="{extensions:Translate LoadJson}"  
+                            IsEnabled="{Binding SettingsFileUrl.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                            Command="{Binding UpdateCommand}"
+                            BackgroundColor="{StaticResource WhiteColor}"
+                            TextColor="{StaticResource OrangeColor}" />
+                    </ctrls:ButtonFrame>
+                    <ctrls:RemoteSettingsControl
+                        RemoteSettings="{Binding RemoteSettings}" />
+                </StackLayout>
+            </ScrollView>
+            <ActivityIndicator 
+                Color="{StaticResource AccentColor}"
+                IsRunning="{Binding IsBusy}" 
+                IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

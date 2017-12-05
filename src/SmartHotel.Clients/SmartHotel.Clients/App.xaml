@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SmartHotel.Clients.Core.Converters;assembly=SmartHotel.Clients.Core"
+             xmlns:ctrls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"
+             xmlns:effects="clr-namespace:SmartHotel.Clients.Core.Effects;assembly=SmartHotel.Clients.Core"
+             x:Class="SmartHotel.Clients.App">
+	<Application.Resources>
+        <ResourceDictionary>
+
+            <!-- COLORS -->
+            <Color x:Key="AccentColor">#BC4C1B</Color>
+            <Color x:Key="BackgroundColor">#212C37</Color>
+            <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="BlackTextColor">#253748</Color>
+            <Color x:Key="BlueColor">#0072C6</Color>
+            <Color x:Key="GreenColor">#368F94</Color>
+            <Color x:Key="OrangeColor">#BC4C1B</Color>
+            <Color x:Key="LightOrangeColor">#D87E56</Color>
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            <Color x:Key="ValidationErrorColor">#FF204F</Color>
+            <Color x:Key="DarkGrayColor">#ADADAD</Color>
+            <Color x:Key="GrayColor">#F6F1E9</Color>
+            
+            <!-- CONVERTERS -->
+            <converters:CheckInTimeConverter x:Key="CheckInTimeConverter" />
+            <converters:CountToHeightConverter x:Key="CountToHeightConverter" />
+            <converters:EnabledToHeightConverter x:Key="EnabledToHeightConverter" />
+            <converters:HotelImageConverter x:Key="HotelImageConverter"/>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <converters:MenuItemTypeConverter x:Key="MenuItemTypeConverter"/>
+            <converters:NotificationTypeToIconConverter x:Key="NotificationTypeToIconConverter"/>
+            <converters:NotificationTypeToTitleConverter x:Key="NotificationTypeToTitleConverter"/>
+            <converters:SelectedToBoolConverter x:Key="SelectedToBoolConverter"/>
+            <converters:ServiceNameToIconConverter x:Key="ServiceNameToIconConverter" />
+            <converters:SuggestionTypeToColorConverter x:Key="SuggestionTypeToColorConverter" />
+            <converters:AmbientLightValueConverter x:Key="AmbientLightValueConverter" />
+            <converters:TemperatureValueConverter x:Key="TemperatureValueConverter" />
+            
+            <!-- FONTS -->
+            <OnPlatform x:Key="PoppinsBold"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Bold"
+                        Android="Poppins-Bold.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Bold.ttf#Poppins"/>
+
+            <OnPlatform x:Key="PoppinsLight"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Light"
+                        Android="Poppins-Light.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Light.ttf#Poppins" />
+
+            <OnPlatform x:Key="PoppinsMedium"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Medium"
+                        Android="Poppins-Medium.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Medium.ttf#Poppins" />
+            
+            <OnPlatform x:Key="PoppinsRegular"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-Regular"
+                        Android="Poppins-Regular.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-Regular.ttf#Poppins"/>
+
+            <OnPlatform x:Key="PoppinsSemiBold"
+                        x:TypeArguments="x:String"
+                        iOS="Poppins-SemiBold"
+                        Android="Poppins-SemiBold.ttf#Poppins"
+                        WinPhone="/Assets/Fonts/Poppins-SemiBold.ttf#Poppins"/>
+
+            <OnPlatform x:Key="FiraSansBold"
+                        x:TypeArguments="x:String"
+                        iOS="FiraSans-Bold"
+                        Android="FiraSans-Bold.ttf#Fira Sans"
+                        WinPhone="/Assets/Fonts/FiraSans-Bold.ttf#Fira Sans"/>
+            
+            <OnPlatform x:Key="FiraSansSemiBold"
+                        x:TypeArguments="x:String"
+                        iOS="FiraSans-SemiBold"
+                        Android="FiraSans-SemiBold.ttf#Fira Sans"
+                        WinPhone="/Assets/Fonts/FiraSans-SemiBold.ttf#Fira Sans"/>
+            
+            <OnPlatform x:Key="FiraSansRegular"
+                        x:TypeArguments="x:String"
+                        iOS="FiraSans-Regular"
+                        Android="FiraSans-Regular.ttf#Fira Sans"
+                        WinPhone="/Assets/Fonts/FiraSans-Regular.ttf#Fira Sans"/>
+            
+            <OnPlatform x:Key="LittleSize"
+                        x:TypeArguments="x:Double"
+                        iOS="11"
+                        Android="12"
+                        WinPhone="12"/>
+
+            <OnPlatform x:Key="MidMediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="12"
+                        Android="14"
+                        WinPhone="14"/>
+
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="14"
+                        Android="16"
+                        WinPhone="16"/>
+
+            <OnPlatform x:Key="LargeSize"
+                        x:TypeArguments="x:Double"
+                        iOS="16"
+                        Android="18"
+                        WinPhone="18"/>
+
+            <OnPlatform x:Key="LargerSize"
+                        x:TypeArguments="x:Double"
+                        iOS="18"
+                        Android="20"
+                        WinPhone="20"/>
+
+            <OnPlatform x:Key="BigSize"
+                        x:TypeArguments="x:Double"
+                        iOS="20"
+                        Android="24"
+                        WinPhone="24"/>
+
+            <OnPlatform x:Key="ExtraBigSize"
+                      x:TypeArguments="x:Double"
+                      iOS="24"
+                      Android="32"
+                      WinPhone="32"/>
+
+            <OnPlatform x:Key="HugeSize"
+                        x:TypeArguments="x:Double"
+                        iOS="32"
+                        Android="48"
+                        WinPhone="48"/>
+            
+            <!-- STYLES -->
+            <Style x:Key="BaseLabelStyle" TargetType="{x:Type Label}">
+            </Style>
+
+            <Style TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}" />
+
+            <Style x:Key="PoppinsBoldLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                 Value="{StaticResource PoppinsBold}" />
+            </Style>
+
+            <Style x:Key="PoppinsLightLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                 Value="{StaticResource PoppinsLight}" />
+            </Style>
+
+            <Style x:Key="PoppinsMediumLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                 Value="{StaticResource PoppinsMedium}" />
+            </Style>
+
+            <Style x:Key="PoppinsRegularLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+            </Style>
+
+            <Style x:Key="PoppinsSemiBoldLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource PoppinsSemiBold}" />
+            </Style>
+
+            <Style x:Key="FiraSansBoldLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource FiraSansBold}" />
+            </Style>
+
+            <Style x:Key="FiraSansSemiBoldLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource FiraSansSemiBold}" />
+            </Style>
+
+            <Style x:Key="FiraSansRegularLabelStyle"
+                   TargetType="{x:Type Label}"
+                   BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource FiraSansRegular}" />
+            </Style>
+
+            <Style x:Key="BaseEntryStyle"
+                   TargetType="{x:Type ctrls:ExtendedEntry}">
+                <Setter Property="FontFamily"
+                    Value="{StaticResource PoppinsRegular}" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="PlaceholderColor"
+                        Value="{StaticResource WhiteColor}" />
+                <Setter Property="HeightRequest"
+                        Value="44" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource LargeSize}" />
+                <Setter Property="HorizontalOptions"
+                        Value="FillAndExpand" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="Opacity"
+                        Value="0.6" />
+                <Setter Property="FocusLineColor"
+                        Value="{StaticResource LightOrangeColor}" />
+                <Setter Property="InvalidLineColor"
+                        Value="{StaticResource ValidationErrorColor}" />
+                <Style.Triggers>
+                    <Trigger TargetType="Entry"
+                             Property="IsFocused" 
+                             Value="True">
+                        <Setter Property="Opacity" Value="1" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="{x:Type ctrls:ExtendedEntry}"
+                   BasedOn="{StaticResource BaseEntryStyle}" />
+
+            <Style x:Key="BaseButtonStyle"
+                   TargetType="{x:Type Button}">
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="HeightRequest" Value="73" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource MidMediumSize}" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource PoppinsSemiBold}" />
+            </Style>
+
+            <Style TargetType="{x:Type Button}"
+                   BasedOn="{StaticResource BaseButtonStyle}" />
+
+            <Style TargetType="{x:Type ctrls:ButtonFrame}">
+                <Setter Property="Padding" Value="0" />
+            </Style>
+
+            <Style TargetType="{x:Type ActivityIndicator}">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="WidthRequest">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS" Value="100" />
+                            <On Platform="UWP" Value="300" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
