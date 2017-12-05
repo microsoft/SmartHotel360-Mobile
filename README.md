@@ -1,4 +1,4 @@
-# SmartHotel
+# SmartHotel360
 
 During our **Connect(); 2017** event this year we presented beautiful Xamarin demos.
 
