@@ -1,17 +1,17 @@
 # SmartHotel360
 
-During our **Connect(); 2017** event this year we presented beautiful Xamarin demos.
+During our **Connect(); 2017** event this year we presented beautiful app demos using Xamarin.
 
 This year, we built the technology stack for a fictional company named SmartHotel360, which allows users to manage their stay at the hotel.
 
-**Note:** This document is about the **Xamarin** apps.
+**Note:** This document is about the apps using **Xamarin**.
 
 ## Projects
 
 There are two different solutions:
 
 - **SmartHotel**: Main project developed with Xamarin.Forms.
-- **SmartHotel Maintenance**: Xamarin.iOS Application that allows the maintenance of the hotel. It makes use of **[Forms Embedding](https://blog.xamarin.com/unleashed-embedding-xamarin-forms-in-xamarin-native/)**.
+- **SmartHotel Maintenance**: Xamarin.iOS Application that allows the maintenance of the hotel. It makes use of **[Xamarin.Forms Native Forms](https://blog.xamarin.com/unleashed-embedding-xamarin-forms-in-xamarin-native/)**.
 - **SmartHotel NFC**: Unlock door using NFC.
 
 ## Supported Platforms: iOS, Android, and Windows
@@ -26,7 +26,7 @@ The SmartHotel Maintenance app is available only for iOS.
 
 ## Xamarin.Forms App (SmartHotel360)
 
-Xamarin.Forms allows you to build native UIs for iOS, Android, macOS, Linux and Windows from a single, shared codebase. You can dive into mobile development with Xamarin.Forms by following our free self-guided learning from Xamarin University. This project exercises the following patterns and features:
+Xamarin.Forms enables you to build native UIs for iOS, Android, macOS, Linux, and Windows from a single, shared codebase. You can dive into app development with Xamarin.Forms by following our [free self-guided learning from Xamarin University](https://university.xamarin.com/classes/track/self-guided). This project exercises the following patterns and features:
 
 - Xamarin.Forms
 - XAML UI
@@ -46,9 +46,9 @@ Xamarin.Forms allows you to build native UIs for iOS, Android, macOS, Linux and 
 - Localization
 - New backends!
 - Xamarin UITests
-- [Forms Embedding](https://blog.xamarin.com/unleashed-embedding-xamarin-forms-in-xamarin-native/)
+- [Xamarin.Forms Native Forms](https://blog.xamarin.com/unleashed-embedding-xamarin-forms-in-xamarin-native/)
 - [Xamarin Live Player](https://www.xamarin.com/live)
-- [.NET Standard 2](https://github.com/dotnet/standard)
+- [.NET Standard 2.0](https://github.com/dotnet/standard)
 
 ## Screens
 
@@ -68,7 +68,7 @@ Xamarin.Forms allows you to build native UIs for iOS, Android, macOS, Linux and 
 
 ## Requirements
 
-* Visual Studio 2017 15.3 or Visual Studio for macOS 7.3 Preview.
+* [Visual Studio 2017 version 15.3 or Visual Studio for Mac version 7.3](https://www.visualstudio.com/vs/)
 * Bing Maps Key - [Getting a Bing Maps Key](https://msdn.microsoft.com/en-us/library/ff428642.aspx)
 
 ## Licenses
