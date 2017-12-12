@@ -13,6 +13,20 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+
+            <OnPlatform x:Key="BigSize"
+                        x:TypeArguments="x:Double"
+                        iOS="20"
+                        Android="24"
+                        WinPhone="24"/>
+            
+            <OnPlatform x:Key="MediumSize"
+                        x:TypeArguments="x:Double"
+                        iOS="14"
+                        Android="16"
+                        WinPhone="16"/>
+
             <Style x:Key="UsernamePanelStyle" TargetType="StackLayout">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="VerticalOptions" Value="End" />
