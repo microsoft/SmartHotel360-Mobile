@@ -93,6 +93,9 @@ Xamarin.Forms enables you to build native UIs for iOS, Android, macOS, Linux, an
 * [Visual Studio 2017 version 15.3 or Visual Studio for Mac version 7.3](https://www.visualstudio.com/vs/)
 * Bing Maps Key - [Getting a Bing Maps Key](https://msdn.microsoft.com/en-us/library/ff428642.aspx)
 
+# Demo Scripts
+There is a detailed step-by-step demo script in the [demoscripts](./demoscripts/) folder of this repo that you can use in your own presentations.
+
 ## Licenses
 
 This project uses some third-party assets with a license that requires attribution:
