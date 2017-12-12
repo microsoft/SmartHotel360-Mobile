@@ -2,13 +2,34 @@
 
 During our **Connect(); 2017** event this year we presented beautiful app demos using Xamarin.
 
-This year, we built the technology stack for a fictional company named SmartHotel360, which allows users to manage their stay at the hotel.
+We are happy to announce the release of SmartHotel360. This release intends to share a simplified version of SmartHotel360 reference sample apps used at Connect(); 2017 Keynotes. If you missed it, you can watch <a href="https://channel9.msdn.com/Events/Connect/2017/K100">Scott Guthrie’s Keynote: Journey to the Intelligent Cloud in Channel 9</a>.
+
+SmartHotel360 is a fictitious smart hospitality company showcasing the future of connected travel.  
+Their vision is to provide:
+- Intelligent, conversational, and personalized apps and experiences to guests 
+- Modern workplace experiences and smart conference rooms for business travelers
+- Real-time customer and business insights for hotel managers & investors
+- Unified analytics and package deal recommendations for campaign managers. 
+There’s never been a better time to be a developer. Our intent with these set of reference apps and Azure backend is to show developers how to get started building the apps of the future, today!
 
 **Note:** This document is about the apps using **Xamarin**.
 
+Mobile and desktop apps we built for this reference sample include:
+
+## SmartHotel360 Mobile and Desktop Apps
+Travelers are always on the go, so SmartHotel360 offers a beautiful fully-native cross-device mobile app for guests and business travelers built with Xamarin. In this app guests and business travelers can book rooms and smart conference rooms as well as customize room temperature and lighting settings. The mobile app is available in iOS, Android, and Windows.
+
+We also built a desktop app. This is a version of the SmartHotel360 Xamarin app. With this app, travelers can adjust the temperature and lighting settings of their rooms and find nearby recommended places to go, like coffee shops. All based on deeply personalized preferences.
+
+## SmartHotel360 Maintenance App
+For hotel managers and maintenance crew, we built a maintenance iOS app and used Xamarin Forms embedded. This is a great way to showcase how companies can modernize existing line-of-business apps with Xamarin. In this app, hotel managers and maintenance crew can get notifications of issues and resolve those directly from their mobile app.
+
+## SmartHotel360 NFC
+Travelers need quick access to their rooms. What if we can provide an automated way to have them go straight to their room when they get to the hotel? We used the power of mobile development with Android and NFC to provide this experience. We included NFC access from the SmartHotel360 traveler application and we also created a digital door application to check-in and open your room. All you need is to tap your phone on the digital door. No need to get a key from the lobby.
+
 ## Projects
 
-There are two different solutions:
+There are three different solutions:
 
 - **SmartHotel**: Main project developed with Xamarin.Forms.
 - **SmartHotel Maintenance**: Xamarin.iOS Application that allows the maintenance of the hotel. It makes use of **[Xamarin.Forms Native Forms](https://blog.xamarin.com/unleashed-embedding-xamarin-forms-in-xamarin-native/)**.
