@@ -252,5 +252,4 @@ paket-files/
 *.sln.iml
 
 # Xamarin
-*.Designer.cs
 *.orig
