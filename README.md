@@ -94,7 +94,7 @@ Xamarin.Forms enables you to build native UIs for iOS, Android, macOS, Linux, an
 * Bing Maps Key - [Getting a Bing Maps Key](https://msdn.microsoft.com/en-us/library/ff428642.aspx)
 
 # Demo Scripts
-There is a detailed step-by-step demo script in the [demoscripts](./demoscripts/) folder of this repo that you can use in your own presentations.
+There is a detailed step-by-step demo script in the [demoscripts](https://github.com/Microsoft/SmartHotel360-mobile-desktop-apps/tree/master/DemoScripts) folder of this repo that you can use in your own presentations.
 
 ## Licenses
 
