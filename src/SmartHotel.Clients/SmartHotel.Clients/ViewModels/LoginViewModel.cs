@@ -4,6 +4,7 @@ using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Validations;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -56,13 +57,13 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand SignInCommand => new Command(SignInAsync);
+        public ICommand SignInCommand => new Command(async () => await SignInAsync());
 
-        public ICommand MicrosoftSignInCommand => new Command(MicrosoftSignInAsync);
+        public ICommand MicrosoftSignInCommand => new Command(async () => await MicrosoftSignInAsync());
 
-        public ICommand SettingsCommand => new Command(NavigateToSettingsAsync);
+        public ICommand SettingsCommand => new Command(async () => await NavigateToSettingsAsync(null));
 
-        private async void SignInAsync()
+        private async Task SignInAsync()
         {
             IsBusy = true;
 
@@ -84,7 +85,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             IsBusy = false;
         }
 
-        private async void MicrosoftSignInAsync()
+        private async Task MicrosoftSignInAsync()
         {
             try
             {
@@ -127,7 +128,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             return isValidUser && isValidPassword;
         }
 
-        private async void NavigateToSettingsAsync(object obj)
+        private async Task NavigateToSettingsAsync(object obj)
         {
             await NavigationService.NavigateToAsync(typeof(SettingsViewModel<RemoteSettings>));
         }

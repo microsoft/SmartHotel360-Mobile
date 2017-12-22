@@ -26,7 +26,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             _nfcService = DependencyService.Get<INfcService>();
         }
 
-        public ICommand ClosePopupCommand => new Command(ClosePopupAsync);
+        public ICommand ClosePopupCommand => new Command(async () => await ClosePopupAsync());
 
         public override async Task InitializeAsync(object navigationData)
         {
@@ -53,7 +53,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async void ClosePopupAsync()
+        private async Task ClosePopupAsync()
         {
             await PopupNavigation.PopAllAsync(true);
         }

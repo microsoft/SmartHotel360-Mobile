@@ -119,7 +119,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public ICommand ReviewsCommand => new Command(SetReviews);
 
-        public ICommand BookingCommand => new Command(BookingAsync);
+        public ICommand BookingCommand => new Command(async () => await BookingAsync());
 
         public override async Task InitializeAsync(object navigationData)
         {
@@ -197,7 +197,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             Reviews = true;
         }
 
-        private async void BookingAsync()
+        private async Task BookingAsync()
         {
             try
             {
