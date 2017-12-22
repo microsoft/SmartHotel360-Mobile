@@ -56,7 +56,7 @@ namespace SmartHotel.Clients.Droid.Renderers
                     }
                     else
                     {
-                        await ChangeBackgroundImage();
+                        await ChangeBackgroundImageAsync();
                     }
                 }
                 else
@@ -82,12 +82,12 @@ namespace SmartHotel.Clients.Droid.Renderers
                 }
                 else
                 {
-                    await ChangeBackgroundImage();
+                    await ChangeBackgroundImageAsync();
                 }
             }
         }
 
-        protected async Task ChangeBackgroundImage()
+        protected async Task ChangeBackgroundImageAsync()
         {
             var element = Element as CalendarButton;
             if (element == null || element.BackgroundImage == null) return;
