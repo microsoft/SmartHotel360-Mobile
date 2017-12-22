@@ -147,14 +147,16 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async Task NextAsync()
+        private Task NextAsync()
         {
             var city = _cities.FirstOrDefault(c => c.ToString().Equals(Suggestion));
 
             if (city != null)
             {
-                await NavigationService.NavigateToAsync<BookingCalendarViewModel>(city);
+                return NavigationService.NavigateToAsync<BookingCalendarViewModel>(city);
             }
+            // just return Task, but have to provide an argument because there is no overload
+            return Task.FromResult(true);
         }
     }
 }

@@ -15,34 +15,28 @@ namespace SmartHotel.Clients.Core.Services.Booking
             _requestService = requestService;
         }
 
-        public async Task<IEnumerable<Models.BookingSummary>> GetBookingsAsync(string token = "")
+        public Task<IEnumerable<Models.BookingSummary>> GetBookingsAsync(string token = "")
         {
             UriBuilder builder = new UriBuilder(AppSettings.BookingEndpoint);
             builder.AppendToPath("Bookings");
 
             string uri = builder.ToString();
 
-            IEnumerable<Models.BookingSummary> booking = await _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
-
-            return booking;
+            return _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
         }
 
-        public async Task<IEnumerable<Models.BookingSummary>> GetLatestBookingsAsync(string token = "")
+        public Task<IEnumerable<Models.BookingSummary>> GetLatestBookingsAsync(string token = "")
         {
             UriBuilder builder = new UriBuilder(AppSettings.BookingEndpoint);
             builder.AppendToPath("Bookings/latest");
 
             string uri = builder.ToString();
 
-            IEnumerable<Models.BookingSummary> booking = await _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
-
-            return booking;
+            return _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
         }
 
-        public async Task<IEnumerable<Models.BookingSummary>> GetBookingsByEmailAsync(string userId, string token = "")
+        public Task<IEnumerable<Models.BookingSummary>> GetBookingsByEmailAsync(string userId, string token = "")
         {
-            IEnumerable<Models.BookingSummary> booking = new List<Models.BookingSummary>();
-
             if (!string.IsNullOrEmpty(token))
             {
                 UriBuilder builder = new UriBuilder(AppSettings.BookingEndpoint);
@@ -50,22 +44,20 @@ namespace SmartHotel.Clients.Core.Services.Booking
 
                 string uri = builder.ToString();
 
-                booking = await _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
+                return _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
             }
             
-            return booking;
+            return Task.FromResult<IEnumerable<Models.BookingSummary>>(new List<Models.BookingSummary>());
         }
 
-        public async Task<IEnumerable<Models.BookingSummary>> GetLatestBookingsByEmailAsync(string email, string token = "")
+        public Task<IEnumerable<Models.BookingSummary>> GetLatestBookingsByEmailAsync(string email, string token = "")
         {
             UriBuilder builder = new UriBuilder(AppSettings.BookingEndpoint);
             builder.AppendToPath($"Bookings/latest/{email}");
 
             string uri = builder.ToString();
 
-            IEnumerable<Models.BookingSummary> booking = await _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
-
-            return booking;
+            return _requestService.GetAsync<IEnumerable<Models.BookingSummary>>(uri, token);
         }
 
         public Task<Models.Booking> CreateBookingAsync(Models.Booking booking, string token = "")

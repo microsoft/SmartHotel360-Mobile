@@ -172,14 +172,14 @@ namespace SmartHotel.Clients.Core.ViewModels
             Find = true;
         }
 
-        private async Task OpenDoorAsync()
+        private Task OpenDoorAsync()
         {
-            await NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
+            return NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
         }
 
-        private async Task CheckoutAsync()
+        private Task CheckoutAsync()
         {
-            await NavigationService.NavigateToPopupAsync<CheckoutViewModel>(true);
+            return NavigationService.NavigateToPopupAsync<CheckoutViewModel>(true);
         }
 
         private async Task OpenBotAsync()

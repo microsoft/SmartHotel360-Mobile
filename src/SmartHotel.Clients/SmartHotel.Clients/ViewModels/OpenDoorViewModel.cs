@@ -53,9 +53,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async Task ClosePopupAsync()
+        private Task ClosePopupAsync()
         {
-            await PopupNavigation.PopAllAsync(true);
+            return PopupNavigation.PopAllAsync(true);
         }
     }
 }

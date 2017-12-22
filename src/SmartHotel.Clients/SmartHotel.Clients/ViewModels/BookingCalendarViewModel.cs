@@ -106,7 +106,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async Task NextAsync()
+        private Task NextAsync()
         {
             var navigationParameter = new Dictionary<string, object>
             {
@@ -115,7 +115,7 @@ namespace SmartHotel.Clients.Core.ViewModels
                 { "until", Until },
             };
 
-            await NavigationService.NavigateToAsync<BookingHotelsViewModel>(navigationParameter);
+            return NavigationService.NavigateToAsync<BookingHotelsViewModel>(navigationParameter);
         }
     }
 }

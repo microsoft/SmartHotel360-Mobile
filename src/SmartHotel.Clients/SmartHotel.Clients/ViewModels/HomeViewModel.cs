@@ -131,37 +131,38 @@ namespace SmartHotel.Clients.Core.ViewModels
             return Task.FromResult(true);
         }
 
-        private async Task OnNotificationsAsync()
+        private Task OnNotificationsAsync()
         {
-            await NavigationService.NavigateToAsync(typeof(NotificationsViewModel), Notifications);
+            return NavigationService.NavigateToAsync(typeof(NotificationsViewModel), Notifications);
         }
 
-        private async Task OpenDoorAsync()
+        private Task OpenDoorAsync()
         {
-            await NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
+            return NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
         }
 
-        private async Task BookRoomAsync()
+        private Task BookRoomAsync()
         {
-            await NavigationService.NavigateToAsync<BookingViewModel>();
+            return NavigationService.NavigateToAsync<BookingViewModel>();
         }
 
-        private async Task SuggestionsAsync()
+        private Task SuggestionsAsync()
         {
-            await NavigationService.NavigateToAsync<SuggestionsViewModel>();
+            return NavigationService.NavigateToAsync<SuggestionsViewModel>();
         }
 
-        private async Task BookConferenceAsync()
+        private Task BookConferenceAsync()
         {
-            await NavigationService.NavigateToAsync<BookingViewModel>();
+            return NavigationService.NavigateToAsync<BookingViewModel>();
         }
 
-        private async Task GoMyRoomAsync()
+        private Task GoMyRoomAsync()
         {
             if (HasBooking)
             {
-                await NavigationService.NavigateToAsync<MyRoomViewModel>();
+                return NavigationService.NavigateToAsync<MyRoomViewModel>();
             }
+            return Task.FromResult(true);
         }
 
         private void OnBookingRequested(Booking booking)
