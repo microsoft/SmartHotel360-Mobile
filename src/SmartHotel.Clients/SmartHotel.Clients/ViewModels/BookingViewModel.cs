@@ -41,7 +41,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             set
             {
                 _search = value;
-                Filter(_search);
+                FilterAsync(_search);
                 OnPropertyChanged();
             }
         }
@@ -82,7 +82,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand NextCommand => new Command(NextAsync);
+        public ICommand NextCommand => new Command(async () => await NextAsync());
 
         public override async Task InitializeAsync(object navigationData)
         {
@@ -121,7 +121,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async void Filter(string search)
+        private async void FilterAsync(string search)
         {
             try
             {
@@ -147,7 +147,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async void NextAsync()
+        private async Task NextAsync()
         {
             var city = _cities.FirstOrDefault(c => c.ToString().Equals(Suggestion));
 

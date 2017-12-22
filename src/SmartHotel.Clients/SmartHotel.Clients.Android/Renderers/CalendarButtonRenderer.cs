@@ -28,7 +28,7 @@ namespace SmartHotel.Clients.Droid.Renderers
             Control.ViewTreeObserver.GlobalLayout += (sender, args) => ChangeBackgroundPattern();
         }
 
-        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected override async void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
             var element = Element as CalendarButton;
@@ -56,7 +56,7 @@ namespace SmartHotel.Clients.Droid.Renderers
                     }
                     else
                     {
-                        ChangeBackgroundImage();
+                        await ChangeBackgroundImage();
                     }
                 }
                 else
@@ -82,12 +82,12 @@ namespace SmartHotel.Clients.Droid.Renderers
                 }
                 else
                 {
-                    ChangeBackgroundImage();
+                    await ChangeBackgroundImage();
                 }
             }
         }
 
-        protected async void ChangeBackgroundImage()
+        protected async Task ChangeBackgroundImage()
         {
             var element = Element as CalendarButton;
             if (element == null || element.BackgroundImage == null) return;

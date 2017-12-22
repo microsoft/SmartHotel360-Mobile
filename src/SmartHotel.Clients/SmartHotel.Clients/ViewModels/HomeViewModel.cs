@@ -80,17 +80,17 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand NotificationsCommand => new Command(OnNotifications);
+        public ICommand NotificationsCommand => new Command(async () => await OnNotificationsAsync());
 
-        public ICommand OpenDoorCommand => new Command(OpenDoorAsync);
+        public ICommand OpenDoorCommand => new Command(async () => await OpenDoorAsync());
 
-        public ICommand BookRoomCommand => new Command(BookRoomAsync);
+        public ICommand BookRoomCommand => new Command(async () => await BookRoomAsync());
 
-        public ICommand SuggestionsCommand => new Command(SuggestionsAsync);
+        public ICommand SuggestionsCommand => new Command(async () => await SuggestionsAsync());
 
-        public ICommand BookConferenceCommand => new Command(BookConferenceAsync);
+        public ICommand BookConferenceCommand => new Command(async () => await BookConferenceAsync());
 
-        public ICommand GoMyRoomCommand => new Command(GoMyRoomAsync);
+        public ICommand GoMyRoomCommand => new Command(async () => await GoMyRoomAsync());
 
         public override async Task InitializeAsync(object navigationData)
         {
@@ -131,32 +131,32 @@ namespace SmartHotel.Clients.Core.ViewModels
             return Task.FromResult(true);
         }
 
-        private async void OnNotifications()
+        private async Task OnNotificationsAsync()
         {
             await NavigationService.NavigateToAsync(typeof(NotificationsViewModel), Notifications);
         }
 
-        private async void OpenDoorAsync()
+        private async Task OpenDoorAsync()
         {
             await NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
         }
 
-        private async void BookRoomAsync()
+        private async Task BookRoomAsync()
         {
             await NavigationService.NavigateToAsync<BookingViewModel>();
         }
 
-        private async void SuggestionsAsync()
+        private async Task SuggestionsAsync()
         {
             await NavigationService.NavigateToAsync<SuggestionsViewModel>();
         }
 
-        private async void BookConferenceAsync()
+        private async Task BookConferenceAsync()
         {
             await NavigationService.NavigateToAsync<BookingViewModel>();
         }
 
-        private async void GoMyRoomAsync()
+        private async Task GoMyRoomAsync()
         {
             if (HasBooking)
             {

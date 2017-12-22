@@ -1,6 +1,7 @@
 ﻿using Rg.Plugins.Popup.Services;
 using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.ViewModels.Base;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -19,11 +20,11 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public string UserAvatar => AppSettings.User?.AvatarUrl;
 
-        public ICommand ClosePopupCommand => new Command(ClosePopupAsync);
+        public ICommand ClosePopupCommand => new Command(async () => await ClosePopupAsync());
 
-        public ICommand CheckoutCommand => new Command(CheckoutAsync);
+        public ICommand CheckoutCommand => new Command(async () => await CheckoutAsync());
 
-        private async void ClosePopupAsync()
+        private async Task ClosePopupAsync()
         {
             AppSettings.HasBooking = false;
 
@@ -33,7 +34,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             await PopupNavigation.PopAllAsync(true);
         }
 
-        private async void CheckoutAsync()
+        private async Task CheckoutAsync()
         {
             AppSettings.HasBooking = false;
 

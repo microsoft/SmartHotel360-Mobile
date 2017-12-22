@@ -66,7 +66,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand HotelSelectedCommand => new Command<Models.Hotel>(OnSelectHotel);
+        public ICommand HotelSelectedCommand => new Command<Models.Hotel>(OnSelectHotelAsync);
 
         public override async Task InitializeAsync(object navigationData)
         {
@@ -112,7 +112,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async void OnSelectHotel(Models.Hotel item)
+        private async void OnSelectHotelAsync(Models.Hotel item)
         {
             if (item != null)
             {
