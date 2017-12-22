@@ -17,19 +17,21 @@ namespace SmartHotel.Clients
     {
         public static PublicClientApplication AuthenticationClient { get; set; }
 
+        static App()
+        {
+            BuildDependencies();
+        }
         public App()
         {
             AuthenticationClient =
                 new PublicClientApplication($"{AppSettings.B2cAuthority}{AppSettings.B2cTenant}", AppSettings.B2cClientId);
 
             InitializeComponent();
-
-            BuildDependencies();
-
+    
             InitNavigation();
         }
 
-        public void BuildDependencies()
+        public static void BuildDependencies()
         {
             // Do you want to use fake services that DO NOT require real backend or internet connection?
             // Set to true the value to use fake services, false if you want to use Azure Services.
