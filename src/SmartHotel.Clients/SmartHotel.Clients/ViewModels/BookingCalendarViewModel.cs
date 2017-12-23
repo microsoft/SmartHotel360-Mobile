@@ -81,7 +81,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public ICommand SelectedDateCommand => new Command((d) => SelectedDate(d));
 
-        public ICommand NextCommand => new Command(async () => await NextAsync());
+        public ICommand NextCommand => new AsyncCommand(NextAsync);
 
         public override Task InitializeAsync(object navigationData)
         {

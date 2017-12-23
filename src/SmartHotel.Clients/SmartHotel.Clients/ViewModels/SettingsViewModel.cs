@@ -56,7 +56,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand UpdateCommand => new Command(async () => await UpdateSettingsAsync(null));
+        public ICommand UpdateCommand => new AsyncCommand(UpdateSettingsAsync);
 
         public override async Task InitializeAsync(object navigationData)
         {

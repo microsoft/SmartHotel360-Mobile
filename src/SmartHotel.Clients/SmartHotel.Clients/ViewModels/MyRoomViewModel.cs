@@ -133,11 +133,11 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public ICommand FindCommand => new Command(SetFind);
 
-        public ICommand OpenDoorCommand => new Command(async () => await OpenDoorAsync());
+        public ICommand OpenDoorCommand => new AsyncCommand(OpenDoorAsync);
 
-        public ICommand CheckoutCommand => new Command(async () => await CheckoutAsync());
+        public ICommand CheckoutCommand => new AsyncCommand(CheckoutAsync);
 
-        public ICommand OpenBotCommand => new Command(async () => await OpenBotAsync());
+        public ICommand OpenBotCommand => new AsyncCommand(OpenBotAsync);
 
         public ICommand EcoModeCommand => new Command(EcoMode);
 
