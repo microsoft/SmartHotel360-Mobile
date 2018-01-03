@@ -20,9 +20,9 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public string UserAvatar => AppSettings.User?.AvatarUrl;
 
-        public ICommand ClosePopupCommand => new Command(async () => await ClosePopupAsync());
+        public ICommand ClosePopupCommand => new AsyncCommand(ClosePopupAsync);
 
-        public ICommand CheckoutCommand => new Command(async () => await CheckoutAsync());
+        public ICommand CheckoutCommand => new AsyncCommand(CheckoutAsync);
 
         private async Task ClosePopupAsync()
         {

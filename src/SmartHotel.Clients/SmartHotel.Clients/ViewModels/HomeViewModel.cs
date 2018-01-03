@@ -80,17 +80,17 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand NotificationsCommand => new Command(async () => await OnNotificationsAsync());
+        public ICommand NotificationsCommand => new AsyncCommand(OnNotificationsAsync);
 
-        public ICommand OpenDoorCommand => new Command(async () => await OpenDoorAsync());
+        public ICommand OpenDoorCommand => new AsyncCommand(OpenDoorAsync);
 
-        public ICommand BookRoomCommand => new Command(async () => await BookRoomAsync());
+        public ICommand BookRoomCommand => new AsyncCommand(BookRoomAsync);
 
-        public ICommand SuggestionsCommand => new Command(async () => await SuggestionsAsync());
+        public ICommand SuggestionsCommand => new AsyncCommand(SuggestionsAsync);
 
-        public ICommand BookConferenceCommand => new Command(async () => await BookConferenceAsync());
+        public ICommand BookConferenceCommand => new AsyncCommand(BookConferenceAsync);
 
-        public ICommand GoMyRoomCommand => new Command(async () => await GoMyRoomAsync());
+        public ICommand GoMyRoomCommand => new AsyncCommand(GoMyRoomAsync);
 
         public override async Task InitializeAsync(object navigationData)
         {

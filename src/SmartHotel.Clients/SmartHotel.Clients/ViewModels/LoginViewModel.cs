@@ -57,11 +57,11 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand SignInCommand => new Command(async () => await SignInAsync());
+        public ICommand SignInCommand => new AsyncCommand(SignInAsync);
 
-        public ICommand MicrosoftSignInCommand => new Command(async () => await MicrosoftSignInAsync());
+        public ICommand MicrosoftSignInCommand => new AsyncCommand(MicrosoftSignInAsync);
 
-        public ICommand SettingsCommand => new Command(async () => await NavigateToSettingsAsync(null));
+        public ICommand SettingsCommand => new AsyncCommand(NavigateToSettingsAsync);
 
         private async Task SignInAsync()
         {
@@ -105,7 +105,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
             catch(Exception)
             {
-                await DialogService.ShowAlertAsync("An error ocurred, try again", "Error", "Ok");
+                await DialogService.ShowAlertAsync("An error occurred, try again", "Error", "Ok");
             }
             finally
             {

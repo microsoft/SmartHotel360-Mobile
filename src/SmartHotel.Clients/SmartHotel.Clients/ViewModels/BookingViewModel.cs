@@ -82,7 +82,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        public ICommand NextCommand => new Command(async () => await NextAsync());
+        public ICommand NextCommand => new AsyncCommand(NextAsync);
 
         public override async Task InitializeAsync(object navigationData)
         {
