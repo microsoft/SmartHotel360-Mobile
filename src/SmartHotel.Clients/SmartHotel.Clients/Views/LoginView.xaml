@@ -168,12 +168,14 @@
                                 <OnIdiom
                                     x:TypeArguments="x:Double" 
                                     Desktop="100"
+                                    Tablet="100"
                                     Phone="95"/>
                             </Image.HeightRequest>
                             <Image.VerticalOptions>
                                 <OnIdiom
                                     x:TypeArguments="LayoutOptions" 
                                     Desktop="End"
+                                    Tablet="End"
                                     Phone="Start"/>
                             </Image.VerticalOptions>
                         </Image>
@@ -187,12 +189,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Center"
+                                Tablet="Center"
                                 Phone="FillAndExpand"/>
                         </Label.HorizontalOptions>
                         <Label.WidthRequest>
                             <OnIdiom
                                 x:TypeArguments="x:Double" 
-                                Desktop="350"/>
+                                Desktop="350"
+                                Tablet="320"/>
                         </Label.WidthRequest>
                     </Label>
                     <ctrls:ExtendedEntry 
@@ -206,12 +210,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Center"
+                                Tablet="Center"
                                 Phone="FillAndExpand" />
                         </ctrls:ExtendedEntry.HorizontalOptions>
                         <ctrls:ExtendedEntry.WidthRequest>
                             <OnIdiom
                                 x:TypeArguments="x:Double" 
-                                Desktop="350" />
+                                Desktop="350"
+                                Tablet="320"/>
                         </ctrls:ExtendedEntry.WidthRequest>
                     </ctrls:ExtendedEntry>
                     <Label 
@@ -223,12 +229,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Center"
+                                Tablet="Center"
                                 Phone="FillAndExpand" />
                         </Label.HorizontalOptions>
                         <Label.WidthRequest>
                             <OnIdiom
                                 x:TypeArguments="x:Double" 
-                                Desktop="350" />
+                                Desktop="350"
+                                Tablet="320"/>
                         </Label.WidthRequest>
                     </Label>
                     <ctrls:ExtendedEntry
@@ -243,12 +251,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Center"
+                                Tablet="Center"
                                 Phone="FillAndExpand"/>
                         </ctrls:ExtendedEntry.HorizontalOptions>
                         <ctrls:ExtendedEntry.WidthRequest>
                             <OnIdiom
                                 x:TypeArguments="x:Double" 
-                                Desktop="350" />
+                                Desktop="350"
+                                Tablet="320"/>
                         </ctrls:ExtendedEntry.WidthRequest>
                     </ctrls:ExtendedEntry>
                     <Grid
@@ -257,12 +267,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Center"
+                                Tablet="Center"
                                 Phone="FillAndExpand" />
                         </Grid.HorizontalOptions>
                         <Grid.WidthRequest>
                             <OnIdiom
                                 x:TypeArguments="x:Double" 
-                                Desktop="350" />
+                                Desktop="350" 
+                                Tablet="320"/>
                         </Grid.WidthRequest>
                         <Label 
                             Text="{extensions:Translate ForgotPassword}"
@@ -283,12 +295,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Start"
+                                Tablet="Start"
                                 Phone="End"/>
                         </StackLayout.VerticalOptions>
                         <StackLayout.Margin>
                             <OnIdiom
                                 x:TypeArguments="Thickness" 
                                 Desktop="0, 200, 0, 0"
+                                Tablet="0, 200, 0, 0"
                                 Phone="0, 0, 0, 36"/>
                         </StackLayout.Margin>
                         <Label   
@@ -302,7 +316,7 @@
                 <!-- Sign in buttons -->
                 <StackLayout  
                     x:Name="SignButtons"
-                    Grid.Row="1" 
+                    Grid.Row="1"    
                     Opacity="0"
                     Margin="38, -40, 38, 0">
                     <StackLayout.Spacing>
@@ -316,12 +330,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Center" 
+                                Tablet="Center"
                                 Phone="FillAndExpand"  />
                         </ctrls:ButtonFrame.HorizontalOptions>
                         <ctrls:ButtonFrame.WidthRequest>
                             <OnIdiom
                                 x:TypeArguments="x:Double" 
-                                Desktop="350" />
+                                Desktop="350"                                    
+                                Tablet="320"/>
                         </ctrls:ButtonFrame.WidthRequest>
                         <Button    
                             Text="{extensions:Translate SignInMayus}"
@@ -341,12 +357,14 @@
                             <OnIdiom
                                 x:TypeArguments="LayoutOptions" 
                                 Desktop="Center" 
+                                Tablet="Center"
                                 Phone="FillAndExpand"  />
                         </ctrls:ButtonFrame.HorizontalOptions>
                         <ctrls:ButtonFrame.WidthRequest>
                             <OnIdiom
                                 x:TypeArguments="x:Double" 
-                                Desktop="350" />
+                                Desktop="350"
+                                Tablet="320"/>
                         </ctrls:ButtonFrame.WidthRequest>
                         <Button   
                             Text="{extensions:Translate SignInMicrosoftMayus}"
