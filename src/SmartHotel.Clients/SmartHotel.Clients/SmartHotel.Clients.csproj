@@ -16,7 +16,6 @@
     <PackageReference Include="Acr.UserDialogs" Version="6.5.1" />
     <PackageReference Include="Autofac" Version="4.6.1" />
     <PackageReference Include="CarouselView.FormsPlugin" Version="4.4.3" />
-    <PackageReference Include="LiveXAML" Version="1.3.3" />
     <PackageReference Include="Microcharts" Version="0.7.1-pre" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1-pre" />
     <PackageReference Include="Microsoft.Azure.Mobile.Analytics" Version="0.15.2" />
