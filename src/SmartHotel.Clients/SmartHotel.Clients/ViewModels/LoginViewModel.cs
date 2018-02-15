@@ -128,9 +128,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             return isValidUser && isValidPassword;
         }
 
-        private async Task NavigateToSettingsAsync(object obj)
+        private Task NavigateToSettingsAsync(object obj)
         {
-            await NavigationService.NavigateToAsync(typeof(SettingsViewModel<RemoteSettings>));
+            return NavigationService.NavigateToAsync(typeof(SettingsViewModel<RemoteSettings>));
         }
     }
 }

@@ -24,14 +24,14 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public ICommand CheckoutCommand => new AsyncCommand(CheckoutAsync);
 
-        private async Task ClosePopupAsync()
+        private Task ClosePopupAsync()
         {
             AppSettings.HasBooking = false;
 
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
             _analyticService.TrackEvent("Checkout");
 
-            await PopupNavigation.PopAllAsync(true);
+            return PopupNavigation.PopAllAsync(true);
         }
 
         private async Task CheckoutAsync()

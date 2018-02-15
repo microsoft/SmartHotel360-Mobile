@@ -16,7 +16,7 @@ namespace SmartHotel.Clients.Core.Services.Notification
             _requestService = requestService;
         }
 
-        public async Task<IEnumerable<Models.Notification>> GetNotificationsAsync(int seq, string token)
+        public Task<IEnumerable<Models.Notification>> GetNotificationsAsync(int seq, string token)
         {
             UriBuilder builder = new UriBuilder(AppSettings.NotificationsEndpoint);
             builder.AppendToPath("notifications");
@@ -24,10 +24,7 @@ namespace SmartHotel.Clients.Core.Services.Notification
 
             string uri = builder.ToString();
 
-            IEnumerable<Models.Notification> notifications =
-                await _requestService.GetAsync<IEnumerable<Models.Notification>>(uri, token);
-
-            return notifications;
+            return _requestService.GetAsync<IEnumerable<Models.Notification>>(uri, token);
         }
 
         public Task DeleteNotificationAsync(Models.Notification notification)
