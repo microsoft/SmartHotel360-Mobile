@@ -89,6 +89,11 @@ Xamarin.Forms enables you to build native UIs for iOS, Android, macOS, Linux, an
 
 <img src="images/nfc.png" Width="210" />
 
+## Sample endpoints
+You can find the list of the sample endpoints in the following link: (http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http).
+To change the endpoints you can modifiy the AppSenttings.cs file in the SmartHotel.Clients project under the Shared Code folder:
+<img src="images/SampleEndpoints.png" Width="840"> 
+
 ## Requirements
 
 * [Visual Studio 2017 version 15.3 or Visual Studio for Mac version 7.3](https://www.visualstudio.com/vs/)
