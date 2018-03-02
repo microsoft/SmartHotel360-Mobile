@@ -94,6 +94,9 @@ You can find the list of the sample endpoints in the following link: (http://sh3
 To change the endpoints you can modifiy the AppSettings.cs file in the SmartHotel.Clients project under the Shared Code folder:
 <img src="images/SampleEndpoints.png" Width="840"> 
 
+You can configure the public endpoints from your running app, when you double click the icon in the login page:
+<img src="images/PublicEndpoints.gif"> 
+
 ## Requirements
 
 * [Visual Studio 2017 version 15.3 or Visual Studio for Mac version 7.3](https://www.visualstudio.com/vs/)
