@@ -91,7 +91,7 @@ Xamarin.Forms enables you to build native UIs for iOS, Android, macOS, Linux, an
 
 ## Sample endpoints
 You can find the list of the sample endpoints in the following link: (http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http).
-To change the endpoints you can modifiy the AppSenttings.cs file in the SmartHotel.Clients project under the Shared Code folder:
+To change the endpoints you can modifiy the AppSettings.cs file in the SmartHotel.Clients project under the Shared Code folder:
 <img src="images/SampleEndpoints.png" Width="840"> 
 
 ## Requirements
