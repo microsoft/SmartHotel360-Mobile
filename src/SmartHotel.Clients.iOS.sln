@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHotel.Clients.iOS", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHotel.Clients.UITests", "SmartHotel.Clients.UITests\SmartHotel.Clients.UITests.csproj", "{8CBF1E7B-7AB7-42BF-8960-6BBE971F9BC7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E4D43C7C-F4DD-4575-A227-4D98CD8CF531}"
+	ProjectSection(SolutionItems) = preProject
+		SmartHotel.Clients\SmartHotel.Clients.iOS\appcenter-post-build.sh = SmartHotel.Clients\SmartHotel.Clients.iOS\appcenter-post-build.sh
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
