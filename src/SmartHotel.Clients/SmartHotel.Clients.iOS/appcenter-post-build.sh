@@ -1,0 +1,1 @@
+appcenter test run uitest --app "SmartHotel360Demo/SmartHotel360iOS" --devices "SmartHotel360Demo/new-iphones" --app-path "build/SmartHotel.Clients.iOS.ipa"  --test-series "master" --locale "en_US" --build-dir "GeneratedTest/AppCenter.UITest.iOS/bin/Release"
