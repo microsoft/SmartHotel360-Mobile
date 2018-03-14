@@ -19,9 +19,9 @@ namespace SmartHotel.Clients.Core.Services.Settings
             settings.B2c.Client = AppSettings.B2cClientId;
             settings.B2c.Tenant = AppSettings.B2cTenant;
             settings.B2c.Policy = AppSettings.B2cPolicy;
-            settings.Analytics.Android = AppSettings.MobileCenterAnalyticsAndroid;
-            settings.Analytics.Ios = AppSettings.MobileCenterAnalyticsIos;
-            settings.Analytics.Uwp = AppSettings.MobileCenterAnalyticsWindows;
+            settings.Analytics.Android = AppSettings.AppCenterAnalyticsAndroid;
+            settings.Analytics.Ios = AppSettings.AppCenterAnalyticsIos;
+            settings.Analytics.Uwp = AppSettings.AppCenterAnalyticsWindows;
             settings.Others.FallbackMapsLocation = AppSettings.FallbackMapsLocation;
             settings.Bot.FacebookId = AppSettings.FacebookBotId;
             settings.Bot.SkypeId = AppSettings.SkypeBotId;
@@ -40,9 +40,9 @@ namespace SmartHotel.Clients.Core.Services.Settings
             AppSettings.B2cClientId = remote.B2c.Client;
             AppSettings.B2cTenant = remote.B2c.Tenant;
             AppSettings.B2cPolicy = remote.B2c.Policy;
-            AppSettings.MobileCenterAnalyticsAndroid = remote.Analytics.Android;
-            AppSettings.MobileCenterAnalyticsIos = remote.Analytics.Ios;
-            AppSettings.MobileCenterAnalyticsWindows = remote.Analytics.Uwp;
+            AppSettings.AppCenterAnalyticsAndroid = remote.Analytics.Android;
+            AppSettings.AppCenterAnalyticsIos = remote.Analytics.Ios;
+            AppSettings.AppCenterAnalyticsWindows = remote.Analytics.Uwp;
             AppSettings.FallbackMapsLocation = remote.Others.FallbackMapsLocation;
             AppSettings.FacebookBotId = remote.Bot.FacebookId;
             AppSettings.SkypeBotId = remote.Bot.SkypeId;
