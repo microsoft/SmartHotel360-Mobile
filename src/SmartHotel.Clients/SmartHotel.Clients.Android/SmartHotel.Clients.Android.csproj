@@ -319,6 +319,7 @@
     <AndroidAsset Include="..\CommonResources\Fonts\firasans\FiraSans-SemiBold.ttf">
       <Link>Assets\FiraSans-SemiBold.ttf</Link>
     </AndroidAsset>
+    <None Include="appcenter-post-build.sh" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

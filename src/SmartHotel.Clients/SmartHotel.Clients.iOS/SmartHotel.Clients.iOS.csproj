@@ -129,6 +129,7 @@
     <Compile Include="Renderers\TransparentViewCell.cs" />
     <Compile Include="Services\BrowserCookiesService.cs" />
     <Compile Include="Services\DismissKeyboard\DismissKeyboardService.cs" />
+    <None Include="appcenter-post-build.sh" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>

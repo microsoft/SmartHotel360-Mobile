@@ -15,10 +15,10 @@ namespace SmartHotel.Clients.Core
         private const string DefaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
         private const string DefaultImagesBaseUri = "YOUR_IMAGE_BASE_URI";
 
-        // Mobile Center
-        private const string DefaultMobileCenterAnalyticsAndroid = "YOUR_APPCENTER_ANDROID_ANALYTICS_ID";
-        private const string DefaultMobileCenterAnalyticsIos = "YOUR_APPCENTER_IOS_ANALYTICS_ID";
-        private const string DefaultMobileCenterAnalyticsWindows = "YOUR_APPCENTER_WINDOWS_ANALYTICS_ID";
+        // App Center (Add your own IDs).
+        private const string DefaultAppCenterAnalyticsAndroid = "494cbf56-bb84-4f3c-ab25-860316af246e";
+        private const string DefaultAppCenterAnalyticsIos = "0422f642-413b-4cde-804d-7b870fc21c95";
+        private const string DefaultAppCenterrAnalyticsWindows = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
 
         // Maps
         private const string DefaultBingMapsApiKey = "YOUR_BINGMAPS_API_KEY";
@@ -144,25 +144,25 @@ namespace SmartHotel.Clients.Core
             set => Settings.AddOrUpdateValue(nameof(User), value);
         }
 
-        public static string MobileCenterAnalyticsAndroid
+        public static string AppCenterAnalyticsAndroid
         {
-            get => Settings.GetValueOrDefault(nameof(MobileCenterAnalyticsAndroid), DefaultMobileCenterAnalyticsAndroid);
+            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsAndroid), AppCenterAnalyticsAndroid);
 
-            set => Settings.AddOrUpdateValue(nameof(MobileCenterAnalyticsAndroid), value);
+            set => Settings.AddOrUpdateValue(nameof(AppCenterAnalyticsAndroid), value);
         }
 
-        public static string MobileCenterAnalyticsIos
+        public static string AppCenterAnalyticsIos
         {
-            get => Settings.GetValueOrDefault(nameof(MobileCenterAnalyticsIos), DefaultMobileCenterAnalyticsIos);
+            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsIos), AppCenterAnalyticsIos);
 
-            set => Settings.AddOrUpdateValue(nameof(MobileCenterAnalyticsIos), value);
+            set => Settings.AddOrUpdateValue(nameof(AppCenterAnalyticsIos), value);
         }
 
-        public static string MobileCenterAnalyticsWindows
+        public static string AppCenterAnalyticsWindows
         {
-            get => Settings.GetValueOrDefault(nameof(MobileCenterAnalyticsWindows), DefaultMobileCenterAnalyticsWindows);
+            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsWindows), AppCenterAnalyticsWindows);
 
-            set => Settings.AddOrUpdateValue(nameof(MobileCenterAnalyticsWindows), value);
+            set => Settings.AddOrUpdateValue(nameof(AppCenterAnalyticsWindows), value);
         }
 
         public static bool UseFakes
