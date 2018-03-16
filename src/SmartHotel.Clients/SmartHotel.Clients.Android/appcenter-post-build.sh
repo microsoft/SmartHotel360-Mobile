@@ -1,3 +1,4 @@
-/bin/bash -c nuget restore 'src/SmartHotel.Clients.UITests/SmartHotel.Clients.UITests.csproj' -DisableParallelProcessing
-/Library/Frameworks/Mono.framework/Versions/5_4_1/bin/msbuild /Users/vsts/agent/2.129.1/work/1/s/src/SmartHotel.Clients.UITests/SmartHotel.Clients.UITests.csproj /p:Configuration=Release /p:Output=$APPCENTER_OUTPUT_DIRECTORY/UITest
+/Library/Frameworks/Mono.framework/Versions/5_4_1/bin/msbuild /Users/vsts/agent/2.129.1/work/1/s/src/SmartHotel.Clients.UITests/SmartHotel.Clients.UITests.csproj /p:Configuration=Release 
+mkdir $APPCENTER_OUTPUT_DIRECTORY/UITest 
+cp /Users/vsts/agent/2.129.1/work/1/s/src/SmartHotel.Clients.UITests/bin/Release/SmartHotel.Clients.UITests.dll $APPCENTER_OUTPUT_DIRECTORY/UITest
 appcenter test run uitest --app "SmartHotel360Demo/SmartHotel360Android" --devices "SmartHotel360Demo/new-models" --app-path $APPCENTER_OUTPUT_DIRECTORY/com.microsoft.smarthotel.apk  --test-series "master" --locale "en_US" --build-dir --build-dir $APPCENTER_OUTPUT_DIRECTORY/UITest --uitest-tools-dir $APPCENTER_SOURCE_DIRECTORY/src/packages/Xamarin.UITest.*/tools --token $TOKEN
