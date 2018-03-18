@@ -205,12 +205,12 @@ namespace SmartHotel.Clients.Core.Controls
 		}
 
 		public static readonly BindableProperty TitleLeftArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleLeftArrowBorderRadius), typeof(Int32), typeof(Calendar), default(Int32),
-					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.BorderRadius = (Int32)newValue);
+					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleLeftArrow.CornerRadius = (Int32)newValue);
 
 		public Int32 TitleLeftArrowBorderRadius
 		{
-			get { return TitleLeftArrow.BorderRadius; }
-			set { TitleLeftArrow.BorderRadius = value; }
+			get { return TitleLeftArrow.CornerRadius; }
+			set { TitleLeftArrow.CornerRadius = value; }
 		}
 
 		public static readonly BindableProperty TitleLeftArrowImageProperty = BindableProperty.Create(nameof(TitleLeftArrowImage), typeof(FileImageSource), typeof(Calendar), default(FileImageSource),
@@ -331,12 +331,12 @@ namespace SmartHotel.Clients.Core.Controls
 		}
 
 		public static readonly BindableProperty TitleRightArrowBorderRadiusProperty = BindableProperty.Create(nameof(TitleRightArrowBorderRadius), typeof(Int32), typeof(Calendar), default(Int32),
-					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.BorderRadius = (Int32)newValue);
+					propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).TitleRightArrow.CornerRadius = (Int32)newValue);
 
 		public Int32 TitleRightArrowBorderRadius
 		{
-			get { return TitleRightArrow.BorderRadius; }
-			set { TitleRightArrow.BorderRadius = value; }
+			get { return TitleRightArrow.CornerRadius; }
+			set { TitleRightArrow.CornerRadius = value; }
 		}
 
 		public static readonly BindableProperty TitleRightArrowImageProperty = BindableProperty.Create(nameof(TitleRightArrowImage), typeof(FileImageSource), typeof(Calendar), default(FileImageSource),
