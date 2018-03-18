@@ -48,7 +48,7 @@ namespace SmartHotel.Clients
 
         protected override void OnStart()
         {
-            MobileCenter.Start($"ios={AppSettings.MobileCenterAnalyticsIos};uwp={AppSettings.MobileCenterAnalyticsWindows};android={AppSettings.MobileCenterAnalyticsAndroid}", typeof(Analytics), typeof(Crashes));
+            MobileCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};uwp={AppSettings.AppCenterAnalyticsWindows};android={AppSettings.AppCenterAnalyticsAndroid}", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()
