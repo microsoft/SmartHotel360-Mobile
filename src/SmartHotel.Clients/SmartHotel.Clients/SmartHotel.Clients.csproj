@@ -4,6 +4,7 @@
     <PackageTargetFallback>$(PackageTargetFallback);portable-win+net45+wp8+win81+wpa8;portable-net45+win8</PackageTargetFallback>
     <AssemblyName>SmartHotel.Clients.Core</AssemblyName>
     <RootNamespace>SmartHotel.Clients.Core</RootNamespace>
+    <Configurations>Debug;Release;UI Test</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Converters\CountToBoolConverter.cs" />

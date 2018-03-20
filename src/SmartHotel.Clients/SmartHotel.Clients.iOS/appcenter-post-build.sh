@@ -1,2 +1,2 @@
-/Library/Frameworks/Mono.framework/Versions/5_4_1/bin/msbuild /Users/vsts/agent/2.129.1/work/1/s/src/SmartHotel.Clients.UITests/SmartHotel.Clients.UITests.csproj /p:Configuration=Release 
+msbuild $APPCENTER_SOURCE_DIRECTORY/src/SmartHotel.Clients.UITests/SmartHotel.Clients.UITests.csproj /p:Configuration=Release 
 appcenter test run uitest --app $APP --devices $DEVICES --app-path $APPCENTER_OUTPUT_DIRECTORY/SmartHotel.Clients.iOS.ipa --test-series "master" --locale "en_US" --build-dir $APPCENTER_SOURCE_DIRECTORY/src/SmartHotel.Clients.UITests/bin/Release --uitest-tools-dir $APPCENTER_SOURCE_DIRECTORY/src/packages/Xamarin.UITest.2.1.3/tools --token $TOKEN
