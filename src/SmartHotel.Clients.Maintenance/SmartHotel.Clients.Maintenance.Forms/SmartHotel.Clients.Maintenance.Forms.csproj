@@ -50,6 +50,9 @@
     <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\MarkupExtensions\TranslateExtension.cs">
       <Link>MarkupExtensions\TranslateExtension.cs</Link>
     </Compile>
+    <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Utils\AsyncCommand.cs">
+      <Link>Utils\AsyncCommand.cs</Link>
+    </Compile>
     <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Validations\IsNotNullOrEmptyRule.cs">
       <Link>Validations\IsNotNullOrEmptyRule.cs</Link>
     </Compile>
