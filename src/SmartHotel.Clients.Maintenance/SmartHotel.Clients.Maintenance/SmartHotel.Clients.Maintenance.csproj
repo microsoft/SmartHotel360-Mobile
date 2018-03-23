@@ -38,12 +38,6 @@
     <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Extensions\UriBuilderExtensions.cs">
       <Link>Extensions\UriBuilderExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Services\Analytic\DummyAnalyticService.cs">
-      <Link>Services\Analytic\DummyAnalyticService.cs</Link>
-    </Compile>
-    <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Services\Analytic\IAnalyticService.cs">
-      <Link>Services\Analytic\IAnalyticService.cs</Link>
-    </Compile>
     <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Services\Dialog\DialogService.cs">
       <Link>Services\Dialog\DialogService.cs</Link>
     </Compile>
