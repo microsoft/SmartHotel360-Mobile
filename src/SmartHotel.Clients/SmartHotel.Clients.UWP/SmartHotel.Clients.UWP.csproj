@@ -313,12 +313,6 @@
     <PackageReference Include="Microcharts.Forms">
       <Version>0.7.1-pre</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Azure.Mobile.Analytics">
-      <Version>0.15.2</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Azure.Mobile.Crashes">
-      <Version>0.15.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Identity.Client">
       <Version>1.0.304142221-alpha</Version>
     </PackageReference>

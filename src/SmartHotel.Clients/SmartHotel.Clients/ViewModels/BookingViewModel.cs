@@ -1,5 +1,4 @@
-﻿using SmartHotel.Clients.Core.Services.Analytic;
-using SmartHotel.Clients.Core.Services.DismissKeyboard;
+﻿using SmartHotel.Clients.Core.Services.DismissKeyboard;
 using SmartHotel.Clients.Core.Services.Hotel;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
@@ -15,7 +14,6 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class BookingViewModel : ViewModelBase
     {
-        private readonly IAnalyticService _analyticService;
         private readonly IHotelService _hotelService;
 
         private string _search;
@@ -25,10 +23,8 @@ namespace SmartHotel.Clients.Core.ViewModels
         private bool _isNextEnabled;
 
         public BookingViewModel(
-            IAnalyticService analyticService,
             IHotelService hotelService)
         {
-            _analyticService = analyticService;
             _hotelService = hotelService;
 
             _cities = new List<Models.City>();
@@ -130,11 +126,6 @@ namespace SmartHotel.Clients.Core.ViewModels
                 Suggestions = new List<string>(
                     _cities.Select(c => c.ToString())
                            .Where(c => c.ToLowerInvariant().Contains(search.ToLowerInvariant())));
-
-                _analyticService.TrackEvent("Filter", new Dictionary<string, string>
-                {
-                    { "Search", search }
-                });
             }
             catch (Exception ex)
             {

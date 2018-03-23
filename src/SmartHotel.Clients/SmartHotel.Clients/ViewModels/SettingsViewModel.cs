@@ -1,5 +1,4 @@
-﻿using SmartHotel.Clients.Core.Services.Analytic;
-using SmartHotel.Clients.Core.Services.Settings;
+﻿using SmartHotel.Clients.Core.Services.Settings;
 using SmartHotel.Clients.Core.Validations;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
@@ -12,17 +11,14 @@ namespace SmartHotel.Clients.Core.ViewModels
     public class SettingsViewModel<TRemoteSettingsModel> : ViewModelBase
         where TRemoteSettingsModel : class
     {
-        private readonly IAnalyticService _analyticService;
         private readonly ISettingsService<TRemoteSettingsModel> _settingsService;
 
         private ValidatableObject<string> _settingsFileUrl;
         private TRemoteSettingsModel _remoteSettings;
 
         public SettingsViewModel(
-            IAnalyticService analyticService,
             ISettingsService<TRemoteSettingsModel> settingsService)
         {
-            _analyticService = analyticService;
             _settingsService = settingsService;
 
             _settingsFileUrl = new ValidatableObject<string>();
@@ -89,7 +85,6 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                     await DialogService.ShowAlertAsync("Remote settings were successfully loaded", "JSON settings loaded!", "Accept");
 
-                    _analyticService.TrackEvent("UpdateSettings");
                 }
             }
             catch (Exception ex)

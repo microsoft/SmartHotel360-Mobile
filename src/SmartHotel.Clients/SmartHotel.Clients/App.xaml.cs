@@ -1,7 +1,4 @@
-﻿using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
-using Microsoft.Azure.Mobile.Crashes;
-using Microsoft.Identity.Client;
+﻿using Microsoft.Identity.Client;
 using SmartHotel.Clients.Core;
 using SmartHotel.Clients.Core.Services.Navigation;
 using SmartHotel.Clients.Core.ViewModels;
@@ -48,7 +45,7 @@ namespace SmartHotel.Clients
 
         protected override void OnStart()
         {
-            MobileCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};uwp={AppSettings.AppCenterAnalyticsWindows};android={AppSettings.AppCenterAnalyticsAndroid}", typeof(Analytics), typeof(Crashes));
+            // Handle when your app starts
         }
 
         protected override void OnSleep()

@@ -15,11 +15,6 @@ namespace SmartHotel.Clients.Core
         private const string DefaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
         private const string DefaultImagesBaseUri = "YOUR_IMAGE_BASE_URI";
 
-        // App Center (Add your own IDs).
-        private const string DefaultAppCenterAnalyticsAndroid = "494cbf56-bb84-4f3c-ab25-860316af246e";
-        private const string DefaultAppCenterAnalyticsIos = "0422f642-413b-4cde-804d-7b870fc21c95";
-        private const string DefaultAppCenterrAnalyticsWindows = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
-
         // Maps
         private const string DefaultBingMapsApiKey = "YOUR_BINGMAPS_API_KEY";
         public const string DefaultFallbackMapsLocation = "40.762246 -73.986943";

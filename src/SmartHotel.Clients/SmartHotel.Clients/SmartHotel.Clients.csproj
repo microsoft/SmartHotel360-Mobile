@@ -19,8 +19,6 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="4.4.3" />
     <PackageReference Include="Microcharts" Version="0.7.1-pre" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1-pre" />
-    <PackageReference Include="Microsoft.Azure.Mobile.Analytics" Version="0.15.2" />
-    <PackageReference Include="Microsoft.Azure.Mobile.Crashes" Version="0.15.2" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.0.304142221-alpha" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
