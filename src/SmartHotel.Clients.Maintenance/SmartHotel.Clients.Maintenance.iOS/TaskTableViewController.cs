@@ -1,5 +1,4 @@
 ﻿using CoreGraphics;
-using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Services.Dialog;
 using SmartHotel.Clients.Core.ViewModels;
 using SmartHotel.Clients.Core.Views;
@@ -124,7 +123,6 @@ namespace SmartHotel.Clients.Maintenance.iOS
         private void OnTitleTapped()
         {
             var settingsViewModel = new SettingsViewModel<RemoteSettings>(
-                    new DummyAnalyticService(),
                     new SettingsService());
             var settingsView = new SettingsView
             {
