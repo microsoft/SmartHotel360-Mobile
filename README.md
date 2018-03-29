@@ -14,6 +14,14 @@ For this reference app scenario, we built several consumer and line-of-business 
 * [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-Sentiment-Analysis-App)
 * [Migrating Internal apps to Azure](https://github.com/Microsoft/SmartHotel360-internal-booking-apps)
 
+You can also download the mobile apps connected to our public endpoints in your devices following these links:
+
+* [SmartHotel360 Android Client App] (https://aka.ms/smarthotel360android)
+* [SmartHotel360 iOS Client App] (https://aka.ms/smarthotel360ios)
+* [SmartHotel360 UWP Client App] (https://aka.ms/smarthotel360uwp)
+* [SmartHotel360 NFC Android App] (https://aka.ms/smarthotel360nfc)
+* [SmartHotel360 iOS Maintenance App] (https://aka.ms/smarthotel360maintenance)  
+
 **Note:** This document is about the apps using **Xamarin**.
 
 Mobile and desktop apps we built for this reference sample include:
