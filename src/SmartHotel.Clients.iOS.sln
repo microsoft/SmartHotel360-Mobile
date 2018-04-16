@@ -200,13 +200,14 @@ Global
 		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.Release|x64.ActiveCfg = Release|iPhone
 		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.Release|x86.ActiveCfg = Release|iPhone
-		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|Any CPU.ActiveCfg = UI Test|iPhone
-		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|Any CPU.Build.0 = UI Test|iPhone
-		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|ARM.ActiveCfg = UI Test|iPhone
+		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|Any CPU.ActiveCfg = UI Test|iPhoneSimulator
+		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|ARM.ActiveCfg = UI Test|iPhoneSimulator
 		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|iPhone.ActiveCfg = UI Test|iPhone
+		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|iPhone.Build.0 = UI Test|iPhone
 		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|iPhoneSimulator.ActiveCfg = UI Test|iPhoneSimulator
-		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|x64.ActiveCfg = UI Test|iPhone
-		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|x86.ActiveCfg = UI Test|iPhone
+		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|iPhoneSimulator.Build.0 = UI Test|iPhoneSimulator
+		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|x64.ActiveCfg = UI Test|iPhoneSimulator
+		{99CB58D3-40AE-46B4-BE78-83A0FE0B8F52}.UI Test|x86.ActiveCfg = UI Test|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
