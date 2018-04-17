@@ -10,6 +10,9 @@ using FFImageLoading;
 using FFImageLoading.Forms.Droid;
 using System;
 using Xamarin.Forms;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace SmartHotel.Clients.NFC.Droid
 {
@@ -34,6 +37,10 @@ namespace SmartHotel.Clients.NFC.Droid
 
         protected override void OnCreate(Bundle bundle)
         {
+            //APP CENTER KEY
+            AppCenter.Start("88002d1c-ad2f-46e4-8233-79561b596601",
+                   typeof(Analytics), typeof(Crashes));
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
