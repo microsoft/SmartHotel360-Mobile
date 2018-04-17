@@ -1,6 +1,9 @@
 ﻿using FFImageLoading.Forms.Touch;
 using Foundation;
 using UIKit;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace SmartHotel.Clients.Maintenance.iOS
 {
@@ -18,6 +21,9 @@ namespace SmartHotel.Clients.Maintenance.iOS
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+            AppCenter.Start(AppSettings.AppCenterAnalyticsIos,
+                   typeof(Analytics), typeof(Crashes));
+
             Xamarin.Forms.Forms.Init();
             CachedImageRenderer.Init();
 
