@@ -7,27 +7,33 @@ namespace SmartHotel.Clients.Core
 {
     public static class AppSettings
     {
+        //IF YOU DEPLOY YOUR OWN ENDPOINT REPLACE THE VALUEW BELOW
+        //App Center
+        private const string DefaultAppCenterAndroid = "494cbf56-bb84-4f3c-ab25-860316af246e";
+        private const string DefaultAppCenteriOS = "0422f642-413b-4cde-804d-7b870fc21c95";
+        private const string DefaultAppCenterUWP = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
+
         // Endpoints
-        private const string DefaultBookingEndpoint = "YOUR_BOOKING_ENDPOINT";
-        private const string DefaultHotelsEndpoint = "YOUR_HOTELS_ENDPOINT";
-        private const string DefaultSuggestionsEndpoint = "YOUR_SUGGESTIONS_ENDPOINT";
-        private const string DefaultNotificationsEndpoint = "YOUR_NOTIFICATIONS_ENDPOINT";
+        private const string DefaultBookingEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
+        private const string DefaultHotelsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
+        private const string DefaultSuggestionsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
+        private const string DefaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
         private const string DefaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
-        private const string DefaultImagesBaseUri = "YOUR_IMAGE_BASE_URI";
+        private const string DefaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
 
         // Maps
-        private const string DefaultBingMapsApiKey = "YOUR_BINGMAPS_API_KEY";
+        private const string DefaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
         public const string DefaultFallbackMapsLocation = "40.762246 -73.986943";
 
         // Bots
-        private const string DefaultSkypeBotId = "YOUR_SKYPE_BOT_ID";
-        private const string DefaultFacebookBotId = "YOUR_FACEBOOK_BOT_ID";
+        private const string DefaultSkypeBotId = "897f3818-8da3-4d23-a613-9a0f9555f2ea";
+        private const string DefaultFacebookBotId = "120799875283148";
 
         // B2c
         public const string B2cAuthority = "https://login.microsoftonline.com/";
         public const string DefaultB2cPolicy = "B2C_1_SignUpInPolicy";
-        public const string DefaultB2cClientId = "YOUR_B2C_CLIENT_ID";
-        public const string DefaultB2cTenant = "YOUR_B2C_TENANT";
+        public const string DefaultB2cClientId = "b3cfbe11-ac36-4dcb-af16-8656ee286dcc";
+        public const string DefaultB2cTenant = "smarthotel360.onmicrosoft.com";
 
         // Booking 
         private const bool DefaultHasBooking = false;
@@ -111,6 +117,7 @@ namespace SmartHotel.Clients.Core
         }
 
         // Other settings
+
         public static string BingMapsApiKey
         {
             get => Settings.GetValueOrDefault(nameof(BingMapsApiKey), DefaultBingMapsApiKey);
@@ -141,21 +148,21 @@ namespace SmartHotel.Clients.Core
 
         public static string AppCenterAnalyticsAndroid
         {
-            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsAndroid), AppCenterAnalyticsAndroid);
+            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsAndroid), DefaultAppCenterAndroid);
 
             set => Settings.AddOrUpdateValue(nameof(AppCenterAnalyticsAndroid), value);
         }
 
         public static string AppCenterAnalyticsIos
         {
-            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsIos), AppCenterAnalyticsIos);
+            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsIos), DefaultAppCenteriOS);
 
             set => Settings.AddOrUpdateValue(nameof(AppCenterAnalyticsIos), value);
         }
 
         public static string AppCenterAnalyticsWindows
         {
-            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsWindows), AppCenterAnalyticsWindows);
+            get => Settings.GetValueOrDefault(nameof(AppCenterAnalyticsWindows), DefaultAppCenterUWP);
 
             set => Settings.AddOrUpdateValue(nameof(AppCenterAnalyticsWindows), value);
         }

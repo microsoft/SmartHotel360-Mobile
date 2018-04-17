@@ -6,6 +6,9 @@ using SmartHotel.Clients.Core.ViewModels.Base;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SmartHotel.Clients
@@ -46,6 +49,10 @@ namespace SmartHotel.Clients
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};" +
+                $"uwp={AppSettings.AppCenterAnalyticsWindows};" +
+                $"android={AppSettings.AppCenterAnalyticsAndroid}",
+                typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()
