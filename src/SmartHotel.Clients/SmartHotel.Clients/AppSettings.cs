@@ -14,12 +14,12 @@ namespace SmartHotel.Clients.Core
         private const string DefaultAppCenterUWP = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
 
         // Endpoints
-        private const string DefaultBookingEndpoint = "https://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
-        private const string DefaultHotelsEndpoint = "https://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
-        private const string DefaultSuggestionsEndpoint = "https://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
-        private const string DefaultNotificationsEndpoint = "https://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
-        private const string DefaultSettingsFileUrl = "https://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
-        private const string DefaultImagesBaseUri = "https://sh360imgpublic.blob.core.windows.net";
+        private const string DefaultBookingEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
+        private const string DefaultHotelsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
+        private const string DefaultSuggestionsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
+        private const string DefaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
+        private const string DefaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
+        private const string DefaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
 
         // Maps
         private const string DefaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
