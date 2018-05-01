@@ -1,4 +1,5 @@
 ﻿using Rg.Plugins.Popup.Services;
+using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -8,6 +9,12 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class CheckoutViewModel : ViewModelBase
     {
+        private readonly IAnalyticService _analyticService;
+
+        public CheckoutViewModel(IAnalyticService analyticService)
+        {
+            _analyticService = analyticService;
+        }
 
         public string UserName => AppSettings.User?.Name;
 
@@ -22,6 +29,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             AppSettings.HasBooking = false;
 
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
+            _analyticService.TrackEvent("Checkout");
 
             return PopupNavigation.PopAllAsync(true);
         }
@@ -31,6 +39,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             AppSettings.HasBooking = false;
 
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
+            _analyticService.TrackEvent("Checkout");
 
             await PopupNavigation.PopAllAsync(false);
     

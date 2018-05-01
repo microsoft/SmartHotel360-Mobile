@@ -1,4 +1,5 @@
-﻿using SmartHotel.Clients.Core.Services.OpenUri;
+﻿using SmartHotel.Clients.Core.Services.Analytic;
+using SmartHotel.Clients.Core.Services.OpenUri;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
 using System.Diagnostics;
@@ -24,11 +25,14 @@ namespace SmartHotel.Clients.Core.ViewModels
         private bool _noDisturb;
 
         private readonly IOpenUriService _openUrlService;
+        private readonly IAnalyticService _analyticService;
 
         public MyRoomViewModel(
-            IOpenUriService openUrlService)
+            IOpenUriService openUrlService,
+            IAnalyticService analyticService)
         {
             _openUrlService = openUrlService;
+            _analyticService = analyticService;
 
             SetNeed();
         }
@@ -194,9 +198,11 @@ namespace SmartHotel.Clients.Core.ViewModels
                 {
                     case Skype:
                         _openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
+                        _analyticService.TrackEvent("SkypeBot");
                         break;
                     case FacebookMessenger:
                         _openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
+                        _analyticService.TrackEvent("FacebookBot");
                         break;
                 }
             }

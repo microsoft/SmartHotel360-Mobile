@@ -1,4 +1,5 @@
 ﻿using SmartHotel.Clients.Core.Models;
+using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Validations;
 using SmartHotel.Clients.Core.ViewModels.Base;
@@ -11,14 +12,17 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        private readonly IAnalyticService _analyticService;
         private readonly IAuthenticationService _authenticationService;
 
         private ValidatableObject<string> _userName;
         private ValidatableObject<string> _password;
 
         public LoginViewModel(
+            IAnalyticService analyticService,
             IAuthenticationService authenticationService)
         {
+            _analyticService = analyticService;
             _authenticationService = authenticationService;
 
             _userName = new ValidatableObject<string>();
@@ -73,6 +77,7 @@ namespace SmartHotel.Clients.Core.ViewModels
                 {
                     IsBusy = false;
 
+                    _analyticService.TrackEvent("SignIn");
                     await NavigationService.NavigateToAsync<MainViewModel>();
                 }
             }
@@ -90,6 +95,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 if (succeeded)
                 {
+                    _analyticService.TrackEvent("MicrosoftSignIn");
                     await NavigationService.NavigateToAsync<MainViewModel>();
                 }
             }

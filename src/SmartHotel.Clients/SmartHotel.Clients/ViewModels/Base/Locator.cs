@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Services.Booking;
 using SmartHotel.Clients.Core.Services.Chart;
@@ -35,6 +36,7 @@ namespace SmartHotel.Clients.Core.ViewModels.Base
         {
             _containerBuilder = new ContainerBuilder();
 
+            _containerBuilder.RegisterType<AnalyticService>().As<IAnalyticService>();
             _containerBuilder.RegisterType<DialogService>().As<IDialogService>();
             _containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
             _containerBuilder.RegisterType<FakeChartService>().As<IChartService>();

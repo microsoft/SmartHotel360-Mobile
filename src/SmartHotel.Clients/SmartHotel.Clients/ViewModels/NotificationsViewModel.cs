@@ -4,20 +4,24 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using SmartHotel.Clients.Core.Services.Notification;
+using SmartHotel.Clients.Core.Services.Analytic;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
     public class NotificationsViewModel : ViewModelBase
     {
         private readonly INotificationService _notificationService;
+        private readonly IAnalyticService _analyticService;
 
         private ObservableCollection<Models.Notification> _notifications;
         private bool _hasItems;
 
         public NotificationsViewModel(
-            INotificationService notificationService)
+            INotificationService notificationService,
+            IAnalyticService analyticService)
         {
             _notificationService = notificationService;
+            _analyticService = analyticService;
 
             HasItems = true;
         }
@@ -62,6 +66,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             {
                 Notifications.Remove(notification);
                 await _notificationService.DeleteNotificationAsync(notification);
+                _analyticService.TrackEvent("DeleteNotification");
                 HasItems = Notifications.Count > 0;
             }
         }

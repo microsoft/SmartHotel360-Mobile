@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using SmartHotel.Clients.Core.Services.Authentication;
+using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Models;
 using Newtonsoft.Json;
 
@@ -14,11 +15,14 @@ namespace SmartHotel.Clients.Core.ViewModels
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly INfcService _nfcService;
+        private readonly IAnalyticService _analyticService;
 
         public OpenDoorViewModel(
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService,
+            IAnalyticService analyticService)
         {
             _authenticationService = authenticationService;
+            _analyticService = analyticService;
             _nfcService = DependencyService.Get<INfcService>();
         }
 
@@ -45,6 +49,7 @@ namespace SmartHotel.Clients.Core.ViewModels
                 var serializedMessage = JsonConvert.SerializeObject(nfcParameter);
 
                 MessagingCenter.Send(serializedMessage, MessengerKeys.SendNFCToken);
+                _analyticService.TrackEvent("OpenDoor");
             }
         }
 
