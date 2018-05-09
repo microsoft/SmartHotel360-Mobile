@@ -6506,8 +6506,8 @@ namespace SmartHotel.Clients.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f090050
-			public const int ApplicationName = 2131296336;
+			// aapt resource value: 0x7f09004f
+			public const int ApplicationName = 2131296335;
 			
 			// aapt resource value: 0x7f090026
 			public const int abc_action_bar_home_description = 2131296294;
@@ -6662,8 +6662,8 @@ namespace SmartHotel.Clients.Droid
 			// aapt resource value: 0x7f090010
 			public const int common_signin_button_text_long = 2131296272;
 			
-			// aapt resource value: 0x7f09004f
-			public const int library_name = 2131296335;
+			// aapt resource value: 0x7f090050
+			public const int library_name = 2131296336;
 			
 			// aapt resource value: 0x7f090011
 			public const int mr_button_content_description = 2131296273;

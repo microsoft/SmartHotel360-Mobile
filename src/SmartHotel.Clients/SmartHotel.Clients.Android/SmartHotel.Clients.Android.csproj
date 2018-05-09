@@ -1065,9 +1065,6 @@
     <AndroidResource Include="Resources\xml\apduservice.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Acr.UserDialogs">
-      <Version>6.5.1</Version>
-    </PackageReference>
     <PackageReference Include="Autofac">
       <Version>4.6.1</Version>
     </PackageReference>
@@ -1159,10 +1156,10 @@
       <Version>2.2.17</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>2.5.0.121934</Version>
+      <Version>3.0.0.446417</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Maps">
-      <Version>2.4.0.282</Version>
+      <Version>3.0.0.446417</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.GooglePlayServices.Base">
       <Version>42.1021.1</Version>

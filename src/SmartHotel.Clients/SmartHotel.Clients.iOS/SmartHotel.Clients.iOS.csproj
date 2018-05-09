@@ -505,9 +505,6 @@
     <BundleResource Include="Resources\ic_others_2.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Acr.UserDialogs">
-      <Version>6.5.1</Version>
-    </PackageReference>
     <PackageReference Include="Autofac">
       <Version>4.6.1</Version>
     </PackageReference>
