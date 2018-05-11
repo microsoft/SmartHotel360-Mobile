@@ -23,7 +23,7 @@
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.6.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.6.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.0.304142221-alpha" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Splat" Version="4.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
