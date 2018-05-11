@@ -18,7 +18,7 @@
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Microcharts" Version="0.7.1-pre" />
-    <PackageReference Include="Microcharts.Forms" Version="0.7.1-pre" />
+    <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
     <PackageReference Include="Microsoft.AppCenter" Version="1.6.0" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.6.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.6.0" />

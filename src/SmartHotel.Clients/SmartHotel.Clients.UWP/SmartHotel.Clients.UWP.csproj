@@ -308,7 +308,7 @@
       <Version>0.7.1-pre</Version>
     </PackageReference>
     <PackageReference Include="Microcharts.Forms">
-      <Version>0.7.1-pre</Version>
+      <Version>0.7.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AppCenter">
       <Version>1.6.0</Version>
