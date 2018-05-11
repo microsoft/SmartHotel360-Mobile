@@ -29,8 +29,8 @@
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
-    <PackageReference Include="Xamarin.FFImageLoading" Version="2.2.20" />
-    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.2.17" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.3.6" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.3.6" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.0.4" />
     <PackageReference Include="Xamanimation" Version="1.1.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
