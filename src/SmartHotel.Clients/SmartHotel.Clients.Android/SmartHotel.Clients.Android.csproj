@@ -1147,7 +1147,7 @@
       <Version>25.4.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Build.Download">
-      <Version>0.4.7</Version>
+      <Version>0.4.11</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading">
       <Version>2.2.20</Version>
