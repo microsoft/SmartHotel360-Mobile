@@ -536,7 +536,7 @@
       <Version>4.5.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings">
-      <Version>3.0.1</Version>
+      <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamanimation">
       <Version>1.1.0</Version>
