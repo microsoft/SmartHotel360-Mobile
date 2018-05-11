@@ -1069,7 +1069,7 @@
       <Version>4.8.1</Version>
     </PackageReference>
     <PackageReference Include="CarouselView.FormsPlugin">
-      <Version>5.2.0</Version>
+      <Version>4.4.3</Version>
     </PackageReference>
     <PackageReference Include="Microcharts.Forms">
       <Version>0.7.1</Version>
