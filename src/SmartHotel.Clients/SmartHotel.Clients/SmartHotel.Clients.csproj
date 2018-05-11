@@ -25,7 +25,7 @@
     <PackageReference Include="Microsoft.Identity.Client" Version="1.0.304142221-alpha" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Splat" Version="4.0.0" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
