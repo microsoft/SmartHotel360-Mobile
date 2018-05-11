@@ -27,7 +27,7 @@
     <PackageReference Include="Splat" Version="4.0.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
-    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.0.1" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.0.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.2.20" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.2.17" />
