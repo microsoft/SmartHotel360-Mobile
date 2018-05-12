@@ -167,6 +167,8 @@
     <Compile Include="Services\BrowserCookiesService.cs" />
     <Compile Include="Services\DismissKeyboard\DismissKeyboardService.cs" />
     <None Include="appcenter-post-build.sh" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\Contents.json" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>
@@ -189,16 +191,6 @@
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\Default.png" />
     <BundleResource Include="Resources\Default%402x.png" />
-    <BundleResource Include="Resources\Icon-60%402x.png" />
-    <BundleResource Include="Resources\Icon-60%403x.png" />
-    <BundleResource Include="Resources\Icon-76.png" />
-    <BundleResource Include="Resources\Icon-76%402x.png" />
-    <BundleResource Include="Resources\Icon-Small-40.png" />
-    <BundleResource Include="Resources\Icon-Small-40%402x.png" />
-    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
-    <BundleResource Include="Resources\Icon-Small.png" />
-    <BundleResource Include="Resources\Icon-Small%402x.png" />
-    <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
@@ -621,166 +613,124 @@
     <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\LaunchImage~iphone_640x960.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Default-Portrait.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default-Portrait%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-1024.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-120.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-152.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-167.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-180.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-20.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-24.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-40.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-40%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-40%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-58.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-60.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-72.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-72%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-80.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-83.5%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-87.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Amazon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-hdpi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-ldpi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-mdpi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-50%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-xhdpi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-xxhdpi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-xxxhdpi.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ITunesArtwork Include="Resources\iTunesArtwork.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ITunesArtwork Include="Resources\iTunesArtwork%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-1242%403x~iphone6s-landscape_2208x1242.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-1242%403x~iphone6s-portrait_1242x2208.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-568h%402x~iphone_640x1136.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-750%402x~iphone6-landscape_1334x750.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-750%402x~iphone6-portrait_750x1334.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-Landscape%402x~ipad_2048x1496.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-Landscape%402x~ipad_2048x1536.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-Landscape~ipad_1024x748.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-Landscape~ipad_1024x768.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-Portrait%402x~ipad_1536x2008.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-Portrait%402x~ipad_1536x2048.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage-Portrait~ipad_768x1024.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage~ipad.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage~iphone-320x480.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\LaunchImage~iphone_640x960.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\upload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-20x20%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-20x20%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-20x20%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-29x29%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-29x29%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-29x29%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-40x40%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-40x40%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-40x40%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-57x57%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-57x57%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-60x60%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-60x60%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-60x60%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-72x72%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-72x72%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-76x76%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-76x76%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-76x76%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-App-83.5x83.5%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-Small-50x50%401x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-Small-50x50%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\ItunesArtwork%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-1242%403x~iphone6s-landscape_2208x1242.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-1242%403x~iphone6s-portrait_1242x2208.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-568h%402x~iphone_640x1136.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-750%402x~iphone6-landscape_1334x750.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-750%402x~iphone6-portrait_750x1334.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape%402x~ipad_2048x1496.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape%402x~ipad_2048x1536.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape~ipad_1024x748.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape~ipad_1024x768.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Portrait%402x~ipad_1536x2008.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Portrait%402x~ipad_1536x2048.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Portrait~ipad_768x1024.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage~ipad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage~iphone-320x480.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage~iphone_640x960.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
