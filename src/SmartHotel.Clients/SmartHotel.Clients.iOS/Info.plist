@@ -25,13 +25,20 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.microsoft.SmartHotel360-df</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>4.5</string>
+	<key>CFBundleShortVersionString</key>
+	<string>4.5</string>
+  	<key>NSCalendarsUsageDescription</key>
+  	<string>We are not using your calender.</string>
+	<key>CFBundleIconName</key> 
+	<string>AppIcon</string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon-60@2x</string>
 		<string>Icon-60@3x</string>
 		<string>Icon-76</string>
 		<string>Icon-76@2x</string>
+		<string>Icon-83.5@2x</string>
 		<string>Default</string>
 		<string>Default@2x</string>
 		<string>Default-568h@2x</string>
@@ -53,14 +60,18 @@
 		<string>fonts/Poppins-Medium.ttf</string>
 		<string>fonts/Poppins-Regular.ttf</string>
 		<string>fonts/Poppins-SemiBold.ttf</string>
-    <string>fonts/FiraSans-Bold.ttf</string>
-    <string>fonts/FiraSans-SemiBold.ttf</string>
-    <string>fonts/FiraSans-Regular.ttf</string>
+		<string>fonts/FiraSans-Bold.ttf</string>
+		<string>fonts/FiraSans-SemiBold.ttf</string>
+		<string>fonts/FiraSans-Regular.ttf</string>
 	</array>
 	<key>CFBundleName</key>
 	<string>SmartHotel.Clients</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile~iphone</key>
+	<string></string>
+	<key>UIMainStoryboardFile~ipad</key>
+	<string></string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
@@ -71,5 +82,9 @@
 	<string>Need confirmation to use geo-location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Need confirmation to use geo-location</string>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
+	<key>XSLaunchImageAssets</key>
+	<string>Resources/Media.xcassets/LaunchImages.launchimage</string>
 </dict>
 </plist>
