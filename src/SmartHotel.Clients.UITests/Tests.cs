@@ -16,7 +16,7 @@ namespace SmartHotel.Clients.UITests
         {
             new LogInPage()
                 .EnterCredentials(TestSettings.TestUsername, TestSettings.TestPassword)
-                .SignIn();
+                .SignIn(); 
 
             new HomePage();
         }
