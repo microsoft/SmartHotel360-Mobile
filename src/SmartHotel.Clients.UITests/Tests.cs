@@ -14,6 +14,9 @@ namespace SmartHotel.Clients.UITests
         [Test]
         public void SuccessSignInTest()
         {
+
+            app.Repl();
+               
             new LogInPage()
                 .EnterCredentials(TestSettings.TestUsername, TestSettings.TestPassword)
                 .SignIn(); 
@@ -27,6 +30,7 @@ namespace SmartHotel.Clients.UITests
             new LogInPage()
                 .EnterCredentials(string.Empty, string.Empty)
                 .SignIn();
+            //FORRESTER IS AWESOME
         }
 
         [Test]
