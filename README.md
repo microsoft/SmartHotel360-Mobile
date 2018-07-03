@@ -8,11 +8,12 @@ We are happy to announce the release of SmartHotel360. This release intends to s
 For this reference app scenario, we built several consumer and line-of-business apps and an Azure backend. You can find all SmartHotel360 repos in the following locations:
 
 * [SmartHotel360 ](https://github.com/Microsoft/SmartHotel360)
-* [Backend Services](https://github.com/Microsoft/SmartHotel360-Azure-backend)
+* [Backend Services (optimized for Kubernetes)](https://github.com/Microsoft/SmartHotel360-AKS-DevSpaces-Demo)
 * [Public Website](https://github.com/Microsoft/SmartHotel360-public-web)
 * [Mobile Apps](https://github.com/Microsoft/SmartHotel360-mobile-desktop-apps)
 * [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-Sentiment-Analysis-App)
 * [Migrating Internal apps to Azure](https://github.com/Microsoft/SmartHotel360-internal-booking-apps)
+* [Original Backend Services](https://github.com/Microsoft/SmartHotel360-Azure-backend)
 
 You can also download the mobile apps connected to our public endpoints in your devices following these links:
 
