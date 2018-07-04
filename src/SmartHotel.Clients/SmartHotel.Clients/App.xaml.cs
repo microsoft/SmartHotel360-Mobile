@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace SmartHotel.Clients
@@ -52,7 +53,7 @@ namespace SmartHotel.Clients
             AppCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};" +
                 $"uwp={AppSettings.AppCenterAnalyticsWindows};" +
                 $"android={AppSettings.AppCenterAnalyticsAndroid}",
-                typeof(Analytics), typeof(Crashes));
+                typeof(Analytics), typeof(Crashes), typeof(Distribute));
         }
 
         protected override void OnSleep()
