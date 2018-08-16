@@ -7,6 +7,7 @@ using Android.Util;
 using Android.Views;
 using CarouselView.FormsPlugin.Android;
 using Microsoft.Identity.Client;
+using Plugin.CurrentActivity;
 using Plugin.Permissions;
 using SmartHotel.Clients.Core;
 using SmartHotel.Clients.Core.Helpers;
@@ -43,6 +44,8 @@ namespace SmartHotel.Clients.Droid
             InitMessageCenterSubscriptions();
             RegisterPlatformDependencies();
             LoadApplication(new App());
+
+            CrossCurrentActivity.Current.Init(this, bundle);
 
             App.AuthenticationClient.PlatformParameters =
                   new PlatformParameters(Forms.Context as Activity);
