@@ -47,7 +47,7 @@
     <Reference Include="System" />
 <<<<<<< HEAD
     <Reference Include="Xamarin.UITest">
-      <HintPath>..\packages\Xamarin.UITest.2.2.5\lib\net45\Xamarin.UITest.dll</HintPath>
+      <HintPath>packages\Xamarin.UITest.2.2.5\lib\net45\Xamarin.UITest.dll</HintPath>
     </Reference>
 =======
 >>>>>>> a021066211be240e818d498858d111a31bbd7fdd
