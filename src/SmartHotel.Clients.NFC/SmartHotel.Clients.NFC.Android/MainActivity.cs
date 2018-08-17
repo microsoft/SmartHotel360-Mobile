@@ -13,6 +13,7 @@ using Xamarin.Forms;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
 
 namespace SmartHotel.Clients.NFC.Droid
 {
@@ -39,7 +40,7 @@ namespace SmartHotel.Clients.NFC.Droid
         {
             //APP CENTER KEY
             AppCenter.Start("88002d1c-ad2f-46e4-8233-79561b596601",
-                   typeof(Analytics), typeof(Crashes));
+                   typeof(Analytics), typeof(Crashes), typeof(Distribute));
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
@@ -47,7 +48,7 @@ namespace SmartHotel.Clients.NFC.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
-            CachedImageRenderer.Init();
+            CachedImageRenderer.Init(false);
             LoadApplication(new App());
 
             _smartHotelCardReader = new SmartHotelCardReader(new WeakReference<SmartHotelCardReader.MessageCallback>(this));

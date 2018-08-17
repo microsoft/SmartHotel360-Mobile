@@ -6,16 +6,16 @@
     <RootNamespace>SmartHotel.Clients.NFC</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.6.1" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microcharts" Version="0.7.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Xam.Plugins.Vibrate" Version="3.0.1" />
-    <PackageReference Include="Xamarin.FFImageLoading" Version="2.2.20" />
-    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.2.20" />
-    <PackageReference Include="Xamanimation" Version="1.0.0" />
-    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.2.20" />
-    <PackageReference Include="Xamarin.Forms" Version="2.4.0.18342" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Xam.Plugins.Vibrate" Version="4.0.0.5" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.3.840" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.3.840" />
+    <PackageReference Include="Xamanimation" Version="1.1.0" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.3.840" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">
