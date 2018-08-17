@@ -19,7 +19,6 @@
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     <PackageReference Include="Microcharts" Version="0.7.1-pre" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1-pre" />
-    <PackageReference Include="Microsoft.AppCenter" Version="1.7.0" />
     <PackageReference Include="Microcharts" Version="0.7.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
     <PackageReference Include="Microsoft.AppCenter" Version="1.8.0" />
