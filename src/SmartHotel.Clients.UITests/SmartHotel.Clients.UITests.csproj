@@ -46,7 +46,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Xamarin.UITest">
-      <HintPath>..\packages\Xamarin.UITest.2.2.4\lib\net45\Xamarin.UITest.dll</HintPath>
+      <HintPath>..\packages\Xamarin.UITest.2.2.5\lib\net45\Xamarin.UITest.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -74,8 +75,11 @@
       <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.UITest">
-      <Version>2.2.4</Version>
+      <Version>2.2.5</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
