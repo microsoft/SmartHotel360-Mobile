@@ -49,6 +49,11 @@ namespace SmartHotel.Clients
 
         protected override void OnStart()
         {
+            // Initialize Live Reload.
+            #if DEBUG
+            LiveReload.Init();
+            #endif
+
             // Handle when your app starts
             AppCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};" +
                 $"uwp={AppSettings.AppCenterAnalyticsWindows};" +
