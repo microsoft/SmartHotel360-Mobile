@@ -28,7 +28,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly IBookingService bookingService;
         readonly IAuthenticationService authenticationService;
         readonly IFileService fileService;
-		readonly ILiveIoTDataService _liveIoTDataService;
+		readonly IRoomDevicesDataService roomDevicesDataService;
 
         public HomeViewModel(
             INotificationService notificationService,
@@ -36,14 +36,14 @@ namespace SmartHotel.Clients.Core.ViewModels
             IBookingService bookingService,
             IAuthenticationService authenticationService,
             IFileService fileService,
-            ILiveIoTDataService liveIoTDataService)
+            IRoomDevicesDataService liveIoTDataService)
         {
             this.notificationService = notificationService;
             this.chartService = chartService;
             this.bookingService = bookingService;
             this.authenticationService = authenticationService;
             this.fileService = fileService;
-            this.liveIoTDataService = liveIoTDataService;
+            this.roomDevicesDataService = liveIoTDataService;
 
             notifications = new ObservableRangeCollection<Notification>();
         }

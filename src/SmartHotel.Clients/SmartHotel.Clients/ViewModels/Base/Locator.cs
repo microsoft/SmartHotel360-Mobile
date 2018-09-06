@@ -39,7 +39,7 @@ namespace SmartHotel.Clients.Core.ViewModels.Base
             containerBuilder.RegisterType<OpenUriService>().As<IOpenUriService>();
             containerBuilder.RegisterType<RequestService>().As<IRequestService>();
             containerBuilder.RegisterType<DefaultBrowserCookiesService>().As<IBrowserCookiesService>();
-            containerBuilder.RegisterType<LiveIoTDataService>().As<ILiveIoTDataService>();
+            containerBuilder.RegisterType<RoomDevicesDataService>().As<IRoomDevicesDataService>();
             containerBuilder.RegisterType<GravatarUrlProvider>().As<IAvatarUrlProvider>();
             containerBuilder.RegisterType<FileService>().As<IFileService>();
             containerBuilder.RegisterType(typeof(SettingsService)).As(typeof(ISettingsService<RemoteSettings>));
