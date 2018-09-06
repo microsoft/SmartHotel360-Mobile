@@ -20,7 +20,7 @@ namespace SmartHotel.Clients.Core
         private const string DefaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
         private const string DefaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
         private const string DefaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
-        private const string DefaultRoomDevicesBaseUri = "";
+        private const string DefaultRoomDevicesEndpoint = "";
 
         // Maps
         private const string DefaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
@@ -103,11 +103,11 @@ namespace SmartHotel.Clients.Core
             set => Settings.AddOrUpdateValue(nameof(ImagesBaseUri), value);
         }
 
-        public static string RoomDevicesBaseUri
+        public static string RoomDevicesEndpoint
         {
-            get => Settings.GetValueOrDefault(nameof(RoomDevicesBaseUri), DefaultRoomDevicesBaseUri);
+            get => Settings.GetValueOrDefault(nameof(RoomDevicesEndpoint), DefaultRoomDevicesEndpoint);
 
-            set => Settings.AddOrUpdateValue(nameof(RoomDevicesBaseUri), value);
+            set => Settings.AddOrUpdateValue(nameof(RoomDevicesEndpoint), value);
         }
 
         public static string SkypeBotId

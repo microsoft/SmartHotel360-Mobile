@@ -4,24 +4,24 @@ using SmartHotel.Clients.Core.Services.Settings;
 
 namespace SmartHotel.Clients.Core.Services.IoT
 {
-    public class LiveIoTDataService : ILiveIoTDataService
+    public class RoomDevicesDataService : IRoomDevicesDataService
     {
         private readonly string _roomDevicesApiEndpoint;
 
-        public LiveIoTDataService()
+        public RoomDevicesDataService()
         {
-            _roomDevicesApiEndpoint = AppSettings.RoomDevicesBaseUri;
+            _roomDevicesApiEndpoint = AppSettings.RoomDevicesEndpoint;
         }
 
-        public bool IsReadOnly => string.IsNullOrEmpty(_roomDevicesApiEndpoint);
+        public bool UseFakes => string.IsNullOrEmpty(_roomDevicesApiEndpoint);
 
         public async Task<RoomTemperature> GetRoomTemperatureAsync(string roomId)
         {
-            if (IsReadOnly)
+            if (UseFakes)
             {
                 await Task.Delay(1000);
 
-                return new RoomTemperature();
+                return RoomTemperature.CreateFake();
             }
             else
             {
@@ -32,11 +32,11 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
         public async Task<RoomAmbientLight> GetRoomAmbientLightAsync(string roomId)
         {
-            if (IsReadOnly)
+            if (UseFakes)
             {
                 await Task.Delay(1000);
 
-                return new RoomAmbientLight();
+                return RoomAmbientLight.CreateFake();
             }
             else
             {
@@ -47,4 +47,5 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
 
     }
+
 }

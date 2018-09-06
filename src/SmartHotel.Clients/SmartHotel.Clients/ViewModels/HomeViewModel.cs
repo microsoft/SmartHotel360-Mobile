@@ -25,20 +25,20 @@ namespace SmartHotel.Clients.Core.ViewModels
         private readonly IChartService _chartService;
         private readonly IBookingService _bookingService;
         private readonly IAuthenticationService _authenticationService;
-        private readonly ILiveIoTDataService _liveIoTDataService;
+        private readonly IRoomDevicesDataService _roomDevicesDataService;
 
         public HomeViewModel(
             INotificationService notificationService,
             IChartService chartService,
             IBookingService bookingService,
             IAuthenticationService authenticationService,
-            ILiveIoTDataService liveIoTDataService)
+            IRoomDevicesDataService liveIoTDataService)
         {
             _notificationService = notificationService;
             _chartService = chartService;
             _bookingService = bookingService;
             _authenticationService = authenticationService;
-            _liveIoTDataService = liveIoTDataService;
+            _roomDevicesDataService = liveIoTDataService;
             _notifications = new ObservableCollection<Notification>();
         }
 
