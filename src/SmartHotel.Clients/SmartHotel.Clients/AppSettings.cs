@@ -21,6 +21,7 @@ namespace SmartHotel.Clients.Core
 
         // Endpoints
         const string defaultImagesBaseUri = "https://sh360publicimg.blob.core.windows.net";
+        const string defaultRoomDevicesBaseUri = "";
 
         // Maps
         const string defaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
@@ -99,6 +100,12 @@ namespace SmartHotel.Clients.Core
         {
             get => Preferences.Get(nameof(ImagesBaseUri), defaultImagesBaseUri);
             set => Preferences.Set(nameof(ImagesBaseUri), value);
+        }
+
+        public static string RoomDevicesBaseUri
+        {
+            get => Preferences.Get(nameof(RoomDevicesBaseUri), defaultRoomDevicesBaseUri);
+            set => Preferences.Set(nameof(RoomDevicesBaseUri), value);
         }
 
         public static string SkypeBotId

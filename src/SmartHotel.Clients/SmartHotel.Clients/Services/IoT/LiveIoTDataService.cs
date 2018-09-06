@@ -1,14 +1,16 @@
 ﻿using System.Threading.Tasks;
+using SmartHotel.Clients.Core.Models;
+using SmartHotel.Clients.Core.Services.Settings;
 
 namespace SmartHotel.Clients.Core.Services.IoT
 {
-    public class LiveIoTDataService
+    public class LiveIoTDataService : ILiveIoTDataService
     {
         private readonly string _roomDevicesApiEndpoint;
 
-        public LiveIoTDataService(string roomDevicesApiEndpoint)
+        public LiveIoTDataService()
         {
-            _roomDevicesApiEndpoint = roomDevicesApiEndpoint;
+            _roomDevicesApiEndpoint = AppSettings.RoomDevicesBaseUri;
         }
 
         public bool IsReadOnly => string.IsNullOrEmpty(_roomDevicesApiEndpoint);

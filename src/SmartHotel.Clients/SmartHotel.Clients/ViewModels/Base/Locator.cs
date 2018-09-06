@@ -15,6 +15,7 @@ using SmartHotel.Clients.Core.Services.Suggestion;
 using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.File;
 using SmartHotel.Clients.Core.Services.Geolocator;
+using SmartHotel.Clients.Core.Services.IoT;
 
 namespace SmartHotel.Clients.Core.ViewModels.Base
 {
@@ -38,6 +39,7 @@ namespace SmartHotel.Clients.Core.ViewModels.Base
             containerBuilder.RegisterType<OpenUriService>().As<IOpenUriService>();
             containerBuilder.RegisterType<RequestService>().As<IRequestService>();
             containerBuilder.RegisterType<DefaultBrowserCookiesService>().As<IBrowserCookiesService>();
+            containerBuilder.RegisterType<LiveIoTDataService>().As<ILiveIoTDataService>();
             containerBuilder.RegisterType<GravatarUrlProvider>().As<IAvatarUrlProvider>();
             containerBuilder.RegisterType<FileService>().As<IFileService>();
             containerBuilder.RegisterType(typeof(SettingsService)).As(typeof(ISettingsService<RemoteSettings>));
