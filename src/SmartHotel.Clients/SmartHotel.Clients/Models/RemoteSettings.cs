@@ -38,6 +38,8 @@ namespace SmartHotel.Clients.Core.Models
 
             [JsonProperty("images_base")]
             public string ImagesBaseUri { get; set; }
+
+            public string RoomDevicesBaseUri { get; set; }
         }
 
         public class TokensData

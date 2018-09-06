@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SmartHotel.Clients.Core.Services.IoT;
 using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Core.ViewModels
@@ -24,17 +25,20 @@ namespace SmartHotel.Clients.Core.ViewModels
         private readonly IChartService _chartService;
         private readonly IBookingService _bookingService;
         private readonly IAuthenticationService _authenticationService;
+        private readonly ILiveIoTDataService _liveIoTDataService;
 
         public HomeViewModel(
             INotificationService notificationService,
             IChartService chartService,
             IBookingService bookingService,
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService,
+            ILiveIoTDataService liveIoTDataService)
         {
             _notificationService = notificationService;
             _chartService = chartService;
             _bookingService = bookingService;
             _authenticationService = authenticationService;
+            _liveIoTDataService = liveIoTDataService;
             _notifications = new ObservableCollection<Notification>();
         }
 

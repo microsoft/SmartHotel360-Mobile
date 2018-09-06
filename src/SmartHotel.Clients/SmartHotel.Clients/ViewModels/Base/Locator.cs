@@ -14,6 +14,7 @@ using SmartHotel.Clients.Core.Services.Request;
 using SmartHotel.Clients.Core.Services.Settings;
 using SmartHotel.Clients.Core.Services.Suggestion;
 using SmartHotel.Clients.Core.Models;
+using SmartHotel.Clients.Core.Services.IoT;
 
 namespace SmartHotel.Clients.Core.ViewModels.Base
 {
@@ -45,6 +46,7 @@ namespace SmartHotel.Clients.Core.ViewModels.Base
             _containerBuilder.RegisterType<OpenUriService>().As<IOpenUriService>();
             _containerBuilder.RegisterType<RequestService>().As<IRequestService>();
             _containerBuilder.RegisterType<DefaultBrowserCookiesService>().As<IBrowserCookiesService>();
+            _containerBuilder.RegisterType<LiveIoTDataService>().As<ILiveIoTDataService>();
             _containerBuilder.RegisterType<GravatarUrlProvider>().As<IAvatarUrlProvider>();
             _containerBuilder.RegisterType(typeof(SettingsService)).As(typeof(ISettingsService<RemoteSettings>));
 

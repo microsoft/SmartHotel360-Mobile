@@ -15,6 +15,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
             settings.Urls.Suggestions = AppSettings.SuggestionsEndpoint;
             settings.Urls.Notifications = AppSettings.NotificationsEndpoint;
             settings.Urls.ImagesBaseUri = AppSettings.ImagesBaseUri;
+            settings.Urls.RoomDevicesBaseUri = AppSettings.RoomDevicesBaseUri;
             settings.Tokens.Bingmaps = AppSettings.BingMapsApiKey;
             settings.B2c.Client = AppSettings.B2cClientId;
             settings.B2c.Tenant = AppSettings.B2cTenant;
@@ -36,6 +37,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
             AppSettings.SuggestionsEndpoint = remote.Urls.Suggestions;
             AppSettings.NotificationsEndpoint = remote.Urls.Notifications;
             AppSettings.ImagesBaseUri = remote.Urls.ImagesBaseUri;
+            AppSettings.RoomDevicesBaseUri = remote.Urls.RoomDevicesBaseUri;
             AppSettings.BingMapsApiKey = remote.Tokens.Bingmaps;
             AppSettings.B2cClientId = remote.B2c.Client;
             AppSettings.B2cTenant = remote.B2c.Tenant;
