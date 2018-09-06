@@ -1,36 +1,24 @@
 ﻿namespace SmartHotel.Clients.Core.Services.IoT
 {
-    public class RoomTemperature
+    public class RoomTemperature : RoomTemperatureBase
     {
         private string _temperatureSensorId;
 
-        private readonly TemperatureValue _defaultMinimum = new TemperatureValue(60);
-        private readonly TemperatureValue _defaultMaximum = new TemperatureValue(90);
+        private static readonly TemperatureValue DefaultMinimum = new TemperatureValue(60);
+        private static readonly TemperatureValue DefaultMaximum = new TemperatureValue(90);
+        private static readonly TemperatureValue DefaultValue = new TemperatureValue(71);
 
-        private readonly TemperatureValue _defaultValue = new TemperatureValue(71);
-
-        public RoomTemperature()
+        public RoomTemperature(): base(DefaultValue, DefaultMinimum, DefaultMaximum)
         {
-            Value = _defaultValue;
-            Desired = _defaultValue;
-        }
-
-        public RoomTemperature(TemperatureValue actualValue) 
-        {
-            Value = actualValue;
-            Desired = actualValue;
+            Desired = DefaultValue;
         }
 
         public RoomTemperature(string temperatureSensorId): this()
         {
             _temperatureSensorId = temperatureSensorId;
-            
         }
 
-        public TemperatureValue Value { get; private set; }
         public TemperatureValue Desired { get; private set; }
 
-        public TemperatureValue Minimum => _defaultMinimum;
-        public TemperatureValue Maximum => _defaultMaximum;
     }
 }

@@ -3,6 +3,7 @@
     public enum TemperatureTypes
     {
         Fahrenheit = 0,
-        Celsius = 1
+        Celsius = 1,
+        Kelvin = 2
     }
 }

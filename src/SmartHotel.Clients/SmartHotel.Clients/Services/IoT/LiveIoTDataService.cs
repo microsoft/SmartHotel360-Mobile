@@ -19,7 +19,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
             {
                 await Task.Delay(1000);
 
-                return new RoomTemperature(string.Empty);
+                return new RoomTemperature();
             }
             else
             {
@@ -28,6 +28,21 @@ namespace SmartHotel.Clients.Core.Services.IoT
             }
         }
 
-        
+        public async Task<RoomAmbientLight> GetRoomAmbientLightAsync(string roomId)
+        {
+            if (IsReadOnly)
+            {
+                await Task.Delay(1000);
+
+                return new RoomAmbientLight();
+            }
+            else
+            {
+                // TODO: call IoT service
+                return new RoomAmbientLight(string.Empty);
+            }
+        }
+
+
     }
 }
