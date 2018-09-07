@@ -2,6 +2,8 @@
 using SkiaSharp;
 using System;
 using System.Linq;
+using System.Text;
+using CarouselView.FormsPlugin.Abstractions;
 
 namespace SmartHotel.Clients.Core.Controls
 {
@@ -73,11 +75,39 @@ namespace SmartHotel.Clients.Core.Controls
             //var medium = Math.Round(Entries.Max(e => e.Value) / 2);
             //var maximum = Entries.Max(e => e.Value);
 
-	        var medium = AbsoluteMinimum + ((AbsoluteMaximum - AbsoluteMinimum) / 2);
+            var medium = AbsoluteMinimum + ((AbsoluteMaximum - AbsoluteMinimum) / 2);
 
             canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMinimum}°", SKColors.Black, LabelTextSize, new SKPoint(cx - radius - LineSize - CaptionMargin, cy), SKTextAlign.Center);
             canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{medium}°", SKColors.Black, LabelTextSize, new SKPoint(cx, cy - radius - LineSize), SKTextAlign.Center);
             canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMaximum}°", SKColors.Black, LabelTextSize, new SKPoint(cx + radius + LineSize + CaptionMargin, cy), SKTextAlign.Center);
+
+            var values = Entries.GetEnumerator();
+            values.MoveNext();
+            var currentValue = values.Current?.Value;
+            values.MoveNext();
+            var desiredValue = values.Current?.Value;
+            values.Dispose();
+
+            DrawCurrentValue(currentValue, SKColor.Parse("#174A51"), canvas, cx, cy);
+            DrawCurrentValue(desiredValue, SKColor.Parse("#378D93"), canvas, cx, (int) (cy * 1.1f));
+        }
+
+        private void DrawCurrentValue(float? currentValue, SKColor textColor, SKCanvas canvas, int cx, int cy)
+        {
+            var paint = new SKPaint();
+            paint.TextSize = 16;
+            paint.Color = textColor; ;
+            paint.Typeface = SKTypeface.FromFamilyName(
+                "Arial",
+                SKFontStyleWeight.Normal,
+                SKFontStyleWidth.Normal,
+                SKFontStyleSlant.Upright
+                );
+            paint.MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, 0.2f); // nice, soft edges
+
+            var degreeSign = "\u00B0";
+            byte[] currentText = Encoding.UTF8.GetBytes($"Current: {currentValue:F0}{degreeSign}");
+            canvas.DrawText(currentText, cx / 1.4f, cy / 1.1f, paint);
         }
     }
 }
