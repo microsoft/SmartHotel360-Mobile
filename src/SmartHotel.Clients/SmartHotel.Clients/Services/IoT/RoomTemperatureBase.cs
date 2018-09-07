@@ -12,12 +12,11 @@ namespace SmartHotel.Clients.Core.Services.IoT
             Maximum = maximum;
 
             Value = defaultValue;
-            Desired = Desired;
         }
 
-        protected RoomTemperatureBase(TemperatureValue defaultValue, TemperatureValue desiredValue, TemperatureValue minimum, TemperatureValue maximum)
+        protected RoomTemperatureBase(TemperatureValue defaultValue, TemperatureValue desiredValue, TemperatureValue minimum, TemperatureValue maximum) : this(defaultValue, minimum, maximum)
         {
-            Desired = Desired;
+            Desired = desiredValue;
         }
 
         public TemperatureValue Value { get; protected set; }
