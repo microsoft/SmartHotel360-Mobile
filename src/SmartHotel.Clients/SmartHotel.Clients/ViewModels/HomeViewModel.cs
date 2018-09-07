@@ -35,6 +35,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             _chartService = chartService;
             _bookingService = bookingService;
             _authenticationService = authenticationService;
+            _notifications = new ObservableCollection<Notification>();
         }
 
         public bool HasBooking
