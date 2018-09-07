@@ -9,7 +9,7 @@ namespace SmartHotel.Clients.Core.Controls
     {
         public TemperatureChart()
         {
-            BackgroundColor = SKColor.Parse("#F6F1E9");
+            BackgroundColor = SKColor.Parse("#F2F2F2");
         }
 
         public float CaptionMargin { get; set; } = 12;
@@ -54,8 +54,14 @@ namespace SmartHotel.Clients.Core.Controls
             {
                 using (SKPath path = new SKPath())
                 {
+                    // Draws the temp chart in a manner that looks similar to the Ambient Light picture
+                    //var percent = (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
+                    //path.AddRoundedRect(SKRect.Create(cx - radius, cy, (2 * radius) * percent, 2), 0.05f, 0.05f);
+
+                    // Draws the normal temp chart as an arc
                     var sweepAngle = 180 * (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
                     path.AddArc(SKRect.Create(cx - radius, cy - radius, 2 * radius, 2 * radius), StartAngle, sweepAngle);
+
                     canvas.DrawPath(path, paint);
                 }
             }
@@ -63,13 +69,15 @@ namespace SmartHotel.Clients.Core.Controls
 
         private void DrawCaption(SKCanvas canvas, int cx, int cy, float radius)
         {
-            var minimum = 0;
-            var medium = Math.Round(Entries.Max(e => e.Value) / 2);
-            var maximum = Entries.Max(e => e.Value);
+            //var minimum = 0;
+            //var medium = Math.Round(Entries.Max(e => e.Value) / 2);
+            //var maximum = Entries.Max(e => e.Value);
 
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{minimum}°", SKColors.Black, LabelTextSize, new SKPoint(cx - radius - LineSize - CaptionMargin, cy), SKTextAlign.Center);
+	        var medium = AbsoluteMinimum + ((AbsoluteMaximum - AbsoluteMinimum) / 2);
+
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMinimum}°", SKColors.Black, LabelTextSize, new SKPoint(cx - radius - LineSize - CaptionMargin, cy), SKTextAlign.Center);
             canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{medium}°", SKColors.Black, LabelTextSize, new SKPoint(cx, cy - radius - LineSize), SKTextAlign.Center);
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{maximum}°", SKColors.Black, LabelTextSize, new SKPoint(cx + radius + LineSize + CaptionMargin, cy), SKTextAlign.Center);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMaximum}°", SKColors.Black, LabelTextSize, new SKPoint(cx + radius + LineSize + CaptionMargin, cy), SKTextAlign.Center);
         }
     }
 }

@@ -6,14 +6,14 @@
         {
         }
 
-        public TemperatureValue(float value, TemperatureTypes unit)
+        public TemperatureValue(float rawValue, TemperatureTypes unit)
         {
-            Value = value;
+            RawValue = rawValue;
             Unit = unit;
         }
 
         public TemperatureTypes Unit { get; private set; }
-        public float Value { get; private set; }
+        public float RawValue { get; private set; }
 
     }
 }
