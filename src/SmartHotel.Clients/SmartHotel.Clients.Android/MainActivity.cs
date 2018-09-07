@@ -40,6 +40,7 @@ namespace SmartHotel.Clients.Droid
             UserDialogs.Init(this);
             Renderers.Calendar.Init();
             Xamarin.FormsMaps.Init(this, bundle);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
 
             InitMessageCenterSubscriptions();
             RegisterPlatformDependencies();
