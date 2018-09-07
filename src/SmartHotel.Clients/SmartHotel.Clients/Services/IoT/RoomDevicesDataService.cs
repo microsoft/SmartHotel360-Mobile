@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Settings;
 
@@ -21,12 +22,18 @@ namespace SmartHotel.Clients.Core.Services.IoT
             {
                 await Task.Delay(1000);
 
-                return RoomTemperature.CreateFake();
+                return FakeRoomTemperature.Create();
             }
             else
             {
                 // TODO: call IoT service
-                return new RoomTemperature(string.Empty);
+                
+                // simulates values returned for IoT device
+                var temperatureSensorId = string.Empty;
+                var currentTemp = 70;
+                var desiredTemp = 76;
+                return new RoomTemperature(temperatureSensorId, new TemperatureValue(currentTemp), new TemperatureValue(desiredTemp));
+
             }
         }
 
@@ -36,12 +43,17 @@ namespace SmartHotel.Clients.Core.Services.IoT
             {
                 await Task.Delay(1000);
 
-                return RoomAmbientLight.CreateFake();
+                return FakeRoomAmbientLight.Create();
             }
             else
             {
                 // TODO: call IoT service
-                return new RoomAmbientLight(string.Empty);
+                
+                // simulates values returned for IoT device
+                var _lightSensorId = string.Empty;
+                var currentLight = new TemperatureValue(4500, TemperatureTypes.Kelvin); 
+                var desiredLight = new TemperatureValue(4000, TemperatureTypes.Kelvin); ;
+                return new RoomAmbientLight(_lightSensorId, currentLight, desiredLight);
             }
         }
 
