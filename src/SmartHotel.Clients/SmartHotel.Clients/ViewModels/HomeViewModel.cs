@@ -9,10 +9,14 @@ using SmartHotel.Clients.Core.Services.Notification;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SkiaSharp;
+using SmartHotel.Clients.Core.Controls;
 using SmartHotel.Clients.Core.Services.IoT;
 using Xamarin.Forms;
+using Entry = Microcharts.Entry;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
@@ -95,7 +99,11 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 HasBooking = AppSettings.HasBooking;
 
-                TemperatureChart = await chartService.GetTemperatureChartAsync();
+                //TemperatureChart = await _chartService.GetTemperatureChartAsync();
+                var roomId = string.Empty; //TODO: use real one
+                var roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync(roomId);
+                TemperatureChart = CreateTemperatureChart(roomTemperature);
+
                 GreenChart = await chartService.GetGreenChartAsync();
 
                 var authenticatedUser = authenticationService.AuthenticatedUser;
@@ -117,6 +125,31 @@ namespace SmartHotel.Clients.Core.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private Microcharts.Chart CreateTemperatureChart(RoomTemperature roomTemperature)
+        {
+            var chartData = new TemperatureChart
+            {
+                MinValue = roomTemperature.Minimum.RawValue,
+                MaxValue = roomTemperature.Maximum.RawValue
+            };
+
+            var currentChartValue = new Entry(roomTemperature.Value.RawValue) {Color = SKColor.Parse("#174A51")};
+            var desiredChartValue = new Entry(roomTemperature.Desired.RawValue) {Color = SKColor.Parse("#378D93")};
+            var maxChartValue = new Entry(roomTemperature.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
+            chartData.Entries = new[] { currentChartValue, desiredChartValue, maxChartValue };
+
+            return chartData;
+        }
+
+        async void FakeUpdateCharts()
+        {
+            while (true)
+            {
+                await Task.Delay(1000);
+                TemperatureChart = await chartService.GetTemperatureChartAsync();
             }
         }
 

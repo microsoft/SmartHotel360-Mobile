@@ -7,7 +7,7 @@
             if (temp.Unit == TemperatureTypes.Fahrenheit)
                 return temp;
 
-            var fahr = 9.0 / 5.0 * temp.Value + 32;
+            var fahr = 9.0 / 5.0 * temp.RawValue + 32;
             return new TemperatureValue((float)fahr, TemperatureTypes.Fahrenheit);
         }
 
@@ -16,7 +16,7 @@
             if (temp.Unit == TemperatureTypes.Celsius)
                 return temp;
 
-            var celc = (temp.Value - 32) * 5.0 / 9.0;
+            var celc = (temp.RawValue - 32) * 5.0 / 9.0;
             return new TemperatureValue((float)celc, TemperatureTypes.Celsius);
         }
     }

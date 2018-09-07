@@ -104,8 +104,8 @@ namespace SmartHotel.Clients.Core
 
         public static string RoomDevicesEndpoint
         {
-            get => Settings.GetValueOrDefault(nameof(RoomDevicesBaseUri), defaultRoomDevicesEndpoint);
-            set => Settings.AddOrUpdateValue(nameof(RoomDevicesBaseUri), value);
+            get => Preferences.Get(nameof(RoomDevicesEndpoint), defaultRoomDevicesEndpoint);
+            set => Preferences.Set(nameof(RoomDevicesEndpoint), value);
         }
 
         public static string SkypeBotId

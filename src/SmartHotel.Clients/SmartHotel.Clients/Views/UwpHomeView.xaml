@@ -10,6 +10,7 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"     
     xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions"
+    xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -193,7 +194,7 @@
                         <!-- ROOM TEMPERATURE -->
                         <Grid
                             Grid.Column="0">
-                            <ffimageloading:CachedImage  
+                            <!--<ffimageloading:CachedImage  
                                 x:Name="BigRoomTemperatureChart"
                                 Aspect="AspectFit"
                                 Margin="60, 84">
@@ -203,7 +204,12 @@
                                         <On Platform="UWP" Value="Assets/room_temperature.png" />
                                     </OnPlatform>
                                 </ffimageloading:CachedImage.Source>
-                            </ffimageloading:CachedImage>
+                            </ffimageloading:CachedImage>-->
+                            <forms:ChartView 
+                                Chart="{Binding TemperatureChart}"
+                                IsVisible="true"
+                                Margin="12, 24, 12, 12"
+                            />
                             <Label 
                                 Text="{extensions:Translate RoomTemperature}"
                                 Style="{StaticResource BigChartTextStyle}"/>
@@ -275,7 +281,7 @@
                                 Grid.Column="0"
                                 Grid.Row="0"
                                 Grid.RowSpan="2">
-                                <ffimageloading:CachedImage                                
+                                <!--<ffimageloading:CachedImage                                
                                     Grid.Column="0"
                                     Grid.Row="0"
                                     Grid.RowSpan="2"
@@ -287,7 +293,12 @@
                                             <On Platform="UWP" Value="Assets/room_temperature.png" />
                                         </OnPlatform>
                                     </ffimageloading:CachedImage.Source>
-                                </ffimageloading:CachedImage>
+                                </ffimageloading:CachedImage>-->
+                                <forms:ChartView 
+                                    Chart="{Binding TemperatureChart}"
+                                    IsVisible="true"
+                                    Margin="12, 24, 12, 12"
+                                    />
                                 <Label 
                                     Text="{extensions:Translate RoomTemperature}"
                                     Style="{StaticResource SmallChartTextStyle}"/>
