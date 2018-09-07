@@ -7,23 +7,22 @@
         private static readonly TemperatureValue DefaultMinimum = new TemperatureValue(60);
         private static readonly TemperatureValue DefaultMaximum = new TemperatureValue(90);
         private static readonly TemperatureValue DefaultValue = new TemperatureValue(71);
-        private static readonly TemperatureValue FakeDesiredValue = new TemperatureValue(76);
 
-        public static RoomTemperature CreateFake()
-        {
-            return new RoomTemperature(FakeDesiredValue);
-        }
-
-        private RoomTemperature(TemperatureValue desired): base(DefaultValue, DefaultMinimum, DefaultMaximum)
+        private RoomTemperature(TemperatureValue desired) : base(DefaultValue, DefaultMinimum, DefaultMaximum)
         {
             Desired = desired;
         }
 
-        public RoomTemperature(string temperatureSensorId): this(temperatureSensorId, DefaultValue)
+        public RoomTemperature() : this(DefaultValue)
         {
         }
 
-        public RoomTemperature(string temperatureSensorId, TemperatureValue value) : base(value, DefaultMinimum, DefaultMaximum)
+        public RoomTemperature(string temperatureSensorId, TemperatureValue desired) : this(temperatureSensorId, DefaultValue, desired)
+        {
+            _temperatureSensorId = temperatureSensorId;
+        }
+
+        public RoomTemperature(string temperatureSensorId, TemperatureValue value, TemperatureValue desired) : base(value, desired, DefaultMinimum, DefaultMaximum)
         {
             _temperatureSensorId = temperatureSensorId;
         }
