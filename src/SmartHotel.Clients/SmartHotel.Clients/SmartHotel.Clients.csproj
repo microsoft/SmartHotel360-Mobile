@@ -21,10 +21,10 @@
     <PackageReference Include="Microcharts.Forms" Version="0.7.1-pre" />
     <PackageReference Include="Microcharts" Version="0.7.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
-    <PackageReference Include="Microsoft.AppCenter" Version="1.8.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.8.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.8.0" />
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.8.0" />
+    <PackageReference Include="Microsoft.AppCenter" Version="1.9.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.9.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.9.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.9.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.0.304142221-alpha" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Splat" Version="5.0.1" />
