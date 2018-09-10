@@ -38,13 +38,13 @@ namespace SmartHotel.Clients.Core.ViewModels
             IChartService chartService,
             IBookingService bookingService,
             IAuthenticationService authenticationService,
-            IRoomDevicesDataService liveIoTDataService)
+            IRoomDevicesDataService roomDevicesDataService)
         {
             _notificationService = notificationService;
             _chartService = chartService;
             _bookingService = bookingService;
             _authenticationService = authenticationService;
-            _roomDevicesDataService = liveIoTDataService;
+            _roomDevicesDataService = roomDevicesDataService;
             _notifications = new ObservableCollection<Notification>();
         }
 
@@ -124,9 +124,8 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 //TemperatureChart = await _chartService.GetTemperatureChartAsync();
                 //FakeUpdateCharts();
-                var roomId = string.Empty; //TODO: use real one
-                var roomTemperature = await _roomDevicesDataService.GetRoomTemperatureAsync(roomId);
-                var roomLight = await _roomDevicesDataService.GetRoomAmbientLightAsync(roomId);
+                var roomTemperature = await _roomDevicesDataService.GetRoomTemperatureAsync(AppSettings.RoomId);
+                var roomLight = await _roomDevicesDataService.GetRoomAmbientLightAsync(AppSettings.RoomId);
                 TemperatureChart = CreateTemperatureChart(roomTemperature);
                 LightChart = CreateLightChart(roomLight);
 
