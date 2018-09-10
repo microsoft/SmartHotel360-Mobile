@@ -1,9 +1,9 @@
 ﻿using Microcharts;
 using SkiaSharp;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using CarouselView.FormsPlugin.Abstractions;
 
 namespace SmartHotel.Clients.Core.Controls
 {
@@ -25,19 +25,24 @@ namespace SmartHotel.Clients.Core.Controls
 
         public override void DrawContent(SKCanvas canvas, int width, int height)
         {
-            var sumValue = Entries.Sum(x => Math.Abs(x.Value));
-            var radius = (Math.Min(width, height) - (2 * Margin)) / 2;
-            var cx = width / 2;
+            var relativeScaleWidth = width / 465.0f;
+            var strokeWidth = relativeScaleWidth * LineSize;
+
+            var relativeMargin = Margin; // * relativeScaleWidth;
+
+            var radius = (width - 2 * relativeMargin) / 2;
+            int cx = (int)((width - 2 * relativeMargin) / 2 + LineSize * relativeScaleWidth);
             var cy = Convert.ToInt32(height / 1.25);
-            var lineWidth = (LineSize < 0) ? (radius / ((Entries.Count() + 1) * 2)) : LineSize;
-            var radiusSpace = lineWidth * 4;
+            var radiusSpace = (width - 2 * relativeMargin) / 2 - 4 * LineSize * relativeScaleWidth; //lineWidth * 4;
 
             foreach (var entry in Entries.OrderByDescending(e => e.Value))
             {
-                DrawChart(canvas, entry, radiusSpace, cx, cy, lineWidth);
+                DrawChart(canvas, entry, radiusSpace, cx, cy, strokeWidth);
             }
 
-            DrawCaption(canvas, cx, cy, radiusSpace);
+            DrawCaption(canvas, cx, cy, radiusSpace, relativeScaleWidth);
+
+            Debug.WriteLine($"relativeScaleWidth:{relativeScaleWidth}");
         }
 
         public void DrawChart(SKCanvas canvas, Entry entry, float radius, int cx, int cy, float strokeWidth)
@@ -66,7 +71,7 @@ namespace SmartHotel.Clients.Core.Controls
             }
         }
 
-        void DrawCaption(SKCanvas canvas, int cx, int cy, float radius)
+        void DrawCaption(SKCanvas canvas, int cx, int cy, float radius, float relativeScaleWidth)
         {
             //var minimum = 0;
             //var medium = Math.Round(Entries.Max(e => e.Value) / 2);
@@ -74,9 +79,9 @@ namespace SmartHotel.Clients.Core.Controls
 
             var medium = AbsoluteMinimum + ((AbsoluteMaximum - AbsoluteMinimum) / 2);
 
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMinimum}°", SKColors.Black, LabelTextSize, new SKPoint(cx - radius - LineSize - CaptionMargin, cy), SKTextAlign.Center);
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{medium}°", SKColors.Black, LabelTextSize, new SKPoint(cx, cy - radius - LineSize), SKTextAlign.Center);
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMaximum}°", SKColors.Black, LabelTextSize, new SKPoint(cx + radius + LineSize + CaptionMargin, cy), SKTextAlign.Center);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMinimum}°", SKColors.Black, LabelTextSize * relativeScaleWidth, new SKPoint(cx - radius - LineSize * relativeScaleWidth - CaptionMargin, cy), SKTextAlign.Center);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{medium}°", SKColors.Black, LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius - LineSize * relativeScaleWidth - 2 * relativeScaleWidth), SKTextAlign.Center);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMaximum}°", SKColors.Black, LabelTextSize * relativeScaleWidth, new SKPoint(cx + radius + LineSize * relativeScaleWidth + CaptionMargin, cy), SKTextAlign.Center);
 
             var values = Entries.GetEnumerator();
             values.MoveNext();
@@ -85,15 +90,15 @@ namespace SmartHotel.Clients.Core.Controls
             var desiredValue = values.Current?.Value;
             values.Dispose();
 
-            DrawCurrentValue(currentValue, SKColor.Parse("#174A51"), canvas, cx, cy);
-            DrawCurrentValue(desiredValue, SKColor.Parse("#378D93"), canvas, cx, (int) (cy * 1.1f));
+            //DrawCurrentValue(currentValue, SKColor.Parse("#174A51"), canvas, cx, cy);
+            //DrawCurrentValue(desiredValue, SKColor.Parse("#378D93"), canvas, cx, (int) (cy * 1.1f));
         }
 
         private void DrawCurrentValue(float? currentValue, SKColor textColor, SKCanvas canvas, int cx, int cy)
         {
             var paint = new SKPaint();
             paint.TextSize = 16;
-            paint.Color = textColor; ;
+            paint.Color = textColor;
             paint.Typeface = SKTypeface.FromFamilyName(
                 "Arial",
                 SKFontStyleWeight.Normal,
@@ -102,7 +107,7 @@ namespace SmartHotel.Clients.Core.Controls
                 );
             paint.MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, 0.2f); // nice, soft edges
 
-            var degreeSign = "\u00B0";
+            var degreeSign = '°';
             byte[] currentText = Encoding.UTF8.GetBytes($"Current: {currentValue:F0}{degreeSign}");
             canvas.DrawText(currentText, cx / 1.4f, cy / 1.1f, paint);
         }

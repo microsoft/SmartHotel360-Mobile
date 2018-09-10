@@ -206,13 +206,17 @@
                                 </ffimageloading:CachedImage.Source>
                             </ffimageloading:CachedImage>-->
                             <forms:ChartView 
+                                x:Name="chartViewBig"
                                 Chart="{Binding TemperatureChart}"
                                 IsVisible="true"
                                 Margin="12, 24, 12, 12"
                             />
+
                             <Label 
                                 Text="{extensions:Translate RoomTemperature}"
                                 Style="{StaticResource BigChartTextStyle}"/>
+                            
+                           
                         </Grid>
                         <Grid 
                             Grid.Column="1"
@@ -280,7 +284,8 @@
                             <Grid  
                                 Grid.Column="0"
                                 Grid.Row="0"
-                                Grid.RowSpan="2">
+                                Grid.RowSpan="2"
+                                >
                                 <!--<ffimageloading:CachedImage                                
                                     Grid.Column="0"
                                     Grid.Row="0"
@@ -295,9 +300,11 @@
                                     </ffimageloading:CachedImage.Source>
                                 </ffimageloading:CachedImage>-->
                                 <forms:ChartView 
+                                    x:Name="chartViewSmall"
                                     Chart="{Binding TemperatureChart}"
                                     IsVisible="true"
-                                    Margin="12, 24, 12, 12"
+                                    Margin="-20, 24, -40, 12"
+                                    PaintSurface="OnPaintSurface"
                                     />
                                 <Label 
                                     Text="{extensions:Translate RoomTemperature}"
