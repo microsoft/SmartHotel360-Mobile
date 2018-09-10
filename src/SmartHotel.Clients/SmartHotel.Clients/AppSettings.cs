@@ -5,7 +5,7 @@ using SmartHotel.Clients.Core.Models;
 
 namespace SmartHotel.Clients.Core
 {
-    public static class AppSettings
+	public static class AppSettings
     {
         //IF YOU DEPLOY YOUR OWN ENDPOINT REPLACE THE VALUEW BELOW
         //App Center
@@ -38,6 +38,9 @@ namespace SmartHotel.Clients.Core
 
         // Booking 
         private const bool DefaultHasBooking = false;
+
+		// Room Devices
+	    private const string DefaultRoomId = "";
 
         // Fakes
         private const bool DefaultUseFakes = true;
@@ -193,5 +196,12 @@ namespace SmartHotel.Clients.Core
         {
             Settings.Remove(nameof(User));
         }
+
+	    public static string RoomId
+	    {
+		    get => Settings.GetValueOrDefault(nameof(RoomId), DefaultRoomId);
+
+		    set => Settings.AddOrUpdateValue(nameof(RoomId), value);
+	    }
     }
 }

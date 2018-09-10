@@ -12,6 +12,7 @@ namespace SmartHotel.Clients.Core.Models
             Analytics = new AnalyticsData();
             Bot = new BotData();
             Others = new OthersData();
+	        RoomDevices = new RoomDevicesData();
         }
 
         public EndpointsData Urls { get; set; }
@@ -26,7 +27,9 @@ namespace SmartHotel.Clients.Core.Models
 
         public OthersData Others { get; set; }
 
-        public class EndpointsData
+		public RoomDevicesData RoomDevices { get; set; }
+
+		public class EndpointsData
         {
             public string Hotels { get; set; }
 
@@ -77,5 +80,10 @@ namespace SmartHotel.Clients.Core.Models
             [JsonProperty(PropertyName = "id")]
             public string SkypeId { get; set; }
         }
+
+	    public class RoomDevicesData
+	    {
+			public string RoomId { get; set; }
+		}
     }
 }

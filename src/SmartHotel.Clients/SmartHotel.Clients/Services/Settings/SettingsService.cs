@@ -26,6 +26,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
             settings.Others.FallbackMapsLocation = AppSettings.FallbackMapsLocation;
             settings.Bot.FacebookId = AppSettings.FacebookBotId;
             settings.Bot.SkypeId = AppSettings.SkypeBotId;
+	        settings.RoomDevices.RoomId = AppSettings.RoomId;
 
             return Task.FromResult(settings);
         }
@@ -48,6 +49,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
             AppSettings.FallbackMapsLocation = remote.Others.FallbackMapsLocation;
             AppSettings.FacebookBotId = remote.Bot.FacebookId;
             AppSettings.SkypeBotId = remote.Bot.SkypeId;
+	        AppSettings.RoomId = remote.RoomDevices.RoomId;
 
             return Task.FromResult(false);
         }
