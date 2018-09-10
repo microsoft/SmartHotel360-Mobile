@@ -23,7 +23,7 @@ namespace SmartHotel.Clients.Core
 
         // Maps
         private const string DefaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
-        public const string DefaultFallbackMapsLocation = "40.762246 -73.986943";
+        public const string DefaultFallbackMapsLocation = "40.762246,-73.986943";
 
         // Bots
         private const string DefaultSkypeBotId = "897f3818-8da3-4d23-a613-9a0f9555f2ea";
