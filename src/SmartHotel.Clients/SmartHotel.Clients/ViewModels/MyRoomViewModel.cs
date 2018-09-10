@@ -5,254 +5,356 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SmartHotel.Clients.Core.Services.IoT;
 using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
-    public class MyRoomViewModel : ViewModelBase
-    {
-        const string Skype = "Skype";
-        const string FacebookMessenger = "Facebook Messenger";
+	public class MyRoomViewModel : ViewModelBase
+	{
+		const string Skype = "Skype";
+		const string FacebookMessenger = "Facebook Messenger";
 
-        private double _ambientLight;
-        private double _temperature;
-        private double _musicVolume;
-        private double _windowBlinds;
-        private bool _isEcoMode;
-        private bool _ambient;
-        private bool _need;
-        private bool _find;
-        private bool _noDisturb;
+		private double _desiredAmbientLight;
+		private double _currentAmbientLight;
+		private double _ambientLightMinimum;
+		private double _ambientLightMaximum;
+		private double _desiredTemperature;
+		private double _currentTemperature;
+		private double _temperatureMinimum;
+		private double _temperatureMaximum;
+		private double _musicVolume;
+		private double _windowBlinds;
+		private bool _isEcoMode;
+		private bool _ambient;
+		private bool _need;
+		private bool _find;
+		private bool _noDisturb;
 
-        private readonly IOpenUriService _openUrlService;
-        private readonly IAnalyticService _analyticService;
+		private bool _isInitializing;
 
-        public MyRoomViewModel(
-            IOpenUriService openUrlService,
-            IAnalyticService analyticService)
-        {
-            _openUrlService = openUrlService;
-            _analyticService = analyticService;
+		private readonly IOpenUriService _openUrlService;
+		private readonly IAnalyticService _analyticService;
+		private readonly IRoomDevicesDataService _roomDevicesDataService;
 
-            SetNeed();
-        }
+		public MyRoomViewModel(
+			IOpenUriService openUrlService,
+			IAnalyticService analyticService,
+			IRoomDevicesDataService roomDevicesDataService )
+		{
+			_openUrlService = openUrlService;
+			_analyticService = analyticService;
+			_roomDevicesDataService = roomDevicesDataService;
 
-        public double AmbientLight
-        {
-            get { return _ambientLight; }
-            set
-            {
-                _ambientLight = value;
-                OnPropertyChanged();
-            }
-        }
+			SetNeed();
+		}
 
-        public double Temperature
-        {
-            get { return _temperature; }
-            set
-            {
-                _temperature = value;
-                OnPropertyChanged();
-            }
-        }
+		public double CurrentAmbientLight
+		{
+			get => _currentAmbientLight;
+			set
+			{
+				_currentAmbientLight = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public double MusicVolume
-        {
-            get { return _musicVolume; }
-            set
-            {
-                _musicVolume = value;
-                OnPropertyChanged();
-            }
-        }
+		public double DesiredAmbientLight
+		{
+			get => _desiredAmbientLight;
+			set
+			{
+				_desiredAmbientLight = value;
+				OnPropertyChanged();
+				if ( !_isInitializing )
+				{
+					// TODO: Call the RoomDevicesDataService to update once the value has stopped changing
+				}
+			}
+		}
 
-        public double WindowBlinds
-        {
-            get { return _windowBlinds; }
-            set
-            {
-                _windowBlinds = value;
-                OnPropertyChanged();
-            }
-        }
+		public double AmbientLightMinimum
+		{
+			get => _ambientLightMinimum;
+			set
+			{
+				_ambientLightMinimum = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public bool IsEcoMode
-        {
-            get { return _isEcoMode; }
-            set
-            {
-                _isEcoMode = value;
-                OnPropertyChanged();
-            }
-        }
+		public double AmbientLightMaximum
+		{
+			get => _ambientLightMaximum;
+			set
+			{
+				_ambientLightMaximum = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public bool Ambient
-        {
-            get { return _ambient; }
-            set
-            {
-                _ambient = value;
-                OnPropertyChanged();
-            }
-        }
+		public double DesiredTemperature
+		{
+			get => _desiredTemperature;
+			set
+			{
+				_desiredTemperature = value;
+				OnPropertyChanged();
+				if ( _isInitializing )
+				{
+					// TODO: Call the RoomDevicesDataService to update once the value has stopped changing
+				}
+			}
+		}
 
-        public bool Need
-        {
-            get { return _need; }
-            set
-            {
-                _need = value;
-                OnPropertyChanged();
-            }
-        }
+		public double CurrentTemperature
+		{
+			get => _currentTemperature;
+			set
+			{
+				_currentTemperature = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public bool Find
-        {
-            get { return _find; }
-            set
-            {
-                _find = value;
-                OnPropertyChanged();
-            }
-        }
+		public double TemperatureMinimum
+		{
+			get => _temperatureMinimum;
+			set
+			{
+				_temperatureMinimum = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public bool NoDisturb
-        {
-            get { return _noDisturb; }
-            set
-            {
-                _noDisturb = value;
-                OnPropertyChanged();
-            }
-        }
+		public double TemperatureMaximum
+		{
+			get => _temperatureMaximum;
+			set
+			{
+				_temperatureMaximum = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public ICommand AmbientCommand => new Command(SetAmbient);
+		public double MusicVolume
+		{
+			get { return _musicVolume; }
+			set
+			{
+				_musicVolume = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public ICommand NeedCommand => new Command(SetNeed);
+		public double WindowBlinds
+		{
+			get { return _windowBlinds; }
+			set
+			{
+				_windowBlinds = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public ICommand FindCommand => new Command(SetFind);
+		public bool IsEcoMode
+		{
+			get { return _isEcoMode; }
+			set
+			{
+				_isEcoMode = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public ICommand OpenDoorCommand => new AsyncCommand(OpenDoorAsync);
+		public bool Ambient
+		{
+			get { return _ambient; }
+			set
+			{
+				_ambient = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public ICommand CheckoutCommand => new AsyncCommand(CheckoutAsync);
+		public bool Need
+		{
+			get { return _need; }
+			set
+			{
+				_need = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public ICommand OpenBotCommand => new AsyncCommand(OpenBotAsync);
+		public bool Find
+		{
+			get { return _find; }
+			set
+			{
+				_find = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public ICommand EcoModeCommand => new Command(EcoMode);
+		public bool NoDisturb
+		{
+			get { return _noDisturb; }
+			set
+			{
+				_noDisturb = value;
+				OnPropertyChanged();
+			}
+		}
 
-        public override async Task InitializeAsync(object navigationData)
-        {
-            IsBusy = true;
+		public ICommand AmbientCommand => new Command( SetAmbient );
 
-            await Task.Delay(500);
-            ActivateDefaultMode();
+		public ICommand NeedCommand => new Command( SetNeed );
 
-            IsBusy = false;
-        }
+		public ICommand FindCommand => new Command( SetFind );
 
-        private void SetAmbient()
-        {
-            Ambient = true;
-            Need = false;
-            Find = false;
-        }
+		public ICommand OpenDoorCommand => new AsyncCommand( OpenDoorAsync );
 
-        private void SetNeed()
-        {
-            Ambient = false;
-            Need = true;
-            Find = false;
-        }
+		public ICommand CheckoutCommand => new AsyncCommand( CheckoutAsync );
 
-        private void SetFind()
-        {
-            Ambient = false;
-            Need = false;
-            Find = true;
-        }
+		public ICommand OpenBotCommand => new AsyncCommand( OpenBotAsync );
 
-        private Task OpenDoorAsync()
-        {
-            return NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
-        }
+		public ICommand EcoModeCommand => new Command( EcoMode );
 
-        private Task CheckoutAsync()
-        {
-            return NavigationService.NavigateToPopupAsync<CheckoutViewModel>(true);
-        }
+		public override async Task InitializeAsync( object navigationData )
+		{
+			IsBusy = true;
 
-        private async Task OpenBotAsync()
-        {
-            var bots = new[] { Skype, FacebookMessenger };
+			_isInitializing = true;
+			IsEcoMode = false;
 
-            try
-            {
-                var selectedBot =
-                    await DialogService.SelectActionAsync(
-                        Resources.BotSelectionMessage,
-                        Resources.BotSelectionTitle,
-                        bots);
+			Task<RoomTemperature> roomTemperatureTask = _roomDevicesDataService.GetRoomTemperatureAsync();
+			Task<RoomAmbientLight> roomAmbientLightTask = _roomDevicesDataService.GetRoomAmbientLightAsync();
+			await Task.WhenAll( roomTemperatureTask, roomAmbientLightTask );
 
-                switch (selectedBot)
-                {
-                    case Skype:
-                        _openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
-                        _analyticService.TrackEvent("SkypeBot");
-                        break;
-                    case FacebookMessenger:
-                        _openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
-                        _analyticService.TrackEvent("FacebookBot");
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"OpenBot: {ex}");
+			RoomTemperature roomTemperature = roomTemperatureTask.Result;
+			TemperatureMaximum = roomTemperature.Maximum.RawValue;
+			TemperatureMinimum = roomTemperature.Minimum.RawValue;
+			CurrentTemperature = roomTemperature.Value.RawValue;
+			DesiredTemperature = roomTemperature.Desired.RawValue;
+			
+			
 
-                await DialogService.ShowAlertAsync(
-                  Resources.BotError,
-                  Resources.ExceptionTitle,
-                  Resources.DialogOk);
-            }
-        }
+			RoomAmbientLight roomAmbientLight = roomAmbientLightTask.Result;
+			AmbientLightMaximum = roomAmbientLight.Maximum.RawValue;
+			AmbientLightMinimum = roomAmbientLight.Minimum.RawValue;
+			CurrentAmbientLight = roomAmbientLight.Value.RawValue;
+			DesiredAmbientLight = roomAmbientLight.Desired.RawValue;
 
-        private void EcoMode()
-        {
-            if (IsEcoMode)
-                ActivateDefaultMode(true);
-            else
-                ActivateEcoMode(true);
-        }
+			MusicVolume = 45;
+			WindowBlinds = 80;
 
-        private void ActivateDefaultMode(bool showToast = false)
-        {
-            IsEcoMode = false;
+			_isInitializing = false;
+			IsBusy = false;
+		}
 
-            AmbientLight = 3400;
-            Temperature = 70;
-            MusicVolume = 45;
-            WindowBlinds = 80;
+		private void SetAmbient()
+		{
+			Ambient = true;
+			Need = false;
+			Find = false;
+		}
 
-            if (showToast)
-            {
-                DialogService.ShowToast(Resources.DeactivateEcoMode, 1000);
-            }
-        }
+		private void SetNeed()
+		{
+			Ambient = false;
+			Need = true;
+			Find = false;
+		}
 
-        private void ActivateEcoMode(bool showToast = false)
-        {
-            IsEcoMode = true;
+		private void SetFind()
+		{
+			Ambient = false;
+			Need = false;
+			Find = true;
+		}
 
-            AmbientLight = 2400;
-            Temperature = 60;
-            MusicVolume = 40;
-            WindowBlinds = 50;
+		private Task OpenDoorAsync()
+		{
+			return NavigationService.NavigateToPopupAsync<OpenDoorViewModel>( true );
+		}
 
-            if (showToast)
-            {
-                DialogService.ShowToast(Resources.ActivateEcoMode, 1000);
-            }
-        }
-    }
+		private Task CheckoutAsync()
+		{
+			return NavigationService.NavigateToPopupAsync<CheckoutViewModel>( true );
+		}
+
+		private async Task OpenBotAsync()
+		{
+			var bots = new[] { Skype, FacebookMessenger };
+
+			try
+			{
+				var selectedBot =
+					await DialogService.SelectActionAsync(
+						Resources.BotSelectionMessage,
+						Resources.BotSelectionTitle,
+						bots );
+
+				switch ( selectedBot )
+				{
+					case Skype:
+						_openUrlService.OpenSkypeBot( AppSettings.SkypeBotId );
+						_analyticService.TrackEvent( "SkypeBot" );
+						break;
+					case FacebookMessenger:
+						_openUrlService.OpenFacebookBot( AppSettings.FacebookBotId );
+						_analyticService.TrackEvent( "FacebookBot" );
+						break;
+				}
+			}
+			catch ( Exception ex )
+			{
+				Debug.WriteLine( $"OpenBot: {ex}" );
+
+				await DialogService.ShowAlertAsync(
+				  Resources.BotError,
+				  Resources.ExceptionTitle,
+				  Resources.DialogOk );
+			}
+		}
+
+		private void EcoMode()
+		{
+			if ( IsEcoMode )
+				ActivateDefaultMode( true );
+			else
+				ActivateEcoMode( true );
+		}
+
+		private void ActivateDefaultMode( bool showToast = false )
+		{
+			IsEcoMode = false;
+
+			DesiredAmbientLight = 3400;
+			DesiredTemperature = 70;
+			MusicVolume = 45;
+			WindowBlinds = 80;
+
+			if ( showToast )
+			{
+				DialogService.ShowToast( Resources.DeactivateEcoMode, 1000 );
+			}
+		}
+
+		private void ActivateEcoMode( bool showToast = false )
+		{
+			IsEcoMode = true;
+
+			DesiredAmbientLight = 2400;
+			DesiredTemperature = 60;
+			MusicVolume = 40;
+			WindowBlinds = 50;
+
+			if ( showToast )
+			{
+				DialogService.ShowToast( Resources.ActivateEcoMode, 1000 );
+			}
+		}
+	}
 }

@@ -401,9 +401,9 @@
                                             Style="{StaticResource AmbientTextStyle}"/>
                                         <controls:CustomSlider
                                             x:Name="AmbientLightSlider"
-                                            Maximum="4600"
-                                            Minimum="2800"
-                                            Value="{Binding AmbientLight, Mode=TwoWay}"
+                                            Maximum="{Binding AmbientLightMaximum}"
+                                            Minimum="{Binding AmbientLightMinimum}"
+                                            Value="{Binding DesiredAmbientLight, Mode=TwoWay}"
                                             DisplayConverter="{StaticResource AmbientLightValueConverter}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
@@ -421,10 +421,10 @@
                                         <Label 
                                             Text="{extensions:Translate Temperature}"  
                                             Style="{StaticResource AmbientTextStyle}"/>
-                                        <controls:CustomSlider
-                                            Maximum="90"
-                                            Minimum="60"
-                                            Value="{Binding Temperature, Mode=TwoWay}"
+										<controls:CustomSlider
+											Maximum="{Binding TemperatureMaximum}"
+											Minimum="{Binding TemperatureMinimum}"
+                                            Value="{Binding DesiredTemperature, Mode=TwoWay}"
                                             DisplayConverter="{StaticResource TemperatureValueConverter}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
