@@ -124,8 +124,8 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 //TemperatureChart = await _chartService.GetTemperatureChartAsync();
                 //FakeUpdateCharts();
-                var roomTemperature = await _roomDevicesDataService.GetRoomTemperatureAsync(AppSettings.RoomId);
-                var roomLight = await _roomDevicesDataService.GetRoomAmbientLightAsync(AppSettings.RoomId);
+                var roomTemperature = await _roomDevicesDataService.GetRoomTemperatureAsync();
+                var roomLight = await _roomDevicesDataService.GetRoomAmbientLightAsync();
                 TemperatureChart = CreateTemperatureChart(roomTemperature);
                 LightChart = CreateLightChart(roomLight);
 

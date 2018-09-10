@@ -7,7 +7,7 @@
 		private static readonly TemperatureValue DefaultMaximum = new TemperatureValue( 4600, TemperatureTypes.Kelvin );
 		private static readonly TemperatureValue DefaultValue = new TemperatureValue( 4500, TemperatureTypes.Kelvin );
 
-		private RoomAmbientLight( TemperatureValue desired ) : base( DefaultValue, DefaultMinimum, DefaultMaximum )
+		public RoomAmbientLight( TemperatureValue desired ) : base( DefaultValue, DefaultMinimum, DefaultMaximum )
 		{
 			Desired = desired;
 		}
