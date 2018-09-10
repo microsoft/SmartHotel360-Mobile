@@ -43,7 +43,7 @@ namespace SmartHotel.Clients.iOS
             };
 #endif
             Forms.Init();
-            CachedImageRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             CarouselViewRenderer.Init();
             Renderers.Calendar.Init();
             Xamarin.FormsMaps.Init();
