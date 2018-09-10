@@ -490,7 +490,7 @@ namespace SmartHotel.Clients.Core.Controls
 					{
 						buttons.Add(new CalendarButton
 						{
-							BorderRadius = 0,
+							CornerRadius = 0,
 							BorderWidth = BorderWidth,
 							BorderColor = BorderColor,
 							FontSize = DatesFontSize,

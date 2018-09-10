@@ -1,4 +1,5 @@
-﻿using Android.Gms.Maps;
+﻿using Android.Content;
+using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using SmartHotel.Clients.Core.Controls;
 using SmartHotel.Clients.Core.Helpers;
@@ -23,7 +24,7 @@ namespace SmartHotel.Clients.Droid.Renderers
         private List<CustomMarkerOptions> _tempMarkers;
         private bool _isDrawnDone;
 
-        public CustomMapRenderer()
+        public CustomMapRenderer(Context context) : base(context)
         {
             _tempMarkers = new List<CustomMarkerOptions>();
             _pinIcon = BitmapDescriptorFactory.FromResource(EventResource);

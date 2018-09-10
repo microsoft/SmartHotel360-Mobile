@@ -13,7 +13,7 @@ namespace SmartHotel.Clients.UWP
         {
             this.InitializeComponent();
 
-            CachedImageRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Renderers.Calendar.Init();
             Xamarin.FormsMaps.Init(AppSettings.BingMapsApiKey);
             LoadApplication(new Clients.App());

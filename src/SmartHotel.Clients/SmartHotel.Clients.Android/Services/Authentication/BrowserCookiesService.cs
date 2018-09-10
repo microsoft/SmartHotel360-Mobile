@@ -20,7 +20,9 @@ namespace SmartHotel.Clients.Droid.Services.Authentication
             else
             {
                 System.Diagnostics.Debug.WriteLine("Clearing cookies for API < LollipopMr1");
+#pragma warning disable CS0618 // Type or member is obsolete
                 CookieSyncManager cookieSyncMngr = CookieSyncManager.CreateInstance(context);
+#pragma warning restore CS0618 // Type or member is obsolete
                 cookieSyncMngr.StartSync();
                 CookieManager cookieManager = CookieManager.Instance;
                 cookieManager.RemoveAllCookie();

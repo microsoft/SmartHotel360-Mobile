@@ -1,4 +1,5 @@
-﻿using SmartHotel.Clients.Droid.Renderers;
+﻿using Android.Content;
+using SmartHotel.Clients.Droid.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -7,6 +8,11 @@ namespace SmartHotel.Clients.Droid.Renderers
 {
     public class CustomSliderRenderer : SliderRenderer
     {
+        public CustomSliderRenderer(Context context) : base(context)
+        {
+            
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<Slider> e)
         {
             base.OnElementChanged(e);

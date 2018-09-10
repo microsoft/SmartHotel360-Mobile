@@ -40,6 +40,7 @@ namespace SmartHotel.Clients.Droid
             UserDialogs.Init(this);
             Renderers.Calendar.Init();
             Xamarin.FormsMaps.Init(this, bundle);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
 
             InitMessageCenterSubscriptions();
             RegisterPlatformDependencies();
@@ -47,8 +48,7 @@ namespace SmartHotel.Clients.Droid
 
             CrossCurrentActivity.Current.Init(this, bundle);
 
-            App.AuthenticationClient.PlatformParameters =
-                  new PlatformParameters(Forms.Context as Activity);
+            App.AuthenticationClient.PlatformParameters = new PlatformParameters(this);
 
             MakeStatusBarTranslucent(false);
             InitNFCService();
