@@ -9,6 +9,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UI Test|AnyCPU'">
     <DefineConstants>TRACE;IS_UI_TEST;</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Converters\CountToBoolConverter.cs" />
     <Compile Remove="Views\Templates\SuggestionSearchItemTemplate.xaml.cs" />
