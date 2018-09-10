@@ -347,7 +347,7 @@
       <Version>1.60.3</Version>
     </PackageReference>
     <PackageReference Include="Splat">
-      <Version>5.0.1</Version>
+      <Version>5.0.2</Version>
     </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>
