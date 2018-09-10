@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using SmartHotel.Clients.Droid.Renderers;
 using Android.Graphics;
+using Android.Content;
 
 [assembly: ExportRenderer(typeof(CalendarButton), typeof(CalendarButtonRenderer))]
 namespace SmartHotel.Clients.Droid.Renderers
@@ -14,6 +15,11 @@ namespace SmartHotel.Clients.Droid.Renderers
     [Preserve(AllMembers = true)]
     public class CalendarButtonRenderer : ButtonRenderer
     {
+        public CalendarButtonRenderer(Context context) : base(context)
+        {
+            
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
         {
             base.OnElementChanged(e);

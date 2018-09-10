@@ -56,7 +56,7 @@ namespace SmartHotel.Clients.UWP
                 var assembliesToInclude = new List<Assembly>()
                 {
                     typeof(CachedImage).GetTypeInfo().Assembly,
-                    typeof(CachedImageRenderer).GetTypeInfo().Assembly,
+                    typeof(FFImageLoading.Forms.Platform.CachedImageRenderer).GetTypeInfo().Assembly,
                     typeof(CarouselViewRenderer).GetTypeInfo().Assembly
                 };
 

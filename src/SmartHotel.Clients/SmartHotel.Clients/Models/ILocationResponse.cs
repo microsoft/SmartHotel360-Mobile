@@ -19,7 +19,7 @@ namespace SmartHotel.Clients.Core.Models
 
             try
             {
-                var locationSetting = AppSettings.DefaultFallbackMapsLocation;
+                var locationSetting = location;
                 var locationParts = locationSetting.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 
                 result.Latitude = double.Parse(locationParts[0], CultureInfo.InvariantCulture);

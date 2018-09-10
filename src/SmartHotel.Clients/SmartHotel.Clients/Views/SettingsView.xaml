@@ -92,7 +92,7 @@
 
             <Style x:Key="BaseButtonStyle"
                    TargetType="{x:Type Button}">
-                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="CornerRadius" Value="0" />
                 <Setter Property="HeightRequest" Value="73" />
                 <Setter Property="HorizontalOptions" Value="Fill" />
                 <Setter Property="FontSize"

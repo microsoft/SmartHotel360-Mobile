@@ -1,5 +1,5 @@
-﻿using Android.App;
-using Android.Nfc;
+﻿using Android.Nfc;
+using Plugin.CurrentActivity;
 using SmartHotel.Clients.Core.Services.NFC;
 using SmartHotel.Clients.Droid.Services.NFC;
 
@@ -12,7 +12,7 @@ namespace SmartHotel.Clients.Droid.Services.NFC
 
         public NfcService()
         {
-            var activity = Xamarin.Forms.Forms.Context as Activity;
+            var activity = CrossCurrentActivity.Current.Activity;
             _nfcDevice = NfcAdapter.GetDefaultAdapter(activity);
         }
 
