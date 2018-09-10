@@ -25,6 +25,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
             settings.Analytics.Uwp = AppSettings.AppCenterAnalyticsWindows;
             settings.Others.FallbackMapsLocation = AppSettings.FallbackMapsLocation;
             settings.Bot.SkypeId = AppSettings.SkypeBotId;
+	        settings.RoomDevices.RoomId = AppSettings.RoomId;
 
             return Task.FromResult(settings);
         }
@@ -46,6 +47,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
             AppSettings.AppCenterAnalyticsWindows = remote.Analytics.Uwp;
             AppSettings.FallbackMapsLocation = remote.Others.FallbackMapsLocation;
             AppSettings.SkypeBotId = remote.Bot.SkypeId;
+	        AppSettings.RoomId = remote.RoomDevices.RoomId;
 
             return Task.FromResult(false);
         }
