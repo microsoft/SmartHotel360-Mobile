@@ -6,7 +6,7 @@
 
         public static RoomAmbientLight Create()
         {
-            return new RoomAmbientLight(string.Empty, FakeDesiredValue);
+            return new RoomAmbientLight(FakeDesiredValue);
         }
     }
 }

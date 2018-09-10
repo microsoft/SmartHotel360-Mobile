@@ -6,7 +6,7 @@
 
         public static RoomTemperature Create()
         {
-            return new RoomTemperature(string.Empty, FakeDesiredValue);
+            return new RoomTemperature(FakeDesiredValue);
         }
     }
 }

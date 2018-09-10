@@ -7,7 +7,7 @@
         private static readonly TemperatureValue DefaultMaximum = new TemperatureValue(90);
         private static readonly TemperatureValue DefaultValue = new TemperatureValue(71);
 
-        private RoomTemperature(TemperatureValue desired) : base(DefaultValue, DefaultMinimum, DefaultMaximum)
+        public RoomTemperature(TemperatureValue desired) : base(DefaultValue, DefaultMinimum, DefaultMaximum)
         {
             Desired = desired;
         }
