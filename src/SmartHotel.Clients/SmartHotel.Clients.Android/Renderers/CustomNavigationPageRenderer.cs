@@ -1,4 +1,5 @@
-﻿using Android.Support.V7.Widget;
+﻿using Android.Content;
+using Android.Support.V7.Widget;
 using SmartHotel.Clients.Core.Views;
 using SmartHotel.Clients.Droid.Renderers;
 using Xamarin.Forms;
@@ -12,6 +13,11 @@ namespace SmartHotel.Clients.Droid.Renderers
     public class CustomNavigationPageRenderer : NavigationPageRenderer
     {
         IPageController PageController => Element as IPageController;
+
+        public CustomNavigationPageRenderer(Context context) : base(context)
+        {
+            
+        }
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {

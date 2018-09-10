@@ -48,8 +48,7 @@ namespace SmartHotel.Clients.Droid
 
             CrossCurrentActivity.Current.Init(this, bundle);
 
-            App.AuthenticationClient.PlatformParameters =
-                  new PlatformParameters(Forms.Context as Activity);
+            App.AuthenticationClient.PlatformParameters = new PlatformParameters(this);
 
             MakeStatusBarTranslucent(false);
             InitNFCService();
