@@ -36,7 +36,7 @@ namespace SmartHotel.Clients.iOS
             // Mapping StyleId to iOS Labels
             Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
             {
-                if (null != e.View.StyleId)
+                if (null != e.View.StyleId && null != e.NativeView)
                 {
                     e.NativeView.AccessibilityIdentifier = e.View.StyleId;
                 }
