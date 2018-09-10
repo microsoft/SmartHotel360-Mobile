@@ -18,11 +18,11 @@ namespace SmartHotel.Clients.Core.ViewModels
 		private double _desiredAmbientLight;
 		private double _currentAmbientLight;
 		private double _ambientLightMinimum;
-		private double _ambientLightMaximum;
+		private double _ambientLightMaximum = 100;
 		private double _desiredTemperature;
 		private double _currentTemperature;
-		private double _temperatureMinimum;
-		private double _temperatureMaximum;
+		private double _temperatureMinimum = 60;
+		private double _temperatureMaximum = 90;
 		private double _musicVolume;
 		private double _windowBlinds;
 		private bool _isEcoMode;
