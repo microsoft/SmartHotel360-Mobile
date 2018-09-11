@@ -74,6 +74,17 @@
                         Value="12, 2, 0, 0" />
             </Style>
 
+	        <Style x:Key="CurrentValueTextStyle"
+	               TargetType="Label"
+	               BasedOn="{StaticResource TabTextStyle}">
+		        <Setter Property="HorizontalTextAlignment"
+		                Value="Start" />
+		        <Setter Property="HorizontalOptions"
+		                Value="Start" />
+		        <Setter Property="Margin"
+		                Value="2, 2, 0, 0" />
+	        </Style>
+
             <Style TargetType="controls:CustomSlider">
                 <Setter Property="HorizontalOptions" 
                         Value="Center" />
@@ -397,10 +408,10 @@
                                         Spacing="0"
                                         Padding="10">
 	                                    <StackLayout Orientation="Horizontal">
-		                                    <Label Text="{extensions:Translate AmbientLight}"
+		                                    <Label Text="{extensions:Translate AmbientLight, StringFormat='{0}:'}"
 		                                           Style="{StaticResource AmbientTextStyle}"/>
 		                                    <Label Text="{Binding CurrentAmbientLight, Converter={StaticResource AmbientLightValueConverter}}"
-		                                           Style="{StaticResource AmbientTextStyle}"/>
+		                                           Style="{StaticResource CurrentValueTextStyle}"/>
 	                                    </StackLayout>
                                         <controls:CustomSlider
                                             x:Name="AmbientLightSlider"
@@ -422,11 +433,10 @@
                                             </controls:CustomSlider.ThumbImage>
                                         </controls:CustomSlider>
 	                                    <StackLayout Orientation="Horizontal">
-		                                    <Label Text="{extensions:Translate Temperature}"
+		                                    <Label Text="{extensions:Translate Temperature, StringFormat='{0}:'}"
 		                                           Style="{StaticResource AmbientTextStyle}"/>
-
 		                                    <Label Text="{Binding CurrentTemperature, Converter={StaticResource TemperatureValueConverter}}"
-		                                           Style="{StaticResource AmbientTextStyle}"/>
+		                                           Style="{StaticResource CurrentValueTextStyle}"/>
 	                                    </StackLayout>
 										<controls:CustomSlider
 											Maximum="{Binding TemperatureMaximum}"
