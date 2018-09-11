@@ -95,26 +95,10 @@ namespace SmartHotel.Clients.Core.Controls
             var desiredValue = values.Current?.Value;
             values.Dispose();
 
-            //DrawCurrentValue(currentValue, SKColor.Parse("#174A51"), canvas, cx, cy);
-            //DrawCurrentValue(desiredValue, SKColor.Parse("#378D93"), canvas, cx, (int) (cy * 1.1f));
-        }
-
-        private void DrawCurrentValue(float? currentValue, SKColor textColor, SKCanvas canvas, int cx, int cy)
-        {
-            var paint = new SKPaint();
-            paint.TextSize = 16;
-            paint.Color = textColor;
-            paint.Typeface = SKTypeface.FromFamilyName(
-                "Arial",
-                SKFontStyleWeight.Normal,
-                SKFontStyleWidth.Normal,
-                SKFontStyleSlant.Upright
-                );
-            paint.MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, 0.2f); // nice, soft edges
-
             var degreeSign = '°';
-            byte[] currentText = Encoding.UTF8.GetBytes($"Current: {currentValue:F0}{degreeSign}");
-            canvas.DrawText(currentText, cx / 1.4f, cy / 1.1f, paint);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Current: {currentValue}{degreeSign}", SKColor.Parse("#174A51"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 1.8f / 4f), SKTextAlign.Center);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue}{degreeSign}", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 1.1f / 4f), SKTextAlign.Center);
         }
+        
     }
 }
