@@ -10,11 +10,13 @@ namespace SmartHotel.Clients.Core.Controls
         public TemperatureChart()
         {
             BackgroundColor = SKColor.Parse("#F2F2F2");
+
+            LabelTextSize = 24f;
         }
 
         public float CaptionMargin { get; set; } = 12;
 
-        public float LineSize { get; set; } = 14;
+        public float LineSize { get; set; } = 28;
 
         public float StartAngle { get; set; } = -180;
 
@@ -29,12 +31,16 @@ namespace SmartHotel.Clients.Core.Controls
             var relativeScaleWidth = width / 465.0f;
             var strokeWidth = relativeScaleWidth * LineSize;
 
-            var relativeMargin = Margin; 
-            var radius = (width) / 2;
-            int cx = (int)(radius + strokeWidth);
-            var cy = Convert.ToInt32(height / 1.25);
+            var radius = (width) * 2.0f / 4f;
+            int cx = (int)(radius);
+            var cy = Convert.ToInt32((height / 2.0f) + radius / 3.7f); 
             var radiusSpace = radius - 4 * strokeWidth; 
 
+            DrawChart(canvas, width, height, cx, cy, radiusSpace, strokeWidth, relativeScaleWidth);
+        }
+
+        protected void DrawChart(SKCanvas canvas, int width, int height, int cx, int cy, float radiusSpace, float strokeWidth, float relativeScaleWidth)
+        {
             foreach (var entry in Entries.OrderByDescending(e => e.Value))
             {
                 DrawChart(canvas, entry, radiusSpace, cx, cy, strokeWidth);
@@ -79,7 +85,7 @@ namespace SmartHotel.Clients.Core.Controls
 
             var degreeSign = '°';
             canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Current: {currentValue?.Value}{degreeSign}", SKColor.Parse("#174A51"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 1.8f / 4f), SKTextAlign.Center);
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue?.Value}{degreeSign}", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 1.1f / 4f), SKTextAlign.Center);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue?.Value}{degreeSign}", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 0.9f / 4f), SKTextAlign.Center);
         }
         
     }

@@ -208,6 +208,7 @@
 
                             <!--<ffimageloading:CachedImage  
                                 x:Name="BigRoomTemperatureChart"
+                                Opacity="0.5"
                                 Aspect="AspectFit"
                                 Margin="60, 84">
                                 <ffimageloading:CachedImage.Source>
@@ -217,8 +218,6 @@
                                     </OnPlatform>
                                 </ffimageloading:CachedImage.Source>
                             </ffimageloading:CachedImage>-->
-
-
                         </Grid>
                         <Grid 
                             Grid.Column="1"
@@ -294,7 +293,18 @@
                                 Grid.Row="0"
                                 Grid.RowSpan="2"
                                 >
+                                
+                                <forms:ChartView 
+                                    x:Name="chartViewSmall"
+                                    Chart="{Binding TemperatureChart}"
+                                    IsVisible="true"
+                                    Margin="0, 40, 0, 0"
+                                    />
+                                <Label 
+                                    Text="{extensions:Translate RoomTemperature}"
+                                    Style="{StaticResource SmallChartTextStyle}"/>
                                 <!--<ffimageloading:CachedImage                                
+                                    Opacity="0.5"
                                     Grid.Column="0"
                                     Grid.Row="0"
                                     Grid.RowSpan="2"
@@ -307,15 +317,6 @@
                                         </OnPlatform>
                                     </ffimageloading:CachedImage.Source>
                                 </ffimageloading:CachedImage>-->
-                                <forms:ChartView 
-                                    x:Name="chartViewSmall"
-                                    Chart="{Binding TemperatureChart}"
-                                    IsVisible="true"
-                                    Margin="-20, 24, -40, 12"
-                                    />
-                                <Label 
-                                    Text="{extensions:Translate RoomTemperature}"
-                                    Style="{StaticResource SmallChartTextStyle}"/>
                             </Grid>
                             <!-- AMBIENT LIGHT -->
                             <Grid  
