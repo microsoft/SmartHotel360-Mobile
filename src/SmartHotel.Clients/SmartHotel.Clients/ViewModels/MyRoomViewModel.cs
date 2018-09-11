@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
-	public class MyRoomViewModel : ViewModelBase
+	public class MyRoomViewModel : ViewModelBase, IHandleViewAppearing, IHandleViewDisappearing
 	{
 		const string Skype = "Skype";
 		const string FacebookMessenger = "Facebook Messenger";
@@ -239,7 +239,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 			TemperatureMinimum = roomTemperature.Minimum.RawValue;
 			CurrentTemperature = roomTemperature.Value.RawValue;
 			DesiredTemperature = roomTemperature.Desired.RawValue;
-			
+
 			RoomAmbientLight roomAmbientLight = roomAmbientLightTask.Result;
 			AmbientLightMaximum = roomAmbientLight.Maximum.RawValue;
 			AmbientLightMinimum = roomAmbientLight.Minimum.RawValue;
@@ -251,6 +251,20 @@ namespace SmartHotel.Clients.Core.ViewModels
 
 			_isInitializing = false;
 			IsBusy = false;
+		}
+
+		public Task OnViewAppearingAsync( VisualElement view )
+		{
+			_roomDevicesDataService.StartCheckingRoomSensorData();
+
+			return Task.FromResult( true );
+		}
+
+		public Task OnViewDisappearingAsync( VisualElement view )
+		{
+			_roomDevicesDataService.StopCheckingRoomSensorData();
+
+			return Task.FromResult( true );
 		}
 
 		private void SetAmbient()
