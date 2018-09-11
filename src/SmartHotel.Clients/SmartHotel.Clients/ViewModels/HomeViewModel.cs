@@ -206,11 +206,18 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             MessagingCenter.Subscribe<Booking>(this, MessengerKeys.BookingRequested, OnBookingRequested);
             MessagingCenter.Subscribe<CheckoutViewModel>(this, MessengerKeys.CheckoutRequested, OnCheckoutRequested);
+			
+			roomDevicesDataService.StartCheckingRoomSensorData();
 
             return Task.FromResult(true);
         }
 
-        public Task OnViewDisappearingAsync(VisualElement view) => Task.FromResult(true);
+        public Task OnViewDisappearingAsync(VisualElement view)
+        {
+	        roomDevicesDataService.StopCheckingRoomSensorData();
+
+            return Task.FromResult(true);
+        }
 
         Task OnNotificationsAsync() => NavigationService.NavigateToAsync(typeof(NotificationsViewModel), Notifications);
 
