@@ -39,7 +39,7 @@ namespace SmartHotel.Clients.Core
         private const bool DefaultHasBooking = false;
 
         // Fakes
-        private const bool DefaultUseFakes = false;
+        private const bool DefaultUseFakes = true;
 
         private static ISettings Settings => CrossSettings.Current;
 

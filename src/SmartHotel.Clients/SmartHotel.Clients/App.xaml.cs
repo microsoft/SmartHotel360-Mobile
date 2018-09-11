@@ -34,9 +34,8 @@ namespace SmartHotel.Clients
 
         public static void BuildDependencies()
         {
-            // Do you want to use fake services that DO NOT require real backend or internet connection?
-            // Set to true the value to use fake services, false if you want to use Azure Services.
-            AppSettings.UseFakes = true;
+            /// Do you want to use fake services that DO NOT require real backend or internet connection?
+            /// Set to true the value of <see cref="AppSettings.DefaultUseFakes"/> to use fake services, false if you want to use Azure Services.
 
             Locator.Instance.Build();
         }
