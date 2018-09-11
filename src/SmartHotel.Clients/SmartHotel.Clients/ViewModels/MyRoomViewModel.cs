@@ -49,6 +49,8 @@ namespace SmartHotel.Clients.Core.ViewModels
 			SetNeed();
 		}
 
+		public bool UseRealRoomDevices => !_roomDevicesDataService.UseFakes;
+
 		public double CurrentAmbientLight
 		{
 			get => _currentAmbientLight;
@@ -237,8 +239,8 @@ namespace SmartHotel.Clients.Core.ViewModels
 			TemperatureMinimum = roomTemperature.Minimum.RawValue;
 			CurrentTemperature = roomTemperature.Value.RawValue;
 			DesiredTemperature = roomTemperature.Desired.RawValue;
-			
-			
+
+
 
 			RoomAmbientLight roomAmbientLight = roomAmbientLightTask.Result;
 			AmbientLightMaximum = roomAmbientLight.Maximum.RawValue;
