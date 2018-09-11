@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microcharts;
 using SkiaSharp;
 using SmartHotel.Clients.Core.Controls;
 using SmartHotel.Clients.Core.Services.IoT;
@@ -23,8 +24,9 @@ namespace SmartHotel.Clients.Core.ViewModels
     public class HomeViewModel : ViewModelBase, IHandleViewAppearing, IHandleViewDisappearing
     {
         bool hasBooking;
-        Microcharts.Chart temperatureChart;
-        Microcharts.Chart greenChart;
+        Chart temperatureChart;
+        Chart lightChart;
+        Chart greenChart;
         ObservableRangeCollection<Notification> notifications;
 
         readonly INotificationService notificationService;
@@ -33,7 +35,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly IAuthenticationService authenticationService;
         readonly IFileService fileService;
 		readonly IRoomDevicesDataService roomDevicesDataService;
-
+        
         public HomeViewModel(
             INotificationService notificationService,
             IChartService chartService,
@@ -62,6 +64,12 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             get => temperatureChart;
             set => SetProperty(ref temperatureChart, value);
+        }
+
+        public Microcharts.Chart LightChart
+        {
+            get => lightChart;
+			set => SetProperty(ref lightChart, value);
         }
 
         public Microcharts.Chart GreenChart
@@ -102,7 +110,9 @@ namespace SmartHotel.Clients.Core.ViewModels
                 //TemperatureChart = await _chartService.GetTemperatureChartAsync();
                 var roomId = string.Empty; //TODO: use real one
                 var roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync(roomId);
+                var roomLight = await roomDevicesDataService.GetRoomAmbientLightAsync(roomId);
                 TemperatureChart = CreateTemperatureChart(roomTemperature);
+                LightChart = CreateLightChart(roomLight);
 
                 GreenChart = await chartService.GetGreenChartAsync();
 
@@ -128,7 +138,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private Microcharts.Chart CreateTemperatureChart(RoomTemperature roomTemperature)
+        Chart CreateTemperatureChart(RoomTemperature roomTemperature)
         {
             var chartData = new TemperatureChart
             {
@@ -144,14 +154,30 @@ namespace SmartHotel.Clients.Core.ViewModels
             return chartData;
         }
 
-        async void FakeUpdateCharts()
+        Chart CreateLightChart(RoomAmbientLight roomTemperature)
         {
-            while (true)
+            var chartData = new LightChart()
             {
-                await Task.Delay(1000);
-                TemperatureChart = await chartService.GetTemperatureChartAsync();
-            }
+                MinValue = roomTemperature.Minimum.RawValue,
+                MaxValue = roomTemperature.Maximum.RawValue
+            };
+
+            var currentChartValue = new Entry(roomTemperature.Value.RawValue) { Color = SKColor.Parse("#174A51") };
+            var desiredChartValue = new Entry(roomTemperature.Desired.RawValue) { Color = SKColor.Parse("#378D93") };
+            var maxChartValue = new Entry(roomTemperature.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
+            chartData.Entries = new[] { currentChartValue, maxChartValue };
+
+            return chartData;
         }
+
+        //async void FakeUpdateCharts()
+        //{
+        //    while (true)
+        //    {
+        //        await Task.Delay(1000);
+        //        TemperatureChart = await _chartService.GetTemperatureChartAsync();
+        //    }
+        //}
 
         void ShowGreetingMessage()
         {
