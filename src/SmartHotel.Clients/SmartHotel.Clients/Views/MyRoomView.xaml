@@ -399,6 +399,7 @@
                                 </Grid.Triggers>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
                                     <RowDefinition Height="50" />
                                 </Grid.RowDefinitions>
                                 <ScrollView
@@ -520,11 +521,29 @@
                                         </controls:CustomSlider>
                                     </StackLayout>
                                 </ScrollView>
-                                <Grid   
-                                    Grid.Row="1"
+	                            <Label Text="Enable room controls by configuring the Room Devices Endpoint"
+									   WidthRequest="275"
+									   Style="{StaticResource TabTextStyle}"
+									   HorizontalTextAlignment="Center"
+									   HorizontalOptions="Center"
+	                                   Grid.Row="1"
+									   IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"/>
+								<Grid   
+                                    Grid.Row="2"
                                     BackgroundColor="{StaticResource GreenColor}" 
-                                    IsVisible="{Binding IsEcoMode, Converter={StaticResource InverseBoolConverter}}">
-                                    <StackLayout
+                                    IsVisible="{Binding IsEcoMode, Converter={StaticResource InverseBoolConverter}}"
+									IsEnabled="{Binding UseRealRoomDevices}">
+									<VisualStateManager.VisualStateGroups>
+										<VisualStateGroup x:Name="CommonStates">
+											<VisualState x:Name="Disabled">
+												<VisualState.Setters>
+													<Setter Property="Opacity"
+													        Value="0.3" />
+												</VisualState.Setters>
+											</VisualState>
+										</VisualStateGroup>
+									</VisualStateManager.VisualStateGroups>
+									<StackLayout
                                         Orientation="Horizontal"
                                         HorizontalOptions="Center">
                                         <Image
@@ -547,10 +566,21 @@
                                     </Grid.GestureRecognizers>
                                 </Grid>
                                 <Grid   
-                                    Grid.Row="1"
+                                    Grid.Row="2"
                                     BackgroundColor="{StaticResource DarkGrayColor}"
-                                    IsVisible="{Binding IsEcoMode}">
-                                    <StackLayout
+									  IsVisible="{Binding IsEcoMode}"
+									  IsEnabled="{Binding UseRealRoomDevices}">
+	                                <VisualStateManager.VisualStateGroups>
+		                                <VisualStateGroup x:Name="CommonStates">
+			                                <VisualState x:Name="Disabled">
+				                                <VisualState.Setters>
+					                                <Setter Property="Opacity"
+					                                        Value="0.3" />
+				                                </VisualState.Setters>
+			                                </VisualState>
+		                                </VisualStateGroup>
+	                                </VisualStateManager.VisualStateGroups>
+									<StackLayout
                                         Orientation="Horizontal"
                                         HorizontalOptions="Center">
                                         <Image
