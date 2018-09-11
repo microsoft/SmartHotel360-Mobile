@@ -48,12 +48,16 @@ namespace SmartHotel.Clients
 
         protected override void OnStart()
         {
-
+            /// Disable AppCenter in UI tests
+#if ( IS_UI_TEST == false )
+            
             // Handle when your app starts
             AppCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};" +
                 $"uwp={AppSettings.AppCenterAnalyticsWindows};" +
                 $"android={AppSettings.AppCenterAnalyticsAndroid}",
                 typeof(Analytics), typeof(Crashes), typeof(Distribute));
+
+#endif
         }
 
         protected override void OnSleep()
