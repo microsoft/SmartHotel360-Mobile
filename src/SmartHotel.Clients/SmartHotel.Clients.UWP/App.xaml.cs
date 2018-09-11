@@ -60,6 +60,8 @@ namespace SmartHotel.Clients.UWP
                     typeof(CarouselViewRenderer).GetTypeInfo().Assembly
                 };
 
+                Rg.Plugins.Popup.Popup.Init();
+
                 Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
