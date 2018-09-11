@@ -7,6 +7,25 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class LightChart : TemperatureChart
     {
+        public LightChart() : base()
+        {
+            LineSize = 14;
+            LabelTextSize = 16f;
+        }
+
+        public override void DrawContent(SKCanvas canvas, int width, int height)
+        {
+            var relativeScaleWidth = width / 465.0f;
+            var strokeWidth = relativeScaleWidth * LineSize;
+
+            var radius = (width) / 2;
+            int cx = (int)(radius + strokeWidth);
+            var cy = Convert.ToInt32(height / 1.25);
+            var radiusSpace = radius - 4 * strokeWidth;
+
+            DrawChart(canvas, width, height, cx, cy, radiusSpace, strokeWidth, relativeScaleWidth);
+        }
+
         protected override void DrawChart(SKCanvas canvas, Entry entry, float radius, int cx, int cy, float strokeWidth)
         {
             using (var paint = new SKPaint
