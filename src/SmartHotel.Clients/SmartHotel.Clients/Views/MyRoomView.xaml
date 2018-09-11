@@ -396,9 +396,12 @@
                                         Grid.Row="0"
                                         Spacing="0"
                                         Padding="10">
-                                        <Label 
-                                            Text="{extensions:Translate AmbientLight}"  
-                                            Style="{StaticResource AmbientTextStyle}"/>
+	                                    <StackLayout Orientation="Horizontal">
+		                                    <Label Text="{extensions:Translate AmbientLight}"
+		                                           Style="{StaticResource AmbientTextStyle}"/>
+		                                    <Label Text="{Binding CurrentAmbientLight, Converter={StaticResource AmbientLightValueConverter}}"
+		                                           Style="{StaticResource AmbientTextStyle}"/>
+	                                    </StackLayout>
                                         <controls:CustomSlider
                                             x:Name="AmbientLightSlider"
                                             Maximum="{Binding AmbientLightMaximum}"
@@ -418,9 +421,13 @@
                                                 </OnPlatform>
                                             </controls:CustomSlider.ThumbImage>
                                         </controls:CustomSlider>
-                                        <Label 
-                                            Text="{extensions:Translate Temperature}"  
-                                            Style="{StaticResource AmbientTextStyle}"/>
+	                                    <StackLayout Orientation="Horizontal">
+		                                    <Label Text="{extensions:Translate Temperature}"
+		                                           Style="{StaticResource AmbientTextStyle}"/>
+
+		                                    <Label Text="{Binding CurrentTemperature, Converter={StaticResource TemperatureValueConverter}}"
+		                                           Style="{StaticResource AmbientTextStyle}"/>
+	                                    </StackLayout>
 										<controls:CustomSlider
 											Maximum="{Binding TemperatureMaximum}"
 											Minimum="{Binding TemperatureMinimum}"
