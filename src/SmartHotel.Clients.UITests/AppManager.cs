@@ -43,7 +43,7 @@ namespace SmartHotel.Clients.UITests
                     .Android
                     .WaitTimes(new WaitTimes())
                     // Used to run a .apk file:
-                    .ApkFile("../../../SmartHotel.Clients/SmartHotel.Clients.Android/bin/Release/com.microsoft.smarthotel.apk")
+                    .ApkFile("../../../SmartHotel.Clients/SmartHotel.Clients.Android/bin/UI Test/com.microsoft.smarthotel.apk")
                     .StartApp();
             }
 
