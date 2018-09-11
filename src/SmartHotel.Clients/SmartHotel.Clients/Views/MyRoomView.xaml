@@ -478,13 +478,13 @@
 												</VisualStateGroup>
 											</VisualStateManager.VisualStateGroups>
                                         </controls:CustomSlider>
-                                        <Label   
-                                            Text="{extensions:Translate MusicVolume}"  
-                                            Style="{StaticResource AmbientTextStyle}"/>
-                                        <controls:CustomSlider
-                                            Maximum="100"
-                                            Minimum="0"
-                                            Value="{Binding MusicVolume, Mode=TwoWay}">
+										<Label IsVisible="false"
+											   Text="{extensions:Translate MusicVolume}"  
+											   Style="{StaticResource AmbientTextStyle}"/>
+										<controls:CustomSlider IsVisible="false"
+															   Maximum="100"
+															   Minimum="0"
+															   Value="{Binding MusicVolume, Mode=TwoWay}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="bg_slider_03" />
@@ -498,13 +498,13 @@
                                                 </OnPlatform>
                                             </controls:CustomSlider.ThumbImage>
                                         </controls:CustomSlider>
-                                        <Label    
-                                            Text="{extensions:Translate WindowBlinds}"  
-                                            Style="{StaticResource AmbientTextStyle}"/>
-                                        <controls:CustomSlider
-                                            Maximum="100"
-                                            Minimum="0"
-                                            Value="{Binding WindowBlinds, Mode=TwoWay}">
+										<Label IsVisible="false"
+											   Text="{extensions:Translate WindowBlinds}"  
+                                               Style="{StaticResource AmbientTextStyle}"/>
+										<controls:CustomSlider IsVisible="false"
+															   Maximum="100"
+															   Minimum="0"
+															   Value="{Binding WindowBlinds, Mode=TwoWay}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="bg_slider_04" />
