@@ -23,7 +23,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>SmartHotel</string>
 	<key>CFBundleIdentifier</key>
-	<string>nl.lvms.SmartHotel360-df</string>
+	<string>com.microsoft.SmartHotel360</string>
 	<key>CFBundleVersion</key>
 	<string>4.5</string>
 	<key>CFBundleShortVersionString</key>
