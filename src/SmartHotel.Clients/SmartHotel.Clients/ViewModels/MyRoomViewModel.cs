@@ -239,9 +239,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 			TemperatureMinimum = roomTemperature.Minimum.RawValue;
 			CurrentTemperature = roomTemperature.Value.RawValue;
 			DesiredTemperature = roomTemperature.Desired.RawValue;
-
-
-
+			
 			RoomAmbientLight roomAmbientLight = roomAmbientLightTask.Result;
 			AmbientLightMaximum = roomAmbientLight.Maximum.RawValue;
 			AmbientLightMinimum = roomAmbientLight.Minimum.RawValue;
