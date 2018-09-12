@@ -2,7 +2,7 @@
 {
     public static class FakeRoomTemperature
     {
-        private static readonly TemperatureValue FakeDesiredValue = new TemperatureValue(76);
+        private static readonly SensorValue FakeDesiredValue = new SensorValue(76);
 
         public static RoomTemperature Create()
         {

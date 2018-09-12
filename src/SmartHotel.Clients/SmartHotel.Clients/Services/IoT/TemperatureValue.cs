@@ -1,18 +1,18 @@
 ﻿namespace SmartHotel.Clients.Core.Services.IoT
 {
-    public struct TemperatureValue
+    public struct SensorValue
     {
-        public TemperatureValue(float value) : this(value, default(TemperatureTypes))
+        public SensorValue(float value) : this(value, default(SensorTypes))
         {
         }
 
-        public TemperatureValue(float rawValue, TemperatureTypes unit)
+        public SensorValue(float rawValue, SensorTypes unit)
         {
             RawValue = rawValue;
             Unit = unit;
         }
 
-        public TemperatureTypes Unit { get; private set; }
+        public SensorTypes Unit { get; private set; }
         public float RawValue { get; private set; }
 
     }

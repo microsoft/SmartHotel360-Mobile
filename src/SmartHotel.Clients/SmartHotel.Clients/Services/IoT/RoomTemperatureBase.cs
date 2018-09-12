@@ -6,7 +6,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 {
     public abstract class RoomTemperatureBase
     {
-        protected RoomTemperatureBase(TemperatureValue defaultValue, TemperatureValue minimum, TemperatureValue maximum)
+        protected RoomTemperatureBase(SensorValue defaultValue, SensorValue minimum, SensorValue maximum)
         {
             Minimum = minimum;
             Maximum = maximum;
@@ -14,15 +14,15 @@ namespace SmartHotel.Clients.Core.Services.IoT
             Value = defaultValue;
         }
 
-        protected RoomTemperatureBase(TemperatureValue defaultValue, TemperatureValue desiredValue, TemperatureValue minimum, TemperatureValue maximum) : this(defaultValue, minimum, maximum)
+        protected RoomTemperatureBase(SensorValue defaultValue, SensorValue desiredValue, SensorValue minimum, SensorValue maximum) : this(defaultValue, minimum, maximum)
         {
             Desired = desiredValue;
         }
 
-        public TemperatureValue Value { get; protected set; }
+        public SensorValue Value { get; protected set; }
 
-        public TemperatureValue Minimum { get; protected set; }
-        public TemperatureValue Maximum { get; protected set; }
-        public TemperatureValue Desired { get; protected set; }
+        public SensorValue Minimum { get; protected set; }
+        public SensorValue Maximum { get; protected set; }
+        public SensorValue Desired { get; protected set; }
     }
 }
