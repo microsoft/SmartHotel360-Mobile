@@ -2,7 +2,7 @@
 {
     public static class FakeRoomAmbientLight
     {
-        private static readonly SensorValue FakeDesiredValue = new SensorValue(3000, SensorTypes.DimmerSwitch);
+        private static readonly SensorValue FakeDesiredValue = new SensorValue(65, SensorTypes.DimmerSwitch);
 
         public static RoomAmbientLight Create()
         {

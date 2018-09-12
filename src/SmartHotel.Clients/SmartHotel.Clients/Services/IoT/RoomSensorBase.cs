@@ -4,9 +4,9 @@ using System.Text;
 
 namespace SmartHotel.Clients.Core.Services.IoT
 {
-    public abstract class RoomTemperatureBase
+    public abstract class RoomSensorBase
     {
-        protected RoomTemperatureBase(SensorValue defaultValue, SensorValue minimum, SensorValue maximum)
+        protected RoomSensorBase(SensorValue defaultValue, SensorValue minimum, SensorValue maximum)
         {
             Minimum = minimum;
             Maximum = maximum;
@@ -14,7 +14,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
             Value = defaultValue;
         }
 
-        protected RoomTemperatureBase(SensorValue defaultValue, SensorValue desiredValue, SensorValue minimum, SensorValue maximum) : this(defaultValue, minimum, maximum)
+        protected RoomSensorBase(SensorValue defaultValue, SensorValue desiredValue, SensorValue minimum, SensorValue maximum) : this(defaultValue, minimum, maximum)
         {
             Desired = desiredValue;
         }

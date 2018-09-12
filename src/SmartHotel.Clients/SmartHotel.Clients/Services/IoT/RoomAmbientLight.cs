@@ -1,6 +1,6 @@
 ﻿namespace SmartHotel.Clients.Core.Services.IoT
 {
-	public class RoomAmbientLight : RoomTemperatureBase
+	public class RoomAmbientLight : RoomSensorBase
 	{
 		public const string SensorDataType = "Light";
 	    public static readonly SensorValue DefaultMinimum = new SensorValue(0, SensorTypes.DimmerSwitch);
