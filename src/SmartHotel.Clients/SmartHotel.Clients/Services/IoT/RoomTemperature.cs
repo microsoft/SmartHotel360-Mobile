@@ -3,11 +3,11 @@
     public class RoomTemperature : RoomTemperatureBase
     {
 	    public const string SensorDataType = "Temperature";
-        private static readonly TemperatureValue DefaultMinimum = new TemperatureValue(60);
-        private static readonly TemperatureValue DefaultMaximum = new TemperatureValue(90);
-        private static readonly TemperatureValue DefaultValue = new TemperatureValue(71);
+        private static readonly SensorValue DefaultMinimum = new SensorValue(60);
+        private static readonly SensorValue DefaultMaximum = new SensorValue(90);
+        private static readonly SensorValue DefaultValue = new SensorValue(71);
 
-        public RoomTemperature(TemperatureValue desired) : base(DefaultValue, DefaultMinimum, DefaultMaximum)
+        public RoomTemperature(SensorValue desired) : base(DefaultValue, DefaultMinimum, DefaultMaximum)
         {
             Desired = desired;
         }
@@ -16,7 +16,7 @@
         {
         }
 
-        public RoomTemperature(TemperatureValue value, TemperatureValue desired) : base(value, desired, DefaultMinimum, DefaultMaximum)
+        public RoomTemperature(SensorValue value, SensorValue desired) : base(value, desired, DefaultMinimum, DefaultMaximum)
         {
         }
 

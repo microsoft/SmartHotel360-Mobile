@@ -41,7 +41,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 				{
 					var currentTemp = float.Parse( sensorData.SensorReading );
 					var desiredTemp = float.Parse( sensorData.DesiredValue );
-					return new RoomTemperature( new TemperatureValue( currentTemp ), new TemperatureValue( desiredTemp ) );
+					return new RoomTemperature( new SensorValue( currentTemp ), new SensorValue( desiredTemp ) );
 				}
 				else
 				{
@@ -49,7 +49,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 					// simulates values returned for IoT device
 					var currentTemp = 70;
 					var desiredTemp = 76;
-					return new RoomTemperature( new TemperatureValue( currentTemp ), new TemperatureValue( desiredTemp ) );
+					return new RoomTemperature( new SensorValue( currentTemp ), new SensorValue( desiredTemp ) );
 				}
 			}
 		}
@@ -67,16 +67,16 @@ namespace SmartHotel.Clients.Core.Services.IoT
 				if ( _currentSensorDataBySensorDataType.TryGetValue( RoomAmbientLight.SensorDataType,
 					out DeviceSensorData sensorData ) )
 				{
-					var currentLight = new TemperatureValue( float.Parse( sensorData.SensorReading ), TemperatureTypes.Kelvin );
-					var desiredLight = new TemperatureValue( float.Parse( sensorData.DesiredValue ), TemperatureTypes.Kelvin );
+					var currentLight = new SensorValue( float.Parse( sensorData.SensorReading ), SensorTypes.DimmerSwitch );
+					var desiredLight = new SensorValue( float.Parse( sensorData.DesiredValue ), SensorTypes.DimmerSwitch );
 					return new RoomAmbientLight( currentLight, desiredLight );
 				}
 				else
 				{
 					//TODO: Handle the case where we haven't actually retrieved data yet
 					// simulates values returned for IoT device
-					var currentLight = new TemperatureValue( 4500, TemperatureTypes.Kelvin );
-					var desiredLight = new TemperatureValue( 4000, TemperatureTypes.Kelvin );
+					var currentLight = new SensorValue( 4500, SensorTypes.DimmerSwitch );
+					var desiredLight = new SensorValue( 4000, SensorTypes.DimmerSwitch );
 					return new RoomAmbientLight( currentLight, desiredLight );
 				}
 			}
