@@ -16,12 +16,12 @@ namespace SmartHotel.Clients.Core.ViewModels
 
 	    double desiredAmbientLight;
 	    double currentAmbientLight;
-	    double ambientLightMinimum;
-	    double ambientLightMaximum = 100;
+		double ambientLightMinimum = RoomAmbientLight.DefaultMinimum.RawValue;
+		double ambientLightMaximum = RoomAmbientLight.DefaultMaximum.RawValue;
 	    double desiredTemperature;
 	    double currentTemperature;
-	    double temperatureMinimum = 60;
-	    double temperatureMaximum = 90;
+		double temperatureMinimum = RoomTemperature.DefaultMinimum.RawValue;
+		double temperatureMaximum = RoomTemperature.DefaultMaximum.RawValue;
         double musicVolume;
         double windowBlinds;
         bool isEcoMode;
