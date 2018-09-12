@@ -40,7 +40,7 @@ namespace SmartHotel.Clients.Core.Controls
                 using (var path = new SKPath())
                 {
                     var percent = (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
-                    path.AddRoundedRect(SKRect.Create(cx - radius - strokeWidth, cy / 2 + strokeWidth, (2 * radius) * percent, 2), 0.05f, 0.05f);
+                    path.AddRoundedRect(SKRect.Create(cx - radius - strokeWidth, cy / 2f + strokeWidth, (2 * radius) * percent, 2), 0.05f, 0.05f);
 
                     canvas.DrawPath(path, paint);
                 }
@@ -53,7 +53,8 @@ namespace SmartHotel.Clients.Core.Controls
             var values = Entries.ToList();
             var currentValue = values.FirstOrDefault();
 
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{currentValue.Value}K", SKColor.Parse("#283748"), LabelTextSize * relativeScaleWidth, new SKPoint(cx - strokeWidth - CaptionMargin, cy / 2 + 3* strokeWidth), SKTextAlign.Center);
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{currentValue?.Value}K", SKColor.Parse("#283748"), LabelTextSize * relativeScaleWidth,
+                new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth), SKTextAlign.Center);
         }
     }
 }
