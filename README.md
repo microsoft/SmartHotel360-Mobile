@@ -106,7 +106,8 @@ To change the endpoints you can modifiy the AppSettings.cs file in the SmartHote
 
 ## Requirements
 
-* [Visual Studio 2017 version 15.3 or Visual Studio for Mac version 7.3](https://www.visualstudio.com/vs/)
+* [Visual Studio 2017 version 15.8 or Visual Studio for Mac version 7.6.3](https://www.visualstudio.com/vs/)
+* Android Build Tools 27.0.3.
 * Bing Maps Key - [Getting a Bing Maps Key](https://msdn.microsoft.com/en-us/library/ff428642.aspx)
 
 ## Demo Scripts
