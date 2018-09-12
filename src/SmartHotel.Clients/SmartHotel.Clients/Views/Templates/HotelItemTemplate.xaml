@@ -66,6 +66,7 @@
     </ContentView.Resources>
   <ContentView.Content>
         <Grid
+            AutomationId="HotelItem"
             RowSpacing="0" 
             HeightRequest="84"
             Margin="24, 24, 24, 0">

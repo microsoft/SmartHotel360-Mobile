@@ -6,6 +6,9 @@
     <RootNamespace>SmartHotel.Clients.Core</RootNamespace>
     <Configurations>Debug;Release;UI Test;UI-Test</Configurations>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UI Test|AnyCPU'">
+    <DefineConstants>TRACE;IS_UI_TEST;</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Converters\CountToBoolConverter.cs" />
     <Compile Remove="Views\Templates\SuggestionSearchItemTemplate.xaml.cs" />

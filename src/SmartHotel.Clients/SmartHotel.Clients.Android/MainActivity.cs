@@ -9,6 +9,8 @@ using CarouselView.FormsPlugin.Android;
 using Microsoft.Identity.Client;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
+using Rg.Plugins.Popup;
+using Rg.Plugins.Popup.Services;
 using SmartHotel.Clients.Core;
 using SmartHotel.Clients.Core.Helpers;
 using SmartHotel.Clients.Core.Services.Authentication;
@@ -41,6 +43,7 @@ namespace SmartHotel.Clients.Droid
             Renderers.Calendar.Init();
             Xamarin.FormsMaps.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
 
             InitMessageCenterSubscriptions();
             RegisterPlatformDependencies();
@@ -133,6 +136,14 @@ namespace SmartHotel.Clients.Droid
                 new ComponentName(this, CardService.ServiceName),
                 ComponentEnabledState.Enabled,
                 ComponentEnableOption.DontKillApp);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (Popup.SendBackPressed(base.OnBackPressed))
+            {
+                PopupNavigation.Instance.PopAllAsync(true);
+            }
         }
     }
 }

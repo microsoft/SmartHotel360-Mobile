@@ -31,7 +31,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
             _analyticService.TrackEvent("Checkout");
 
-            return PopupNavigation.PopAllAsync(true);
+            return PopupNavigation.Instance.PopAllAsync(true);
         }
 
         private async Task CheckoutAsync()
@@ -41,7 +41,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
             _analyticService.TrackEvent("Checkout");
 
-            await PopupNavigation.PopAllAsync(false);
+            await PopupNavigation.Instance.PopAllAsync(false);
     
             await NavigationService.NavigateToAsync<BookingViewModel>();
         }
