@@ -171,9 +171,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             };
 
             var currentChartValue = new Entry(light.Value.RawValue) { Color = SKColor.Parse("#174A51") };
-            var desiredChartValue = new Entry(light.Desired.RawValue) { Color = SKColor.Parse("#378D93") };
+            //var desiredChartValue = new Entry(light.Desired.RawValue) { Color = SKColor.Parse("#378D93") };
             var maxChartValue = new Entry(light.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
-            chartData.Entries = new[] { currentChartValue, desiredChartValue, maxChartValue };
+            chartData.Entries = new[] { currentChartValue, maxChartValue };
 
             return chartData;
         }
