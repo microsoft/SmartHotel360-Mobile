@@ -34,9 +34,8 @@ namespace SmartHotel.Clients
 
         public static void BuildDependencies()
         {
-            // Do you want to use fake services that DO NOT require real backend or internet connection?
-            // Set to true the value to use fake services, false if you want to use Azure Services.
-            AppSettings.UseFakes = true;
+            /// Do you want to use fake services that DO NOT require real backend or internet connection?
+            /// Set to true the value of <see cref="AppSettings.DefaultUseFakes"/> to use fake services, false if you want to use Azure Services.
 
             Locator.Instance.Build();
         }
@@ -49,12 +48,16 @@ namespace SmartHotel.Clients
 
         protected override void OnStart()
         {
-
+            /// Disable AppCenter in UI tests
+#if ( IS_UI_TEST == false )
+            
             // Handle when your app starts
             AppCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};" +
                 $"uwp={AppSettings.AppCenterAnalyticsWindows};" +
                 $"android={AppSettings.AppCenterAnalyticsAndroid}",
                 typeof(Analytics), typeof(Crashes), typeof(Distribute));
+
+#endif
         }
 
         protected override void OnSleep()
