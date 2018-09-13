@@ -52,13 +52,14 @@ namespace SmartHotel.Clients.Core.Controls
         {
             var values = Entries.ToList();
             var currentValue = values.FirstOrDefault();
-            var desiredValue = values.Skip(1).Take(1).FirstOrDefault();
 
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Current: {currentValue?.Value}%", SKColor.Parse("#283748"), LabelTextSize * relativeScaleWidth,
+            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{currentValue?.Value}%", SKColor.Parse("#283748"), LabelTextSize * relativeScaleWidth,
                 new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth), SKTextAlign.Center);
 
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue?.Value}%", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth,
-                new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth * 1.45f), SKTextAlign.Center);
+            // uncomment to add Desired value
+            //var desiredValue = values.Skip(1).Take(1).FirstOrDefault();
+            //canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue?.Value}%", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth,
+            //    new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth * 1.45f), SKTextAlign.Center);
         }
     }
 }
