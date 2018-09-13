@@ -15,7 +15,7 @@ namespace SmartHotel.Clients.Core.Converters
 
             var lightValue = (double)value;
 
-            return $"{lightValue.ToString("N0")}K";
+            return $"{lightValue:N0}%";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
