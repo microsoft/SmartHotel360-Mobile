@@ -5,7 +5,7 @@ namespace SmartHotel.Clients.Core.Views
 {
     public partial class UwpSuggestionsView : ContentPage
     {
-        private const double MinWidth = 720;
+        const double MinWidth = 720;
 
         public UwpSuggestionsView()
         {
@@ -32,12 +32,9 @@ namespace SmartHotel.Clients.Core.Views
             this.SizeChanged -= OnSizeChanged;
         }
 
-        private void OnSizeChanged(object sender, System.EventArgs e)
-        {
-            AdaptLayout();
-        }
+        void OnSizeChanged(object sender, System.EventArgs e) => AdaptLayout();
 
-        private void AdaptLayout()
+        void AdaptLayout()
         {
             if (Width < 0)
             {

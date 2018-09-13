@@ -15,7 +15,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
     public abstract class BaseSettingsLoader<TRemoteSettingsModel> : IBaseSettingsLoader<TRemoteSettingsModel>
         where TRemoteSettingsModel : class
     {
-        private readonly JsonSerializerSettings _serializerSettings;
+        readonly JsonSerializerSettings _serializerSettings;
 
         protected BaseSettingsLoader()
         {

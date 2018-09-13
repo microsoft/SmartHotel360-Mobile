@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using MvvmHelpers;
 
 namespace SmartHotel.Clients.Core.Extensions
 {
     public static class ObservableExtension
     {
-        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> source)
+        public static ObservableRangeCollection<T> ToObservableRangeCollection<T>(this IEnumerable<T> source)
         {
-            ObservableCollection<T> collection = new ObservableCollection<T>();
+            var collection = new ObservableRangeCollection<T>();
 
-            foreach (T item in source)
+            foreach (var item in source)
             {
                 collection.Add(item);
             }

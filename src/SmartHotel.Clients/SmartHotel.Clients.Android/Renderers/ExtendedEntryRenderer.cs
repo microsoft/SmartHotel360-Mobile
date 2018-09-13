@@ -38,9 +38,6 @@ namespace SmartHotel.Clients.Droid.Renderers
             }
         }
 
-        private void UpdateLineColor()
-        {
-            Control?.Background?.SetColorFilter(ExtendedEntryElement.LineColorToApply.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
-        }
+        void UpdateLineColor() => Control?.Background?.SetColorFilter(ExtendedEntryElement.LineColorToApply.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
     }
 }

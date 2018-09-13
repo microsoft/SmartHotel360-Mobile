@@ -40,7 +40,7 @@ namespace SmartHotel.Clients
             Locator.Instance.Build();
         }
 
-        private Task InitNavigation()
+        Task InitNavigation()
         {
             var navigationService = Locator.Instance.Resolve<INavigationService>();
             return navigationService.NavigateToAsync<ExtendedSplashViewModel>();

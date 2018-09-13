@@ -26,9 +26,6 @@ namespace SmartHotel.Clients.Core.Views
             this.SizeChanged -= OnSizeChanged;
         }
 
-        private void OnSizeChanged(object sender, System.EventArgs e)
-        {
-            AmbientLightSlider.WidthRequest = Width;
-        }
+        void OnSizeChanged(object sender, System.EventArgs e) => AmbientLightSlider.WidthRequest = Width;
     }
 }

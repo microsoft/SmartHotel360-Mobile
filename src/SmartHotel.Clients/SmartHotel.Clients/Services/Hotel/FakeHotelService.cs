@@ -10,7 +10,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
 {
     public class FakeHotelService : IHotelService
     {
-        private static List<City> Cities = new List<City>
+        static List<City> Cities = new List<City>
         {
             new City
             {
@@ -32,7 +32,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Models.Hotel> Hotels = new List<Models.Hotel>
+        static List<Models.Hotel> Hotels = new List<Models.Hotel>
         {
             new Models.Hotel
             {
@@ -42,7 +42,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
                 Picture = Device.RuntimePlatform == Device.UWP ? "Assets/img_1.png" : "img_1",
                 City = "Barcelona, Spain",
                 PricePerNight = 76,
-                Price = 76, 
+                Price = 76,
                 Rating = 3,
                 Latitude = 47.612081510010654,
                 Longitude = -122.330555830464,
@@ -108,7 +108,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Review> Reviews = new List<Review>
+        static List<Review> Reviews = new List<Review>
         {
             new Review
             {
@@ -139,7 +139,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Service> HotelServices = new List<Service>
+        static List<Service> HotelServices = new List<Service>
         {
             new Service
             {
@@ -158,7 +158,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Service> RoomServices = new List<Service>
+        static List<Service> RoomServices = new List<Service>
         {
             new Service
             {
@@ -202,7 +202,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
         {
             await Task.Delay(500);
 
-            return Reviews.Where(r => r.HotelId == id).ToObservableCollection();
+            return Reviews.Where(r => r.HotelId == id).ToObservableRangeCollection();
         }
 
         public async Task<IEnumerable<Models.Hotel>> SearchAsync(int cityId)
@@ -219,7 +219,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
 
             return Hotels
                 .Where(h => h.CityId == cityId && h.Rating == rating && h.PricePerNight >= minPrice && h.PricePerNight < maxPrice)
-                .ToObservableCollection();
+                .ToObservableRangeCollection();
         }
 
         public async Task<IEnumerable<Service>> GetHotelServicesAsync()

@@ -69,17 +69,14 @@ namespace SmartHotel.Clients.iOS
             return true;
         }
 
-        private void RegisterPlatformDependencies()
-        {
-            Locator.Instance.Register<IBrowserCookiesService, BrowserCookiesService>();
-        }
+        void RegisterPlatformDependencies() => Locator.Instance.Register<IBrowserCookiesService, BrowserCookiesService>();
 
-        private static void InitChartView()
+        static void InitChartView()
         {
             var t1 = typeof(ChartView);
         }
 
-        private static void InitXamanimation()
+        static void InitXamanimation()
         {
             var t2 = typeof(Xamanimation.AnimationBase);
         }

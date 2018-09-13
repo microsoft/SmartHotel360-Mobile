@@ -8,10 +8,7 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class GreenChart : Chart
     {
-        public GreenChart()
-        {
-            BackgroundColor = SKColor.Parse("#F6F1E9");
-        }
+        public GreenChart() => BackgroundColor = SKColor.Parse("#F6F1E9");
 
         public float GreenChartLabelTextSize { get; set; } = 9;
 
@@ -19,7 +16,7 @@ namespace SmartHotel.Clients.Core.Controls
 
         public PointMode PointMode { get; set; } = PointMode.Circle;
 
-        private float ValueRange => MaxValue - MinValue;
+        float ValueRange => MaxValue - MinValue;
 
         public float CalculateYOrigin(float itemHeight, float headerHeight)
         {
@@ -62,7 +59,7 @@ namespace SmartHotel.Clients.Core.Controls
         {
             var result = new List<SKPoint>();
 
-            for (int i = 0; i < Entries.Count(); i++)
+            for (var i = 0; i < Entries.Count(); i++)
             {
                 var entry = Entries.ElementAt(i);
 
@@ -75,14 +72,11 @@ namespace SmartHotel.Clients.Core.Controls
             return result.ToArray();
         }
 
-        protected void DrawFooter(SKCanvas canvas, SKPoint[] points, SKSize itemSize, int height, float footerHeight)
-        {
-            this.DrawLabels(canvas, points, itemSize, height, footerHeight);
-        }
+        protected void DrawFooter(SKCanvas canvas, SKPoint[] points, SKSize itemSize, int height, float footerHeight) => this.DrawLabels(canvas, points, itemSize, height, footerHeight);
 
         protected void DrawLabels(SKCanvas canvas, SKPoint[] points, SKSize itemSize, int height, float footerHeight)
         {
-            for (int i = 0; i < Entries.Count(); i++)
+            for (var i = 0; i < Entries.Count(); i++)
             {
                 var entry = Entries.ElementAt(i);
                 var point = points[i];
@@ -110,7 +104,7 @@ namespace SmartHotel.Clients.Core.Controls
         {
             if (points.Length > 0 && PointMode != PointMode.None)
             {
-                for (int i = 0; i < points.Length; i++)
+                for (var i = 0; i < points.Length; i++)
                 {
                     var entry = Entries.ElementAt(i);
                     var point = points[i];
@@ -123,7 +117,7 @@ namespace SmartHotel.Clients.Core.Controls
         {
             if (points.Length > 0)
             {
-                for (int i = 0; i < points.Length; i++)
+                for (var i = 0; i < points.Length; i++)
                 {
                     var entry = Entries.ElementAt(i);
                     var point = points[i];

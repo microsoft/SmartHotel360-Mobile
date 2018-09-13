@@ -16,11 +16,11 @@ namespace SmartHotel.Clients.Core.Controls
                 {
                     if (oldValue != null)
                     {
-                        var observableCollection = oldValue as INotifyCollectionChanged;
+                        var ObservableRangeCollection = oldValue as INotifyCollectionChanged;
 
-                        if (observableCollection != null)
+                        if (ObservableRangeCollection != null)
                         {
-                            observableCollection.CollectionChanged -= (s, e) =>
+                            ObservableRangeCollection.CollectionChanged -= (s, e) =>
                             {
                                 var newItems = e.NewItems;
                                 if (newItems != null)
@@ -46,19 +46,19 @@ namespace SmartHotel.Clients.Core.Controls
                     }
                     if (newValue != null)
                     {
-                        var observableCollection = newValue as INotifyCollectionChanged;
+                        var ObservableRangeCollection = newValue as INotifyCollectionChanged;
 
-                        if (observableCollection != null)
+                        if (ObservableRangeCollection != null)
                         {
-                            observableCollection.CollectionChanged += (s, e) =>
+                            ObservableRangeCollection.CollectionChanged += (s, e) =>
                             {
                                 var newItems = e.NewItems;
-                                if (newItems!= null)
+                                if (newItems != null)
                                 {
                                     foreach (SpecialDate sd in newItems)
                                     {
                                         var buttons = (bindable as Calendar).buttons;
-                                        var button = buttons.Where(d=> d.Date.HasValue).FirstOrDefault(d => d.Date.Value.Date == sd.Date.Date);
+                                        var button = buttons.Where(d => d.Date.HasValue).FirstOrDefault(d => d.Date.Value.Date == sd.Date.Date);
                                         (bindable as Calendar).SetButtonSpecial(button, sd);
                                     }
                                 }
@@ -75,23 +75,20 @@ namespace SmartHotel.Clients.Core.Controls
                         }
                     }
                 });
-        
+
 
         public IEnumerable<SpecialDate> SpecialDates
-		{
-			get { return (IEnumerable<SpecialDate>)GetValue(SpecialDatesProperty); }
-			set { SetValue(SpecialDatesProperty, value); }
-		}
+        {
+            get => (IEnumerable<SpecialDate>)GetValue(SpecialDatesProperty);
+            set => SetValue(SpecialDatesProperty, value);
+        }
 
-		#endregion
+        #endregion
 
-		public void RaiseSpecialDatesChanged()
-		{
-			ChangeCalendar(CalandarChanges.MaxMin);
-		}
+        public void RaiseSpecialDatesChanged() => ChangeCalendar(CalandarChanges.MaxMin);
 
-		protected void SetButtonSpecial(CalendarButton button, SpecialDate special)
-		{
+        protected void SetButtonSpecial(CalendarButton button, SpecialDate special)
+        {
             if (button != null)
             {
                 Device.BeginInvokeOnMainThread(() =>
@@ -108,6 +105,6 @@ namespace SmartHotel.Clients.Core.Controls
                     button.IsEnabled = special.Selectable;
                 });
             }
-		}
-	}
+        }
+    }
 }

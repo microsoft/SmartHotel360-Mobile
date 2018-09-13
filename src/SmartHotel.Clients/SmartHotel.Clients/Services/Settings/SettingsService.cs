@@ -9,7 +9,7 @@ namespace SmartHotel.Clients.Core.Services.Settings
 
         public Task<RemoteSettings> LoadSettingsAsync()
         {
-            RemoteSettings settings = new RemoteSettings();
+            var settings = new RemoteSettings();
             settings.Urls.Bookings = AppSettings.BookingEndpoint;
             settings.Urls.Hotels = AppSettings.HotelsEndpoint;
             settings.Urls.Suggestions = AppSettings.SuggestionsEndpoint;

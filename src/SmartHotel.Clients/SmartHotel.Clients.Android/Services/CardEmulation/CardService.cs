@@ -23,12 +23,12 @@ namespace SmartHotel.Clients.Droid.Services.CardEmulation
         public const string ServiceName = "smartHotel.clients.droid.services.cardEmulation.cardService";
 
         // "OK" status word sent in response to SELECT AID command (0x9000)
-        private static readonly byte[] SELECT_OK_SW = HexStringToByteArray("9000");
+        static readonly byte[] SELECT_OK_SW = HexStringToByteArray("9000");
         
         // "UNKNOWN" status word sent in response to invalid APDU command (0x0000)
-        private static readonly byte[] UNKNOWN_CMD_SW = HexStringToByteArray("0000");
+        static readonly byte[] UNKNOWN_CMD_SW = HexStringToByteArray("0000");
 
-        private static String _messageValue;
+        static String _messageValue;
 
         public CardService()
         {
@@ -51,25 +51,19 @@ namespace SmartHotel.Clients.Droid.Services.CardEmulation
         {
         }
 
-        private static byte[] HexStringToByteArray(string hex)
-        {
-            return Enumerable.Range(0, hex.Length)
+        static byte[] HexStringToByteArray(string hex) => Enumerable.Range(0, hex.Length)
                      .Where(x => x % 2 == 0)
                      .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
                      .ToArray();
-        }
 
-        private static byte[] ConcatArrays(byte[] first, byte[] rest)
+        static byte[] ConcatArrays(byte[] first, byte[] rest)
         {
-            byte[] result = new byte[first.Length + rest.Length];
+            var result = new byte[first.Length + rest.Length];
             first.CopyTo(result, 0);
             rest.CopyTo(result, first.Length);
             return result;
         }
 
-        private void StartNFCService(string message)
-        {
-            _messageValue = message;
-        }
+        void StartNFCService(string message) => _messageValue = message;
     }
 }

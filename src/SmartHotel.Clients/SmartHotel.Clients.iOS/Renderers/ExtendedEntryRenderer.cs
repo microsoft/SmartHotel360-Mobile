@@ -53,13 +53,13 @@ namespace SmartHotel.Clients.iOS.Renderers
             lineLayer.Frame = new CGRect(0, Frame.Size.Height - LineLayer.LineHeight, Control.Frame.Size.Width, LineLayer.LineHeight);
         }
 
-        private void UpdateLineColor()
+        void UpdateLineColor()
         {
             LineLayer lineLayer = GetOrAddLineLayer();
             lineLayer.BorderColor = ExtendedEntryElement.LineColorToApply.ToCGColor();
         }
 
-        private LineLayer GetOrAddLineLayer()
+        LineLayer GetOrAddLineLayer()
         {
             var lineLayer = Control.Layer.Sublayers?.OfType<LineLayer>().FirstOrDefault();
             
@@ -74,10 +74,7 @@ namespace SmartHotel.Clients.iOS.Renderers
             return lineLayer;
         }
 
-        private void UpdateCursorColor()
-        {
-            Control.TintColor = Element.TextColor.ToUIColor();
-        }
+        void UpdateCursorColor() => Control.TintColor = Element.TextColor.ToUIColor();
 
         class LineLayer : CALayer
         {

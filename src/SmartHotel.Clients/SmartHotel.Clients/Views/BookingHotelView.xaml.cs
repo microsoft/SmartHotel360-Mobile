@@ -5,9 +5,9 @@ namespace SmartHotel.Clients.Core.Views
 {
     public partial class BookingHotelView : ContentPage
     {
-        private const int ParallaxSpeed = 4;
+        const int ParallaxSpeed = 4;
 
-        private double _lastScroll;
+        double _lastScroll;
 
         public BookingHotelView()
         {
@@ -38,7 +38,7 @@ namespace SmartHotel.Clients.Core.Views
             ParallaxScroll.Scrolled -= OnParallaxScrollScrolled;
         }
 
-        private void OnParallaxScrollScrolled(object sender, ScrolledEventArgs e)
+        void OnParallaxScrollScrolled(object sender, ScrolledEventArgs e)
         {
             double translation = 0;
 

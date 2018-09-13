@@ -1,14 +1,11 @@
 ﻿using System.Threading.Tasks;
 using SmartHotel.Clients.Core.Services.Dialog;
 using SmartHotel.Clients.Core.Services.Navigation;
-using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Core.ViewModels.Base
 {
-    public abstract class ViewModelBase : BindableObject
+    public abstract class ViewModelBase : MvvmHelpers.BaseViewModel
     {
-        private bool _isBusy;
-
         protected readonly IDialogService DialogService;
         protected readonly INavigationService NavigationService;
 
@@ -18,23 +15,6 @@ namespace SmartHotel.Clients.Core.ViewModels.Base
             NavigationService = Locator.Instance.Resolve<INavigationService>();
         }
 
-        public bool IsBusy
-        {
-            get
-            {
-                return _isBusy;
-            }
-
-            set
-            {
-                _isBusy = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public virtual Task InitializeAsync(object navigationData)
-        {
-            return Task.FromResult(false);
-        }
+        public virtual Task InitializeAsync(object navigationData) => Task.FromResult(false);
     }
 }

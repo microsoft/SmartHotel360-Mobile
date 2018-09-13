@@ -9,6 +9,7 @@ using System.Linq;
 using Windows.Devices.Geolocation;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls.Maps;
+using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.UWP;
 using Xamarin.Forms.Platform.UWP;
@@ -18,12 +19,12 @@ namespace SmartHotel.Clients.UWP.Renderers
 {
     public class CustomMapRenderer : MapRenderer
     {
-        private RandomAccessStreamReference EventResource = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/pushpin_01.png"));
-        private RandomAccessStreamReference RestaurantResource = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/pushpin_02.png"));
+        RandomAccessStreamReference EventResource = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/pushpin_01.png"));
+        RandomAccessStreamReference RestaurantResource = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/pushpin_02.png"));
 
-        private CustomMap _customMap;
-        private List<CustomPin> _customPins;
-        private List<CustomMapIcon> _tempMapIcons;
+        CustomMap _customMap;
+        List<CustomPin> _customPins;
+        List<CustomMapIcon> _tempMapIcons;
 
         public CustomMapRenderer()
         {
@@ -48,12 +49,9 @@ namespace SmartHotel.Clients.UWP.Renderers
             }
         }
 
-        private void ClearPushPins(MapControl mapControl)
-        {
-            mapControl.MapElements.Clear();
-        }
+        void ClearPushPins(MapControl mapControl) => mapControl.MapElements.Clear();
 
-        private void AddPushPins(MapControl mapControl, IEnumerable<CustomPin> pins)
+        void AddPushPins(MapControl mapControl, IEnumerable<CustomPin> pins)
         {
             if (_tempMapIcons != null)
             {
@@ -96,7 +94,7 @@ namespace SmartHotel.Clients.UWP.Renderers
             }
         }
 
-        private void PositionMap()
+        void PositionMap()
         {
             var myMap = this.Element as CustomMap;
             var formsPins = myMap.CustomPins;
@@ -114,8 +112,8 @@ namespace SmartHotel.Clients.UWP.Renderers
             var maxLongitude = formsPins.Max(x => x.Position.Longitude);
             var maxLatitude = formsPins.Max(x => x.Position.Latitude);
 
-            var distance = MapHelper.CalculateDistance(minLatitude, minLongitude,
-                maxLatitude, maxLongitude, 'M') / 2;
+            var distance = Location.CalculateDistance(minLatitude, minLongitude,
+                maxLatitude, maxLongitude, DistanceUnits.Miles) / 2;
 
             myMap.MoveToRegion(MapSpan.FromCenterAndRadius(centerPosition, Distance.FromMiles(distance)));
         }

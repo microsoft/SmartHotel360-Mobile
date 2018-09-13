@@ -137,7 +137,7 @@ namespace SmartHotel.Clients.Droid.Renderers
         Task<Bitmap> GetBitmap(FileImageSource image)
         {
             var handler = new FileImageSourceHandler();
-            return handler.LoadImageAsync(image, this.Control.Context);
+            return handler.LoadImageAsync(image, Control.Context);
         }
     }
 

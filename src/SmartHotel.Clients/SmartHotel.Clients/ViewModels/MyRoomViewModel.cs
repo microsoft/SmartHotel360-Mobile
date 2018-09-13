@@ -14,117 +14,81 @@ namespace SmartHotel.Clients.Core.ViewModels
         const string Skype = "Skype";
         const string FacebookMessenger = "Facebook Messenger";
 
-        private double _ambientLight;
-        private double _temperature;
-        private double _musicVolume;
-        private double _windowBlinds;
-        private bool _isEcoMode;
-        private bool _ambient;
-        private bool _need;
-        private bool _find;
-        private bool _noDisturb;
+        double ambientLight;
+        double temperature;
+        double musicVolume;
+        double windowBlinds;
+        bool isEcoMode;
+        bool ambient;
+        bool need;
+        bool find;
+        bool noDisturb;
 
-        private readonly IOpenUriService _openUrlService;
-        private readonly IAnalyticService _analyticService;
+        readonly IOpenUriService openUrlService;
+        readonly IAnalyticService analyticService;
 
         public MyRoomViewModel(
             IOpenUriService openUrlService,
             IAnalyticService analyticService)
         {
-            _openUrlService = openUrlService;
-            _analyticService = analyticService;
+            this.openUrlService = openUrlService;
+            this.analyticService = analyticService;
 
             SetNeed();
         }
 
         public double AmbientLight
         {
-            get { return _ambientLight; }
-            set
-            {
-                _ambientLight = value;
-                OnPropertyChanged();
-            }
+            get => ambientLight;
+            set => SetProperty(ref ambientLight, value);
         }
 
         public double Temperature
         {
-            get { return _temperature; }
-            set
-            {
-                _temperature = value;
-                OnPropertyChanged();
-            }
+            get => temperature;
+            set => SetProperty(ref temperature, value);
         }
 
         public double MusicVolume
         {
-            get { return _musicVolume; }
-            set
-            {
-                _musicVolume = value;
-                OnPropertyChanged();
-            }
+            get => musicVolume;
+            set => SetProperty(ref musicVolume, value);
         }
 
         public double WindowBlinds
         {
-            get { return _windowBlinds; }
-            set
-            {
-                _windowBlinds = value;
-                OnPropertyChanged();
-            }
+            get => windowBlinds;
+            set => SetProperty(ref windowBlinds, value);
         }
 
         public bool IsEcoMode
         {
-            get { return _isEcoMode; }
-            set
-            {
-                _isEcoMode = value;
-                OnPropertyChanged();
-            }
+            get => isEcoMode;
+            set => SetProperty(ref isEcoMode, value);
         }
 
         public bool Ambient
         {
-            get { return _ambient; }
-            set
-            {
-                _ambient = value;
-                OnPropertyChanged();
-            }
+            get => ambient;
+            set => SetProperty(ref ambient, value);
         }
 
         public bool Need
         {
-            get { return _need; }
-            set
-            {
-                _need = value;
-                OnPropertyChanged();
-            }
+            get => need;
+            set => SetProperty(ref need, value);
         }
 
         public bool Find
         {
-            get { return _find; }
-            set
-            {
-                _find = value;
-                OnPropertyChanged();
-            }
+            get => find;
+            set => SetProperty(ref find, value);
         }
 
         public bool NoDisturb
         {
-            get { return _noDisturb; }
-            set
-            {
-                _noDisturb = value;
-                OnPropertyChanged();
-            }
+            get => noDisturb;
+            set => SetProperty(ref noDisturb, value);
         }
 
         public ICommand AmbientCommand => new Command(SetAmbient);
@@ -151,38 +115,32 @@ namespace SmartHotel.Clients.Core.ViewModels
             IsBusy = false;
         }
 
-        private void SetAmbient()
+        void SetAmbient()
         {
             Ambient = true;
             Need = false;
             Find = false;
         }
 
-        private void SetNeed()
+        void SetNeed()
         {
             Ambient = false;
             Need = true;
             Find = false;
         }
 
-        private void SetFind()
+        void SetFind()
         {
             Ambient = false;
             Need = false;
             Find = true;
         }
 
-        private Task OpenDoorAsync()
-        {
-            return NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
-        }
+        Task OpenDoorAsync() => NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
 
-        private Task CheckoutAsync()
-        {
-            return NavigationService.NavigateToPopupAsync<CheckoutViewModel>(true);
-        }
+        Task CheckoutAsync() => NavigationService.NavigateToPopupAsync<CheckoutViewModel>(true);
 
-        private async Task OpenBotAsync()
+        async Task OpenBotAsync()
         {
             var bots = new[] { Skype, FacebookMessenger };
 
@@ -197,12 +155,12 @@ namespace SmartHotel.Clients.Core.ViewModels
                 switch (selectedBot)
                 {
                     case Skype:
-                        _openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
-                        _analyticService.TrackEvent("SkypeBot");
+                        openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
+                        analyticService.TrackEvent("SkypeBot");
                         break;
                     case FacebookMessenger:
-                        _openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
-                        _analyticService.TrackEvent("FacebookBot");
+                        openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
+                        analyticService.TrackEvent("FacebookBot");
                         break;
                 }
             }
@@ -217,7 +175,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private void EcoMode()
+        void EcoMode()
         {
             if (IsEcoMode)
                 ActivateDefaultMode(true);
@@ -225,7 +183,7 @@ namespace SmartHotel.Clients.Core.ViewModels
                 ActivateEcoMode(true);
         }
 
-        private void ActivateDefaultMode(bool showToast = false)
+        void ActivateDefaultMode(bool showToast = false)
         {
             IsEcoMode = false;
 
@@ -240,7 +198,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private void ActivateEcoMode(bool showToast = false)
+        void ActivateEcoMode(bool showToast = false)
         {
             IsEcoMode = true;
 

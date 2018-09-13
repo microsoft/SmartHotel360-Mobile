@@ -8,12 +8,9 @@ namespace SmartHotel.Clients.Core.Validations
         {
             ValidationMessage = "Should be an URL";
         }
-        
+
         public string ValidationMessage { get; set; }
 
-        public bool Check(string value)
-        {
-            return new UrlAttribute().IsValid(value);
-        }
+        public bool Check(string value) => new UrlAttribute().IsValid(value);
     }
 }

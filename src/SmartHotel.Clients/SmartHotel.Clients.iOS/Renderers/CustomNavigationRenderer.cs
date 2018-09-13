@@ -27,13 +27,13 @@ namespace SmartHotel.Clients.iOS.Renderers
             base.Dispose(disposing);
         }
 
-        private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == NavigationPage.BarTextColorProperty.PropertyName || e.PropertyName == Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.StatusBarTextColorModeProperty.PropertyName)
                 UpdateStatusBarStyle();
         }
 
-        private async void UpdateStatusBarStyle()
+        async void UpdateStatusBarStyle()
         {
             // we want to change defaults XF status bar style calcs
             await System.Threading.Tasks.Task.Delay(1);

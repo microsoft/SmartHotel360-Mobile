@@ -6,12 +6,9 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class CustomSlider : ContentView
     {
-        private bool _alreadyAllocated = false;
+        bool alreadyAllocated = false;
 
-        public CustomSlider()
-        {
-            Initialize();
-        }
+        public CustomSlider() => Initialize();
 
         public static readonly BindableProperty MinimumProperty =
             BindableProperty.Create("Minimum", typeof(double), typeof(CustomSlider), 0.0d, propertyChanged: MinimumChanged);
@@ -37,38 +34,38 @@ namespace SmartHotel.Clients.Core.Controls
 
         public double Maximum
         {
-            get { return (double)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get => (double)GetValue(MaximumProperty);
+            set => SetValue(MaximumProperty, value);
         }
 
         public double Minimum
         {
-            get { return (double)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get => (double)GetValue(MinimumProperty);
+            set => SetValue(MinimumProperty, value);
         }
 
         public double Value
         {
-            get { return (double)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => (double)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
         }
 
         public ImageSource BackgroundImage
         {
-            get { return (ImageSource)GetValue(BackgroundImageProperty); }
-            set { SetValue(BackgroundImageProperty, value); }
+            get => (ImageSource)GetValue(BackgroundImageProperty);
+            set => SetValue(BackgroundImageProperty, value);
         }
 
         public ImageSource ThumbImage
         {
-            get { return (ImageSource)GetValue(ThumbImageProperty); }
-            set { SetValue(ThumbImageProperty, value); }
+            get => (ImageSource)GetValue(ThumbImageProperty);
+            set => SetValue(ThumbImageProperty, value);
         }
 
         public IValueConverter DisplayConverter
         {
-            get { return (IValueConverter)GetValue(DisplayConverterProperty); }
-            set { SetValue(DisplayConverterProperty, value); }
+            get => (IValueConverter)GetValue(DisplayConverterProperty);
+            set => SetValue(DisplayConverterProperty, value);
         }
 
         protected Slider SliderControl { get; set; }
@@ -85,18 +82,18 @@ namespace SmartHotel.Clients.Core.Controls
         {
             base.OnSizeAllocated(width, height);
 
-            if (!_alreadyAllocated && SliderControl.Bounds.Width > -1 && SliderControl.Bounds.Height > -1)
+            if (!alreadyAllocated && SliderControl.Bounds.Width > -1 && SliderControl.Bounds.Height > -1)
             {
                 if (Device.Idiom != TargetIdiom.Desktop)
-                    _alreadyAllocated = true;
+                    alreadyAllocated = true;
 
                 MoveIndicator(SliderControl.Value);
             }
         }
 
-        private void Initialize()
+        void Initialize()
         {
-            Grid content = new Grid()
+            var content = new Grid()
             {
                 Padding = new Thickness(4, 0)
             };
@@ -127,7 +124,7 @@ namespace SmartHotel.Clients.Core.Controls
                 Margin = new Thickness(
                     -content.Padding.Left / 2,
                     Device.RuntimePlatform == Device.UWP ? 8 : -5,
-                    -content.Padding.Right / 2, 
+                    -content.Padding.Right / 2,
                     0),
                 Aspect = Device.Idiom == TargetIdiom.Desktop ? Aspect.AspectFill : Aspect.AspectFit,
                 HeightRequest = Device.Idiom == TargetIdiom.Desktop ? 12 : 18,
@@ -173,7 +170,7 @@ namespace SmartHotel.Clients.Core.Controls
             Content = content;
         }
 
-        private void MoveIndicator(double v)
+        void MoveIndicator(double v)
         {
             var slideIndicatorPosition = CalculatePosition(v);
             UpdateDisplayValue();
@@ -184,23 +181,20 @@ namespace SmartHotel.Clients.Core.Controls
             ValueContainer.TranslationX = slideIndicatorPosition - diff - thumbHalf;
         }
 
-        private void UpdateDisplayValue()
-        {
-            ValueControl.Text = DisplayConverter != null
+        void UpdateDisplayValue() => ValueControl.Text = DisplayConverter != null
                 ? $"{DisplayConverter.Convert(SliderControl.Value, typeof(string), null, CultureInfo.CurrentUICulture)}"
                 : SliderControl.Value.ToString("N0");
-        }
 
-        private double CalculatePosition(double value)
+        double CalculatePosition(double value)
         {
-            double rangeDiff = Maximum - Minimum;
-            double valueDiff = value - Minimum;
-            double ratio = valueDiff / rangeDiff;
+            var rangeDiff = Maximum - Minimum;
+            var valueDiff = value - Minimum;
+            var ratio = valueDiff / rangeDiff;
 
             return SliderControl.Bounds.Width * ratio;
         }
 
-        private static void ValueChanged(BindableObject bindable, object oldValue, object newValue)
+        static void ValueChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customSlider = (CustomSlider)bindable;
 
@@ -208,31 +202,31 @@ namespace SmartHotel.Clients.Core.Controls
             customSlider.CalculatePosition(Convert.ToDouble(newValue));
         }
 
-        private static void BackgroundImageChanged(BindableObject bindable, object oldValue, object newValue)
+        static void BackgroundImageChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customSlider = (CustomSlider)bindable;
             customSlider.BackgroundImageControl.Source = (ImageSource)newValue;
         }
 
-        private static void ThumbImageChanged(BindableObject bindable, object oldValue, object newValue)
+        static void ThumbImageChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customSlider = (CustomSlider)bindable;
             customSlider.ThumbImageControl.Source = (ImageSource)newValue;
         }
 
-        private static void MinimumChanged(BindableObject bindable, object oldValue, object newValue)
+        static void MinimumChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customSlider = (CustomSlider)bindable;
             customSlider.SliderControl.Minimum = (double)newValue;
         }
 
-        private static void MaximumChanged(BindableObject bindable, object oldValue, object newValue)
+        static void MaximumChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customSlider = (CustomSlider)bindable;
             customSlider.SliderControl.Maximum = (double)newValue;
         }
 
-        private static void DisplayConverterChanged(BindableObject bindable, object oldValue, object newValue)
+        static void DisplayConverterChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var customSlider = (CustomSlider)bindable;
             customSlider?.UpdateDisplayValue();

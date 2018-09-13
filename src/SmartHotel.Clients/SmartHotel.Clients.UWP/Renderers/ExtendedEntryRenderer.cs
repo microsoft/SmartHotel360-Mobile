@@ -52,7 +52,7 @@ namespace SmartHotel.Clients.UWP.Renderers
             base.Dispose(disposing);
         }
 
-        private void UpdateLineColor()
+        void UpdateLineColor()
         {
             var border = Control.FindVisualChildren<Border>()      
                 .Where(c => c.Name == "BorderElement")
@@ -64,9 +64,6 @@ namespace SmartHotel.Clients.UWP.Renderers
             }
         }
 
-        private void OnControlLoaded(object sender, RoutedEventArgs e)
-        {
-            UpdateLineColor();
-        }
+        void OnControlLoaded(object sender, RoutedEventArgs e) => UpdateLineColor();
     }
 }

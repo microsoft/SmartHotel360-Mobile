@@ -8,6 +8,7 @@ using SmartHotel.Clients.Droid.Renderers;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.Android;
@@ -17,12 +18,12 @@ namespace SmartHotel.Clients.Droid.Renderers
 {
     public class CustomMapRenderer : MapRenderer
     {
-        private const int EventResource = Resource.Drawable.pushpin_01;
-        private const int RestaurantResource = Resource.Drawable.pushpin_02;
+        const int EventResource = Resource.Drawable.pushpin_01;
+        const int RestaurantResource = Resource.Drawable.pushpin_02;
 
-        private BitmapDescriptor _pinIcon;
-        private List<CustomMarkerOptions> _tempMarkers;
-        private bool _isDrawnDone;
+        BitmapDescriptor _pinIcon;
+        List<CustomMarkerOptions> _tempMarkers;
+        bool _isDrawnDone;
 
         public CustomMapRenderer(Context context) : base(context)
         {
@@ -61,12 +62,9 @@ namespace SmartHotel.Clients.Droid.Renderers
             }
         }
 
-        private void ClearPushPins(MapView mapView)
-        {
-            NativeMap.Clear();
-        }
+        void ClearPushPins(MapView mapView) => NativeMap.Clear();
 
-        private void AddPushPins(MapView mapView, IEnumerable<CustomPin> pins)
+        void AddPushPins(MapView mapView, IEnumerable<CustomPin> pins)
         {
             foreach (var formsPin in pins)
             {
@@ -101,9 +99,9 @@ namespace SmartHotel.Clients.Droid.Renderers
             }
         }
 
-        private void PositionMap()
+        void PositionMap()
         {
-            var myMap = this.Element as CustomMap;
+            var myMap = Element as CustomMap;
             var formsPins = myMap.CustomPins;
 
             if (formsPins == null || formsPins.Count() == 0)
@@ -119,8 +117,8 @@ namespace SmartHotel.Clients.Droid.Renderers
             var maxLongitude = formsPins.Max(x => x.Position.Longitude);
             var maxLatitude = formsPins.Max(x => x.Position.Latitude);
 
-            var distance = MapHelper.CalculateDistance(minLatitude, minLongitude,
-                maxLatitude, maxLongitude, 'M') / 2;
+            var distance = Location.CalculateDistance(minLatitude, minLongitude,
+                maxLatitude, maxLongitude, DistanceUnits.Miles) / 2;
 
             myMap.MoveToRegion(MapSpan.FromCenterAndRadius(centerPosition, Distance.FromMiles(distance)));
         }

@@ -12,49 +12,35 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private readonly IAnalyticService _analyticService;
-        private readonly IAuthenticationService _authenticationService;
+        readonly IAnalyticService analyticService;
+        readonly IAuthenticationService authenticationService;
 
-        private ValidatableObject<string> _userName;
-        private ValidatableObject<string> _password;
+        ValidatableObject<string> userName;
+        ValidatableObject<string> password;
 
         public LoginViewModel(
             IAnalyticService analyticService,
             IAuthenticationService authenticationService)
         {
-            _analyticService = analyticService;
-            _authenticationService = authenticationService;
+            this.analyticService = analyticService;
+            this.authenticationService = authenticationService;
 
-            _userName = new ValidatableObject<string>();
-            _password = new ValidatableObject<string>();
+            userName = new ValidatableObject<string>();
+            password = new ValidatableObject<string>();
 
             AddValidations();
         }
 
         public ValidatableObject<string> UserName
         {
-            get
-            {
-                return _userName;
-            }
-            set
-            {
-                _userName = value;
-                OnPropertyChanged();
-            }
+            get => userName;
+            set => SetProperty(ref userName, value);
         }
 
         public ValidatableObject<string> Password
         {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-                OnPropertyChanged();
-            }
+            get => password;
+            set => SetProperty(ref password, value);
         }
 
         public ICommand SignInCommand => new AsyncCommand(SignInAsync);
@@ -63,21 +49,21 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public ICommand SettingsCommand => new AsyncCommand(NavigateToSettingsAsync);
 
-        private async Task SignInAsync()
+        async Task SignInAsync()
         {
             IsBusy = true;
 
-            bool isValid = Validate();
+            var isValid = Validate();
 
             if (isValid)
             {
-                bool isAuth = await _authenticationService.LoginAsync(UserName.Value, Password.Value);
+                var isAuth = await authenticationService.LoginAsync(UserName.Value, Password.Value);
 
                 if (isAuth)
                 {
                     IsBusy = false;
 
-                    _analyticService.TrackEvent("SignIn");
+                    analyticService.TrackEvent("SignIn");
                     await NavigationService.NavigateToAsync<MainViewModel>();
                 }
             }
@@ -85,17 +71,17 @@ namespace SmartHotel.Clients.Core.ViewModels
             IsBusy = false;
         }
 
-        private async Task MicrosoftSignInAsync()
+        async Task MicrosoftSignInAsync()
         {
             try
             {
                 IsBusy = true;
 
-                bool succeeded = await _authenticationService.LoginWithMicrosoftAsync();
+                var succeeded = await authenticationService.LoginWithMicrosoftAsync();
 
                 if (succeeded)
                 {
-                    _analyticService.TrackEvent("MicrosoftSignIn");
+                    analyticService.TrackEvent("MicrosoftSignIn");
                     await NavigationService.NavigateToAsync<MainViewModel>();
                 }
             }
@@ -113,24 +99,21 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private void AddValidations()
+        void AddValidations()
         {
-            _userName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Username should not be empty" });
-            _userName.Validations.Add(new EmailRule());
-            _password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password should not be empty" });
+            userName.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Username should not be empty" });
+            userName.Validations.Add(new EmailRule());
+            password.Validations.Add(new IsNotNullOrEmptyRule<string> { ValidationMessage = "Password should not be empty" });
         }
 
-        private bool Validate()
+        bool Validate()
         {
-            bool isValidUser = _userName.Validate();
-            bool isValidPassword = _password.Validate();
+            var isValidUser = userName.Validate();
+            var isValidPassword = password.Validate();
 
             return isValidUser && isValidPassword;
         }
 
-        private Task NavigateToSettingsAsync(object obj)
-        {
-            return NavigationService.NavigateToAsync(typeof(SettingsViewModel<RemoteSettings>));
-        }
+        Task NavigateToSettingsAsync(object obj) => NavigationService.NavigateToAsync(typeof(SettingsViewModel<RemoteSettings>));
     }
 }

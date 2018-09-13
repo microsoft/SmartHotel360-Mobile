@@ -7,63 +7,51 @@ namespace SmartHotel.Clients.Core.Models
 {
     public class MenuItem : BindableObject
     {
-        private string _title;
-        private MenuItemType _menuItemType;
-        private Type _viewModelType;
-        private bool _isEnabled;
+        string title;
+        MenuItemType menuItemType;
+        Type viewModelType;
+        bool isEnabled;
 
         public string Title
         {
-            get
-            {
-                return _title;
-            }
+            get => title;
 
             set
             {
-                _title = value;
+                title = value;
                 OnPropertyChanged();
             }
         }
 
         public MenuItemType MenuItemType
         {
-            get
-            {
-                return _menuItemType;
-            }
+            get => menuItemType;
 
             set
             {
-                _menuItemType = value;
+                menuItemType = value;
                 OnPropertyChanged();
             }
         }
 
         public Type ViewModelType
         {
-            get
-            {
-                return _viewModelType;
-            }
+            get => viewModelType;
 
             set
             {
-                _viewModelType = value;
+                viewModelType = value;
                 OnPropertyChanged();
             }
         }
 
         public bool IsEnabled
         {
-            get
-            {
-                return _isEnabled;
-            }
+            get => isEnabled;
 
             set
             {
-                _isEnabled = value;
+                isEnabled = value;
                 OnPropertyChanged();
             }
         }

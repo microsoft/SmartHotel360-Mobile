@@ -11,13 +11,13 @@ namespace SmartHotel.Clients.Core.Controls
             WidthRequest = 48;
         }
 
-		public static readonly BindableProperty DateProperty =
+        public static readonly BindableProperty DateProperty =
             BindableProperty.Create(nameof(Date), typeof(DateTime?), typeof(CalendarButton), null);
 
         public DateTime? Date
         {
-            get { return (DateTime?)GetValue(DateProperty); }
-            set { SetValue(DateProperty, value); }
+            get => (DateTime?)GetValue(DateProperty);
+            set => SetValue(DateProperty, value);
         }
 
         public static readonly BindableProperty IsSelectedProperty =
@@ -25,8 +25,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public bool IsSelected
         {
-            get { return (bool)GetValue(IsSelectedProperty); }
-            set { SetValue(IsSelectedProperty, value); }
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
         }
 
         public static readonly BindableProperty IsOutOfMonthProperty =
@@ -34,8 +34,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public bool IsOutOfMonth
         {
-            get { return (bool)GetValue(IsOutOfMonthProperty); }
-            set { SetValue(IsOutOfMonthProperty, value); }
+            get => (bool)GetValue(IsOutOfMonthProperty);
+            set => SetValue(IsOutOfMonthProperty, value);
         }
 
         public static readonly BindableProperty TextWithoutMeasureProperty =
@@ -48,25 +48,25 @@ namespace SmartHotel.Clients.Core.Controls
                 var text = (string)GetValue(TextWithoutMeasureProperty);
                 return string.IsNullOrEmpty(text) ? Text : text;
             }
-            set { SetValue(TextWithoutMeasureProperty, value); }
+            set => SetValue(TextWithoutMeasureProperty, value);
         }
 
-		public static readonly BindableProperty BackgroundPatternProperty =
-			BindableProperty.Create(nameof(BackgroundPattern), typeof(BackgroundPattern), typeof(Button), null);
+        public static readonly BindableProperty BackgroundPatternProperty =
+            BindableProperty.Create(nameof(BackgroundPattern), typeof(BackgroundPattern), typeof(Button), null);
 
-		public BackgroundPattern BackgroundPattern
-		{
-			get { return (BackgroundPattern)GetValue(BackgroundPatternProperty); }
-			set { SetValue(BackgroundPatternProperty, value); }
-		}
+        public BackgroundPattern BackgroundPattern
+        {
+            get => (BackgroundPattern)GetValue(BackgroundPatternProperty);
+            set => SetValue(BackgroundPatternProperty, value);
+        }
 
-		public static readonly BindableProperty BackgroundImageProperty =
-			BindableProperty.Create(nameof(BackgroundImage), typeof(FileImageSource), typeof(Button), null);
+        public static readonly BindableProperty BackgroundImageProperty =
+            BindableProperty.Create(nameof(BackgroundImage), typeof(FileImageSource), typeof(Button), null);
 
-		public FileImageSource BackgroundImage
-		{
-			get { return (FileImageSource)GetValue(BackgroundImageProperty); }
-			set { SetValue(BackgroundImageProperty, value); }	
-		}
+        public FileImageSource BackgroundImage
+        {
+            get => (FileImageSource)GetValue(BackgroundImageProperty);
+            set => SetValue(BackgroundImageProperty, value);
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace SmartHotel.Clients.Core.Services.Booking
 {
     public class FakeBookingService : IBookingService
     {
-        private static List<Models.BookingSummary> Bookings = new List<Models.BookingSummary>
+        static List<Models.BookingSummary> bookings = new List<Models.BookingSummary>
         {
             new Models.BookingSummary
             {
@@ -28,7 +28,7 @@ namespace SmartHotel.Clients.Core.Services.Booking
         };
 
 
-        private static Models.Occupancy Occupancy = new Models.Occupancy
+        static Models.Occupancy occupancy = new Models.Occupancy
         {
             OcuppancyIfSunny = 79.10,
             OccupancyIfNotSunny = 58.50
@@ -38,35 +38,35 @@ namespace SmartHotel.Clients.Core.Services.Booking
         {
             await Task.Delay(500);
 
-            return Bookings;
+            return bookings;
         }
 
         public async Task<IEnumerable<Models.BookingSummary>> GetLatestBookingsAsync(string token = "")
         {
             await Task.Delay(500);
 
-            return Bookings;
+            return bookings;
         }
 
         public async Task<IEnumerable<Models.BookingSummary>> GetBookingsByEmailAsync(string email, string token = "")
         {
             await Task.Delay(500);
 
-            return Bookings.Where(b => b.UserId == email);
+            return bookings.Where(b => b.UserId == email);
         }
 
         public async Task<IEnumerable<Models.BookingSummary>> GetLatestBookingsByEmailAsync(string email, string token = "")
         {
             await Task.Delay(500);
 
-            return Bookings.Where(b => b.UserId == email);
+            return bookings.Where(b => b.UserId == email);
         }
 
         public async Task<Models.Booking> CreateBookingAsync(Models.Booking booking, string token = "")
         {
             await Task.Delay(500);
 
-            Bookings.Add(new Models.BookingSummary
+            bookings.Add(new Models.BookingSummary
             {
                 HotelId = booking.HotelId,
                 UserId = booking.UserId,
@@ -81,7 +81,7 @@ namespace SmartHotel.Clients.Core.Services.Booking
         {
             await Task.Delay(500);
 
-            return Occupancy;
+            return occupancy;
         }
     }
 }

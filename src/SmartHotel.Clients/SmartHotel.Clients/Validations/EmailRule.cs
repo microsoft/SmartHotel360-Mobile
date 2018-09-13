@@ -11,9 +11,6 @@ namespace SmartHotel.Clients.Core.Validations
 
         public string ValidationMessage { get; set; }
 
-        public bool Check(string value)
-        {
-            return new EmailAddressAttribute().IsValid(value);
-        }
+        public bool Check(string value) => new EmailAddressAttribute().IsValid(value);
     }
 }

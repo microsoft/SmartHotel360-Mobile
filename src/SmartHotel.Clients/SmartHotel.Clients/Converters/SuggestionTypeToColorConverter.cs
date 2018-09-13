@@ -7,17 +7,17 @@ namespace SmartHotel.Clients.Core.Converters
 {
     public class SuggestionTypeToColorConverter : IValueConverter
     {
-        private Color RestaurantColor = Color.FromHex("#BD4B14");
-        private Color EventColor = Color.FromHex("#348E94");
-        private Color NoColor = Color.FromHex("#FFFFFF");
+        Color RestaurantColor = Color.FromHex("#BD4B14");
+        Color EventColor = Color.FromHex("#348E94");
+        Color NoColor = Color.FromHex("#FFFFFF");
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is SuggestionType)
+            if (value is SuggestionType)
             {
                 var suggestionType = (SuggestionType)value;
 
-                switch(suggestionType)
+                switch (suggestionType)
                 {
                     case SuggestionType.Event:
                         return EventColor;
@@ -30,9 +30,6 @@ namespace SmartHotel.Clients.Core.Converters
             return NoColor;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

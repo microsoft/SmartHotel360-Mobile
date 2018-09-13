@@ -11,67 +11,50 @@ namespace SmartHotel.Clients.Core.ViewModels
     public class SettingsViewModel<TRemoteSettingsModel> : ViewModelBase
         where TRemoteSettingsModel : class
     {
-        private readonly ISettingsService<TRemoteSettingsModel> _settingsService;
+        readonly ISettingsService<TRemoteSettingsModel> settingsService;
 
-        private ValidatableObject<string> _settingsFileUrl;
-        private TRemoteSettingsModel _remoteSettings;
+        ValidatableObject<string> settingsFileUrl;
+        TRemoteSettingsModel remoteSettings;
 
         public SettingsViewModel(
             ISettingsService<TRemoteSettingsModel> settingsService)
         {
-            _settingsService = settingsService;
+            this.settingsService = settingsService;
 
-            _settingsFileUrl = new ValidatableObject<string>();
+            settingsFileUrl = new ValidatableObject<string>();
 
             AddValidations();
         }
 
         public ValidatableObject<string> SettingsFileUrl
         {
-            get
-            {
-                return _settingsFileUrl;
-            }
-            set
-            {
-                _settingsFileUrl = value;
-                OnPropertyChanged();
-            }
+            get => settingsFileUrl;
+            set => SetProperty(ref settingsFileUrl, value);
         }
 
         public TRemoteSettingsModel RemoteSettings
         {
-            get
-            {
-                return _remoteSettings;
-            }
-            set
-            {
-                _remoteSettings = value;
-                OnPropertyChanged();
-            }
+            get => remoteSettings;
+            set => SetProperty(ref remoteSettings, value);
         }
 
         public ICommand UpdateCommand => new AsyncCommand(UpdateSettingsAsync);
 
         public override async Task InitializeAsync(object navigationData)
         {
-            SettingsFileUrl.Value = _settingsService.RemoteFileUrl;
-            RemoteSettings = await _settingsService.LoadSettingsAsync();
+            SettingsFileUrl.Value = settingsService.RemoteFileUrl;
+            RemoteSettings = await settingsService.LoadSettingsAsync();
         }
 
-        private void AddValidations()
+        void AddValidations()
         {
-            _settingsFileUrl.Validations.Add(new IsNotNullOrEmptyRule<string>());
-            _settingsFileUrl.Validations.Add(new ValidUrlRule());
+            settingsFileUrl.Validations.Add(new IsNotNullOrEmptyRule<string>());
+            settingsFileUrl.Validations.Add(new ValidUrlRule());
         }
 
-        private bool Validate()
-        {
-            return _settingsFileUrl.Validate();
-        }
+        bool Validate() => settingsFileUrl.Validate();
 
-        private async Task UpdateSettingsAsync(object obj)
+        async Task UpdateSettingsAsync(object obj)
         {
             try
             {
@@ -79,9 +62,9 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 if (Validate())
                 {
-                    RemoteSettings = await _settingsService.LoadRemoteSettingsAsync(_settingsFileUrl.Value);
-                    await _settingsService.PersistRemoteSettingsAsync(RemoteSettings);
-                    _settingsService.RemoteFileUrl = SettingsFileUrl.Value;
+                    RemoteSettings = await settingsService.LoadRemoteSettingsAsync(settingsFileUrl.Value);
+                    await settingsService.PersistRemoteSettingsAsync(RemoteSettings);
+                    settingsService.RemoteFileUrl = SettingsFileUrl.Value;
 
                     await DialogService.ShowAlertAsync("Remote settings were successfully loaded", "JSON settings loaded!", "Accept");
                 }

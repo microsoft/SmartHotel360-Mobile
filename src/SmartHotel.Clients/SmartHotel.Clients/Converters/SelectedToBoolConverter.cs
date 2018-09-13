@@ -28,7 +28,7 @@ namespace SmartHotel.Clients.Core.Converters
                             var valueText = value.ToString();
                             var labelText = label.Text;
 
-                            if(valueText.Equals(labelText))
+                            if (valueText.Equals(labelText))
                                 return true;
                         }
                     }
@@ -42,9 +42,6 @@ namespace SmartHotel.Clients.Core.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

@@ -15,8 +15,8 @@ namespace SmartHotel.Clients.Core.Views.Templates
 
         public ICommand DeleteCommand
         {
-            get { return (ICommand)GetValue(DeleteCommandProperty); }
-            set { SetValue(DeleteCommandProperty, value); }
+            get => (ICommand)GetValue(DeleteCommandProperty);
+            set => SetValue(DeleteCommandProperty, value);
         }
 
         public NotificationDetailItemTemplate()
@@ -32,7 +32,7 @@ namespace SmartHotel.Clients.Core.Views.Templates
             InitializeCell();
         }
 
-        private ICommand TransitionCommand
+        ICommand TransitionCommand
         {
             get
             {
@@ -52,12 +52,9 @@ namespace SmartHotel.Clients.Core.Views.Templates
             }
         }
 
-        private void OnDeleteTapped()
-        {
-            TransitionCommand.Execute(null);
-        }
+        void OnDeleteTapped() => TransitionCommand.Execute(null);
 
-        private void InitializeCell()
+        void InitializeCell()
         {
             var isUwp = Device.RuntimePlatform == Device.UWP;
 

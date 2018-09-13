@@ -9,12 +9,9 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class CheckoutViewModel : ViewModelBase
     {
-        private readonly IAnalyticService _analyticService;
+        readonly IAnalyticService analyticService;
 
-        public CheckoutViewModel(IAnalyticService analyticService)
-        {
-            _analyticService = analyticService;
-        }
+        public CheckoutViewModel(IAnalyticService analyticService) => this.analyticService = analyticService;
 
         public string UserName => AppSettings.User?.Name;
 
@@ -24,25 +21,25 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public ICommand CheckoutCommand => new AsyncCommand(CheckoutAsync);
 
-        private Task ClosePopupAsync()
+        Task ClosePopupAsync()
         {
             AppSettings.HasBooking = false;
 
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
-            _analyticService.TrackEvent("Checkout");
+            analyticService.TrackEvent("Checkout");
 
             return PopupNavigation.Instance.PopAllAsync(true);
         }
 
-        private async Task CheckoutAsync()
+        async Task CheckoutAsync()
         {
             AppSettings.HasBooking = false;
 
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
-            _analyticService.TrackEvent("Checkout");
+            analyticService.TrackEvent("Checkout");
 
             await PopupNavigation.Instance.PopAllAsync(false);
-    
+
             await NavigationService.NavigateToAsync<BookingViewModel>();
         }
     }

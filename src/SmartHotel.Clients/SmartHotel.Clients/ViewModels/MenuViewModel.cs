@@ -1,4 +1,5 @@
-﻿using SmartHotel.Clients.Core.Models;
+﻿using MvvmHelpers;
+using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Services.OpenUri;
 using SmartHotel.Clients.Core.ViewModels.Base;
@@ -14,22 +15,22 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class MenuViewModel : ViewModelBase, IHandleViewAppearing, IHandleViewDisappearing
     {
-        const string Skype = "Skype";
-        const string FacebookMessenger = "Facebook Messenger";
+        const string skype = "Skype";
+        const string facebookMessenger = "Facebook Messenger";
 
-        private ObservableCollection<Models.MenuItem> _menuItems;
+        ObservableRangeCollection<Models.MenuItem> menuItems;
 
-        private readonly IAuthenticationService _authenticationService;
-        private readonly IOpenUriService _openUrlService;
+        readonly IAuthenticationService authenticationService;
+        readonly IOpenUriService openUrlService;
 
         public MenuViewModel(
             IAuthenticationService authenticationService,
             IOpenUriService openUrlService)
         {
-            _authenticationService = authenticationService;
-            _openUrlService = openUrlService;
+            this.authenticationService = authenticationService;
+            this.openUrlService = openUrlService;
 
-            MenuItems = new ObservableCollection<Models.MenuItem>();
+            MenuItems = new ObservableRangeCollection<Models.MenuItem>();
 
             InitMenuItems();
         }
@@ -38,15 +39,12 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public string UserAvatar => AppSettings.User?.AvatarUrl;
 
-        public ObservableCollection<Models.MenuItem> MenuItems
+        public ObservableRangeCollection<Models.MenuItem> MenuItems
         {
-            get
-            {
-                return _menuItems;
-            }
+            get => menuItems;
             set
             {
-                _menuItems = value;
+                menuItems = value;
                 OnPropertyChanged();
             }
         }
@@ -61,12 +59,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             return Task.FromResult(true);
         }
 
-        public Task OnViewDisappearingAsync(VisualElement view)
-        {
-            return Task.FromResult(true);
-        }
+        public Task OnViewDisappearingAsync(VisualElement view) => Task.FromResult(true);
 
-        private void InitMenuItems()
+        void InitMenuItems()
         {
             MenuItems.Add(new Models.MenuItem
             {
@@ -117,13 +112,13 @@ namespace SmartHotel.Clients.Core.ViewModels
             });
         }
 
-        private async void OnSelectMenuItem(Models.MenuItem item)
+        async void OnSelectMenuItem(Models.MenuItem item)
         {
             if (item.MenuItemType == MenuItemType.Concierge)
             {
                 if (Device.RuntimePlatform == Device.UWP)
                 {
-                    _openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
+                    openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
                 }
                 else
                 {
@@ -137,16 +132,16 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private Task RemoveUserCredentials()
+        Task RemoveUserCredentials()
         {
             AppSettings.HasBooking = false;
 
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
 
-            return _authenticationService.LogoutAsync();
+            return authenticationService.LogoutAsync();
         }
 
-        private void OnBookingRequested(Booking booking)
+        void OnBookingRequested(Booking booking)
         {
             if (booking == null)
             {
@@ -156,12 +151,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             SetMenuItemStatus(MenuItemType.MyRoom, true);
         }
 
-        private void OnCheckoutRequested(object args)
-        {
-            SetMenuItemStatus(MenuItemType.MyRoom, false);
-        }
+        void OnCheckoutRequested(object args) => SetMenuItemStatus(MenuItemType.MyRoom, false);
 
-        private void SetMenuItemStatus(MenuItemType type, bool enabled)
+        void SetMenuItemStatus(MenuItemType type, bool enabled)
         {
             Models.MenuItem menuItem = MenuItems.FirstOrDefault(m => m.MenuItemType == type);
 
@@ -171,11 +163,11 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async Task OpenBotAsync()
+        async Task OpenBotAsync()
         {
             await Task.Delay(100);
 
-            var bots = new[] { Skype, FacebookMessenger };
+            var bots = new[] { skype, facebookMessenger };
 
             try
             {
@@ -187,11 +179,11 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 switch (selectedBot)
                 {
-                    case Skype:
-                        _openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
+                    case skype:
+                        openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
                         break;
-                    case FacebookMessenger:
-                        _openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
+                    case facebookMessenger:
+                        openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
                         break;
                 }
             }

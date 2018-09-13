@@ -18,9 +18,6 @@ namespace SmartHotel.Clients.Core.Converters
             return $"{lightValue.ToString("N0")}°F";
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

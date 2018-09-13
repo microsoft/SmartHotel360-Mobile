@@ -25,8 +25,8 @@ namespace SmartHotel.Clients.Core.Controls
         public static readonly BindableProperty UnCheckedImageProperty =
             BindableProperty.Create("UnCheckedImage", typeof(ImageSource), typeof(ToggleButton), null);
 
-        private ICommand _toggleCommand;
-        private Image _toggleImage;
+        ICommand toggleCommand;
+        Image toggleImage;
 
         public ToggleButton()
         {
@@ -35,46 +35,46 @@ namespace SmartHotel.Clients.Core.Controls
 
         public ICommand Command
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
         }
 
         public object CommandParameter
         {
-            get { return GetValue(CommandParameterProperty); }
-            set { SetValue(CommandParameterProperty, value); }
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
 
         public bool Checked
         {
-            get { return (bool)GetValue(CheckedProperty); }
-            set { SetValue(CheckedProperty, value); }
+            get => (bool)GetValue(CheckedProperty);
+            set => SetValue(CheckedProperty, value);
         }
 
         public bool Animate
         {
-            get { return (bool)GetValue(AnimateProperty); }
-            set { SetValue(CheckedProperty, value); }
+            get => (bool)GetValue(AnimateProperty);
+            set => SetValue(CheckedProperty, value);
         }
 
         public ImageSource CheckedImage
         {
-            get { return (ImageSource)GetValue(CheckedImageProperty); }
-            set { SetValue(CheckedImageProperty, value); }
+            get => (ImageSource)GetValue(CheckedImageProperty);
+            set => SetValue(CheckedImageProperty, value);
         }
 
         public ImageSource UnCheckedImage
         {
-            get { return (ImageSource)GetValue(UnCheckedImageProperty); }
-            set { SetValue(UnCheckedImageProperty, value); }
+            get => (ImageSource)GetValue(UnCheckedImageProperty);
+            set => SetValue(UnCheckedImageProperty, value);
         }
 
         public ICommand ToogleCommand
         {
             get
             {
-                return _toggleCommand
-                ?? (_toggleCommand = new Command(() =>
+                return toggleCommand
+                ?? (toggleCommand = new Command(() =>
                 {
                     if (Checked)
                     {
@@ -93,9 +93,9 @@ namespace SmartHotel.Clients.Core.Controls
             }
         }
 
-        private void Initialize()
+        void Initialize()
         {
-            _toggleImage = new Image();
+            toggleImage = new Image();
 
             Animate = true;
 
@@ -104,18 +104,18 @@ namespace SmartHotel.Clients.Core.Controls
                 Command = ToogleCommand
             });
 
-            _toggleImage.Source = UnCheckedImage;
-            Content = _toggleImage;
+            toggleImage.Source = UnCheckedImage;
+            Content = toggleImage;
         }
 
         protected override void OnParentSet()
         {
             base.OnParentSet();
-            _toggleImage.Source = UnCheckedImage;
-            Content = _toggleImage;
+            toggleImage.Source = UnCheckedImage;
+            Content = toggleImage;
         }
 
-        private static async void OnCheckedChanged(BindableObject bindable, object oldValue, object newValue)
+        static async void OnCheckedChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var toggleButton = (ToggleButton)bindable;
 
@@ -124,14 +124,14 @@ namespace SmartHotel.Clients.Core.Controls
 
             if (toggleButton.Checked)
             {
-                toggleButton._toggleImage.Source = toggleButton.CheckedImage;
+                toggleButton.toggleImage.Source = toggleButton.CheckedImage;
             }
             else
             {
-                toggleButton._toggleImage.Source = toggleButton.UnCheckedImage;
+                toggleButton.toggleImage.Source = toggleButton.UnCheckedImage;
             }
 
-            toggleButton.Content = toggleButton._toggleImage;
+            toggleButton.Content = toggleButton.toggleImage;
 
             if (toggleButton.Animate)
             {

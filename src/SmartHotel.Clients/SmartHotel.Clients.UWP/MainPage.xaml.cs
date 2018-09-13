@@ -20,7 +20,7 @@ namespace SmartHotel.Clients.UWP
             NativeCustomize();
         }
 
-        private void NativeCustomize()
+        void NativeCustomize()
         {
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 500));
 

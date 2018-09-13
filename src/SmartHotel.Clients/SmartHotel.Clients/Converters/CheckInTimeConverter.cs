@@ -10,8 +10,8 @@ namespace SmartHotel.Clients.Core.Converters
         {
             try
             {
-                string time = value.ToString();
-                DateTime date = DateTime.Parse(time, culture);
+                var time = value.ToString();
+                var date = DateTime.Parse(time, culture);
 
                 return date.ToString("HH:mm tt");
             }
@@ -21,9 +21,6 @@ namespace SmartHotel.Clients.Core.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

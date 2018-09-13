@@ -5,7 +5,7 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class ExtendedEntry : Entry
     {
-        private Color _lineColorToApply;
+        Color lineColorToApply;
 
         public ExtendedEntry()
         {
@@ -17,10 +17,10 @@ namespace SmartHotel.Clients.Core.Controls
 
         public Color LineColorToApply
         {
-            get { return _lineColorToApply; }
+            get => lineColorToApply;
             private set
             {
-                _lineColorToApply = value;
+                lineColorToApply = value;
                 OnPropertyChanged(nameof(LineColorToApply));
             }
         }
@@ -30,8 +30,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public Color LineColor
         {
-            get { return (Color)GetValue(LineColorProperty); }
-            set { SetValue(LineColorProperty, value); }
+            get => (Color)GetValue(LineColorProperty);
+            set => SetValue(LineColorProperty, value);
         }
 
         public static readonly BindableProperty FocusLineColorProperty =
@@ -39,8 +39,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public Color FocusLineColor
         {
-            get { return (Color)GetValue(FocusLineColorProperty); }
-            set { SetValue(FocusLineColorProperty, value); }
+            get => (Color)GetValue(FocusLineColorProperty);
+            set => SetValue(FocusLineColorProperty, value);
         }
 
         public static readonly BindableProperty IsValidProperty =
@@ -48,8 +48,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public bool IsValid
         {
-            get { return (bool)GetValue(IsValidProperty); }
-            set { SetValue(IsValidProperty, value); }
+            get => (bool)GetValue(IsValidProperty);
+            set => SetValue(IsValidProperty, value);
         }
 
         public static readonly BindableProperty InvalidLineColorProperty =
@@ -57,8 +57,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public Color InvalidLineColor
         {
-            get { return (Color)GetValue(InvalidLineColorProperty); }
-            set { SetValue(InvalidLineColorProperty, value); }
+            get => (Color)GetValue(InvalidLineColorProperty);
+            set => SetValue(InvalidLineColorProperty, value);
         }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -71,7 +71,7 @@ namespace SmartHotel.Clients.Core.Controls
             }
         }
 
-        private void OnFocused(object sender, FocusEventArgs e)
+        void OnFocused(object sender, FocusEventArgs e)
         {
             IsValid = true;
             LineColorToApply = FocusLineColor != Color.Default
@@ -79,17 +79,11 @@ namespace SmartHotel.Clients.Core.Controls
                 : GetNormalStateLineColor();
         }
 
-        private void OnUnfocused(object sender, FocusEventArgs e)
-        {
-            ResetLineColor();
-        }
+        void OnUnfocused(object sender, FocusEventArgs e) => ResetLineColor();
 
-        private void ResetLineColor()
-        {
-            LineColorToApply = GetNormalStateLineColor();
-        }
+        void ResetLineColor() => LineColorToApply = GetNormalStateLineColor();
 
-        private void CheckValidity()
+        void CheckValidity()
         {
             if (!IsValid)
             {
@@ -97,11 +91,8 @@ namespace SmartHotel.Clients.Core.Controls
             }
         }
 
-        private Color GetNormalStateLineColor()
-        {
-            return LineColor != Color.Default
+        Color GetNormalStateLineColor() => LineColor != Color.Default
                     ? LineColor
                     : TextColor;
-        }
     }
 }
