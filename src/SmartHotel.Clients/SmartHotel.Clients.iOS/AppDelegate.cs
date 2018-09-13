@@ -49,6 +49,7 @@ namespace SmartHotel.Clients.iOS
             Xamarin.FormsMaps.Init();
             InitChartView();
             InitXamanimation();
+            Rg.Plugins.Popup.Popup.Init();
 
             RegisterPlatformDependencies();
             LoadApplication(new App());
