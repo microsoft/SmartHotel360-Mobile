@@ -1,6 +1,6 @@
 ﻿namespace SmartHotel.Clients.Core.Services.IoT
 {
-    public enum SensorTypes
+    public enum SensorType
     {
         Fahrenheit = 0,
         Celsius = 1,

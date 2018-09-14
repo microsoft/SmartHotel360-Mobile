@@ -2,17 +2,17 @@
 {
     public struct SensorValue
     {
-        public SensorValue(float value) : this(value, default(SensorTypes))
+        public SensorValue(float value) : this(value, default(SensorType))
         {
         }
 
-        public SensorValue(float rawValue, SensorTypes unit)
+        public SensorValue(float rawValue, SensorType unit)
         {
             RawValue = rawValue;
             Unit = unit;
         }
 
-        public SensorTypes Unit { get; private set; }
+        public SensorType Unit { get; private set; }
         public float RawValue { get; private set; }
 
     }

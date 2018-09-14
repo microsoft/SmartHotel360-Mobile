@@ -25,4 +25,15 @@ namespace SmartHotel.Clients.Core.Models
 	    [DataMember(Name = "EventTimestamp")]
 	    public DateTime EventTimestamp { get; set; }
     }
+
+    [DataContract(Name = "deviceSensorData")]
+    public class DeviceRequest
+    {
+        [DataMember(Name = "deviceId")]
+        public string DeviceId { get; set; }
+        [DataMember(Name = "methodName")]
+        public string MethodName { get; set; }
+        [DataMember(Name = "value")]
+        public string Value { get; set; }
+    }
 }
