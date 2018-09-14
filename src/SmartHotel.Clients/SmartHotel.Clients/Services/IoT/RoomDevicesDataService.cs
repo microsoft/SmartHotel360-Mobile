@@ -11,63 +11,61 @@ using SmartHotel.Clients.Core.Services.Request;
 
 namespace SmartHotel.Clients.Core.Services.IoT
 {
-	public class RoomDevicesDataService : IRoomDevicesDataService
-	{
-	    // TODO: Probably best to get this in AppSettings
-		private readonly TimeSpan _sensorDataPollingInterval = TimeSpan.FromSeconds( 5 );
-		private readonly string _roomDevicesApiEndpoint;
-		private readonly string _roomId;
-		private Timer _sensorDataPollingTimer;
+    public class RoomDevicesDataService : IRoomDevicesDataService
+    {
+        // TODO: Probably best to get this in AppSettings
+        private readonly TimeSpan _sensorDataPollingInterval = TimeSpan.FromSeconds(5);
+        private readonly string _roomDevicesApiEndpoint;
+        private readonly string _roomId;
+        private Timer _sensorDataPollingTimer;
 
-	    private readonly IRequestService _requestService;
+	    private readonly IRequestService _requestService; 
 	    private readonly IAuthenticationService _authenticationService;
 
 	    private readonly ConcurrentDictionary<SensorDataType, DeviceSensorData>
 			_currentSensorDataBySensorDataType = new ConcurrentDictionary<SensorDataType, DeviceSensorData>();
 
 		public RoomDevicesDataService(IRequestService requestService, IAuthenticationService authenticationService)
-		{
-		    _requestService = requestService;
+        {
+            _requestService = requestService;
 		    _authenticationService = authenticationService;
 		    _roomDevicesApiEndpoint = AppSettings.RoomDevicesEndpoint;
-			_roomId = AppSettings.RoomId;
-		}
+            _roomId = AppSettings.RoomId;
+        }
 
-		public bool UseFakes => string.IsNullOrEmpty( _roomDevicesApiEndpoint );
+        public bool UseFakes => string.IsNullOrEmpty(_roomDevicesApiEndpoint);
 
 		public async Task<RoomTemperature> GetRoomTemperatureAsync()
-		{
-			if ( UseFakes )
-			{
-				await Task.Delay( 1000 );
+        {
+            if (UseFakes)
+            {
+                await Task.Delay(1000);
 
-				return FakeRoomTemperature.Create();
-			}
+                return FakeRoomTemperature.Create();
+            }
 
 		    var storedValue = GetStoredSensorData<RoomTemperature>();
 		    if (storedValue != null)
-		    {
+				{
 		        return (RoomTemperature) storedValue;
-		    }
+				}
 
 		    var roomData = await GetRoomSensorData(_authenticationService.AuthenticatedUser.Token, _roomId);
 		    ProcessRoomData(roomData);
 
 		    return (RoomTemperature) GetStoredSensorData<RoomTemperature>();
-		}
-
 	    public async Task<RoomAmbientLight> GetRoomAmbientLightAsync()
-	    {
-	        if (UseFakes)
-	        {
-	            await Task.Delay(1000);
+		{
+			if ( UseFakes )
+			{
+				await Task.Delay( 1000 );
 
-	            return FakeRoomAmbientLight.Create();
-	        }
+				return FakeRoomAmbientLight.Create();
+			}
 
 	        var storedValue = GetStoredSensorData<RoomAmbientLight>();
 	        if (storedValue != null)
-	        {
+			{
 	            return (RoomAmbientLight)storedValue;
 	        }
 
@@ -75,15 +73,15 @@ namespace SmartHotel.Clients.Core.Services.IoT
 	        ProcessRoomData(roomData);
 
 	        return (RoomAmbientLight)GetStoredSensorData<RoomAmbientLight>();
-	    }
+				}
 
 
         private RoomSensorBase GetStoredSensorData<T>() where T : RoomSensorBase, new()
-	    {
+				    {
 	        RoomSensorBase sensor = new T();
 	        if (_currentSensorDataBySensorDataType.TryGetValue(sensor.SensorDataType,
 	            out DeviceSensorData sensorData))
-	        {
+				        {
 	            var currentTemp = float.Parse(sensorData.SensorReading);
 	            var desiredTemp = float.Parse(sensorData.DesiredValue);
 
@@ -92,7 +90,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
 	            if (typeof(T) == typeof(RoomAmbientLight))
 	                return new RoomAmbientLight(new SensorValue(currentTemp * 100f), new SensorValue(desiredTemp * 100f));
-	        }
+				    }
 
 	        return null;
         }
@@ -103,26 +101,26 @@ namespace SmartHotel.Clients.Core.Services.IoT
 	        {
                 if (Enum.TryParse(rawSensor.SensorDataType, out SensorDataType dataType))
                     _currentSensorDataBySensorDataType.AddOrUpdate(dataType, rawSensor, (key, oldValue) => rawSensor);
-	        }
+			}
 
-	    }
+		}
 
 	    private async Task<IEnumerable<DeviceSensorData>> GetRoomSensorData(string token, string roomId)
-	    {
+		{
 	        UriBuilder builder = new UriBuilder(_roomDevicesApiEndpoint);
 	        builder.AppendToPath($"Devices/room/{roomId}");
 	        var uri = builder.ToString();
 
             return await _requestService.GetAsync<IEnumerable<DeviceSensorData>> (uri, token);
-	    }
+			}
 
 
 	    public async Task UpdateDesiredAsync(RoomSensorBase roomSensor)
-	    {
+		{
 	        if (_currentSensorDataBySensorDataType.TryGetValue(roomSensor.SensorDataType,
-	            out DeviceSensorData sensorData))
-	        {
-	            string sensorId = sensorData.SensorId;
+				out DeviceSensorData sensorData ) )
+			{
+				string sensorId = sensorData.SensorId;
 
 	            UriBuilder builder = new UriBuilder(_roomDevicesApiEndpoint);
 	            builder.AppendToPath($"Devices");
@@ -136,35 +134,35 @@ namespace SmartHotel.Clients.Core.Services.IoT
 	            };
 
 	            await _requestService.PostAsync(uri, request, _authenticationService.AuthenticatedUser.Token);
-	        }
+			}
 
         }
 
         public void StartCheckingRoomSensorData()
-		{
-			if ( _sensorDataPollingTimer != null )
-			{
-				return;
-			}
+        {
+            if (_sensorDataPollingTimer != null)
+            {
+                return;
+            }
 
-			_sensorDataPollingTimer = new Timer( _sensorDataPollingInterval, SensorDataPollingTimerTick );
-			_sensorDataPollingTimer.Start();
-		}
+            _sensorDataPollingTimer = new Timer(_sensorDataPollingInterval, SensorDataPollingTimerTick);
+            _sensorDataPollingTimer.Start();
+        }
 
-		public void StopCheckingRoomSensorData()
-		{
-			_sensorDataPollingTimer?.Stop();
-			_sensorDataPollingTimer = null;
-		}
+        public void StopCheckingRoomSensorData()
+        {
+            _sensorDataPollingTimer?.Stop();
+            _sensorDataPollingTimer = null;
+        }
 
 		private async void SensorDataPollingTimerTick()
-		{
-			_sensorDataPollingTimer?.Stop();
+        {
+            _sensorDataPollingTimer?.Stop();
 
 		    var roomData = await GetRoomSensorData(_authenticationService.AuthenticatedUser.Token, _roomId);
 		    ProcessRoomData(roomData);
 
             _sensorDataPollingTimer?.Start();
-		}
-	}
+        }
+    }
 }
