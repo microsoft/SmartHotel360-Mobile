@@ -35,7 +35,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
         public bool UseFakes => string.IsNullOrEmpty(_roomDevicesApiEndpoint);
 
-		public async Task<RoomTemperature> GetRoomTemperatureAsync()
+        public async Task<RoomTemperature> GetRoomTemperatureAsync()
         {
             if (UseFakes)
             {
@@ -44,17 +44,19 @@ namespace SmartHotel.Clients.Core.Services.IoT
                 return FakeRoomTemperature.Create();
             }
 
-		    var storedValue = GetStoredSensorData<RoomTemperature>();
-		    if (storedValue != null)
-				{
-		        return (RoomTemperature) storedValue;
-				}
+            var storedValue = GetStoredSensorData<RoomTemperature>();
+            if (storedValue != null)
+            {
+                return (RoomTemperature) storedValue;
+            }
 
-		    var roomData = await GetRoomSensorData(_authenticationService.AuthenticatedUser.Token, _roomId);
-		    ProcessRoomData(roomData);
+            var roomData = await GetRoomSensorData(_authenticationService.AuthenticatedUser.Token, _roomId);
+            ProcessRoomData(roomData);
 
-		    return (RoomTemperature) GetStoredSensorData<RoomTemperature>();
-	    public async Task<RoomAmbientLight> GetRoomAmbientLightAsync()
+            return (RoomTemperature) GetStoredSensorData<RoomTemperature>();
+        }
+
+        public async Task<RoomAmbientLight> GetRoomAmbientLightAsync()
 		{
 			if ( UseFakes )
 			{
