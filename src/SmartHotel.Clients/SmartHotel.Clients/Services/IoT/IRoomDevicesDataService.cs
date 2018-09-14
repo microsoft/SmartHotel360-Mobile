@@ -2,14 +2,14 @@
 
 namespace SmartHotel.Clients.Core.Services.IoT
 {
-	public interface IRoomDevicesDataService
-	{
-		bool UseFakes { get; }
+    public interface IRoomDevicesDataService
+    {
+        bool UseFakes { get; }
 
-		Task<RoomAmbientLight> GetRoomAmbientLightAsync();
-		Task<RoomTemperature> GetRoomTemperatureAsync();
-	    Task UpdateDesiredAsync(RoomSensorBase roomSensor);
+        Task<RoomAmbientLight> GetRoomAmbientLightAsync();
+        Task<RoomTemperature> GetRoomTemperatureAsync();
+        Task UpdateDesiredAsync(RoomSensorBase roomSensor);
         void StartCheckingRoomSensorData();
-		void StopCheckingRoomSensorData();
-	}
+        void StopCheckingRoomSensorData();
+    }
 }
