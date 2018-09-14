@@ -19,6 +19,8 @@ namespace SmartHotel.Clients.Core.Services.IoT
             Desired = desiredValue;
         }
 
+        public SensorDataType SensorDataType { get; protected set; }
+
         public SensorValue Value { get; protected set; }
 
         public SensorValue Minimum { get; protected set; }
