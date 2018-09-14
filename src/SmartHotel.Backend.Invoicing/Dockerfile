@@ -1,0 +1,20 @@
+FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
+WORKDIR /app
+EXPOSE 61111
+EXPOSE 44391
+
+FROM microsoft/dotnet:2.1-sdk AS build
+WORKDIR /src
+COPY SmartHotel.Backend.Invoicing/SmartHotel.Backend.Invoicing.csproj SmartHotel.Backend.Invoicing/
+RUN dotnet restore SmartHotel.Backend.Invoicing/SmartHotel.Backend.Invoicing.csproj
+COPY . .
+WORKDIR /src/SmartHotel.Backend.Invoicing
+RUN dotnet build SmartHotel.Backend.Invoicing.csproj -c Release -o /app
+
+FROM build AS publish
+RUN dotnet publish SmartHotel.Backend.Invoicing.csproj -c Release -o /app
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "SmartHotel.Backend.Invoicing.dll"]

@@ -38,6 +38,8 @@ namespace SmartHotel.Clients.Core.ViewModels
             MessagingCenter.Send(this, MessengerKeys.CheckoutRequested);
             analyticService.TrackEvent("Checkout");
 
+
+
             await PopupNavigation.Instance.PopAllAsync(false);
 
             await NavigationService.NavigateToAsync<BookingViewModel>();

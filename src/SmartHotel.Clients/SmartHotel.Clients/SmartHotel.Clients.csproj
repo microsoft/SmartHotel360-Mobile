@@ -41,6 +41,9 @@
     <PackageReference Include="Xamarin.Forms.Maps" Version="3.1.0.697729" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SmartHotel.Core.Invoicing\SmartHotel.Core.Invoicing.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

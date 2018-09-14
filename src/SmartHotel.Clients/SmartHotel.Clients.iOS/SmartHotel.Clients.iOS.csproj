@@ -222,6 +222,10 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SmartHotel.Core.Invoicing\SmartHotel.Core.Invoicing.csproj">
+      <Project>{4bfac265-b454-462d-8cb1-bfbf6338eb58}</Project>
+      <Name>SmartHotel.Core.Invoicing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartHotel.Clients\SmartHotel.Clients.csproj">
       <Project>{7ADA23CF-CB3D-4898-822F-915E251ED8F1}</Project>
       <Name>SmartHotel.Clients</Name>

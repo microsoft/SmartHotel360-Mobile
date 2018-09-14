@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  smarthotel.backend.invoicing:
+    image: ${DOCKER_REGISTRY}smarthotelbackendinvoicing
+    build:
+      context: .
+      dockerfile: SmartHotel.Backend.Invoicing/Dockerfile

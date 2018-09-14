@@ -292,6 +292,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SmartHotel.Core.Invoicing\SmartHotel.Core.Invoicing.csproj">
+      <Project>{4bfac265-b454-462d-8cb1-bfbf6338eb58}</Project>
+      <Name>SmartHotel.Core.Invoicing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartHotel.Clients\SmartHotel.Clients.csproj">
       <Project>{7ada23cf-cb3d-4898-822f-915e251ed8f1}</Project>
       <Name>SmartHotel.Clients</Name>

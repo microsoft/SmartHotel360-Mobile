@@ -134,6 +134,10 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SmartHotel.Core.Invoicing\SmartHotel.Core.Invoicing.csproj">
+      <Project>{4bfac265-b454-462d-8cb1-bfbf6338eb58}</Project>
+      <Name>SmartHotel.Core.Invoicing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartHotel.Clients\SmartHotel.Clients.csproj">
       <Project>{1dba2177-d2fd-41e5-9146-eb545ce5f3f4}</Project>
       <Name>SmartHotel.Clients</Name>

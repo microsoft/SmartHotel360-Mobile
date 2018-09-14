@@ -12,6 +12,7 @@ using SmartHotel.Clients.Core.Services.Authentication;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmHelpers;
+using SmartHotel.Core.Invoicing;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
@@ -30,6 +31,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly IHotelService hotelService;
         readonly IBookingService bookingService;
         readonly IAuthenticationService authenticationService;
+        readonly ExportService invoicingService;
 
         public BookingHotelViewModel(
             IHotelService hotelService,
@@ -202,6 +204,18 @@ namespace SmartHotel.Clients.Core.ViewModels
                     };
 
                     await bookingService.CreateBookingAsync(newBooking, authenticatedUser.Token);
+
+                    var invoice = new Invoice
+                    {
+                        Email = user.Email,
+                        Name = user.Name,
+                        HotelName = Hotel.Name,
+                        InvoiceNumber = Guid.NewGuid().ToString(),
+                        Items = new List<string> { newBooking.ToString() },
+                        Total = Hotel.PricePerNight * (until - from).Days
+                    };
+
+                    invoicingService.ExportInvoice(invoice, Xamarin.Essentials.FileSystem.AppDataDirectory);
 
                     AppSettings.HasBooking = true;
 
