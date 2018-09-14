@@ -140,7 +140,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
         public void StartCheckingRoomSensorData()
         {
-            if (_sensorDataPollingTimer != null)
+            if (_sensorDataPollingTimer != null || UseFakes)
             {
                 return;
             }
