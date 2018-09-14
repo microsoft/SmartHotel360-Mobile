@@ -41,7 +41,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         protected void DrawChart(SKCanvas canvas, int width, int height, int cx, int cy, float radiusSpace, float strokeWidth, float relativeScaleWidth)
         {
-            foreach (var entry in Entries.OrderByDescending(e => e.Value))
+
+            foreach (var entry in Entries)
             {
                 DrawChart(canvas, entry, radiusSpace, cx, cy, strokeWidth);
             }
