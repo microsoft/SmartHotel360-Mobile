@@ -61,7 +61,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	        set
 	        {
 	            bool changed = SetProperty(ref desiredAmbientLight, value);
-	            if ( !isInitializing && changed )
+	            if ( !isInitializing && UseRealRoomDevices && changed )
 	            {
 	                // TODO: Call the RoomDevicesDataService to update once the value has stopped changing
 	            }
@@ -86,7 +86,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	        set
 	        {
 	            bool changed = SetProperty(ref desiredTemperature, value);
-	            if ( !isInitializing && changed )
+	            if ( !isInitializing && UseRealRoomDevices && changed )
 	            {
 	                // TODO: Call the RoomDevicesDataService to update once the value has stopped changing
 	            }
@@ -279,7 +279,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 		{
 			IsEcoMode = false;
 
-			DesiredAmbientLight = 3400;
+			DesiredAmbientLight = 100;
 			DesiredTemperature = 70;
 			MusicVolume = 45;
 			WindowBlinds = 80;
@@ -294,7 +294,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 		{
 			IsEcoMode = true;
 
-			DesiredAmbientLight = 2400;
+			DesiredAmbientLight = 0;
 			DesiredTemperature = 60;
 			MusicVolume = 40;
 			WindowBlinds = 50;

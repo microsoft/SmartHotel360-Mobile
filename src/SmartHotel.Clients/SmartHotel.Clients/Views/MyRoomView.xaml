@@ -416,7 +416,6 @@
 	                                    </StackLayout>
                                         <controls:CustomSlider
                                             x:Name="AmbientLightSlider"
-											IsEnabled="{Binding UseRealRoomDevices}"
                                             Maximum="{Binding AmbientLightMaximum}"
                                             Minimum="{Binding AmbientLightMinimum}"
                                             Value="{Binding DesiredAmbientLight, Mode=TwoWay}"
@@ -451,7 +450,6 @@
 	                                    </StackLayout>
 										<controls:CustomSlider
 											x:Name="TemperatureSlider"
-											IsEnabled="{Binding UseRealRoomDevices}"
 											Maximum="{Binding TemperatureMaximum}"
 											Minimum="{Binding TemperatureMinimum}"
                                             Value="{Binding DesiredTemperature, Mode=TwoWay}"
@@ -479,10 +477,10 @@
 												</VisualStateGroup>
 											</VisualStateManager.VisualStateGroups>
                                         </controls:CustomSlider>
-										<Label IsVisible="false"
+										<Label IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
 											   Text="{extensions:Translate MusicVolume}"  
 											   Style="{StaticResource AmbientTextStyle}"/>
-										<controls:CustomSlider IsVisible="false"
+										<controls:CustomSlider IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
 															   Maximum="100"
 															   Minimum="0"
 															   Value="{Binding MusicVolume, Mode=TwoWay}">
@@ -499,10 +497,10 @@
                                                 </OnPlatform>
                                             </controls:CustomSlider.ThumbImage>
                                         </controls:CustomSlider>
-										<Label IsVisible="false"
+										<Label IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
 											   Text="{extensions:Translate WindowBlinds}"  
                                                Style="{StaticResource AmbientTextStyle}"/>
-										<controls:CustomSlider IsVisible="false"
+										<controls:CustomSlider IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
 															   Maximum="100"
 															   Minimum="0"
 															   Value="{Binding WindowBlinds, Mode=TwoWay}">
@@ -531,8 +529,7 @@
 								<Grid   
                                     Grid.Row="2"
                                     BackgroundColor="{StaticResource GreenColor}" 
-                                    IsVisible="{Binding IsEcoMode, Converter={StaticResource InverseBoolConverter}}"
-									IsEnabled="{Binding UseRealRoomDevices}">
+                                    IsVisible="{Binding IsEcoMode, Converter={StaticResource InverseBoolConverter}}">
 									<VisualStateManager.VisualStateGroups>
 										<VisualStateGroup x:Name="CommonStates">
 											<VisualState x:Name="Disabled">
@@ -568,8 +565,7 @@
                                 <Grid   
                                     Grid.Row="2"
                                     BackgroundColor="{StaticResource DarkGrayColor}"
-									  IsVisible="{Binding IsEcoMode}"
-									  IsEnabled="{Binding UseRealRoomDevices}">
+									  IsVisible="{Binding IsEcoMode}">
 	                                <VisualStateManager.VisualStateGroups>
 		                                <VisualStateGroup x:Name="CommonStates">
 			                                <VisualState x:Name="Disabled">
