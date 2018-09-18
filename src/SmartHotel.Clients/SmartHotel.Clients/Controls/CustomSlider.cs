@@ -189,6 +189,8 @@ namespace SmartHotel.Clients.Core.Controls
             ValueControl.Text = DisplayConverter != null
                 ? $"{DisplayConverter.Convert(SliderControl.Value, typeof(string), null, CultureInfo.CurrentUICulture)}"
                 : SliderControl.Value.ToString("N0");
+
+            Value = SliderControl.Value;
         }
 
         private double CalculatePosition(double value)
