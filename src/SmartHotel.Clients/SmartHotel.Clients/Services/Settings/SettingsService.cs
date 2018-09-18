@@ -27,6 +27,8 @@ namespace SmartHotel.Clients.Core.Services.Settings
             settings.Bot.FacebookId = AppSettings.FacebookBotId;
             settings.Bot.SkypeId = AppSettings.SkypeBotId;
 	        settings.RoomDevices.RoomId = AppSettings.RoomId;
+            settings.RoomDevices.ThermostatDeviceId = AppSettings.ThermostatDeviceId;
+            settings.RoomDevices.LightDeviceId = AppSettings.LightDeviceId;
 
             return Task.FromResult(settings);
         }
@@ -50,6 +52,8 @@ namespace SmartHotel.Clients.Core.Services.Settings
             AppSettings.FacebookBotId = remote.Bot.FacebookId;
             AppSettings.SkypeBotId = remote.Bot.SkypeId;
 	        AppSettings.RoomId = remote.RoomDevices.RoomId;
+            AppSettings.ThermostatDeviceId = remote.RoomDevices.ThermostatDeviceId;
+            AppSettings.LightDeviceId = remote.RoomDevices.LightDeviceId;
 
             return Task.FromResult(false);
         }

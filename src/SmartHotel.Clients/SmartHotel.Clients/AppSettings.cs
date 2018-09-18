@@ -41,6 +41,9 @@ namespace SmartHotel.Clients.Core
 
 		// Room Devices
 	    private const string DefaultRoomId = "";
+        private const string DefaultThermostatDeviceId = "Room11Thermostat";
+        private const string DefaultLightDeviceId = "Room11Light";
+
 
         // Fakes
         private const bool DefaultUseFakes = true;
@@ -203,5 +206,19 @@ namespace SmartHotel.Clients.Core
 
 		    set => Settings.AddOrUpdateValue(nameof(RoomId), value);
 	    }
+
+        public static string ThermostatDeviceId
+        {
+            get => Settings.GetValueOrDefault(nameof(ThermostatDeviceId), DefaultThermostatDeviceId);
+
+            set => Settings.AddOrUpdateValue(nameof(ThermostatDeviceId), value);
+        }
+
+        public static string LightDeviceId
+        {
+            get => Settings.GetValueOrDefault(nameof(LightDeviceId), DefaultLightDeviceId);
+
+            set => Settings.AddOrUpdateValue(nameof(LightDeviceId), value);
+        }
     }
 }

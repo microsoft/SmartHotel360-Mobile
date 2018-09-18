@@ -16,7 +16,6 @@ namespace SmartHotel.Clients.Core.Services.IoT
 		// TODO: Probably best to get this in AppSettings
 		private readonly TimeSpan _sensorDataPollingInterval = TimeSpan.FromSeconds( 5 );
 		private readonly string _roomDevicesApiEndpoint;
-		private readonly string _roomId;
 		private Timer _sensorDataPollingTimer;
 
 		private readonly IRequestService _requestService;
@@ -25,7 +24,11 @@ namespace SmartHotel.Clients.Core.Services.IoT
 		private readonly ConcurrentDictionary<SensorDataType, DeviceSensorData>
 			_currentSensorDataBySensorDataType = new ConcurrentDictionary<SensorDataType, DeviceSensorData>();
 
-		public RoomDevicesDataService( IRequestService requestService, IAuthenticationService authenticationService )
+	    private string _thermostatDeviceId;
+	    private string _lightDeviceId;
+	    private readonly string _roomId;
+
+        public RoomDevicesDataService( IRequestService requestService, IAuthenticationService authenticationService )
 		{
 			_requestService = requestService;
 			_authenticationService = authenticationService;
@@ -37,8 +40,11 @@ namespace SmartHotel.Clients.Core.Services.IoT
 				{
 					throw new Exception( $"{nameof( AppSettings )}.{nameof( AppSettings.RoomId )} must be specified." );
 				}
-				_roomId = AppSettings.RoomId;
-			}
+			_roomId = AppSettings.RoomId;
+		    _thermostatDeviceId = AppSettings.ThermostatDeviceId;
+		    _lightDeviceId = AppSettings.LightDeviceId;
+
+		}
 		}
 
 		public bool UseFakes => string.IsNullOrEmpty( _roomDevicesApiEndpoint );
@@ -137,13 +143,16 @@ namespace SmartHotel.Clients.Core.Services.IoT
 				var uri = builder.ToString();
 
                 string methodName;
+			    string deviceId;
                 switch (sensorDataType)
                 {
                     case SensorDataType.Temperature:
                         methodName = "SetDesiredTemperature";
+                        deviceId = _thermostatDeviceId;
                         break;
                     case SensorDataType.Light:
                         methodName = "SetDesiredAmbientLight";
+                        deviceId = _lightDeviceId;
                         break;
                     default:
                         throw new NotSupportedException(sensorDataType.ToString());
@@ -151,7 +160,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
                 var request = new DeviceRequest
 				{
-					DeviceId = sensorId,
+					DeviceId = deviceId,
                     MethodName = methodName,
                     Value = desiredTemperature.ToString( CultureInfo.InvariantCulture )
 				};
