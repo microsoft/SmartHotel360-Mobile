@@ -20,7 +20,11 @@ namespace SmartHotel.Clients.Core.Controls
 
         public float StartAngle { get; set; } = -180;
 
-        protected float AbsoluteMinimum => Entries.Select(x => x.Value).Concat(new[] { MaxValue, MinValue, InternalMinValue ?? 0 }).Min(x => Math.Abs(x));
+		public Entry CurrentValueEntry { get; set; }
+
+		public Entry DesiredValueEntry { get; set; }
+
+		protected float AbsoluteMinimum => Entries.Select(x => x.Value).Concat(new[] { MaxValue, MinValue, InternalMinValue ?? 0 }).Min(x => Math.Abs(x));
 
         float AbsoluteMaximum => Entries.Select(x => x.Value).Concat(new[] { MaxValue, MinValue, InternalMinValue ?? 0 }).Max(x => Math.Abs(x));
 
@@ -80,13 +84,21 @@ namespace SmartHotel.Clients.Core.Controls
             canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{medium}°", SKColors.Black, LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius - strokeWidth - 2 * relativeScaleWidth), SKTextAlign.Center);
             canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{AbsoluteMaximum}°", SKColors.Black, LabelTextSize * relativeScaleWidth, new SKPoint(cx + radius + strokeWidth + CaptionMargin, cy), SKTextAlign.Center);
 
-            var values = Entries.ToList();
-            var currentValue = values.FirstOrDefault();
-            var desiredValue = values.Skip(1).Take(1).FirstOrDefault();
 
             var degreeSign = '°';
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Current: {currentValue?.Value}{degreeSign}", SKColor.Parse("#174A51"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 1.8f / 4f), SKTextAlign.Center);
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue?.Value}{degreeSign}", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 0.9f / 4f), SKTextAlign.Center);
+	        if (CurrentValueEntry != null)
+	        {
+		        canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Current: {CurrentValueEntry.Value}{degreeSign}",
+			        SKColor.Parse("#174A51"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 1.8f / 4f),
+			        SKTextAlign.Center);
+	        }
+
+	        if (DesiredValueEntry != null)
+	        {
+		        canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {DesiredValueEntry?.Value}{degreeSign}",
+			        SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth, new SKPoint(cx, cy - radius * 0.9f / 4f),
+			        SKTextAlign.Center);
+	        }
         }
         
     }

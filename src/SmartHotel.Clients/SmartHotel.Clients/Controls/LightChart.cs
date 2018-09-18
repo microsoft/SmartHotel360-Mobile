@@ -50,13 +50,14 @@ namespace SmartHotel.Clients.Core.Controls
         protected override void DrawCaption(SKCanvas canvas, int cx, int cy, float radius, float relativeScaleWidth,
             float strokeWidth)
         {
-            var values = Entries.ToList();
-            var currentValue = values.FirstOrDefault();
+	        if (CurrentValueEntry != null)
+	        {
+		        canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{CurrentValueEntry.Value}%", SKColor.Parse("#283748"),
+			        LabelTextSize * relativeScaleWidth,
+			        new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth), SKTextAlign.Center);
+	        }
 
-            canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{currentValue?.Value}%", SKColor.Parse("#283748"), LabelTextSize * relativeScaleWidth,
-                new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth), SKTextAlign.Center);
-
-            // uncomment to add Desired value
+	        // uncomment to add Desired value
             //var desiredValue = values.Skip(1).Take(1).FirstOrDefault();
             //canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue?.Value}%", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth,
             //    new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth * 1.45f), SKTextAlign.Center);

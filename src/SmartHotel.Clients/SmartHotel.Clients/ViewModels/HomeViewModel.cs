@@ -152,6 +152,8 @@ namespace SmartHotel.Clients.Core.ViewModels
             var desiredChartValue = new Entry(roomTemperature.Desired.RawValue) { Color = SKColor.Parse("#378D93") };
             var maxChartValue = new Entry(roomTemperature.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
 
+	        chartData.CurrentValueEntry = currentChartValue;
+	        chartData.DesiredValueEntry = desiredChartValue;
 
             if (roomTemperature.Value.RawValue > roomTemperature.Desired.RawValue)
                 chartData.Entries = new[] { maxChartValue, currentChartValue, desiredChartValue  };
@@ -173,6 +175,9 @@ namespace SmartHotel.Clients.Core.ViewModels
 
             var currentChartValue = new Entry(light.Value.RawValue) { Color = SKColor.Parse("#174A51") };
             var maxChartValue = new Entry(light.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
+
+	        chartData.CurrentValueEntry = currentChartValue;
+
             chartData.Entries = new[] { maxChartValue, currentChartValue };
 
             return chartData;
