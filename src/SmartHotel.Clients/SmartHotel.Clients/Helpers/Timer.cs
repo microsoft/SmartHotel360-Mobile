@@ -13,6 +13,8 @@ namespace SmartHotel.Clients.Core.Helpers
 
 	    private CancellationTokenSource _cancellation;
 
+        public bool IsRunning => !_cancellation.IsCancellationRequested;
+
 	    public Timer(TimeSpan timespan, Action callback, bool isRecurring = false)
 	    {
 		    _timespan = timespan;

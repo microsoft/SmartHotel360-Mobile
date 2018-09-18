@@ -29,7 +29,7 @@ namespace SmartHotel.Clients.Core.Helpers
         private void TimerTick()
         {
             _timer.Stop();
-
+            _isRunning = false;
             var now = DateTime.UtcNow;
             if (_lastestPulse != null)
             {

@@ -9,7 +9,6 @@ using SmartHotel.Clients.Core.Services.Notification;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microcharts;
@@ -35,7 +34,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly IAuthenticationService authenticationService;
         readonly IFileService fileService;
 		readonly IRoomDevicesDataService roomDevicesDataService;
-        
+
         public HomeViewModel(
             INotificationService notificationService,
             IChartService chartService,
@@ -107,11 +106,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 HasBooking = AppSettings.HasBooking;
 
-                //TemperatureChart = await _chartService.GetTemperatureChartAsync();
-                var roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync();
-                var roomLight = await roomDevicesDataService.GetRoomAmbientLightAsync();
-                TemperatureChart = CreateTemperatureChart(roomTemperature);
-                LightChart = CreateLightChart(roomLight);
+                await GetTemperatureAndLight();
 
                 GreenChart = await chartService.GetGreenChartAsync();
 
@@ -137,6 +132,14 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
+        private async Task GetTemperatureAndLight()
+        {
+            var roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync();
+            var roomLight = await roomDevicesDataService.GetRoomAmbientLightAsync();
+            TemperatureChart = CreateTemperatureChart(roomTemperature);
+            LightChart = CreateLightChart(roomLight);
+        }
+
         Chart CreateTemperatureChart(RoomTemperature roomTemperature)
         {
             var chartData = new TemperatureChart
@@ -145,8 +148,8 @@ namespace SmartHotel.Clients.Core.ViewModels
                 MaxValue = roomTemperature.Maximum.RawValue
             };
 
-            var currentChartValue = new Entry(roomTemperature.Value.RawValue) {Color = SKColor.Parse("#174A51")};
-            var desiredChartValue = new Entry(roomTemperature.Desired.RawValue) {Color = SKColor.Parse("#378D93")};
+            var currentChartValue = new Entry(roomTemperature.Value.RawValue) { Color = SKColor.Parse("#174A51") };
+            var desiredChartValue = new Entry(roomTemperature.Desired.RawValue) { Color = SKColor.Parse("#378D93") };
             var maxChartValue = new Entry(roomTemperature.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
 
 
@@ -169,21 +172,11 @@ namespace SmartHotel.Clients.Core.ViewModels
             };
 
             var currentChartValue = new Entry(light.Value.RawValue) { Color = SKColor.Parse("#174A51") };
-            //var desiredChartValue = new Entry(light.Desired.RawValue) { Color = SKColor.Parse("#378D93") };
             var maxChartValue = new Entry(light.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
             chartData.Entries = new[] { maxChartValue, currentChartValue };
 
             return chartData;
         }
-
-        //async void FakeUpdateCharts()
-        //{
-        //    while (true)
-        //    {
-        //        await Task.Delay(1000);
-        //        TemperatureChart = await _chartService.GetTemperatureChartAsync();
-        //    }
-        //}
 
         void ShowGreetingMessage()
         {
@@ -214,7 +207,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             MessagingCenter.Subscribe<Booking>(this, MessengerKeys.BookingRequested, OnBookingRequested);
             MessagingCenter.Subscribe<CheckoutViewModel>(this, MessengerKeys.CheckoutRequested, OnCheckoutRequested);
 			
-			roomDevicesDataService.StartCheckingRoomSensorData();
+            roomDevicesDataService.StartCheckingRoomSensorData(async () => await GetTemperatureAndLight());
 
             return Task.FromResult(true);
         }
