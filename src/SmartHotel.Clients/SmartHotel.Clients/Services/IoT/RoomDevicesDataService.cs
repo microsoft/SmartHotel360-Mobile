@@ -125,27 +125,39 @@ namespace SmartHotel.Clients.Core.Services.IoT
 		}
 
 
-		public async Task UpdateDesiredAsync( RoomSensorBase roomSensor )
+		public async Task UpdateDesiredAsync( float desiredTemperature, SensorDataType sensorDataType )
 		{
-			if ( _currentSensorDataBySensorDataType.TryGetValue( roomSensor.SensorDataType,
+		    UriBuilder builder = new UriBuilder( _roomDevicesApiEndpoint );
+		    if ( _currentSensorDataBySensorDataType.TryGetValue( sensorDataType,
 				out DeviceSensorData sensorData ) )
 			{
-				string sensorId = sensorData.SensorId;
+				var sensorId = sensorData.SensorId;
 
-				UriBuilder builder = new UriBuilder( _roomDevicesApiEndpoint );
-				builder.AppendToPath( $"Devices" );
+			    builder.AppendToPath( "Devices" );
 				var uri = builder.ToString();
 
-				var request = new DeviceRequest
+                string methodName;
+                switch (sensorDataType)
+                {
+                    case SensorDataType.Temperature:
+                        methodName = "SetDesiredTemperature";
+                        break;
+                    case SensorDataType.Light:
+                        methodName = "SetDesiredAmbientLight";
+                        break;
+                    default:
+                        throw new NotSupportedException(sensorDataType.ToString());
+                }
+
+                var request = new DeviceRequest
 				{
 					DeviceId = sensorId,
-					// TODO: should MethodName be set ?
-					Value = roomSensor.Desired.RawValue.ToString( CultureInfo.InvariantCulture )
+                    MethodName = methodName,
+                    Value = desiredTemperature.ToString( CultureInfo.InvariantCulture )
 				};
 
 				await _requestService.PostAsync( uri, request, _authenticationService.AuthenticatedUser.Token );
 			}
-
 		}
 
 		public void StartCheckingRoomSensorData()

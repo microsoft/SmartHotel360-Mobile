@@ -8,7 +8,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
         Task<RoomAmbientLight> GetRoomAmbientLightAsync();
         Task<RoomTemperature> GetRoomTemperatureAsync();
-        Task UpdateDesiredAsync(RoomSensorBase roomSensor);
+        Task UpdateDesiredAsync(float desiredTemperature, SensorDataType sensorDataType);
         void StartCheckingRoomSensorData();
         void StopCheckingRoomSensorData();
     }
