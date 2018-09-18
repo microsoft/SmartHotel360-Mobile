@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SmartHotel.Clients.Core.Helpers;
 using SmartHotel.Clients.Core.Services.IoT;
 using Xamarin.Forms;
 
@@ -33,7 +34,11 @@ namespace SmartHotel.Clients.Core.ViewModels
 
 		private bool _isInitializing;
 
-		private readonly IOpenUriService _openUrlService;
+	    private readonly DelayedAction _delayedTemperatureChanged;
+	    private readonly DelayedAction _delayedLightChanged;
+	    private readonly TimeSpan _sliderInertia = TimeSpan.FromSeconds(2);
+
+        private readonly IOpenUriService _openUrlService;
 		private readonly IAnalyticService _analyticService;
 		private readonly IRoomDevicesDataService _roomDevicesDataService;
 
@@ -46,10 +51,19 @@ namespace SmartHotel.Clients.Core.ViewModels
 			_analyticService = analyticService;
 			_roomDevicesDataService = roomDevicesDataService;
 
-			SetNeed();
+
+            _delayedTemperatureChanged = new DelayedAction(() => !_isInitializing && UseRealRoomDevices,
+                () => { Debug.WriteLine("Update temperature.");},
+                 _sliderInertia);
+
+		    _delayedLightChanged = new DelayedAction(() => !_isInitializing && UseRealRoomDevices,
+		        () => { Debug.WriteLine("Update light."); },
+		        _sliderInertia);
+
+            SetNeed();
 		}
 
-		public bool UseRealRoomDevices => !_roomDevicesDataService.UseFakes;
+	    public bool UseRealRoomDevices => !_roomDevicesDataService.UseFakes;
 
 		public double CurrentAmbientLight
 		{
@@ -67,11 +81,9 @@ namespace SmartHotel.Clients.Core.ViewModels
 			set
 			{
 				_desiredAmbientLight = value;
-				OnPropertyChanged();
-				if ( !_isInitializing && UseRealRoomDevices )
-				{
-					// TODO: Call the RoomDevicesDataService to update once the value has stopped changing
-				}
+                OnPropertyChanged();
+
+				_delayedLightChanged.Pulse();
 			}
 		}
 
@@ -101,11 +113,9 @@ namespace SmartHotel.Clients.Core.ViewModels
 			set
 			{
 				_desiredTemperature = value;
-				OnPropertyChanged();
-				if ( !_isInitializing && UseRealRoomDevices )
-				{
-					// TODO: Call the RoomDevicesDataService to update once the value has stopped changing
-				}
+                OnPropertyChanged();
+
+                _delayedTemperatureChanged.Pulse();
 			}
 		}
 
@@ -267,7 +277,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 			return Task.FromResult( true );
 		}
 
-		private void SetAmbient()
+        private void SetAmbient()
 		{
 			Ambient = true;
 			Need = false;
