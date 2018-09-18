@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using SmartHotel.Clients.Core.Helpers;
 using SmartHotel.Clients.Core.Services.IoT;
 using Xamarin.Forms;
 
@@ -31,6 +32,9 @@ namespace SmartHotel.Clients.Core.ViewModels
         bool noDisturb;
 
 		bool isInitializing;
+	    readonly DelayedAction delayedTemperatureChanged;
+	    readonly DelayedAction delayedLightChanged;
+	    readonly TimeSpan sliderInertia = TimeSpan.FromSeconds(2);
         readonly IOpenUriService openUrlService;
         readonly IAnalyticService analyticService;
 		readonly IRoomDevicesDataService roomDevicesDataService;
@@ -44,7 +48,16 @@ namespace SmartHotel.Clients.Core.ViewModels
             this.analyticService = analyticService;
 			this.roomDevicesDataService = roomDevicesDataService;
 
-			SetNeed();
+
+            delayedTemperatureChanged = new DelayedAction(() => !isInitializing && UseRealRoomDevices,
+                () => { Debug.WriteLine("Update temperature.");},
+                 sliderInertia);
+
+		    delayedLightChanged = new DelayedAction(() => !isInitializing && UseRealRoomDevices,
+		        () => { Debug.WriteLine("Update light."); },
+		        sliderInertia);
+
+            SetNeed();
 		}
 
 		public bool UseRealRoomDevices => !roomDevicesDataService.UseFakes;
@@ -63,7 +76,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	            bool changed = SetProperty(ref desiredAmbientLight, value);
 	            if ( !isInitializing && UseRealRoomDevices && changed )
 	            {
-	                // TODO: Call the RoomDevicesDataService to update once the value has stopped changing
+	                delayedLightChanged.Pulse();
 	            }
 	        }
 	    }
@@ -88,7 +101,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	            bool changed = SetProperty(ref desiredTemperature, value);
 	            if ( !isInitializing && UseRealRoomDevices && changed )
 	            {
-	                // TODO: Call the RoomDevicesDataService to update once the value has stopped changing
+	                delayedTemperatureChanged.Pulse();
 	            }
 	        }
 	    }
