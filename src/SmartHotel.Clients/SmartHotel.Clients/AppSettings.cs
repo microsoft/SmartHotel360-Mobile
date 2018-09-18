@@ -5,7 +5,7 @@ using SmartHotel.Clients.Core.Models;
 
 namespace SmartHotel.Clients.Core
 {
-    public static class AppSettings
+	public static class AppSettings
     {
         //IF YOU DEPLOY YOUR OWN ENDPOINT REPLACE THE VALUEW BELOW
         //App Center
@@ -20,6 +20,7 @@ namespace SmartHotel.Clients.Core
         private const string DefaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
         private const string DefaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
         private const string DefaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
+        private const string DefaultRoomDevicesEndpoint = "";
 
         // Maps
         private const string DefaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
@@ -37,6 +38,12 @@ namespace SmartHotel.Clients.Core
 
         // Booking 
         private const bool DefaultHasBooking = false;
+
+		// Room Devices
+	    private const string DefaultRoomId = "";
+        private const string DefaultThermostatDeviceId = "Room11Thermostat";
+        private const string DefaultLightDeviceId = "Room11Light";
+
 
         // Fakes
         private const bool DefaultUseFakes = true;
@@ -100,6 +107,13 @@ namespace SmartHotel.Clients.Core
             get => Settings.GetValueOrDefault(nameof(ImagesBaseUri), DefaultImagesBaseUri);
 
             set => Settings.AddOrUpdateValue(nameof(ImagesBaseUri), value);
+        }
+
+        public static string RoomDevicesEndpoint
+        {
+            get => Settings.GetValueOrDefault(nameof(RoomDevicesEndpoint), DefaultRoomDevicesEndpoint);
+
+            set => Settings.AddOrUpdateValue(nameof(RoomDevicesEndpoint), value);
         }
 
         public static string SkypeBotId
@@ -184,6 +198,27 @@ namespace SmartHotel.Clients.Core
         public static void RemoveUserData()
         {
             Settings.Remove(nameof(User));
+        }
+
+	    public static string RoomId
+	    {
+		    get => Settings.GetValueOrDefault(nameof(RoomId), DefaultRoomId);
+
+		    set => Settings.AddOrUpdateValue(nameof(RoomId), value);
+	    }
+
+        public static string ThermostatDeviceId
+        {
+            get => Settings.GetValueOrDefault(nameof(ThermostatDeviceId), DefaultThermostatDeviceId);
+
+            set => Settings.AddOrUpdateValue(nameof(ThermostatDeviceId), value);
+        }
+
+        public static string LightDeviceId
+        {
+            get => Settings.GetValueOrDefault(nameof(LightDeviceId), DefaultLightDeviceId);
+
+            set => Settings.AddOrUpdateValue(nameof(LightDeviceId), value);
         }
     }
 }

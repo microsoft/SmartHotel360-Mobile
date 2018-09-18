@@ -10,12 +10,13 @@
     xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"     
     xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions"
+    xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
     BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
 
             <Color x:Key="ChartBackgroundColor">#F2F2F2</Color>
-            
+
             <Style x:Key="BookTextStyle" 
                    TargetType="Label"
                    BasedOn="{StaticResource PoppinsMediumLabelStyle}">
@@ -92,7 +93,7 @@
                 <Setter Property="HeightRequest" Value="60" />
                 <Setter Property="VerticalOptions" Value="End" />
             </Style>
-            
+
             <Style x:Key="BigChartTextStyle" 
                    TargetType="Label"
                    BasedOn="{StaticResource PoppinsMediumLabelStyle}">
@@ -110,7 +111,7 @@
                 <Setter Property="HorizontalOptions" Value="Start" />
                 <Setter Property="Margin" Value="12" />
             </Style>
-            
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -193,8 +194,21 @@
                         <!-- ROOM TEMPERATURE -->
                         <Grid
                             Grid.Column="0">
-                            <ffimageloading:CachedImage  
+
+                            <forms:ChartView 
+                                x:Name="chartViewBig"
+                                Chart="{Binding TemperatureChart}"
+                                IsVisible="true"
+                                Margin="12, 24, 12, 12"
+                            />
+
+                            <Label 
+                                Text="{extensions:Translate RoomTemperature}"
+                                Style="{StaticResource BigChartTextStyle}"/>
+
+                            <!--<ffimageloading:CachedImage  
                                 x:Name="BigRoomTemperatureChart"
+                                Opacity="0.5"
                                 Aspect="AspectFit"
                                 Margin="60, 84">
                                 <ffimageloading:CachedImage.Source>
@@ -203,10 +217,7 @@
                                         <On Platform="UWP" Value="Assets/room_temperature.png" />
                                     </OnPlatform>
                                 </ffimageloading:CachedImage.Source>
-                            </ffimageloading:CachedImage>
-                            <Label 
-                                Text="{extensions:Translate RoomTemperature}"
-                                Style="{StaticResource BigChartTextStyle}"/>
+                            </ffimageloading:CachedImage>-->
                         </Grid>
                         <Grid 
                             Grid.Column="1"
@@ -215,8 +226,17 @@
                         <!-- AMBIENT LIGHT -->
                         <Grid
                             Grid.Column="2">
-                            <ffimageloading:CachedImage  
+
+                            <forms:ChartView 
+                                Chart="{Binding LightChart}"
+                                Margin="0, 24, 0, 12"
+                            />
+                            <Label       
+                                Text="{extensions:Translate AmbientLight}"
+                                Style="{StaticResource BigChartTextStyle}"/>
+                            <!--<ffimageloading:CachedImage  
                                 Aspect="AspectFit"
+                                Opacity="0.4"
                                 Margin="60">
                                 <ffimageloading:CachedImage.Source>
                                     <OnPlatform x:TypeArguments="ImageSource">
@@ -224,10 +244,7 @@
                                         <On Platform="UWP" Value="Assets/ambient_light.png" />
                                     </OnPlatform>
                                 </ffimageloading:CachedImage.Source>
-                            </ffimageloading:CachedImage>
-                            <Label       
-                                Text="{extensions:Translate AmbientLight}"
-                                Style="{StaticResource BigChartTextStyle}"/>
+                            </ffimageloading:CachedImage>-->
                         </Grid>
                         <Grid 
                             Grid.Column="3"
@@ -274,8 +291,20 @@
                             <Grid  
                                 Grid.Column="0"
                                 Grid.Row="0"
-                                Grid.RowSpan="2">
-                                <ffimageloading:CachedImage                                
+                                Grid.RowSpan="2"
+                                >
+                                
+                                <forms:ChartView 
+                                    x:Name="chartViewSmall"
+                                    Chart="{Binding TemperatureChart}"
+                                    IsVisible="true"
+                                    Margin="0, 40, 0, 0"
+                                    />
+                                <Label 
+                                    Text="{extensions:Translate RoomTemperature}"
+                                    Style="{StaticResource SmallChartTextStyle}"/>
+                                <!--<ffimageloading:CachedImage                                
+                                    Opacity="0.5"
                                     Grid.Column="0"
                                     Grid.Row="0"
                                     Grid.RowSpan="2"
@@ -287,16 +316,22 @@
                                             <On Platform="UWP" Value="Assets/room_temperature.png" />
                                         </OnPlatform>
                                     </ffimageloading:CachedImage.Source>
-                                </ffimageloading:CachedImage>
-                                <Label 
-                                    Text="{extensions:Translate RoomTemperature}"
-                                    Style="{StaticResource SmallChartTextStyle}"/>
+                                </ffimageloading:CachedImage>-->
                             </Grid>
                             <!-- AMBIENT LIGHT -->
                             <Grid  
                                 Grid.Column="1"
                                 Grid.Row="0">
-                                <ffimageloading:CachedImage                                
+                              
+                                <forms:ChartView 
+                                Chart="{Binding LightChart}"
+                                Margin="0, 0, 0, 12"
+                            />
+                                <Label 
+                                    Text="{extensions:Translate AmbientLight}"
+                                    Style="{StaticResource SmallChartTextStyle}"/>
+                                <!--<ffimageloading:CachedImage  
+                                    Opacity="0.4"
                                     Aspect="AspectFit"
                                     Margin="12, 6">
                                     <ffimageloading:CachedImage.Source>
@@ -305,10 +340,7 @@
                                             <On Platform="UWP" Value="Assets/ambient_light.png" />
                                         </OnPlatform>
                                     </ffimageloading:CachedImage.Source>
-                                </ffimageloading:CachedImage>
-                                <Label 
-                                    Text="{extensions:Translate AmbientLight}"
-                                    Style="{StaticResource SmallChartTextStyle}"/>
+                                </ffimageloading:CachedImage>-->
                             </Grid>
                             <!-- BE GREEN -->
                             <Grid 

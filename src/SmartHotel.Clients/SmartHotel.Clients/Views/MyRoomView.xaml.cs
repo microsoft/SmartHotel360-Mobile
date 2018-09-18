@@ -1,4 +1,5 @@
 ﻿using SmartHotel.Clients.Core.Helpers;
+using SmartHotel.Clients.Core.ViewModels.Base;
 using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Core.Views
@@ -10,25 +11,25 @@ namespace SmartHotel.Clients.Core.Views
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             StatusBarHelper.Instance.MakeTranslucentStatusBar(false);
-
-            this.SizeChanged += OnSizeChanged;
+	        if (BindingContext is IHandleViewAppearing viewAware)
+	        {
+		        await viewAware.OnViewAppearingAsync(this);
+	        }
         }
 
-        protected override void OnDisappearing()
+        protected override async void OnDisappearing()
         {
             base.OnDisappearing();
 
-            this.SizeChanged -= OnSizeChanged;
-        }
-
-        private void OnSizeChanged(object sender, System.EventArgs e)
-        {
-            AmbientLightSlider.WidthRequest = Width;
+	        if (BindingContext is IHandleViewDisappearing viewAware)
+	        {
+		        await viewAware.OnViewDisappearingAsync(this);
+	        }
         }
     }
 }

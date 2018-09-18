@@ -15,7 +15,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <Style x:Key="BookTextStyle" 
+	        <Color x:Key="ChartBackgroundColor">#F2F2F2</Color>
+
+			<Style x:Key="BookTextStyle" 
                    TargetType="Label"
                    BasedOn="{StaticResource PoppinsMediumLabelStyle}">
                 <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
@@ -322,22 +324,9 @@
                     <Grid
                         Grid.Row="0"
                         Grid.Column="0"
-                        BackgroundColor="{StaticResource GrayColor}">
-                        <ffimageloading:CachedImage                                
-                            Aspect="AspectFit"
-                            VerticalOptions="End"
-                            Margin="12, 24, 12, 12">
-                            <ffimageloading:CachedImage.Source>
-                                <OnPlatform x:TypeArguments="ImageSource">
-                                    <On Platform="Android, iOS" Value="room_temperature" />
-                                    <On Platform="UWP" Value="Assets/room_temperature.png" />
-                                </OnPlatform>
-                            </ffimageloading:CachedImage.Source>
-                        </ffimageloading:CachedImage>
-                        <microcharts:ChartView 
-                            Chart="{Binding TemperatureChart}"
-                            VerticalOptions="End"
-                            IsVisible="false" />
+                        BackgroundColor="{StaticResource ChartBackgroundColor}">
+                        <microcharts:ChartView Chart="{Binding TemperatureChart}"
+                                               Margin="12, 24, 12, 12" />
                         <Label  
                             Text="{extensions:Translate RoomTemperature}"
                             Style="{StaticResource ChartTextStyle}"/>
@@ -346,22 +335,13 @@
                     <Grid
                         Grid.Row="0"
                         Grid.Column="1"
-                        BackgroundColor="{StaticResource GrayColor}">
+                        BackgroundColor="{StaticResource ChartBackgroundColor}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <ffimageloading:CachedImage     
-                            Grid.Row="0" 
-                            Aspect="AspectFit"
-                            Margin="16, 36, 16, 6">
-                            <ffimageloading:CachedImage.Source>
-                                <OnPlatform x:TypeArguments="ImageSource">
-                                    <On Platform="Android, iOS" Value="ambient_light" />
-                                    <On Platform="UWP" Value="Assets/ambient_light.png" />
-                                </OnPlatform>
-                            </ffimageloading:CachedImage.Source>
-                        </ffimageloading:CachedImage>
+						<microcharts:ChartView Chart="{Binding LightChart}"
+											   Margin="16, 36, 16, 6" />
                         <Label     
                             Grid.Row="0"
                             Text="{extensions:Translate AmbientLight}"
