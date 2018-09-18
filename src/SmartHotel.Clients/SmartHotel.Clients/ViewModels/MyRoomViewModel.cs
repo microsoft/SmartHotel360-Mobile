@@ -225,21 +225,21 @@ namespace SmartHotel.Clients.Core.ViewModels
 		}
 
 
-        private bool IsRoomDevicesLive()
+        bool IsRoomDevicesLive()
         {
-            return !_isInitializing && UseRealRoomDevices;
+            return !isInitializing && UseRealRoomDevices;
 	    }
 
-	    private async Task UpdateRoomLight(double desiredAmbientLight)
+	    async Task UpdateRoomLight(double desiredAmbientLight)
 	    {
             Debug.WriteLine($"UpdateRoomLight: {desiredAmbientLight}");
-	        await _roomDevicesDataService.UpdateDesiredAsync((float) desiredAmbientLight, SensorDataType.Light);
+	        await roomDevicesDataService.UpdateDesiredAsync((float) desiredAmbientLight, SensorDataType.Light);
 	    }
 
-	    private async Task UpdateRoomTemperature(double desiredTemperature)
+	    async Task UpdateRoomTemperature(double desiredTemperature)
 	    {
 	        Debug.WriteLine($"UpdateRoomLight: {desiredTemperature}");
-            await _roomDevicesDataService.UpdateDesiredAsync((float)desiredTemperature, SensorDataType.Temperature);
+            await roomDevicesDataService.UpdateDesiredAsync((float)desiredTemperature, SensorDataType.Temperature);
         }
 
 
