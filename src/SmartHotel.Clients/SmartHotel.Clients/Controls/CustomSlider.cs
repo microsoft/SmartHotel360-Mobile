@@ -181,9 +181,14 @@ namespace SmartHotel.Clients.Core.Controls
             ValueContainer.TranslationX = slideIndicatorPosition - diff - thumbHalf;
         }
 
-        void UpdateDisplayValue() => ValueControl.Text = DisplayConverter != null
+        private void UpdateDisplayValue()
+        {
+            ValueControl.Text = DisplayConverter != null
                 ? $"{DisplayConverter.Convert(SliderControl.Value, typeof(string), null, CultureInfo.CurrentUICulture)}"
                 : SliderControl.Value.ToString("N0");
+
+            Value = SliderControl.Value;
+        }
 
         double CalculatePosition(double value)
         {
