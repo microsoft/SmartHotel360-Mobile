@@ -30,7 +30,15 @@ namespace SmartHotel.Clients.Core.Services.IoT
 			_requestService = requestService;
 			_authenticationService = authenticationService;
 			_roomDevicesApiEndpoint = AppSettings.RoomDevicesEndpoint;
-			_roomId = AppSettings.RoomId;
+
+			if ( !UseFakes )
+			{
+				if ( string.IsNullOrWhiteSpace( AppSettings.RoomId ) )
+				{
+					throw new Exception( $"{nameof( AppSettings )}.{nameof( AppSettings.RoomId )} must be specified." );
+				}
+				_roomId = AppSettings.RoomId;
+			}
 		}
 
 		public bool UseFakes => string.IsNullOrEmpty( _roomDevicesApiEndpoint );
