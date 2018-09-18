@@ -13,8 +13,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 {
     public class RoomDevicesDataService : IRoomDevicesDataService
     {
-        // TODO: Probably best to get this in AppSettings
-        private readonly TimeSpan _sensorDataPollingInterval = TimeSpan.FromSeconds(5);
+        private readonly TimeSpan _sensorDataPollingInterval = TimeSpan.FromSeconds(3);
         private readonly string _roomDevicesApiEndpoint;
         private Timer _sensorDataPollingTimer;
 
@@ -28,8 +27,8 @@ namespace SmartHotel.Clients.Core.Services.IoT
         private readonly string _lightDeviceId;
         private readonly string _roomId;
 
-        private Action _sensorDataChangedCallback;
-
+	    private int _startPollingRequestCount = 0;
+		
         public RoomDevicesDataService(IRequestService requestService, IAuthenticationService authenticationService)
         {
             _requestService = requestService;
@@ -48,6 +47,12 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
             }
         }
+
+		public event EventHandler SensorDataChanged;
+		private void OnSensorDataChanged()
+		{
+			SensorDataChanged?.Invoke( this, EventArgs.Empty );
+		}
 
         public bool UseFakes => string.IsNullOrEmpty(_roomDevicesApiEndpoint);
 
@@ -165,27 +170,36 @@ namespace SmartHotel.Clients.Core.Services.IoT
             };
 
             await _requestService.PostAsync(uri, request, _authenticationService.AuthenticatedUser.Token);
-            await GetLatestData();
         }
 
 
 
-        public void StartCheckingRoomSensorData(Action sensorDataChangedCallback)
+        public void StartCheckingRoomSensorData()
         {
-            _sensorDataChangedCallback = sensorDataChangedCallback;
-            if (_sensorDataPollingTimer != null || UseFakes)
+            if (UseFakes)
             {
                 return;
             }
 
-            _sensorDataPollingTimer = new Timer(_sensorDataPollingInterval, SensorDataPollingTimerTick);
-            _sensorDataPollingTimer.Start();
+	        if (_sensorDataPollingTimer == null)
+	        {
+		        _sensorDataPollingTimer = new Timer(_sensorDataPollingInterval, SensorDataPollingTimerTick);
+		        _sensorDataPollingTimer.Start();
+	        }
+
+	        _startPollingRequestCount++;
         }
 
         public void StopCheckingRoomSensorData()
         {
-            _sensorDataPollingTimer?.Stop();
-            _sensorDataPollingTimer = null;
+	        _startPollingRequestCount--;
+	        if (_startPollingRequestCount <= 0)
+	        {
+				// Last request to stop polling
+		        _startPollingRequestCount = 0;
+		        _sensorDataPollingTimer?.Stop();
+		        _sensorDataPollingTimer = null;
+	        }
         }
 
         private async void SensorDataPollingTimerTick()
@@ -193,7 +207,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
             _sensorDataPollingTimer?.Stop();
 
             await GetLatestData();
-            _sensorDataChangedCallback();
+	        OnSensorDataChanged();
 
             _sensorDataPollingTimer?.Start();
         }
