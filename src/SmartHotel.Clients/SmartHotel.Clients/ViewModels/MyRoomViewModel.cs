@@ -52,17 +52,17 @@ namespace SmartHotel.Clients.Core.ViewModels
 			_roomDevicesDataService = roomDevicesDataService;
 
 
-            _delayedTemperatureChanged = new DelayedAction(() => !_isInitializing && UseRealRoomDevices,
-                () => { Debug.WriteLine("Update temperature.");},
+            _delayedTemperatureChanged = new DelayedAction(IsRoomDevicesLive,
+                () => { UpdateRoomTemperature(DesiredTemperature); },
                  _sliderInertia);
 
-		    _delayedLightChanged = new DelayedAction(() => !_isInitializing && UseRealRoomDevices,
-		        () => { Debug.WriteLine("Update light."); },
+		    _delayedLightChanged = new DelayedAction(IsRoomDevicesLive,
+		        () => { UpdateRoomLight(DesiredAmbientLight); },
 		        _sliderInertia);
 
             SetNeed();
 		}
-
+        
 	    public bool UseRealRoomDevices => !_roomDevicesDataService.UseFakes;
 
 		public double CurrentAmbientLight
@@ -276,6 +276,25 @@ namespace SmartHotel.Clients.Core.ViewModels
 
 			return Task.FromResult( true );
 		}
+
+
+        private bool IsRoomDevicesLive()
+        {
+            return !_isInitializing && UseRealRoomDevices;
+	    }
+
+	    private async Task UpdateRoomLight(double desiredAmbientLight)
+	    {
+            Debug.WriteLine($"UpdateRoomLight: {desiredAmbientLight}");
+	        await _roomDevicesDataService.UpdateDesiredAsync((float) desiredAmbientLight, SensorDataType.Light);
+	    }
+
+	    private async Task UpdateRoomTemperature(double desiredTemperature)
+	    {
+	        Debug.WriteLine($"UpdateRoomLight: {desiredTemperature}");
+            await _roomDevicesDataService.UpdateDesiredAsync((float)desiredTemperature, SensorDataType.Temperature);
+        }
+
 
         private void SetAmbient()
 		{
