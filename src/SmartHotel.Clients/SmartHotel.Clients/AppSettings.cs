@@ -9,17 +9,17 @@ namespace SmartHotel.Clients.Core
     {
         //IF YOU DEPLOY YOUR OWN ENDPOINT REPLACE THE VALUEW BELOW
         //App Center
-        private const string DefaultAppCenterAndroid = "494cbf56-bb84-4f3c-ab25-860316af246e";
-        private const string DefaultAppCenteriOS = "0422f642-413b-4cde-804d-7b870fc21c95";
-        private const string DefaultAppCenterUWP = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
+        private const string DefaultAppCenterAndroid = "f4754bd4-1edf-4bd8-83cd-b9f6539293da";
+        private const string DefaultAppCenteriOS = "f3584cf1-6c12-465e-9511-d8db225bd340";
+        private const string DefaultAppCenterUWP = "fd822e0c-f6fd-446c-846c-622c3c229006";
 
         // Endpoints
-        private const string DefaultBookingEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
-        private const string DefaultHotelsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
-        private const string DefaultSuggestionsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
-        private const string DefaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
+        private const string DefaultBookingEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/bookings-api";
+        private const string DefaultHotelsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/hotels-api";
+        private const string DefaultSuggestionsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/suggestions-api";
+        private const string DefaultNotificationsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/notifications-api";
         private const string DefaultSettingsFileUrl = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/configuration-api/cfg/public";
-        private const string DefaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
+        private const string DefaultImagesBaseUri = "https://sh360publicimg.blob.core.windows.net";
 
         // Maps
         private const string DefaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
@@ -39,7 +39,7 @@ namespace SmartHotel.Clients.Core
         private const bool DefaultHasBooking = false;
 
         // Fakes
-        private const bool DefaultUseFakes = true;
+        private const bool DefaultUseFakes = false;
 
         private static ISettings Settings => CrossSettings.Current;
 
@@ -64,7 +64,7 @@ namespace SmartHotel.Clients.Core
 
             set => Settings.AddOrUpdateValue(nameof(B2cPolicy), value);
         }
-        
+
 
         // API Endpoints
         public static string BookingEndpoint
