@@ -14,12 +14,12 @@ namespace SmartHotel.Clients.Core
         private const string DefaultAppCenterUWP = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
 
         // Endpoints
-        private const string DefaultBookingEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
-        private const string DefaultHotelsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
-        private const string DefaultSuggestionsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
-        private const string DefaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
+        private const string DefaultBookingEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/bookings-api";
+        private const string DefaultHotelsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/hotels-api";
+        private const string DefaultSuggestionsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/suggestions-api";
+        private const string DefaultNotificationsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/notifications-api";
         private const string DefaultSettingsFileUrl = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/configuration-api/cfg/public";
-        private const string DefaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
+        private const string DefaultImagesBaseUri = "https://sh360publicimg.blob.core.windows.net";
 
         // Maps
         private const string DefaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
@@ -39,7 +39,7 @@ namespace SmartHotel.Clients.Core
         private const bool DefaultHasBooking = false;
 
         // Fakes
-        private const bool DefaultUseFakes = true;
+        private const bool DefaultUseFakes = false;
 
         private static ISettings Settings => CrossSettings.Current;
 
@@ -64,7 +64,7 @@ namespace SmartHotel.Clients.Core
 
             set => Settings.AddOrUpdateValue(nameof(B2cPolicy), value);
         }
-        
+
 
         // API Endpoints
         public static string BookingEndpoint
