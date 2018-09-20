@@ -5,14 +5,15 @@ using Xamarin.Forms;
 using SmartHotel.Clients.Core.Services.Hotel;
 using System;
 using System.Diagnostics;
-using SmartHotel.Clients.Core.Extensions;
 using System.Net.Http;
 using SmartHotel.Clients.Core.Services.Booking;
 using SmartHotel.Clients.Core.Services.Authentication;
 using System.Collections.Generic;
 using System.Linq;
 using MvvmHelpers;
+using SmartHotel.Clients.Core.Extensions;
 using SmartHotel.Core.Invoicing;
+using SmartHotel.Clients.Core.Exceptions;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
@@ -31,7 +32,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly IHotelService hotelService;
         readonly IBookingService bookingService;
         readonly IAuthenticationService authenticationService;
-        readonly ExportService invoicingService;
+        ExportService invoicingService;
 
         public BookingHotelViewModel(
             IHotelService hotelService,
@@ -41,6 +42,8 @@ namespace SmartHotel.Clients.Core.ViewModels
             this.hotelService = hotelService;
             this.bookingService = bookingService;
             this.authenticationService = authenticationService;
+
+            invoicingService = new ExportService();
 
             SetMyHotel();
         }
@@ -120,6 +123,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                         var hotelReviews = await hotelService.GetReviewsAsync(Hotel.Id);
                         HotelReviews = hotelReviews.ToObservableRangeCollection();
+                        HotelReviews = hotelReviews.ToObservableRangeCollection();
 
                         // Experiment with r https://docs.microsoft.com/en-us/azure/machine-learning/studio/extend-your-experiment-with-r
                         /*
@@ -132,6 +136,11 @@ namespace SmartHotel.Clients.Core.ViewModels
                     catch (HttpRequestException httpEx)
                     {
                         Debug.WriteLine($"[Booking Hotels Step] Error retrieving data: {httpEx}");
+                    }
+                    catch (ConnectivityException cex)
+                    {
+                        Debug.WriteLine($"[Booking Hotels Step] Connectivity Error: {cex}");
+                        await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
                     }
                     catch (Exception ex)
                     {
@@ -211,7 +220,7 @@ namespace SmartHotel.Clients.Core.ViewModels
                         Name = user.Name,
                         HotelName = Hotel.Name,
                         InvoiceNumber = Guid.NewGuid().ToString(),
-                        Items = new List<string> { newBooking.ToString() },
+                        Items = new List<string> { $"{newBooking.Rooms.Count} room(s), from {newBooking.From.ToShortDateString()} to {newBooking.To.ToShortDateString()}" },
                         Total = Hotel.PricePerNight * (until - from).Days
                     };
 
@@ -223,6 +232,11 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                     MessagingCenter.Send(newBooking, MessengerKeys.BookingRequested);
                 }
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Booking] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {

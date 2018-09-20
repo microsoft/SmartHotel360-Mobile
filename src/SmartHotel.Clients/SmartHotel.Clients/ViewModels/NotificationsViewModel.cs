@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using SmartHotel.Clients.Core.ViewModels.Base;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using SmartHotel.Clients.Core.Services.Notification;
@@ -43,7 +42,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public override Task InitializeAsync(object navigationData)
         {
-            if(navigationData != null)
+            if (navigationData != null)
             {
                 Notifications = (ObservableRangeCollection<Models.Notification>)navigationData;
                 HasItems = Notifications.Count > 0;

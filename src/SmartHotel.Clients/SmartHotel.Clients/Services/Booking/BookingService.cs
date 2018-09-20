@@ -10,7 +10,10 @@ namespace SmartHotel.Clients.Core.Services.Booking
     {
         readonly IRequestService requestService;
 
-        public BookingService(IRequestService requestService) => this.requestService = requestService;
+        public BookingService(IRequestService requestService)
+        {
+            this.requestService = requestService;
+        }
 
         public Task<IEnumerable<Models.BookingSummary>> GetBookingsAsync(string token = "")
         {

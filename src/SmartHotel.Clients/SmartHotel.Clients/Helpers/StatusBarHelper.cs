@@ -4,9 +4,10 @@ namespace SmartHotel.Clients.Core.Helpers
 {
     public class StatusBarHelper
     {
+        static readonly StatusBarHelper instance = new StatusBarHelper();
         public const string TranslucentStatusChangeMessage = "TranslucentStatusChange";
 
-        public static StatusBarHelper Instance { get; } = new StatusBarHelper();
+        public static StatusBarHelper Instance => instance;
 
         protected StatusBarHelper()
         {

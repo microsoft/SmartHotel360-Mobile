@@ -28,10 +28,7 @@ namespace SmartHotel.Clients.Core.Controls
         ICommand toggleCommand;
         Image toggleImage;
 
-        public ToggleButton()
-        {
-            Initialize();
-        }
+        public ToggleButton() => Initialize();
 
         public ICommand Command
         {
@@ -69,11 +66,7 @@ namespace SmartHotel.Clients.Core.Controls
             set => SetValue(UnCheckedImageProperty, value);
         }
 
-        public ICommand ToogleCommand
-        {
-            get
-            {
-                return toggleCommand
+        public ICommand ToogleCommand => toggleCommand
                 ?? (toggleCommand = new Command(() =>
                 {
                     if (Checked)
@@ -90,8 +83,6 @@ namespace SmartHotel.Clients.Core.Controls
                         Command.Execute(CommandParameter);
                     }
                 }));
-            }
-        }
 
         void Initialize()
         {

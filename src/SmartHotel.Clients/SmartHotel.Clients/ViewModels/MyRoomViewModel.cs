@@ -11,8 +11,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class MyRoomViewModel : ViewModelBase
     {
-        const string Skype = "Skype";
-        const string FacebookMessenger = "Facebook Messenger";
+        const string skype = "Skype";
 
         double ambientLight;
         double temperature;
@@ -142,7 +141,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         async Task OpenBotAsync()
         {
-            var bots = new[] { Skype, FacebookMessenger };
+            var bots = new[] { skype };
 
             try
             {
@@ -154,13 +153,9 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 switch (selectedBot)
                 {
-                    case Skype:
+                    case skype:
                         openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
                         analyticService.TrackEvent("SkypeBot");
-                        break;
-                    case FacebookMessenger:
-                        openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
-                        analyticService.TrackEvent("FacebookBot");
                         break;
                 }
             }

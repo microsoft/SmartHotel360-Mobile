@@ -36,7 +36,7 @@ namespace SmartHotel.Clients.UWP.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName.Equals(nameof(ExtendedEntry.LineColorToApply)))
+            if (e.PropertyName.Equals(nameof(ExtendedEntry.LineColor)))
             {
                 UpdateLineColor();
             }
@@ -60,7 +60,7 @@ namespace SmartHotel.Clients.UWP.Renderers
 
             if (border != null)
             {
-                border.BorderBrush = new SolidColorBrush(ExtendedEntryElement.LineColorToApply.ToUwp());
+                border.BorderBrush = new SolidColorBrush(ExtendedEntryElement.LineColor.ToUwp());
             }
         }
 

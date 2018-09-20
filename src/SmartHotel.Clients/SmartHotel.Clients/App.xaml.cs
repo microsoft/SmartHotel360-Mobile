@@ -28,7 +28,7 @@ namespace SmartHotel.Clients
                 new PublicClientApplication($"{AppSettings.B2cAuthority}{AppSettings.B2cTenant}", AppSettings.B2cClientId);
 
             InitializeComponent();
-    
+
             InitNavigation();
         }
 
@@ -49,14 +49,13 @@ namespace SmartHotel.Clients
         protected override void OnStart()
         {
             /// Disable AppCenter in UI tests
-#if ( IS_UI_TEST == false )
-            
+#if (IS_UI_TEST == false)
+
             // Handle when your app starts
             AppCenter.Start($"ios={AppSettings.AppCenterAnalyticsIos};" +
                 $"uwp={AppSettings.AppCenterAnalyticsWindows};" +
                 $"android={AppSettings.AppCenterAnalyticsAndroid}",
                 typeof(Analytics), typeof(Crashes), typeof(Distribute));
-
 #endif
         }
 

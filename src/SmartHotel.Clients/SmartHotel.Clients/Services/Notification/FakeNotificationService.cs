@@ -20,6 +20,9 @@ namespace SmartHotel.Clients.Core.Services.Notification
             return Task.FromResult(data.AsEnumerable());
         }
 
-        public Task DeleteNotificationAsync(Models.Notification notification) => Task.FromResult(false);
+        public Task DeleteNotificationAsync(Models.Notification notification)
+        {
+            return Task.FromResult(false);
+        }
     }
 }

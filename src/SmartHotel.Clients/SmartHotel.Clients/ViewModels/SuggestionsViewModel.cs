@@ -1,10 +1,10 @@
 ﻿using MvvmHelpers;
+using SmartHotel.Clients.Core.Exceptions;
 using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Geolocator;
 using SmartHotel.Clients.Core.Services.Suggestion;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -20,7 +20,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly ILocationService locationService;
 
         public SuggestionsViewModel(
-            ISuggestionService suggestionService, 
+            ISuggestionService suggestionService,
             ILocationService locationService)
         {
             this.suggestionService = suggestionService;
@@ -65,11 +65,16 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 if (!string.IsNullOrEmpty(httpEx.Message))
                 {
-                    await DialogService.ShowAlertAsync( 
+                    await DialogService.ShowAlertAsync(
                         string.Format(Resources.HttpRequestExceptionMessage, httpEx.Message),
                         Resources.HttpRequestExceptionTitle,
                         Resources.DialogOk);
                 }
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Suggestions] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {

@@ -15,7 +15,12 @@ namespace SmartHotel.Clients.Core.ViewModels
         public MenuViewModel MenuViewModel
         {
             get => menuViewModel;
-            set => SetProperty(ref menuViewModel, value);
+
+            set
+            {
+                menuViewModel = value;
+                OnPropertyChanged();
+            }
         }
 
         public override Task InitializeAsync(object navigationData) => Task.WhenAll

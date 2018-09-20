@@ -11,10 +11,9 @@ namespace SmartHotel.Clients.iOS.Effects
     {
         protected override void OnAttached()
         {
-            var label = Control as UILabel;
             var element = Element as Label;
 
-            if (label != null && element != null)
+            if (Control is UILabel label && element != null)
             {
                 var attributes = new UIStringAttributes { UnderlineStyle = NSUnderlineStyle.Single };
                 var attrString = new NSAttributedString(element.Text, attributes);

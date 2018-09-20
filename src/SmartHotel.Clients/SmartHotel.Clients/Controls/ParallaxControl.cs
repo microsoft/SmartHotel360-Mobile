@@ -21,8 +21,8 @@ namespace SmartHotel.Clients.Core.Controls
         double height;
         public void Parallax()
         {
-            if (ParallaxView == null
-                || Device.RuntimePlatform == "Windows"
+            if (ParallaxView == null 
+                || Device.RuntimePlatform == "Windows" 
                 || Device.RuntimePlatform == "WinPhone")
                 return;
 

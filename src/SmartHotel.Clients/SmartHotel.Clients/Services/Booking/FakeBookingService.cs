@@ -28,7 +28,7 @@ namespace SmartHotel.Clients.Core.Services.Booking
         };
 
 
-        static Models.Occupancy occupancy = new Models.Occupancy
+        static readonly Models.Occupancy occupancy = new Models.Occupancy
         {
             OcuppancyIfSunny = 79.10,
             OccupancyIfNotSunny = 58.50

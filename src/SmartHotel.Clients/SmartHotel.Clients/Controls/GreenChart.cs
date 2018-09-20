@@ -72,7 +72,7 @@ namespace SmartHotel.Clients.Core.Controls
             return result.ToArray();
         }
 
-        protected void DrawFooter(SKCanvas canvas, SKPoint[] points, SKSize itemSize, int height, float footerHeight) => this.DrawLabels(canvas, points, itemSize, height, footerHeight);
+        protected void DrawFooter(SKCanvas canvas, SKPoint[] points, SKSize itemSize, int height, float footerHeight) => DrawLabels(canvas, points, itemSize, height, footerHeight);
 
         protected void DrawLabels(SKCanvas canvas, SKPoint[] points, SKSize itemSize, int height, float footerHeight)
         {

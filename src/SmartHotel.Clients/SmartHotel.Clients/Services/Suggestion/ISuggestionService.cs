@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using MvvmHelpers;
 
 namespace SmartHotel.Clients.Core.Services.Suggestion

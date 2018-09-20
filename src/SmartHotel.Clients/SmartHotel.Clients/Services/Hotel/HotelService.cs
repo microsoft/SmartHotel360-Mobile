@@ -11,7 +11,10 @@ namespace SmartHotel.Clients.Core.Services.Hotel
     {
         readonly IRequestService requestService;
 
-        public HotelService(IRequestService requestService) => this.requestService = requestService;
+        public HotelService(IRequestService requestService)
+        {
+            this.requestService = requestService;
+        }
 
         public Task<IEnumerable<City>> GetCitiesAsync()
         {

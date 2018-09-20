@@ -1,4 +1,5 @@
-﻿using SmartHotel.Clients.Core.Models;
+﻿using SmartHotel.Clients.Core.Exceptions;
+using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Validations;
@@ -17,6 +18,8 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         ValidatableObject<string> userName;
         ValidatableObject<string> password;
+
+        public bool IsValid { get; set; }
 
         public LoginViewModel(
             IAnalyticService analyticService,
@@ -53,9 +56,9 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             IsBusy = true;
 
-            var isValid = Validate();
+            IsValid = Validate();           
 
-            if (isValid)
+            if (IsValid)
             {
                 var isAuth = await authenticationService.LoginAsync(UserName.Value, Password.Value);
 
@@ -67,6 +70,8 @@ namespace SmartHotel.Clients.Core.ViewModels
                     await NavigationService.NavigateToAsync<MainViewModel>();
                 }
             }
+
+            MessagingCenter.Send(this, MessengerKeys.SignInRequested);
 
             IsBusy = false;
         }
@@ -87,11 +92,15 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
             catch (ServiceAuthenticationException)
             {
-                await DialogService.ShowAlertAsync("Please, try again", "Login error", "Ok");
+                await DialogService.ShowAlertAsync("Please, try again.", "Login error", "Ok");
+            }
+            catch(ConnectivityException)
+            {
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch(Exception)
             {
-                await DialogService.ShowAlertAsync("An error occurred, try again", "Error", "Ok");
+                await DialogService.ShowAlertAsync("An error occurred, try again.", "Error", "Ok");
             }
             finally
             {

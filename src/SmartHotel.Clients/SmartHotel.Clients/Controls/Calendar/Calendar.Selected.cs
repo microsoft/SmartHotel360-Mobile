@@ -288,44 +288,46 @@ namespace SmartHotel.Clients.Core.Controls
 
         #endregion
 
-        protected void SetButtonSelected(CalendarButton button, SpecialDate special, bool first = false, bool last = false) => Device.BeginInvokeOnMainThread(() =>
-                                                                                                                               {
-                                                                                                                                   button.BackgroundPattern = special != null ? special.BackgroundPattern : null;
-                                                                                                                                   if (first)
-                                                                                                                                   {
-                                                                                                                                       button.BackgroundImage = special != null ? special.BackgroundImage : FirstSelectedBackgroundImage != null ? FirstSelectedBackgroundImage : null;
-                                                                                                                                   }
-                                                                                                                                   else if (last)
-                                                                                                                                   {
-                                                                                                                                       button.BackgroundImage = special != null ? special.BackgroundImage : LastSelectedBackgroundImage != null ? LastSelectedBackgroundImage : null;
-                                                                                                                                   }
-                                                                                                                                   else
-                                                                                                                                   {
-                                                                                                                                       if (SelectedDates.Count == 1)
-                                                                                                                                       {
-                                                                                                                                           button.BackgroundImage = special != null ? special.BackgroundImage : SelectedBackgroundImage != null ? SelectedBackgroundImage : null;
-                                                                                                                                       }
-                                                                                                                                       else
-                                                                                                                                       {
-                                                                                                                                           button.BackgroundImage = special != null ? special.BackgroundImage : SelectedBackgroundImage != null ? SelectedRangeBackgroundImage : null;
-                                                                                                                                       }
-                                                                                                                                   }
-                                                                                                                                   var defaultBackgroundColor = button.IsOutOfMonth ? DatesBackgroundColorOutsideMonth : DatesBackgroundColor;
-                                                                                                                                   var defaultTextColor = button.IsOutOfMonth ? DatesTextColorOutsideMonth : DatesTextColor;
-                                                                                                                                   var defaultFontAttributes = button.IsOutOfMonth ? DatesFontAttributesOutsideMonth : DatesFontAttributes;
-                                                                                                                                   var defaultFontFamily = button.IsOutOfMonth ? DatesFontFamilyOutsideMonth : DatesFontFamily;
-                                                                                                                                   button.IsEnabled = true;
-                                                                                                                                   button.IsSelected = true;
-                                                                                                                                   button.VerticalOptions = LayoutOptions.FillAndExpand;
-                                                                                                                                   button.HorizontalOptions = LayoutOptions.FillAndExpand;
-                                                                                                                                   button.FontSize = SelectedFontSize;
-                                                                                                                                   button.BorderWidth = SelectedBorderWidth;
-                                                                                                                                   button.BorderColor = SelectedBorderColor;
-                                                                                                                                   button.BackgroundColor = SelectedBackgroundColor != Color.Default ? SelectedBackgroundColor : (special != null && special.BackgroundColor.HasValue ? special.BackgroundColor.Value : defaultBackgroundColor);
-                                                                                                                                   button.TextColor = SelectedTextColor != Color.Default ? SelectedTextColor : (special != null && special.TextColor.HasValue ? special.TextColor.Value : defaultTextColor);
-                                                                                                                                   button.FontAttributes = SelectedFontAttributes != FontAttributes.None ? SelectedFontAttributes : (special != null && special.FontAttributes.HasValue ? special.FontAttributes.Value : defaultFontAttributes);
-                                                                                                                                   button.FontFamily = !string.IsNullOrEmpty(SelectedFontFamily) ? SelectedFontFamily : (special != null && !string.IsNullOrEmpty(special.FontFamily) ? special.FontFamily : defaultFontFamily);
-                                                                                                                               });
+        protected void SetButtonSelected(CalendarButton button, SpecialDate special, bool first = false, bool last = false) => Device.BeginInvokeOnMainThread(() =>                        
+        {
+            button.BackgroundPattern = special != null ? special.BackgroundPattern : null;
+
+            if (first)
+            {
+                button.BackgroundImage = special != null ? special.BackgroundImage : FirstSelectedBackgroundImage != null ? FirstSelectedBackgroundImage : null;
+            }
+            else if (last)
+            {
+                button.BackgroundImage = special != null ? special.BackgroundImage : LastSelectedBackgroundImage != null ? LastSelectedBackgroundImage : null;
+            }
+            else
+            {
+                if (SelectedDates.Count == 1)
+                {
+                    button.BackgroundImage = special != null ? special.BackgroundImage : SelectedBackgroundImage != null ? SelectedBackgroundImage : null;
+                }
+                else
+                {
+                    button.BackgroundImage = special != null ? special.BackgroundImage : SelectedBackgroundImage != null ? SelectedRangeBackgroundImage : null;
+                }
+            }
+
+            var defaultBackgroundColor = button.IsOutOfMonth ? DatesBackgroundColorOutsideMonth : DatesBackgroundColor;
+            var defaultTextColor = button.IsOutOfMonth ? DatesTextColorOutsideMonth : DatesTextColor;
+            var defaultFontAttributes = button.IsOutOfMonth ? DatesFontAttributesOutsideMonth : DatesFontAttributes;
+            var defaultFontFamily = button.IsOutOfMonth ? DatesFontFamilyOutsideMonth : DatesFontFamily;
+            button.IsEnabled = true;
+            button.IsSelected = true;
+            button.VerticalOptions = LayoutOptions.FillAndExpand;
+            button.HorizontalOptions = LayoutOptions.FillAndExpand;
+            button.FontSize = SelectedFontSize;
+            button.BorderWidth = SelectedBorderWidth;
+            button.BorderColor = SelectedBorderColor;
+            button.BackgroundColor = SelectedBackgroundColor != Color.Default ? SelectedBackgroundColor : (special != null && special.BackgroundColor.HasValue ? special.BackgroundColor.Value : defaultBackgroundColor);
+            button.TextColor = SelectedTextColor != Color.Default ? SelectedTextColor : (special != null && special.TextColor.HasValue ? special.TextColor.Value : defaultTextColor);
+            button.FontAttributes = SelectedFontAttributes != FontAttributes.None ? SelectedFontAttributes : (special != null && special.FontAttributes.HasValue ? special.FontAttributes.Value : defaultFontAttributes);
+            button.FontFamily = !string.IsNullOrEmpty(SelectedFontFamily) ? SelectedFontFamily : (special != null && !string.IsNullOrEmpty(special.FontFamily) ? special.FontFamily : defaultFontFamily);
+        });
 
         protected bool ChangeSelectedDate(DateTime? date, bool clicked = true)
         {

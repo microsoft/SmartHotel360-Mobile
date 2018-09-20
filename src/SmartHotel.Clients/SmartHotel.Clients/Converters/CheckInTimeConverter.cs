@@ -10,6 +10,7 @@ namespace SmartHotel.Clients.Core.Converters
         {
             try
             {
+
                 var time = value.ToString();
                 var date = DateTime.Parse(time, culture);
 

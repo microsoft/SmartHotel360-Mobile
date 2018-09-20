@@ -292,16 +292,15 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SmartHotel.Core.Invoicing\SmartHotel.Core.Invoicing.csproj">
-      <Project>{4bfac265-b454-462d-8cb1-bfbf6338eb58}</Project>
-      <Name>SmartHotel.Core.Invoicing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SmartHotel.Clients\SmartHotel.Clients.csproj">
       <Project>{7ada23cf-cb3d-4898-822f-915e251ed8f1}</Project>
       <Name>SmartHotel.Clients</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Autofac">
       <Version>4.8.1</Version>
     </PackageReference>
@@ -350,6 +349,9 @@
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.60.3</Version>
     </PackageReference>
+    <PackageReference Include="Splat">
+      <Version>5.0.2</Version>
+    </PackageReference>
     <PackageReference Include="System.ValueTuple">
       <Version>4.5.0</Version>
     </PackageReference>
@@ -366,7 +368,7 @@
       <Version>2.4.3.840</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.1.0.697729</Version>
+      <Version>3.2.0.839982</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

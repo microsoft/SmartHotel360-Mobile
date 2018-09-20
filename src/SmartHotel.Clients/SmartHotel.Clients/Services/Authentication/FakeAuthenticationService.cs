@@ -5,15 +5,9 @@ namespace SmartHotel.Clients.Core.Services.Authentication
 {
     public class FakeAuthenticationService : IAuthenticationService
     {
-        static bool AuthSucceded;
+        static bool authSucceded;
 
-        public bool IsAuthenticated
-        {
-            get
-            {
-                return AuthSucceded;
-            }
-        }
+        public bool IsAuthenticated => authSucceded;
 
         public User AuthenticatedUser => new User
         {
@@ -33,7 +27,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
                 succeeded = false;
             }
 
-            AuthSucceded = succeeded;
+            authSucceded = succeeded;
 
             return succeeded;
         }
@@ -44,7 +38,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
 
         public Task LogoutAsync()
         {
-            AuthSucceded = false;
+            authSucceded = false;
 
             return Task.FromResult(false);
         }

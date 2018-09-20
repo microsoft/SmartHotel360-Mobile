@@ -32,25 +32,19 @@ namespace SmartHotel.Clients.Core.Views.Templates
             InitializeCell();
         }
 
-        ICommand TransitionCommand
+        ICommand TransitionCommand => new Command(async () =>
         {
-            get
-            {
-                return new Command(async () =>
-                {
-                    var isUwp = Device.RuntimePlatform == Device.UWP;
+            var isUwp = Device.RuntimePlatform == Device.UWP;
 
-                    DeleteContainer.BackgroundColor = Color.FromHex("#EC0843");
-                    DeleteImage.Source =  isUwp ? $"Assets/ic_paperbin.png" : $"ic_paperbin";
+            DeleteContainer.BackgroundColor = Color.FromHex("#EC0843");
+            DeleteImage.Source = isUwp ? $"Assets/ic_paperbin.png" : $"ic_paperbin";
 
-                    await this.TranslateTo(-this.Width, 0, 500, Easing.SinIn);
+            await this.TranslateTo(-Width, 0, 500, Easing.SinIn);
 
-                    DeleteCommand?.Execute(BindingContext);
+            DeleteCommand?.Execute(BindingContext);
 
-                    InitializeCell();
-                });
-            }
-        }
+            InitializeCell();
+        });
 
         void OnDeleteTapped() => TransitionCommand.Execute(null);
 
@@ -58,7 +52,7 @@ namespace SmartHotel.Clients.Core.Views.Templates
         {
             var isUwp = Device.RuntimePlatform == Device.UWP;
 
-            this.TranslationX = 0;
+            TranslationX = 0;
             DeleteContainer.BackgroundColor = Color.FromHex("#F2F2F2");
             DeleteImage.Source = isUwp ? $"Assets/ic_paperbin_red.png" : $"ic_paperbin_red";
         }

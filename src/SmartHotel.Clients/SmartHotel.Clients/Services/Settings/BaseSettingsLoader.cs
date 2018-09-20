@@ -15,11 +15,11 @@ namespace SmartHotel.Clients.Core.Services.Settings
     public abstract class BaseSettingsLoader<TRemoteSettingsModel> : IBaseSettingsLoader<TRemoteSettingsModel>
         where TRemoteSettingsModel : class
     {
-        readonly JsonSerializerSettings _serializerSettings;
+        readonly JsonSerializerSettings serializerSettings;
 
         protected BaseSettingsLoader()
         {
-            _serializerSettings = new JsonSerializerSettings
+            serializerSettings = new JsonSerializerSettings
             {
                 ContractResolver = new DefaultContractResolver
                 {

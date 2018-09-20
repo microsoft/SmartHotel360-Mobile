@@ -3,7 +3,7 @@ using System.IO;
 
 namespace SmartHotel.Clients.Core.Extensions
 {
-    static class UriBuilderExtensions
+    public static class UriBuilderExtensions
     {
         internal static void AppendToPath(this UriBuilder builder, string pathToAdd)
         {

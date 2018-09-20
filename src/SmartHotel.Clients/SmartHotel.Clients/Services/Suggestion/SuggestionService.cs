@@ -3,7 +3,6 @@ using SmartHotel.Clients.Core.Extensions;
 using SmartHotel.Clients.Core.Services.Request;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Threading.Tasks;
 

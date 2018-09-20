@@ -1,5 +1,4 @@
-﻿using SmartHotel.Clients.Core.ViewModels.Base;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 

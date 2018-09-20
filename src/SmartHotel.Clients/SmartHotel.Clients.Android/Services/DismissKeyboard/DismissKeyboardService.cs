@@ -10,7 +10,7 @@ namespace SmartHotel.Clients.Droid.Services.DismissKeyboard
     {
         public void DismissKeyboard()
         {
-            var inputMethodManager = InputMethodManager.FromContext(Application.Context);
+            var inputMethodManager = InputMethodManager.FromContext(Android.App.Application.Context);
 
             inputMethodManager.HideSoftInputFromWindow(
                 ((Activity)Xamarin.Forms.Forms.Context).Window.DecorView.WindowToken, HideSoftInputFlags.NotAlways);

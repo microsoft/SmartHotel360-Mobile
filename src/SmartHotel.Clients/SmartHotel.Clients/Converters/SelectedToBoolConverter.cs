@@ -28,7 +28,7 @@ namespace SmartHotel.Clients.Core.Converters
                             var valueText = value.ToString();
                             var labelText = label.Text;
 
-                            if (valueText.Equals(labelText))
+                            if(valueText.Equals(labelText))
                                 return true;
                         }
                     }

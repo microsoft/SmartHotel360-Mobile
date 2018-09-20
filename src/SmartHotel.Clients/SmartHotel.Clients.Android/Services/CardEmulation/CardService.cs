@@ -23,27 +23,24 @@ namespace SmartHotel.Clients.Droid.Services.CardEmulation
         public const string ServiceName = "smartHotel.clients.droid.services.cardEmulation.cardService";
 
         // "OK" status word sent in response to SELECT AID command (0x9000)
-        static readonly byte[] SELECT_OK_SW = HexStringToByteArray("9000");
+        static readonly byte[] sELECT_OK_SW = HexStringToByteArray("9000");
         
         // "UNKNOWN" status word sent in response to invalid APDU command (0x0000)
-        static readonly byte[] UNKNOWN_CMD_SW = HexStringToByteArray("0000");
+        static readonly byte[] uNKNOWN_CMD_SW = HexStringToByteArray("0000");
 
-        static String _messageValue;
+        static string messageValue;
 
-        public CardService()
-        {
-            MessagingCenter.Subscribe<string>(this, MessengerKeys.SendNFCToken, StartNFCService);
-        }
+        public CardService() => MessagingCenter.Subscribe<string>(this, MessengerKeys.SendNFCToken, StartNFCService);
 
         public override byte[] ProcessCommandApdu(byte[] commandApdu, Bundle extras)
         {
-            if (!string.IsNullOrEmpty(_messageValue))
+            if (!string.IsNullOrEmpty(messageValue))
             {
-                return ConcatArrays(Encoding.UTF8.GetBytes(_messageValue), SELECT_OK_SW);
+                return ConcatArrays(Encoding.UTF8.GetBytes(messageValue), sELECT_OK_SW);
             }
             else
             {
-                return UNKNOWN_CMD_SW;
+                return uNKNOWN_CMD_SW;
             }
         }
 
@@ -64,6 +61,6 @@ namespace SmartHotel.Clients.Droid.Services.CardEmulation
             return result;
         }
 
-        void StartNFCService(string message) => _messageValue = message;
+        void StartNFCService(string message) => messageValue = message;
     }
 }

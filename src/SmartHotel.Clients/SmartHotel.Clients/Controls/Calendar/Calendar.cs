@@ -82,7 +82,7 @@ namespace SmartHotel.Clients.Core.Controls
             weekNumberLabels = new List<Label>(6);
             buttons = new List<CalendarButton>(42);
             mainCalendars = new List<Grid>(1);
-            WeekNumbers = new List<Grid>(1);
+            weekNumbers = new List<Grid>(1);
 
             CalendarViewType = DateTypeEnum.Normal;
             YearsRow = 4;
@@ -279,8 +279,8 @@ namespace SmartHotel.Clients.Core.Controls
         #region DatesFontAttributes
 
         public static readonly BindableProperty DatesFontAttributesProperty =
-            BindableProperty.Create(nameof(DatesFontAttributes), typeof(FontAttributes), typeof(Calendar), FontAttributes.None,
-                                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeDatesFontAttributes((FontAttributes)newValue, (FontAttributes)oldValue));
+            BindableProperty.Create(nameof(DatesFontAttributes), typeof(FontAttributes), typeof(Calendar), FontAttributes.None,     
+                propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeDatesFontAttributes((FontAttributes)newValue, (FontAttributes)oldValue));
 
         protected void ChangeDatesFontAttributes(FontAttributes newValue, FontAttributes oldValue)
         {
@@ -303,8 +303,8 @@ namespace SmartHotel.Clients.Core.Controls
         #region DatesFontSize
 
         public static readonly BindableProperty DatesFontSizeProperty =
-            BindableProperty.Create(nameof(DatesFontSize), typeof(double), typeof(Calendar), 20.0,
-                                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeDatesFontSize((double)newValue, (double)oldValue));
+            BindableProperty.Create(nameof(DatesFontSize), typeof(double), typeof(Calendar), 20.0,      
+                propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeDatesFontSize((double)newValue, (double)oldValue));
 
         protected void ChangeDatesFontSize(double newValue, double oldValue)
         {
@@ -327,8 +327,8 @@ namespace SmartHotel.Clients.Core.Controls
         #region DatesFontFamily
 
         public static readonly BindableProperty DatesFontFamilyProperty =
-                    BindableProperty.Create(nameof(DatesFontFamily), typeof(string), typeof(Calendar), default(string),
-                                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeDatesFontFamily((string)newValue, (string)oldValue));
+                    BindableProperty.Create(nameof(DatesFontFamily), typeof(string), typeof(Calendar), default(string), 
+                        propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeDatesFontFamily((string)newValue, (string)oldValue));
 
         protected void ChangeDatesFontFamily(string newValue, string oldValue)
         {
@@ -351,7 +351,7 @@ namespace SmartHotel.Clients.Core.Controls
 
         public static readonly BindableProperty ShowNumOfMonthsProperty =
             BindableProperty.Create(nameof(ShowNumOfMonths), typeof(int), typeof(Calendar), 1,
-                                    propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeCalendar(CalandarChanges.All));
+                propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeCalendar(CalandarChanges.All));
 
         /// <summary>
         /// Gets or sets a the number of months to show
@@ -436,7 +436,7 @@ namespace SmartHotel.Clients.Core.Controls
         protected void CreateWeeknumbers()
         {
             weekNumberLabels.Clear();
-            WeekNumbers.Clear();
+            weekNumbers.Clear();
             if (!ShowNumberOfWeek) return;
 
             for (var i = 0; i < ShowNumOfMonths; i++)
@@ -466,7 +466,7 @@ namespace SmartHotel.Clients.Core.Controls
 
                     weekNumbers.Children.Add(weekNumberLabels.Last(), 0, r);
                 }
-                WeekNumbers.Add(weekNumbers);
+                this.weekNumbers.Add(weekNumbers);
             }
         }
 
@@ -513,89 +513,89 @@ namespace SmartHotel.Clients.Core.Controls
         public void ForceRedraw() => ChangeCalendar(CalandarChanges.All);
 
         protected void ChangeCalendar(CalandarChanges changes) => Device.BeginInvokeOnMainThread(() =>
-                                                                  {
-                                                                      Content = null;
-                                                                      if (changes.HasFlag(CalandarChanges.StartDate))
-                                                                      {
-                                                                          TitleLabel.Text = StartDate.ToString(TitleLabelFormat);
-                                                                          if (titleLabels != null)
-                                                                          {
-                                                                              var tls = StartDate.AddMonths(1);
-                                                                              foreach (var tl in titleLabels)
-                                                                              {
-                                                                                  (tl as Label).Text = tls.ToString(TitleLabelFormat);
-                                                                                  tls = tls.AddMonths(1);
-                                                                              }
-                                                                          }
-                                                                      }
+        {
+            Content = null;
+            if (changes.HasFlag(CalandarChanges.StartDate))
+            {
+                TitleLabel.Text = StartDate.ToString(TitleLabelFormat);
+                if (titleLabels != null)
+                {
+                    var tls = StartDate.AddMonths(1);
+                    foreach (var tl in titleLabels)
+                    {
+                        (tl as Label).Text = tls.ToString(TitleLabelFormat);
+                        tls = tls.AddMonths(1);
+                    }
+                }
+            }
 
-                                                                      var start = CalendarStartDate(StartDate).Date;
-                                                                      var beginOfMonth = false;
-                                                                      var endOfMonth = false;
-                                                                      for (var i = 0; i < buttons.Count; i++)
-                                                                      {
-                                                                          endOfMonth |= beginOfMonth && start.Day == 1;
-                                                                          beginOfMonth |= start.Day == 1;
+            var start = CalendarStartDate(StartDate).Date;
+            var beginOfMonth = false;
+            var endOfMonth = false;
+            for (var i = 0; i < buttons.Count; i++)
+            {
+                endOfMonth |= beginOfMonth && start.Day == 1;
+                beginOfMonth |= start.Day == 1;
 
-                                                                          if (i < dayLabels.Count && WeekdaysShow && changes.HasFlag(CalandarChanges.StartDay))
-                                                                          {
-                                                                              var day = start.ToString(WeekdaysFormat);
-                                                                              var showDay = char.ToUpper(day.First()) + day.Substring(1).ToLower();
-                                                                              dayLabels[i].Text = showDay;
-                                                                          }
+                if (i < dayLabels.Count && WeekdaysShow && changes.HasFlag(CalandarChanges.StartDay))
+                {
+                    var day = start.ToString(WeekdaysFormat);
+                    var showDay = char.ToUpper(day.First()) + day.Substring(1).ToLower();
+                    dayLabels[i].Text = showDay;
+                }
 
-                                                                          ChangeWeekNumbers(start, i);
+                ChangeWeekNumbers(start, i);
 
-                                                                          if (changes.HasFlag(CalandarChanges.All))
-                                                                          {
-                                                                              buttons[i].Text = string.Format("{0}", start.Day);
-                                                                          }
-                                                                          else
-                                                                          {
-                                                                              buttons[i].TextWithoutMeasure = string.Format("{0}", start.Day);
-                                                                          }
-                                                                          buttons[i].Date = start;
+                if (changes.HasFlag(CalandarChanges.All))
+                {
+                    buttons[i].Text = string.Format("{0}", start.Day);
+                }
+                else
+                {
+                    buttons[i].TextWithoutMeasure = string.Format("{0}", start.Day);
+                }
+                buttons[i].Date = start;
 
-                                                                          buttons[i].IsOutOfMonth = !(beginOfMonth && !endOfMonth);
-                                                                          buttons[i].IsEnabled = ShowNumOfMonths == 1 || !buttons[i].IsOutOfMonth;
+                buttons[i].IsOutOfMonth = !(beginOfMonth && !endOfMonth);
+                buttons[i].IsEnabled = ShowNumOfMonths == 1 || !buttons[i].IsOutOfMonth;
 
-                                                                          SpecialDate sd = null;
-                                                                          if (SpecialDates != null)
-                                                                          {
-                                                                              sd = SpecialDates.FirstOrDefault(s => s.Date.Date == start.Date);
-                                                                          }
+                SpecialDate sd = null;
+                if (SpecialDates != null)
+                {
+                    sd = SpecialDates.FirstOrDefault(s => s.Date.Date == start.Date);
+                }
 
-                                                                          SetButtonNormal(buttons[i]);
+                SetButtonNormal(buttons[i]);
 
-                                                                          if ((MinDate.HasValue && start.Date < MinDate) || (MaxDate.HasValue && start.Date > MaxDate) || (DisableAllDates && sd == null))
-                                                                          {
-                                                                              SetButtonDisabled(buttons[i]);
-                                                                          }
-                                                                          else if (buttons[i].IsEnabled && (SelectedDates?.Select(d => d.Date)?.Contains(start.Date) ?? false))
-                                                                          {
-                                                                              SetButtonSelected(buttons[i], sd);
-                                                                          }
-                                                                          else if (sd != null)
-                                                                          {
-                                                                              SetButtonSpecial(buttons[i], sd);
-                                                                          }
+                if ((MinDate.HasValue && start.Date < MinDate) || (MaxDate.HasValue && start.Date > MaxDate) || (DisableAllDates && sd == null))
+                {
+                    SetButtonDisabled(buttons[i]);
+                }
+                else if (buttons[i].IsEnabled && (SelectedDates?.Select(d => d.Date)?.Contains(start.Date) ?? false))
+                {
+                    SetButtonSelected(buttons[i], sd);
+                }
+                else if (sd != null)
+                {
+                    SetButtonSpecial(buttons[i], sd);
+                }
 
-                                                                          start = start.AddDays(1);
-                                                                          if (i != 0 && (i + 1) % 42 == 0)
-                                                                          {
-                                                                              beginOfMonth = false;
-                                                                              endOfMonth = false;
-                                                                              start = CalendarStartDate(start);
-                                                                          }
+                start = start.AddDays(1);
+                if (i != 0 && (i + 1) % 42 == 0)
+                {
+                    beginOfMonth = false;
+                    endOfMonth = false;
+                    start = CalendarStartDate(start);
+                }
 
-                                                                      }
-                                                                      if (DisableDatesLimitToMaxMinRange)
-                                                                      {
-                                                                          TitleLeftArrow.IsEnabled = !(MinDate.HasValue && CalendarStartDate(StartDate).Date < MinDate);
-                                                                          TitleRightArrow.IsEnabled = !(MaxDate.HasValue && start > MaxDate);
-                                                                      }
-                                                                      Content = mainView;
-                                                                  });
+            }
+            if (DisableDatesLimitToMaxMinRange)
+            {
+                TitleLeftArrow.IsEnabled = !(MinDate.HasValue && CalendarStartDate(StartDate).Date < MinDate);
+                TitleRightArrow.IsEnabled = !(MaxDate.HasValue && start > MaxDate);
+            }
+            Content = mainView;
+        });
 
         protected void SetButtonNormal(CalendarButton button)
         {

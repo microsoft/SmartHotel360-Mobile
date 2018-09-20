@@ -9,6 +9,9 @@ namespace SmartHotel.Clients.Core.Views
 			InitializeComponent ();
         }
 
-        protected override bool OnBackgroundClicked() => false;
+        protected override bool OnBackgroundClicked()
+        {
+            return false;
+        }
     }
 }

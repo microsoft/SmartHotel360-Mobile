@@ -17,10 +17,7 @@ namespace SmartHotel.Clients.Core.Controls
             set => SetValue(RemoteSettingsProperty, value);
         }
 
-        public RemoteSettingsControl()
-        {
-            InitializeComponent();
-        }
+        public RemoteSettingsControl() => InitializeComponent();
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

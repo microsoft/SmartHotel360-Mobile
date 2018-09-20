@@ -11,7 +11,6 @@ namespace SmartHotel.Core.Invoicing
         {
             var fileName = DateTime.Now.ToString("yyyyMMdd_HHmmss", CultureInfo.InvariantCulture) + ".txt";
            
-
             var finalPath = Path.Combine(path, "Invoices");
 
             if (!Directory.Exists(finalPath))
@@ -28,7 +27,7 @@ namespace SmartHotel.Core.Invoicing
                 "###########################################\n" +
                 "\n" +
                 $"{invoice.Name}\n" +
-                $"{invoice.Items.Select(i => i + "\n")}" +
+                $"{string.Concat(invoice.Items.Select(i => i + "\n").ToArray())}" +
                 "\n" +
                 $"Total: {invoice.Total.ToString("C")}\n" +
                 "\n" +

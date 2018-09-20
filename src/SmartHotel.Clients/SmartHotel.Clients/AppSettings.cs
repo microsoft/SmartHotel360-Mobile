@@ -7,17 +7,18 @@ namespace SmartHotel.Clients.Core
     public static class AppSettings
     {
         //IF YOU DEPLOY YOUR OWN ENDPOINT REPLACE THE VALUEW BELOW
+
         //App Center
         const string defaultAppCenterAndroid = "b3b1403c-3f9d-4c77-805e-9c002de6ddf7";
         const string defaultAppCenteriOS = "7a2a290b-07b0-47dc-9dcd-15461e894e6d";
         const string defaultAppCenterUWP = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
+        static string defaultBookingEndpoint;
+        static string defaultHotelsEndpoint;
+        static string defaultSuggestionsEndpoint;
+        static string defaultNotificationsEndpoint;
+        static string defaultSettingsFileUrl;
 
         // Endpoints
-        const string defaultBookingEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
-        const string defaultHotelsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
-        const string defaultSuggestionsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
-        const string defaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
-        const string defaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
         const string defaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
 
         // Maps
@@ -25,8 +26,7 @@ namespace SmartHotel.Clients.Core
         public const string DefaultFallbackMapsLocation = "40.762246,-73.986943";
 
         // Bots
-        const string defaultSkypeBotId = "897f3818-8da3-4d23-a613-9a0f9555f2ea";
-        const string defaultFacebookBotId = "120799875283148";
+        const string defaultSkypeBotId = "87e0cdb5-8e79-4592-9dc8-11697ffe79cc";
 
         // B2c
         public const string B2cAuthority = "https://login.microsoftonline.com/";
@@ -38,7 +38,30 @@ namespace SmartHotel.Clients.Core
         const bool defaultHasBooking = false;
 
         // Fakes
-        const bool defaultUseFakes = true;
+        const bool defaultUseFakes = false;
+
+        // Use local Docker endpoints
+        const bool useLocalDocker = true;
+
+        static AppSettings()
+        {
+            if (useLocalDocker)
+            {
+                defaultBookingEndpoint = "http://localhost:6100/";
+                defaultHotelsEndpoint = "http://localhost:6101/";
+                defaultSuggestionsEndpoint = "http://localhost:6102/";
+                defaultNotificationsEndpoint = "http://localhost:6105/";
+                defaultSettingsFileUrl = "http://localhost:6103/cfg/public-http";
+            }
+            else
+            {
+                defaultBookingEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
+                defaultHotelsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
+                defaultSuggestionsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
+                defaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
+                defaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
+            }
+        }
 
         // Azure B2C settings
         public static string B2cClientId
@@ -58,7 +81,7 @@ namespace SmartHotel.Clients.Core
             get => Preferences.Get(nameof(B2cPolicy), DefaultB2cPolicy);
             set => Preferences.Set(nameof(B2cPolicy), value);
         }
-        
+
 
         // API Endpoints
         public static string BookingEndpoint
@@ -95,12 +118,6 @@ namespace SmartHotel.Clients.Core
         {
             get => Preferences.Get(nameof(SkypeBotId), defaultSkypeBotId);
             set => Preferences.Set(nameof(SkypeBotId), value);
-        }
-
-        public static string FacebookBotId
-        {
-            get => Preferences.Get(nameof(FacebookBotId), defaultFacebookBotId);
-            set => Preferences.Set(nameof(FacebookBotId), value);
         }
 
         // Other settings

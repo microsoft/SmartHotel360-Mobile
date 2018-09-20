@@ -33,7 +33,7 @@ namespace SmartHotel.Clients.iOS.Renderers
                 UpdateStatusBarStyle();
         }
 
-        async void UpdateStatusBarStyle()
+        private async void UpdateStatusBarStyle()
         {
             // we want to change defaults XF status bar style calcs
             await System.Threading.Tasks.Task.Delay(1);

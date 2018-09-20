@@ -4,10 +4,7 @@ namespace SmartHotel.Clients.Core.Validations
 {
     public class ValidUrlRule : IValidationRule<string>
     {
-        public ValidUrlRule()
-        {
-            ValidationMessage = "Should be an URL";
-        }
+        public ValidUrlRule() => ValidationMessage = "Should be an URL";
 
         public string ValidationMessage { get; set; }
 

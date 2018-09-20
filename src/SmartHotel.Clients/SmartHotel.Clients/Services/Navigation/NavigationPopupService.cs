@@ -8,7 +8,6 @@ namespace SmartHotel.Clients.Core.Services.Navigation
 {
     public partial class NavigationService : INavigationService
     {
-
         public Task NavigateToPopupAsync<TViewModel>(bool animate) where TViewModel : ViewModelBase => NavigateToPopupAsync<TViewModel>(null, animate);
 
         public async Task NavigateToPopupAsync<TViewModel>(object parameter, bool animate) where TViewModel : ViewModelBase

@@ -42,10 +42,9 @@ namespace SmartHotel.Clients.UWP.Renderers
 
         async Task DrawBackgroundImage()
         {
-            var sourceButton = this.Element as CalendarButton;
             var targetButton = this.Control;
 
-            if (sourceButton == null || targetButton == null) return;
+            if (!(this.Element is CalendarButton sourceButton) || targetButton == null) return;
 
             if (sourceButton.BackgroundImage != null)
             {
@@ -111,7 +110,7 @@ namespace SmartHotel.Clients.UWP.Renderers
 
         Task<Image> GetCurrentImage()
         {
-            var sourceButton = this.Element as CalendarButton;
+            var sourceButton = Element as CalendarButton;
             if (sourceButton == null) return null;
 
             return GetImageAsync(sourceButton.BackgroundImage);

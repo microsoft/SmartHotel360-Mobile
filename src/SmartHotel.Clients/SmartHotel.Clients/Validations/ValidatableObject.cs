@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using MvvmHelpers;
 using Xamarin.Forms;
@@ -49,8 +48,8 @@ namespace SmartHotel.Clients.Core.Validations
         {
             Errors.Clear();
 
-            var errors = Validations.Where(v => !v.Check(Value))
-                                                     .Select(v => v.ValidationMessage);
+            var errors = Validations.Where(v => !v.Check(Value))                        
+                .Select(v => v.ValidationMessage);
 
             foreach (var error in errors)
             {
@@ -59,7 +58,7 @@ namespace SmartHotel.Clients.Core.Validations
 
             IsValid = !Errors.Any();
 
-            return this.IsValid;
+            return IsValid;
         }
     }
 }

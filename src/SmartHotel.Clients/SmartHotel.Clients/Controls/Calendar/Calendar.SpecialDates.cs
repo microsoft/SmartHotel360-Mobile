@@ -16,11 +16,9 @@ namespace SmartHotel.Clients.Core.Controls
                 {
                     if (oldValue != null)
                     {
-                        var ObservableRangeCollection = oldValue as INotifyCollectionChanged;
-
-                        if (ObservableRangeCollection != null)
+                        if (oldValue is INotifyCollectionChanged observableCollection)
                         {
-                            ObservableRangeCollection.CollectionChanged -= (s, e) =>
+                            observableCollection.CollectionChanged -= (s, e) =>
                             {
                                 var newItems = e.NewItems;
                                 if (newItems != null)
@@ -46,11 +44,9 @@ namespace SmartHotel.Clients.Core.Controls
                     }
                     if (newValue != null)
                     {
-                        var ObservableRangeCollection = newValue as INotifyCollectionChanged;
-
-                        if (ObservableRangeCollection != null)
+                        if (newValue is INotifyCollectionChanged observableCollection)
                         {
-                            ObservableRangeCollection.CollectionChanged += (s, e) =>
+                            observableCollection.CollectionChanged += (s, e) =>
                             {
                                 var newItems = e.NewItems;
                                 if (newItems != null)
@@ -75,7 +71,6 @@ namespace SmartHotel.Clients.Core.Controls
                         }
                     }
                 });
-
 
         public IEnumerable<SpecialDate> SpecialDates
         {

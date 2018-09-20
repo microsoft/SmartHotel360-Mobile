@@ -70,8 +70,6 @@ namespace SmartHotel.Clients.Core.Models
 
         public class BotData
         {
-            [JsonProperty(PropertyName = "FacebookBotId")]
-            public string FacebookId { get; set; }
             [JsonProperty(PropertyName = "id")]
             public string SkypeId { get; set; }
         }

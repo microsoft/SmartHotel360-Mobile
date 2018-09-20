@@ -10,7 +10,7 @@
     xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions">
     <pages:PopupPage.Resources>
         <ResourceDictionary>
-            
+
             <Style x:Key="LogoImageStyle" 
                    TargetType="Image">
                 <Setter Property="HeightRequest" Value="60" />
@@ -38,8 +38,8 @@
                 <Setter Property="Margin" Value="0, 48, 0, 6" />
                 <Setter Property="LineBreakMode" Value="NoWrap" />
             </Style>
-            
-                <Style x:Key="CheckoutButtonPanelStyle" 
+
+            <Style x:Key="CheckoutButtonPanelStyle" 
                    TargetType="StackLayout">
                 <Setter Property="HeightRequest" Value="60" />
                 <Setter Property="VerticalOptions" Value="End" />
@@ -55,7 +55,7 @@
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
             </Style>
-                       
+
         </ResourceDictionary>
     </pages:PopupPage.Resources>
     <pages:PopupPage.Animation>
@@ -118,7 +118,7 @@
                 </ffimageloading:CachedImage>
                 <Grid 
                     BackgroundColor="#293849"
-                    Opacity="0.75"/>    
+                    Opacity="0.75"/>
             </Grid>
             <Grid
                 Grid.Row="2">

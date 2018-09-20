@@ -9,9 +9,12 @@ namespace SmartHotel.Clients.Core.Services.Notification
 {
     public class NotificationService : INotificationService
     {
-        readonly IRequestService requestService;
+        readonly IRequestService _requestService;
 
-        public NotificationService(IRequestService requestService) => this.requestService = requestService;
+        public NotificationService(IRequestService requestService)
+        {
+            _requestService = requestService;
+        }
 
         public Task<IEnumerable<Models.Notification>> GetNotificationsAsync(int seq, string token)
         {
@@ -21,7 +24,7 @@ namespace SmartHotel.Clients.Core.Services.Notification
 
             var uri = builder.ToString();
 
-            return requestService.GetAsync<IEnumerable<Models.Notification>>(uri, token);
+            return _requestService.GetAsync<IEnumerable<Models.Notification>>(uri, token);
         }
 
         public Task DeleteNotificationAsync(Models.Notification notification) => Task.FromResult(false);

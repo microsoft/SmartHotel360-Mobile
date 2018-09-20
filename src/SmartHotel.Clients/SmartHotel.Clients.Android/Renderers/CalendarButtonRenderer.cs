@@ -95,8 +95,7 @@ namespace SmartHotel.Clients.Droid.Renderers
 
         protected async Task ChangeBackgroundImageAsync()
         {
-            var element = Element as CalendarButton;
-            if (element == null || element.BackgroundImage == null) return;
+            if (!(Element is CalendarButton element) || element.BackgroundImage == null) return;
 
             var d = new List<Drawable>();
             var image = await GetBitmap(element.BackgroundImage);
@@ -108,8 +107,7 @@ namespace SmartHotel.Clients.Droid.Renderers
 
         protected void ChangeBackgroundPattern()
         {
-            var element = Element as CalendarButton;
-            if (element == null || element.BackgroundPattern == null || Control.Width == 0) return;
+            if (!(Element is CalendarButton element) || element.BackgroundPattern == null || Control.Width == 0) return;
 
             var d = new List<Drawable>();
             for (var i = 0; i < element.BackgroundPattern.Pattern.Count; i++)
@@ -137,7 +135,7 @@ namespace SmartHotel.Clients.Droid.Renderers
         Task<Bitmap> GetBitmap(FileImageSource image)
         {
             var handler = new FileImageSourceHandler();
-            return handler.LoadImageAsync(image, Control.Context);
+            return handler.LoadImageAsync(image, this.Control.Context);
         }
     }
 

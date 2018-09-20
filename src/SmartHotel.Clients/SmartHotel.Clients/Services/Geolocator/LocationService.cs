@@ -1,5 +1,4 @@
 ﻿using Xamarin.Essentials;
-using SmartHotel.Clients.Core.Models;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace SmartHotel.Clients.Core.Services.Geolocator
 {
     public class LocationService : ILocationService
     {
-        readonly TimeSpan PositionReadTimeout = TimeSpan.FromSeconds(5);
+        readonly TimeSpan positionReadTimeout = TimeSpan.FromSeconds(5);
 
         public async Task<Location> GetPositionAsync()
         {
@@ -21,12 +20,10 @@ namespace SmartHotel.Clients.Core.Services.Geolocator
 
                 if (position != null)
                 {
-                    //got a cahched position, so let's use it.
+                    // Got a cahched position, so let's use it.
                     return position;
                 }
-
-
-
+                                
                 position = await Geolocation.GetLocationAsync(new GeolocationRequest
                 {
                     DesiredAccuracy = GeolocationAccuracy.Medium,

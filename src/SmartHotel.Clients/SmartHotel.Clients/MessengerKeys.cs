@@ -8,5 +8,11 @@
 
         // NFC
         public static string SendNFCToken = "SendNFCToken";
+
+        // Login
+        public static string SignInRequested = "SignInRequested";
+
+        // Settings
+        public static string LoadSettingsRequested = "LoadSettingsRequested";
     }
 }

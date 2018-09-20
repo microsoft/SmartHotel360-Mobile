@@ -95,10 +95,13 @@ namespace SmartHotel.Clients.Core.Controls
                 grid.Children.Add(StarImages[i], i, 0);
             }
 
-            this.Content = grid;
+            Content = grid;
         }
 
-        static void UpdateStarsDisplay(BindableObject bindable, object oldValue, object newValue) => ((RatingControl)bindable).UpdateStarsDisplay();
+        static void UpdateStarsDisplay(BindableObject bindable, object oldValue, object newValue)
+        {
+            ((RatingControl)bindable).UpdateStarsDisplay();
+        }
 
         static void OnPrecisionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {

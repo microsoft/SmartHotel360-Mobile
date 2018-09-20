@@ -7,10 +7,7 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class TemperatureChart : Chart
     {
-        public TemperatureChart()
-        {
-            BackgroundColor = SKColor.Parse("#F6F1E9");
-        }
+        public TemperatureChart() => BackgroundColor = SKColor.Parse("#F6F1E9");
 
         public float CaptionMargin { get; set; } = 12;
 

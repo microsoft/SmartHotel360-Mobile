@@ -110,9 +110,8 @@ namespace SmartHotel.Clients.Core.Controls
         protected virtual View GetItemView(object item)
         {
             var content = ItemTemplate.CreateContent();
-            var view = content as View;
 
-            if (view == null)
+            if (!(content is View view))
             {
                 return null;
             }
@@ -134,9 +133,7 @@ namespace SmartHotel.Clients.Core.Controls
         {
             view.GestureRecognizers.Add(gesture);
 
-            var layout = view as Layout<View>;
-
-            if (layout == null)
+            if (!(view is Layout<View> layout))
             {
                 return;
             }

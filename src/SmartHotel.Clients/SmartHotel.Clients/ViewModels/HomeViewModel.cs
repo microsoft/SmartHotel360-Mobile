@@ -1,12 +1,13 @@
 ﻿using MvvmHelpers;
+using SmartHotel.Clients.Core.Exceptions;
 using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Services.Booking;
 using SmartHotel.Clients.Core.Services.Chart;
+using SmartHotel.Clients.Core.Services.File;
 using SmartHotel.Clients.Core.Services.Notification;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -25,17 +26,21 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly IChartService chartService;
         readonly IBookingService bookingService;
         readonly IAuthenticationService authenticationService;
+        readonly IFileService fileService;
 
         public HomeViewModel(
             INotificationService notificationService,
             IChartService chartService,
             IBookingService bookingService,
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService,
+            IFileService fileService)
         {
             this.notificationService = notificationService;
             this.chartService = chartService;
             this.bookingService = bookingService;
             this.authenticationService = authenticationService;
+            this.fileService = fileService;
+
             notifications = new ObservableRangeCollection<Notification>();
         }
 
@@ -63,6 +68,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             set => SetProperty(ref notifications, value);
         }
 
+        const string greetingMessageLastShownFileName = "GreetingMessageLastShownDate.txt";        
+        const string greetingMessageEmbeddedResourceName = "SmartHotel.Clients.Core.Resources.GreetingMessage.txt";
+
         public ICommand NotificationsCommand => new AsyncCommand(OnNotificationsAsync);
 
         public ICommand OpenDoorCommand => new AsyncCommand(OpenDoorAsync);
@@ -88,7 +96,14 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 var authenticatedUser = authenticationService.AuthenticatedUser;
                 var notifications = await notificationService.GetNotificationsAsync(3, authenticatedUser.Token);
-                Notifications = new ObservableRangeCollection<Models.Notification>(notifications);
+                Notifications = new ObservableRangeCollection<Notification>(notifications);
+
+                ShowGreetingMessage();
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Home] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {
@@ -99,6 +114,30 @@ namespace SmartHotel.Clients.Core.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        void ShowGreetingMessage()
+        {
+            // Check the last time the greeting message was showed. That date is saved in a File.
+            // If the file does not exists, or the date in the file is in the past, don't show the greeting-
+            if (fileService.ExistsInLocalAppDataFolder(greetingMessageLastShownFileName))
+            {
+                var textFromFile = fileService.ReadStringFromLocalAppDataFolder(greetingMessageLastShownFileName);
+                long.TryParse(textFromFile, out var lastShownTicks);
+
+                if (lastShownTicks < DateTime.Now.Ticks)
+                {
+                    return;
+                }
+            }
+
+            // Show greeting message
+            var greetingMessage = fileService.ReadStringFromAssemblyEmbeddedResource(greetingMessageEmbeddedResourceName);
+            DialogService.ShowToast(greetingMessage);
+
+            // Save last shown date
+            var stringTicks = DateTime.Now.Ticks.ToString();
+            fileService.WriteStringToLocalAppDataFolder(greetingMessageLastShownFileName, stringTicks);
         }
 
         public Task OnViewAppearingAsync(VisualElement view)

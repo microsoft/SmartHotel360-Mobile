@@ -63,19 +63,10 @@ namespace SmartHotel.Clients.UITests
 
     public class WaitTimes : IWaitTimes
     {
-        public TimeSpan GestureCompletionTimeout
-        {
-            get { return TimeSpan.FromMinutes(1); }
-        }
+        public TimeSpan GestureCompletionTimeout => TimeSpan.FromMinutes(1);
 
-        public TimeSpan GestureWaitTimeout
-        {
-            get { return TimeSpan.FromMinutes(1); }
-        }
+        public TimeSpan GestureWaitTimeout => TimeSpan.FromMinutes(1);
 
-        public TimeSpan WaitForTimeout
-        {
-            get { return TimeSpan.FromMinutes(1); }
-        }
+        public TimeSpan WaitForTimeout => TimeSpan.FromMinutes(1);
     }
 }

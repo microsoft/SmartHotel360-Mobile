@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using SmartHotel.Clients.Core.Exceptions;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
@@ -8,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace SmartHotel.Clients.Core.Services.Request
 {
@@ -72,6 +74,11 @@ namespace SmartHotel.Clients.Core.Services.Request
 
         HttpClient CreateHttpClient(string token = "")
         {
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                throw new ConnectivityException();
+            }
+
             var httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

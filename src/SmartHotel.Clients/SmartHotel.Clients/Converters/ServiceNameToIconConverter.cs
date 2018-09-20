@@ -8,11 +8,11 @@ namespace SmartHotel.Clients.Core.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!string.IsNullOrEmpty(value.ToString()))
+            if(!string.IsNullOrEmpty(value.ToString()))
             {
                 var icon = value.ToString();
 
-                switch (icon)
+                switch(icon)
                 {
                     case "Airport shuttle":
                         return Device.RuntimePlatform == Device.UWP ? "Assets/ic_airport_shutle.png" : "ic_airport_shutle";
@@ -59,6 +59,6 @@ namespace SmartHotel.Clients.Core.Converters
             return string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

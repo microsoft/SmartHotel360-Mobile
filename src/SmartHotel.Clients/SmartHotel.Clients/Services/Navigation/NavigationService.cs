@@ -15,10 +15,7 @@ namespace SmartHotel.Clients.Core.Services.Navigation
         readonly IAuthenticationService authenticationService;
         protected readonly Dictionary<Type, Type> mappings;
 
-        protected Application CurrentApplication
-        {
-            get { return Application.Current; }
-        }
+        protected Application CurrentApplication => Application.Current;
 
         public NavigationService(IAuthenticationService authenticationService)
         {
@@ -63,9 +60,7 @@ namespace SmartHotel.Clients.Core.Services.Navigation
 
         public virtual Task RemoveLastFromBackStackAsync()
         {
-            var mainPage = CurrentApplication.MainPage as MainView;
-
-            if (mainPage != null)
+            if (CurrentApplication.MainPage is MainView mainPage)
             {
                 mainPage.Detail.Navigation.RemovePage(
                     mainPage.Detail.Navigation.NavigationStack[mainPage.Detail.Navigation.NavigationStack.Count - 2]);
@@ -89,9 +84,8 @@ namespace SmartHotel.Clients.Core.Services.Navigation
             else if (CurrentApplication.MainPage is MainView)
             {
                 var mainPage = CurrentApplication.MainPage as MainView;
-                var navigationPage = mainPage.Detail as CustomNavigationPage;
 
-                if (navigationPage != null)
+                if (mainPage.Detail is CustomNavigationPage navigationPage)
                 {
                     var currentPage = navigationPage.CurrentPage;
 
@@ -110,9 +104,7 @@ namespace SmartHotel.Clients.Core.Services.Navigation
             }
             else
             {
-                var navigationPage = CurrentApplication.MainPage as CustomNavigationPage;
-
-                if (navigationPage != null)
+                if (CurrentApplication.MainPage is CustomNavigationPage navigationPage)
                 {
                     await navigationPage.PushAsync(page);
                 }

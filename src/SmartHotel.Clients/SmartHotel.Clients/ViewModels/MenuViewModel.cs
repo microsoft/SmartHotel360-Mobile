@@ -4,7 +4,6 @@ using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Services.OpenUri;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +15,6 @@ namespace SmartHotel.Clients.Core.ViewModels
     public class MenuViewModel : ViewModelBase, IHandleViewAppearing, IHandleViewDisappearing
     {
         const string skype = "Skype";
-        const string facebookMessenger = "Facebook Messenger";
 
         ObservableRangeCollection<Models.MenuItem> menuItems;
 
@@ -155,7 +153,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         void SetMenuItemStatus(MenuItemType type, bool enabled)
         {
-            Models.MenuItem menuItem = MenuItems.FirstOrDefault(m => m.MenuItemType == type);
+            var menuItem = MenuItems.FirstOrDefault(m => m.MenuItemType == type);
 
             if (menuItem != null)
             {
@@ -167,7 +165,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             await Task.Delay(100);
 
-            var bots = new[] { skype, facebookMessenger };
+            var bots = new[] { skype };
 
             try
             {
@@ -181,9 +179,6 @@ namespace SmartHotel.Clients.Core.ViewModels
                 {
                     case skype:
                         openUrlService.OpenSkypeBot(AppSettings.SkypeBotId);
-                        break;
-                    case facebookMessenger:
-                        openUrlService.OpenFacebookBot(AppSettings.FacebookBotId);
                         break;
                 }
             }

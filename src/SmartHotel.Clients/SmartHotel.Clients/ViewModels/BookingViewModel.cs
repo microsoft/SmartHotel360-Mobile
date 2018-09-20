@@ -1,4 +1,5 @@
-﻿using SmartHotel.Clients.Core.Services.Analytic;
+﻿using SmartHotel.Clients.Core.Exceptions;
+using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Services.DismissKeyboard;
 using SmartHotel.Clients.Core.Services.Hotel;
 using SmartHotel.Clients.Core.ViewModels.Base;
@@ -98,6 +99,11 @@ namespace SmartHotel.Clients.Core.ViewModels
                         Resources.HttpRequestExceptionTitle,
                         Resources.DialogOk);
                 }
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Booking Where Step] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {

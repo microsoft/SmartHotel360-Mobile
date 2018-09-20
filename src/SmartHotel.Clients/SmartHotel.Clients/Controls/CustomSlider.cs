@@ -124,7 +124,7 @@ namespace SmartHotel.Clients.Core.Controls
                 Margin = new Thickness(
                     -content.Padding.Left / 2,
                     Device.RuntimePlatform == Device.UWP ? 8 : -5,
-                    -content.Padding.Right / 2,
+                    -content.Padding.Right / 2, 
                     0),
                 Aspect = Device.Idiom == TargetIdiom.Desktop ? Aspect.AspectFill : Aspect.AspectFit,
                 HeightRequest = Device.Idiom == TargetIdiom.Desktop ? 12 : 18,

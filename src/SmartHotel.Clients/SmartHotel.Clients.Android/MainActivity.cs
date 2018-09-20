@@ -41,12 +41,12 @@ namespace SmartHotel.Clients.Droid
             Xamarin.Essentials.Platform.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
             Popup.Init(this, bundle);
+            Acr.UserDialogs.UserDialogs.Init(this);
 
             InitMessageCenterSubscriptions();
             RegisterPlatformDependencies();
             LoadApplication(new App());
-
-
+            
             App.AuthenticationClient.PlatformParameters = new PlatformParameters(this);
 
             MakeStatusBarTranslucent(false);
@@ -65,7 +65,7 @@ namespace SmartHotel.Clients.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        
+
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);

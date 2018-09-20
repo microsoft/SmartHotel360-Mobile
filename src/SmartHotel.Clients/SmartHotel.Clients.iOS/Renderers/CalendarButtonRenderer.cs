@@ -70,12 +70,11 @@ namespace SmartHotel.Clients.iOS.Renderers
 
         protected void DrawBackgroundPattern()
         {
-            var element = Element as CalendarButton;
-            if (element == null || element.BackgroundPattern == null || Control.Frame.Width == 0) return;
+            if (!(Element is CalendarButton element) || element.BackgroundPattern == null || Control.Frame.Width == 0) return;
 
             UIImage image;
             UIGraphics.BeginImageContext(Control.Frame.Size);
-            using (CGContext g = UIGraphics.GetCurrentContext())
+            using (var g = UIGraphics.GetCurrentContext())
             {
                 for (var i = 0; i < element.BackgroundPattern.Pattern.Count; i++)
                 {

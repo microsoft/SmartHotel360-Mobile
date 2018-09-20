@@ -11,7 +11,7 @@ namespace SmartHotel.Clients.Core.Controls
             WidthRequest = 48;
         }
 
-        public static readonly BindableProperty DateProperty =
+		public static readonly BindableProperty DateProperty =
             BindableProperty.Create(nameof(Date), typeof(DateTime?), typeof(CalendarButton), null);
 
         public DateTime? Date
@@ -52,18 +52,18 @@ namespace SmartHotel.Clients.Core.Controls
         }
 
         public static readonly BindableProperty BackgroundPatternProperty =
-            BindableProperty.Create(nameof(BackgroundPattern), typeof(BackgroundPattern), typeof(Button), null);
+			BindableProperty.Create(nameof(BackgroundPattern), typeof(BackgroundPattern), typeof(Button), null);
 
-        public BackgroundPattern BackgroundPattern
+		public BackgroundPattern BackgroundPattern
         {
             get => (BackgroundPattern)GetValue(BackgroundPatternProperty);
             set => SetValue(BackgroundPatternProperty, value);
         }
 
         public static readonly BindableProperty BackgroundImageProperty =
-            BindableProperty.Create(nameof(BackgroundImage), typeof(FileImageSource), typeof(Button), null);
+			BindableProperty.Create(nameof(BackgroundImage), typeof(FileImageSource), typeof(Button), null);
 
-        public FileImageSource BackgroundImage
+		public FileImageSource BackgroundImage
         {
             get => (FileImageSource)GetValue(BackgroundImageProperty);
             set => SetValue(BackgroundImageProperty, value);

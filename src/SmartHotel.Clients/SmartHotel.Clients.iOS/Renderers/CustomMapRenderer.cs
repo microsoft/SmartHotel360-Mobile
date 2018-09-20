@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using UIKit;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Maps.iOS;
@@ -23,16 +22,16 @@ namespace SmartHotel.Clients.iOS.Renderers
         readonly UIImage eventImage = UIImage.FromFile("pushpin_01.png");
         readonly UIImage restaurantImage = UIImage.FromFile("pushpin_02.png");
 
-        List<CustomPin> _customPins;
-        List<MKAnnotationView> _tempAnnotations;
-        UIView _customPinView;
-        CustomMap _customMap;
-        bool _isDrawnDone;
+        List<CustomPin> customPins;
+        List<MKAnnotationView> tempAnnotations;
+        UIView customPinView;
+        CustomMap customMap;
+        bool isDrawnDone;
 
         public CustomMapRenderer()
         {
-            _tempAnnotations = new List<MKAnnotationView>();
-            _customPins = new List<CustomPin>();
+            tempAnnotations = new List<MKAnnotationView>();
+            customPins = new List<CustomPin>();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -40,11 +39,11 @@ namespace SmartHotel.Clients.iOS.Renderers
             base.OnElementPropertyChanged(sender, e);
 
             var iosMapView = (MKMapView)Control;
-            _customMap = (CustomMap)sender;
+            customMap = (CustomMap)sender;
 
-            if (e.PropertyName.Equals("CustomPins") && !_isDrawnDone)
+            if (e.PropertyName.Equals("CustomPins") && !isDrawnDone)
             {
-                _customPins = _customMap.CustomPins.ToList();
+                customPins = customMap.CustomPins.ToList();
 
                 ClearPushPins(iosMapView);
 
@@ -53,10 +52,10 @@ namespace SmartHotel.Clients.iOS.Renderers
                 iosMapView.DidSelectAnnotationView += OnDidSelectAnnotationView;
                 iosMapView.DidDeselectAnnotationView += OnDidDeselectAnnotationView;
 
-                AddPushPins(iosMapView, _customMap.CustomPins);
+                AddPushPins(iosMapView, customMap.CustomPins);
                 PositionMap();
 
-                _isDrawnDone = true;
+                isDrawnDone = true;
             }
         }
 
@@ -105,16 +104,16 @@ namespace SmartHotel.Clients.iOS.Renderers
         void OnDidSelectAnnotationView(object sender, MKAnnotationViewEventArgs e)
         {
             var customView = e.View as CustomMKAnnotationView;
-            _customPinView = new UIView();
-            e.View.AddSubview(_customPinView);
+            customPinView = new UIView();
+            e.View.AddSubview(customPinView);
 
             var anotation = customView.Annotation as MKAnnotation;
             var selectedPin = GetCustomPin(anotation);
-            var pin = _customPins.FirstOrDefault((p => p.Id == selectedPin.Id));
+            var pin = customPins.FirstOrDefault((p => p.Id == selectedPin.Id));
 
             if (pin != null)
             {
-                _customMap.SelectedPin = pin;
+                customMap.SelectedPin = pin;
             }
         }
 
@@ -122,9 +121,9 @@ namespace SmartHotel.Clients.iOS.Renderers
         {
             if (!e.View.Selected)
             {
-                _customPinView.RemoveFromSuperview();
-                _customPinView.Dispose();
-                _customPinView = null;
+                customPinView.RemoveFromSuperview();
+                customPinView.Dispose();
+                customPinView = null;
             }
         }
 
@@ -142,7 +141,7 @@ namespace SmartHotel.Clients.iOS.Renderers
 
                 mapView.AddAnnotation(annotation);
 
-                _tempAnnotations.Add(GetViewForAnnotation(mapView, annotation));
+                tempAnnotations.Add(GetViewForAnnotation(mapView, annotation));
             }
         }
 
@@ -150,7 +149,7 @@ namespace SmartHotel.Clients.iOS.Renderers
         {
             var position = new Position(annotation.Coordinate.Latitude, annotation.Coordinate.Longitude);
 
-            foreach (var pin in _customPins)
+            foreach (var pin in customPins)
             {
                 if (pin.Position == position)
                 {
@@ -165,7 +164,7 @@ namespace SmartHotel.Clients.iOS.Renderers
 
         void PositionMap()
         {
-            var myMap = this.Element as CustomMap;
+            var myMap = Element as CustomMap;
             var formsPins = myMap.CustomPins;
 
             if (formsPins == null || formsPins.Count() == 0)
@@ -181,8 +180,8 @@ namespace SmartHotel.Clients.iOS.Renderers
             var maxLongitude = formsPins.Max(x => x.Position.Longitude);
             var maxLatitude = formsPins.Max(x => x.Position.Latitude);
 
-            var distance = Location.CalculateDistance(minLatitude, minLongitude,
-                maxLatitude, maxLongitude, DistanceUnits.Miles) / 2;
+            var distance = MapHelper.CalculateDistance(minLatitude, minLongitude,
+                maxLatitude, maxLongitude, 'M') / 2;
 
             myMap.MoveToRegion(MapSpan.FromCenterAndRadius(centerPosition, Distance.FromMiles(distance)));
         }

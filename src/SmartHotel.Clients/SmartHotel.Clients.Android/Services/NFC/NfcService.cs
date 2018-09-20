@@ -8,19 +8,19 @@ namespace SmartHotel.Clients.Droid.Services.NFC
 {
     public class NfcService : INfcService
     {
-        NfcAdapter _nfcDevice;
+        NfcAdapter nfcDevice;
 
         public NfcService()
         {
             var activity = ((Activity)Xamarin.Forms.Forms.Context);
-            _nfcDevice = NfcAdapter.GetDefaultAdapter(activity);
+            nfcDevice = NfcAdapter.GetDefaultAdapter(activity);
         }
 
         public bool IsAvailable
         {
             get
             {
-                return _nfcDevice?.IsEnabled == true && _nfcDevice.IsNdefPushEnabled;
+                return nfcDevice?.IsEnabled == true && nfcDevice.IsNdefPushEnabled;
             }
         }
     }
