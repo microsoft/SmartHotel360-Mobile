@@ -16,11 +16,12 @@ namespace SmartHotel.Clients.Core.Controls
         public override void DrawContent(SKCanvas canvas, int width, int height)
         {
             var relativeScaleWidth = width / 465.0f;
+            var relativeScaleHeight = height / 270.0f;
             var strokeWidth = relativeScaleWidth * LineSize;
 
             var radius = (width) / 2;
             int cx = (int)(radius + strokeWidth);
-            var cy = Convert.ToInt32(height / 1.25);
+            var cy = Convert.ToInt32(height);
             var radiusSpace = radius - 4 * strokeWidth;
 
             DrawChart(canvas, width, height, cx, cy, radiusSpace, strokeWidth, relativeScaleWidth);
@@ -40,7 +41,7 @@ namespace SmartHotel.Clients.Core.Controls
                 using (var path = new SKPath())
                 {
                     var percent = (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
-                    path.AddRoundedRect(SKRect.Create(cx - radius - strokeWidth, cy / 2f + strokeWidth, (2 * radius) * percent, 2), 0.05f, 0.05f);
+                    path.AddRoundedRect(SKRect.Create(cx - radius - strokeWidth, cy / 2f - strokeWidth, (2 * radius) * percent, 2), 0.05f, 0.05f);
 
                     canvas.DrawPath(path, paint);
                 }
@@ -54,7 +55,7 @@ namespace SmartHotel.Clients.Core.Controls
 	        {
 		        canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{CurrentValueEntry.Value}%", SKColor.Parse("#283748"),
 			        LabelTextSize * relativeScaleWidth,
-			        new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth), SKTextAlign.Center);
+			        new SKPoint(cx - CaptionMargin, cy / 2f + LabelTextSize / 2f), SKTextAlign.Center);
 	        }
 
 	        // uncomment to add Desired value

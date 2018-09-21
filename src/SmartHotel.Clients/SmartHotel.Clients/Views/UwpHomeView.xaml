@@ -284,8 +284,8 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="33*" />
-                                <RowDefinition Height="66*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <!-- ROOM TEMPERATURE -->
                             <Grid  
