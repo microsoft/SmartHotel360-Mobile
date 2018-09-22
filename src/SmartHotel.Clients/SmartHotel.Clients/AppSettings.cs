@@ -19,7 +19,7 @@ namespace SmartHotel.Clients.Core
         static string defaultSettingsFileUrl;
 
         // Endpoints
-        const string defaultImagesBaseUri = "http://sh360imgpublic.blob.core.windows.net";
+        const string defaultImagesBaseUri = "https://sh360publicimg.blob.core.windows.net";
 
         // Maps
         const string defaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
@@ -55,11 +55,11 @@ namespace SmartHotel.Clients.Core
             }
             else
             {
-                defaultBookingEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/bookings-api";
-                defaultHotelsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/hotels-api";
-                defaultSuggestionsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/suggestions-api";
-                defaultNotificationsEndpoint = "http://sh360services-public.eastus2.cloudapp.azure.com/notifications-api";
-                defaultSettingsFileUrl = "http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http";
+                defaultBookingEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/bookings-api";
+                defaultHotelsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/hotels-api";
+                defaultSuggestionsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/suggestions-api";
+                defaultNotificationsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/notifications-api";
+                defaultSettingsFileUrl = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/configuration-api/cfg/public";
             }
         }
 
