@@ -12,6 +12,7 @@ namespace SmartHotel.Clients.Core
         const string defaultAppCenterAndroid = "b3b1403c-3f9d-4c77-805e-9c002de6ddf7";
         const string defaultAppCenteriOS = "7a2a290b-07b0-47dc-9dcd-15461e894e6d";
         const string defaultAppCenterUWP = "140a8550-c309-4bc1-a05d-e5a0f7e4df1d";
+
         static string defaultBookingEndpoint;
         static string defaultHotelsEndpoint;
         static string defaultSuggestionsEndpoint;
@@ -41,7 +42,7 @@ namespace SmartHotel.Clients.Core
         const bool defaultUseFakes = false;
 
         // Use local Docker endpoints
-        const bool useLocalDocker = true;
+        const bool useLocalDocker = false;
 
         static AppSettings()
         {
@@ -55,7 +56,7 @@ namespace SmartHotel.Clients.Core
             }
             else
             {
-                defaultBookingEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/bookings-api";
+                defaultBookingEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/bookings";
                 defaultHotelsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/hotels-api";
                 defaultSuggestionsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/suggestions-api";
                 defaultNotificationsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/notifications-api";

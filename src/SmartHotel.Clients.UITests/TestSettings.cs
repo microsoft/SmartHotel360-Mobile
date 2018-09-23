@@ -4,6 +4,6 @@
     {
         public const string TestUsername = "me@smarthotel.com";
         public const string TestPassword = "12345";
-        public const string City = "Seattle, United States";
+        public const string City = "Orlando, United States";
     }
 }
