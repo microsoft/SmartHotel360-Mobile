@@ -15,8 +15,8 @@ namespace SmartHotel.Clients.Core.Views.Templates
 
         public ICommand DeleteCommand
         {
-            get { return (ICommand)GetValue(DeleteCommandProperty); }
-            set { SetValue(DeleteCommandProperty, value); }
+            get => (ICommand)GetValue(DeleteCommandProperty);
+            set => SetValue(DeleteCommandProperty, value);
         }
 
         public NotificationDetailItemTemplate()
@@ -32,36 +32,27 @@ namespace SmartHotel.Clients.Core.Views.Templates
             InitializeCell();
         }
 
-        private ICommand TransitionCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    var isUwp = Device.RuntimePlatform == Device.UWP;
-
-                    DeleteContainer.BackgroundColor = Color.FromHex("#EC0843");
-                    DeleteImage.Source =  isUwp ? $"Assets/ic_paperbin.png" : $"ic_paperbin";
-
-                    await this.TranslateTo(-this.Width, 0, 500, Easing.SinIn);
-
-                    DeleteCommand?.Execute(BindingContext);
-
-                    InitializeCell();
-                });
-            }
-        }
-
-        private void OnDeleteTapped()
-        {
-            TransitionCommand.Execute(null);
-        }
-
-        private void InitializeCell()
+        ICommand TransitionCommand => new Command(async () =>
         {
             var isUwp = Device.RuntimePlatform == Device.UWP;
 
-            this.TranslationX = 0;
+            DeleteContainer.BackgroundColor = Color.FromHex("#EC0843");
+            DeleteImage.Source = isUwp ? $"Assets/ic_paperbin.png" : $"ic_paperbin";
+
+            await this.TranslateTo(-Width, 0, 500, Easing.SinIn);
+
+            DeleteCommand?.Execute(BindingContext);
+
+            InitializeCell();
+        });
+
+        void OnDeleteTapped() => TransitionCommand.Execute(null);
+
+        void InitializeCell()
+        {
+            var isUwp = Device.RuntimePlatform == Device.UWP;
+
+            TranslationX = 0;
             DeleteContainer.BackgroundColor = Color.FromHex("#F2F2F2");
             DeleteImage.Source = isUwp ? $"Assets/ic_paperbin_red.png" : $"ic_paperbin_red";
         }

@@ -6,7 +6,7 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class RatingControl : ContentView
     {
-        private List<Image> StarImages { get; set; }
+        List<Image> StarImages { get; set; }
 
         public static readonly BindableProperty RatingProperty =
           BindableProperty.Create(propertyName: nameof(Rating),
@@ -18,8 +18,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public int Rating
         {
-            get { return (int)GetValue(RatingProperty); }
-            set { SetValue(RatingProperty, value); }
+            get => (int)GetValue(RatingProperty);
+            set => SetValue(RatingProperty, value);
         }
 
         public static readonly BindableProperty PrecisionProperty =
@@ -31,8 +31,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public PrecisionType Precision
         {
-            get { return (PrecisionType)GetValue(PrecisionProperty); }
-            set { SetValue(PrecisionProperty, value); }
+            get => (PrecisionType)GetValue(PrecisionProperty);
+            set => SetValue(PrecisionProperty, value);
         }
 
         public static readonly BindableProperty ImageFullStarProperty =
@@ -44,8 +44,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public ImageSource ImageFullStar
         {
-            get { return (ImageSource)GetValue(ImageFullStarProperty); }
-            set { SetValue(ImageFullStarProperty, value); }
+            get => (ImageSource)GetValue(ImageFullStarProperty);
+            set => SetValue(ImageFullStarProperty, value);
         }
 
         public static readonly BindableProperty ImageEmptyStarProperty =
@@ -57,8 +57,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public ImageSource ImageEmptyStar
         {
-            get { return (ImageSource)GetValue(ImageEmptyStarProperty); }
-            set { SetValue(ImageEmptyStarProperty, value); }
+            get => (ImageSource)GetValue(ImageEmptyStarProperty);
+            set => SetValue(ImageEmptyStarProperty, value);
         }
 
         public static readonly BindableProperty ImageHalfStarProperty =
@@ -70,20 +70,20 @@ namespace SmartHotel.Clients.Core.Controls
 
         public ImageSource ImageHalfStar
         {
-            get { return (ImageSource)GetValue(ImageHalfStarProperty); }
-            set { SetValue(ImageHalfStarProperty, value); }
+            get => (ImageSource)GetValue(ImageHalfStarProperty);
+            set => SetValue(ImageHalfStarProperty, value);
         }
 
         public RatingControl() : base()
         {
-            Grid grid = new Grid()
+            var grid = new Grid()
             {
                 ColumnSpacing = 4
             };
 
             // Create Star Image Placeholders 
             StarImages = new List<Image>();
-            for (int i = 0; i < 5; i++)
+            for (var i = 0; i < 5; i++)
             {
                 StarImages.Add(new Image()
                 {
@@ -95,32 +95,32 @@ namespace SmartHotel.Clients.Core.Controls
                 grid.Children.Add(StarImages[i], i, 0);
             }
 
-            this.Content = grid;
+            Content = grid;
         }
 
-        private static void UpdateStarsDisplay(BindableObject bindable, object oldValue, object newValue)
+        static void UpdateStarsDisplay(BindableObject bindable, object oldValue, object newValue)
         {
             ((RatingControl)bindable).UpdateStarsDisplay();
         }
 
-        private static void OnPrecisionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        static void OnPrecisionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = ((RatingControl)bindable);
             control.UpdateStarsDisplay();
         }
 
         // Fill the star based on the Rating value
-        private void UpdateStarsDisplay()
+        void UpdateStarsDisplay()
         {
-            for (int i = 0; i < StarImages.Count; i++)
+            for (var i = 0; i < StarImages.Count; i++)
             {
                 StarImages[i].Source = GetStarSource(i);
             }
         }
 
-        private ImageSource GetStarSource(int position)
+        ImageSource GetStarSource(int position)
         {
-            int currentStarMaxRating = (position + 1);
+            var currentStarMaxRating = (position + 1);
 
             if (Precision.Equals(PrecisionType.Half))
             {

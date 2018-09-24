@@ -5,15 +5,9 @@ namespace SmartHotel.Clients.Core.Services.Authentication
 {
     public class FakeAuthenticationService : IAuthenticationService
     {
-        private static bool AuthSucceded;
+        static bool authSucceded;
 
-        public bool IsAuthenticated
-        {
-            get
-            {
-                return AuthSucceded;
-            }
-        }
+        public bool IsAuthenticated => authSucceded;
 
         public User AuthenticatedUser => new User
         {
@@ -26,31 +20,25 @@ namespace SmartHotel.Clients.Core.Services.Authentication
         {
             await Task.Delay(500);
 
-            bool succeeded = true;
+            var succeeded = true;
 
             if (userName.StartsWith("1"))
             {
                 succeeded = false;
             }
 
-            AuthSucceded = succeeded;
+            authSucceded = succeeded;
 
             return succeeded;
         }
 
-        public Task<bool> LoginWithMicrosoftAsync()
-        {
-            return Task.FromResult(false);
-        }
+        public Task<bool> LoginWithMicrosoftAsync() => Task.FromResult(false);
 
-        public Task<bool> UserIsAuthenticatedAndValidAsync()
-        {
-            return Task.FromResult(IsAuthenticated);
-        }
+        public Task<bool> UserIsAuthenticatedAndValidAsync() => Task.FromResult(IsAuthenticated);
 
         public Task LogoutAsync()
         {
-            AuthSucceded = false;
+            authSucceded = false;
 
             return Task.FromResult(false);
         }

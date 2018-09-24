@@ -9,7 +9,7 @@ namespace SmartHotel.Clients.Droid.Services.Authentication
     {
         public Task ClearCookiesAsync()
         {
-            var context = Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity;
+            var context = Android.App.Application.Context;
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.LollipopMr1)
             {
@@ -21,10 +21,10 @@ namespace SmartHotel.Clients.Droid.Services.Authentication
             {
                 System.Diagnostics.Debug.WriteLine("Clearing cookies for API < LollipopMr1");
 #pragma warning disable CS0618 // Type or member is obsolete
-                CookieSyncManager cookieSyncMngr = CookieSyncManager.CreateInstance(context);
+                var cookieSyncMngr = CookieSyncManager.CreateInstance(context);
 #pragma warning restore CS0618 // Type or member is obsolete
                 cookieSyncMngr.StartSync();
-                CookieManager cookieManager = CookieManager.Instance;
+                var cookieManager = CookieManager.Instance;
                 cookieManager.RemoveAllCookie();
                 cookieManager.RemoveSessionCookie();
                 cookieSyncMngr.StopSync();

@@ -1,5 +1,4 @@
-﻿using FFImageLoading.Forms.WinUWP;
-using SmartHotel.Clients.Core;
+﻿using SmartHotel.Clients.Core;
 using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.UI;
@@ -11,7 +10,7 @@ namespace SmartHotel.Clients.UWP
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             Renderers.Calendar.Init();
@@ -20,7 +19,7 @@ namespace SmartHotel.Clients.UWP
             NativeCustomize();
         }
 
-        private void NativeCustomize()
+        void NativeCustomize()
         {
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 500));
 

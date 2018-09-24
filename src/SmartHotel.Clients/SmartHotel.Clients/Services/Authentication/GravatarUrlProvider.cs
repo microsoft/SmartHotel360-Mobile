@@ -18,7 +18,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
             return uriBuilder.ToString();
         }
 
-        private static string GetMd5(string email)
+        static string GetMd5(string email)
         {
             using (var algorithm = System.Security.Cryptography.MD5.Create())
             {

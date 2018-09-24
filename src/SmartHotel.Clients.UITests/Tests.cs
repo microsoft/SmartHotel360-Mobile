@@ -48,7 +48,7 @@ namespace SmartHotel.Clients.UITests
                 .SelectMenuOption(BasePage.NavigationMenuOptions.BookRoom);
 
             new BookCityPage()
-                .SelectCity(TestSettings.NewYork)
+                .SelectCity(TestSettings.City)
                 .Continue();
 
             new BookDatesPage()

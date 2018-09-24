@@ -35,7 +35,7 @@ namespace SmartHotel.Clients.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName.Equals(nameof(ExtendedEntry.LineColorToApply)))
+            if (e.PropertyName.Equals(nameof(ExtendedEntry.LineColor)))
             {
                 UpdateLineColor();
             }
@@ -49,17 +49,17 @@ namespace SmartHotel.Clients.iOS.Renderers
         {
             base.LayoutSubviews();
 
-            LineLayer lineLayer = GetOrAddLineLayer();
+            var lineLayer = GetOrAddLineLayer();
             lineLayer.Frame = new CGRect(0, Frame.Size.Height - LineLayer.LineHeight, Control.Frame.Size.Width, LineLayer.LineHeight);
         }
 
-        private void UpdateLineColor()
+        void UpdateLineColor()
         {
-            LineLayer lineLayer = GetOrAddLineLayer();
-            lineLayer.BorderColor = ExtendedEntryElement.LineColorToApply.ToCGColor();
+            var lineLayer = GetOrAddLineLayer();
+            lineLayer.BorderColor = ExtendedEntryElement.LineColor.ToCGColor();
         }
 
-        private LineLayer GetOrAddLineLayer()
+        LineLayer GetOrAddLineLayer()
         {
             var lineLayer = Control.Layer.Sublayers?.OfType<LineLayer>().FirstOrDefault();
             
@@ -74,19 +74,13 @@ namespace SmartHotel.Clients.iOS.Renderers
             return lineLayer;
         }
 
-        private void UpdateCursorColor()
-        {
-            Control.TintColor = Element.TextColor.ToUIColor();
-        }
+        void UpdateCursorColor() => Control.TintColor = Element.TextColor.ToUIColor();
 
         class LineLayer : CALayer
         {
             public static nfloat LineHeight = 2f;
 
-            public LineLayer()
-            {
-                BorderWidth = LineHeight;
-            }
+            public LineLayer() => BorderWidth = LineHeight;
         }
     }
 }

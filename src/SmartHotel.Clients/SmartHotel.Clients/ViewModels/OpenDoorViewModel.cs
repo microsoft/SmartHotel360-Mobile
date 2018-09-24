@@ -13,32 +13,32 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class OpenDoorViewModel : ViewModelBase
     {
-        private readonly IAuthenticationService _authenticationService;
-        private readonly INfcService _nfcService;
-        private readonly IAnalyticService _analyticService;
+        readonly IAuthenticationService authenticationService;
+        readonly INfcService nfcService;
+        readonly IAnalyticService analyticService;
 
         public OpenDoorViewModel(
             IAuthenticationService authenticationService,
             IAnalyticService analyticService)
         {
-            _authenticationService = authenticationService;
-            _analyticService = analyticService;
-            _nfcService = DependencyService.Get<INfcService>();
+            this.authenticationService = authenticationService;
+            this.analyticService = analyticService;
+            nfcService = DependencyService.Get<INfcService>();
         }
 
         public ICommand ClosePopupCommand => new AsyncCommand(ClosePopupAsync);
 
         public override async Task InitializeAsync(object navigationData)
         {
-            if (_nfcService != null)
+            if (nfcService != null)
             {
-                if (!_nfcService.IsAvailable)
+                if (!nfcService.IsAvailable)
                 {
                     await DialogService.ShowAlertAsync(Resources.NoNfc, Resources.Information, Resources.DialogOk);
                     return;
                 }
 
-                var authenticatedUser = _authenticationService.AuthenticatedUser;
+                var authenticatedUser = authenticationService.AuthenticatedUser;
 
                 var nfcParameter = new NfcParameter
                 {
@@ -49,13 +49,10 @@ namespace SmartHotel.Clients.Core.ViewModels
                 var serializedMessage = JsonConvert.SerializeObject(nfcParameter);
 
                 MessagingCenter.Send(serializedMessage, MessengerKeys.SendNFCToken);
-                _analyticService.TrackEvent("OpenDoor");
+                analyticService.TrackEvent("OpenDoor");
             }
         }
 
-        private Task ClosePopupAsync()
-        {
-            return PopupNavigation.Instance.PopAllAsync(true);
-        }
+        Task ClosePopupAsync() => PopupNavigation.Instance.PopAllAsync(true);
     }
 }

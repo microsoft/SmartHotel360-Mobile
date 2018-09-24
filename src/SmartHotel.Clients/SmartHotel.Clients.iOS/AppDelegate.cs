@@ -25,7 +25,7 @@ namespace SmartHotel.Clients.iOS
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-        {        
+        {
             // Newer version of Xamarin Studio and Visual Studio provide the
             // ENABLE_TEST_CLOUD compiler directive in the Debug configuration,
             // but not the Release configuration.
@@ -69,17 +69,14 @@ namespace SmartHotel.Clients.iOS
             return true;
         }
 
-        private void RegisterPlatformDependencies()
-        {
-            Locator.Instance.Register<IBrowserCookiesService, BrowserCookiesService>();
-        }
+        void RegisterPlatformDependencies() => Locator.Instance.Register<IBrowserCookiesService, BrowserCookiesService>();
 
-        private static void InitChartView()
+        static void InitChartView()
         {
             var t1 = typeof(ChartView);
         }
 
-        private static void InitXamanimation()
+        static void InitXamanimation()
         {
             var t2 = typeof(Xamanimation.AnimationBase);
         }

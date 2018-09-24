@@ -12,7 +12,7 @@
     utils:NavigationBarAttachedProperty.TextColor="{StaticResource WhiteColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            
+
             <xamanimation:StoryBoard 
                 x:Key="SuggestionsTranslationAnimation" 
                 Target="{x:Reference Suggestions}">
@@ -21,7 +21,7 @@
                     Easing="CubicOut" 
                     Duration="750" />
             </xamanimation:StoryBoard>
-            
+
             <Color x:Key="SearchTextColor">#48959B</Color>
 
             <Style x:Key="WhereTextStyle" 
@@ -101,7 +101,7 @@
                 <Setter Property="VerticalOptions" 
                         Value="Start" />
             </Style>
-            
+
             <Color x:Key="NextButtonColor">#BD4B14</Color>
 
             <Style x:Key="NextTextStyle" 
@@ -112,7 +112,7 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
-            
+
             <Style x:Key="SuggestionTextStyle" 
                    TargetType="Label"
                    BasedOn="{StaticResource PoppinsRegularLabelStyle}">
@@ -273,8 +273,7 @@
                     <ctrls:ExtendedEntry
                         Text="{Binding Search, Mode=TwoWay}"
                         Style="{StaticResource SearchTextStyle}" 
-                        LineColor="{StaticResource WhiteColor}"
-                        FocusLineColor="{StaticResource WhiteColor}" />
+                        LineColor="{StaticResource WhiteColor}"/>
                 </ctrls:ButtonFrame>
                 <!-- Next button -->
                 <Grid

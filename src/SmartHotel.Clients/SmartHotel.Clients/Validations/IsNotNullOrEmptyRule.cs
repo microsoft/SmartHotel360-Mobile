@@ -2,10 +2,7 @@
 {
     public class IsNotNullOrEmptyRule<T> : IValidationRule<T>
     {
-        public IsNotNullOrEmptyRule()
-        {
-            ValidationMessage = "Should not be empty";
-        }
+        public IsNotNullOrEmptyRule() => ValidationMessage = "Should not be empty";
 
         public string ValidationMessage { get; set; }
 

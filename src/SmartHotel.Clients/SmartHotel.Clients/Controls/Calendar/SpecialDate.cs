@@ -6,12 +6,9 @@ namespace SmartHotel.Clients.Core.Controls
 {
 	public class SpecialDate
 	{
-		public SpecialDate(DateTime date)
-		{
-			Date = date;
-		}
+        public SpecialDate(DateTime date) => Date = date;
 
-		public DateTime Date { get; set; }
+        public DateTime Date { get; set; }
 		public Color? TextColor { get; set; }
 		public Color? BackgroundColor { get; set; }
 		public Color? BorderColor { get; set; }
@@ -37,17 +34,14 @@ namespace SmartHotel.Clients.Core.Controls
 	public class BackgroundPattern
 	{
 		protected int columns;
-		public BackgroundPattern(int columns)
-		{
-			this.columns = columns;
-		}
+        public BackgroundPattern(int columns) => this.columns = columns;
 
-		public List<Pattern> Pattern;
+        public List<Pattern> Pattern;
 
 		public float GetTop(int t)
 		{
 			float r = 0;
-			for (int i = t-columns; i > -1; i-=columns)
+			for (var i = t-columns; i > -1; i-=columns)
 			{
 				r += Pattern[i].HightPercent;
 			}
@@ -57,7 +51,7 @@ namespace SmartHotel.Clients.Core.Controls
 		public float GetLeft(int l)
 		{
 			float r = 0;
-			for (int i = l-1; i > -1 && (i+1) % columns != 0; i--)
+			for (var i = l-1; i > -1 && (i+1) % columns != 0; i--)
 			{
 				r += Pattern[i].WidthPercent;
 			}

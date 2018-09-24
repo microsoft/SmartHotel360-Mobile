@@ -37,7 +37,7 @@
                         iOS="10"
                         Android="10"
                         WinPhone="11"/>
-            
+
             <Style x:Key="ChartTextStyle" 
                    TargetType="Label"
                    BasedOn="{StaticResource PoppinsSemiBoldLabelStyle}">
@@ -97,9 +97,9 @@
                    BasedOn="{StaticResource GoMyRoomPanelStyle}">
                 <Setter Property="HeightRequest" Value="48" />
             </Style>
-            
+
             <Color x:Key="BookConferencePanelColor">#378D93</Color>
-            
+
             <Style x:Key="BookConferencePanelStyle" 
                    TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="{StaticResource BookConferencePanelColor}" />
@@ -112,7 +112,7 @@
                    BasedOn="{StaticResource BookConferencePanelStyle}">
                 <Setter Property="HeightRequest" Value="48" />
             </Style>
-            
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>

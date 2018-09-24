@@ -14,7 +14,7 @@ namespace SmartHotel.Clients.Core.Controls
 
         public IEnumerable<CustomPin> CustomPins
         {
-            get { return (IEnumerable<CustomPin>)base.GetValue(CustomPinsProperty); }
+            get => (IEnumerable<CustomPin>)base.GetValue(CustomPinsProperty);
             set { base.SetValue(CustomPinsProperty, value); }
         }
 
@@ -24,7 +24,7 @@ namespace SmartHotel.Clients.Core.Controls
 
         public CustomPin SelectedPin
         {
-            get { return (CustomPin)base.GetValue(SelectedPinProperty); }
+            get => (CustomPin)base.GetValue(SelectedPinProperty);
             set { base.SetValue(SelectedPinProperty, value); }
         }
 

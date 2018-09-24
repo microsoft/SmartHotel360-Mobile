@@ -23,13 +23,13 @@ namespace SmartHotel.Clients.Droid.Renderers
         {
             base.OnLayout(changed, l, t, r, b);
 
-            int containerHeight = b - t;
+            var containerHeight = b - t;
 
             PageController.ContainerArea = new Rectangle(0, 0, Context.FromPixels(r - l), Context.FromPixels(containerHeight));
 
             for (var i = 0; i < ChildCount; i++)
             {
-                AView child = GetChildAt(i);
+                var child = GetChildAt(i);
 
                 if (child is Toolbar)
                 {

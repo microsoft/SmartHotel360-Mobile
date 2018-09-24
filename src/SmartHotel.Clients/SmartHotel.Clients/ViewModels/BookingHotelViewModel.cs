@@ -3,114 +3,87 @@ using SmartHotel.Clients.Core.ViewModels.Base;
 using System.Windows.Input;
 using Xamarin.Forms;
 using SmartHotel.Clients.Core.Services.Hotel;
-using System.Collections.ObjectModel;
 using System;
 using System.Diagnostics;
-using SmartHotel.Clients.Core.Extensions;
 using System.Net.Http;
 using SmartHotel.Clients.Core.Services.Booking;
 using SmartHotel.Clients.Core.Services.Authentication;
 using System.Collections.Generic;
 using System.Linq;
+using MvvmHelpers;
+using SmartHotel.Clients.Core.Extensions;
+using SmartHotel.Clients.Core.Exceptions;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
     public class BookingHotelViewModel : ViewModelBase
     {
-        private bool _myHotel;
-        private bool _rooms;
-        private bool _reviews;
-        private Models.Hotel _hotel;
-        private DateTime _from;
-        private DateTime _until;
-        private ObservableCollection<Models.Service> _hotelServices;
-        private ObservableCollection<Models.Service> _roomServices;
-        private ObservableCollection<Models.Review> _hotelReviews;
+        bool myHotel;
+        bool rooms;
+        bool reviews;
+        Models.Hotel hotel;
+        DateTime from;
+        DateTime until;
+        ObservableRangeCollection<Models.Service> hotelServices;
+        ObservableRangeCollection<Models.Service> roomServices;
+        ObservableRangeCollection<Models.Review> hotelReviews;
 
-        private readonly IHotelService _hotelService;
-        private readonly IBookingService _bookingService;
-        private readonly IAuthenticationService _authenticationService;
+        readonly IHotelService hotelService;
+        readonly IBookingService bookingService;
+        readonly IAuthenticationService authenticationService;
 
         public BookingHotelViewModel(
             IHotelService hotelService,
             IBookingService bookingService,
             IAuthenticationService authenticationService)
         {
-            _hotelService = hotelService;
-            _bookingService = bookingService;
-            _authenticationService = authenticationService;
-
+            this.hotelService = hotelService;
+            this.bookingService = bookingService;
+            this.authenticationService = authenticationService;
+         
             SetMyHotel();
         }
 
         public Models.Hotel Hotel
         {
-            get { return _hotel; }
-            set
-            {
-                _hotel = value;
-                OnPropertyChanged();
-            }
+            get => hotel;
+            set => SetProperty(ref hotel, value);
         }
 
-        public ObservableCollection<Models.Service> HotelServices
+        public ObservableRangeCollection<Models.Service> HotelServices
         {
-            get { return _hotelServices; }
-            set
-            {
-                _hotelServices = value;
-                OnPropertyChanged();
-            }
+            get => hotelServices;
+            set => SetProperty(ref hotelServices, value);
         }
 
-        public ObservableCollection<Models.Service> RoomServices
+        public ObservableRangeCollection<Models.Service> RoomServices
         {
-            get { return _roomServices; }
-            set
-            {
-                _roomServices = value;
-                OnPropertyChanged();
-            }
+            get => roomServices;
+            set => SetProperty(ref roomServices, value);
         }
 
-        public ObservableCollection<Models.Review> HotelReviews
+        public ObservableRangeCollection<Models.Review> HotelReviews
         {
-            get { return _hotelReviews; }
-            set
-            {
-                _hotelReviews = value;
-                OnPropertyChanged();
-            }
+            get => hotelReviews;
+            set => SetProperty(ref hotelReviews, value);
         }
 
         public bool MyHotel
         {
-            get { return _myHotel; }
-            set
-            {
-                _myHotel = value;
-                OnPropertyChanged();
-            }
+            get => myHotel;
+            set => SetProperty(ref myHotel, value);
         }
 
         public bool Rooms
         {
-            get { return _rooms; }
-            set
-            {
-                _rooms = value;
-                OnPropertyChanged();
-            }
+            get => rooms;
+            set => SetProperty(ref rooms, value);
         }
 
         public bool Reviews
         {
-            get { return _reviews; }
-            set
-            {
-                _reviews = value;
-                OnPropertyChanged();
-            }
+            get => reviews;
+            set => SetProperty(ref reviews, value);
         }
 
         public ICommand MyHotelCommand => new Command(SetMyHotel);
@@ -127,8 +100,8 @@ namespace SmartHotel.Clients.Core.ViewModels
             {
                 var navigationParameter = navigationData as Dictionary<string, object>;
                 Hotel = navigationParameter["hotel"] as Models.Hotel;
-                _from = (DateTime)navigationParameter["from"];
-                _until = (DateTime)navigationParameter["until"];
+                from = (DateTime)navigationParameter["from"];
+                until = (DateTime)navigationParameter["until"];
 
                 if (Hotel != null)
                 {
@@ -136,16 +109,17 @@ namespace SmartHotel.Clients.Core.ViewModels
                     {
                         IsBusy = true;
 
-                        Hotel = await _hotelService.GetHotelByIdAsync(Hotel.Id);
+                        Hotel = await hotelService.GetHotelByIdAsync(Hotel.Id);
 
-                        var hotelServices = await _hotelService.GetHotelServicesAsync();
-                        HotelServices = hotelServices.ToObservableCollection();
+                        var hotelServices = await hotelService.GetHotelServicesAsync();
+                        HotelServices = hotelServices.ToObservableRangeCollection();
 
-                        var roomServices = await _hotelService.GetRoomServicesAsync();
-                        RoomServices = roomServices.ToObservableCollection();
+                        var roomServices = await hotelService.GetRoomServicesAsync();
+                        RoomServices = roomServices.ToObservableRangeCollection();
 
-                        var hotelReviews = await _hotelService.GetReviewsAsync(Hotel.Id);
-                        HotelReviews = hotelReviews.ToObservableCollection();
+                        var hotelReviews = await hotelService.GetReviewsAsync(Hotel.Id);
+                        HotelReviews = hotelReviews.ToObservableRangeCollection();
+                        HotelReviews = hotelReviews.ToObservableRangeCollection();
 
                         // Experiment with r https://docs.microsoft.com/en-us/azure/machine-learning/studio/extend-your-experiment-with-r
                         /*
@@ -158,6 +132,11 @@ namespace SmartHotel.Clients.Core.ViewModels
                     catch (HttpRequestException httpEx)
                     {
                         Debug.WriteLine($"[Booking Hotels Step] Error retrieving data: {httpEx}");
+                    }
+                    catch (ConnectivityException cex)
+                    {
+                        Debug.WriteLine($"[Booking Hotels Step] Connectivity Error: {cex}");
+                        await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
                     }
                     catch (Exception ex)
                     {
@@ -176,32 +155,32 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private void SetMyHotel()
+        void SetMyHotel()
         {
             MyHotel = true;
             Rooms = false;
             Reviews = false;
         }
 
-        private void SetRooms()
+        void SetRooms()
         {
             MyHotel = false;
             Rooms = true;
             Reviews = false;
         }
 
-        private void SetReviews()
+        void SetReviews()
         {
             MyHotel = false;
             Rooms = false;
             Reviews = true;
         }
 
-        private async Task BookingAsync()
+        async Task BookingAsync()
         {
             try
             {
-                var authenticatedUser = _authenticationService.AuthenticatedUser;
+                var authenticatedUser = authenticationService.AuthenticatedUser;
 
                 var booking = await DialogService.ShowConfirmAsync(
                 string.Format(Resources.DialogBookingMessage, Hotel.Name),
@@ -211,7 +190,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 if (booking)
                 {
-                    var user = _authenticationService.AuthenticatedUser;
+                    var user = authenticationService.AuthenticatedUser;
 
                     var newBooking = new Models.Booking
                     {
@@ -225,18 +204,23 @@ namespace SmartHotel.Clients.Core.ViewModels
                         {
                             new Models.Room { Quantity = 1, RoomType = 0 }
                         },
-                        From = _from,
-                        To = _until
+                        From = from,
+                        To = until
                     };
 
-                    await _bookingService.CreateBookingAsync(newBooking, authenticatedUser.Token);
-
+                    await bookingService.CreateBookingAsync(newBooking, authenticatedUser.Token);
+                                               
                     AppSettings.HasBooking = true;
 
                     await NavigationService.NavigateToAsync<MainViewModel>();
 
                     MessagingCenter.Send(newBooking, MessengerKeys.BookingRequested);
                 }
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Booking] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {
@@ -249,13 +233,13 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async Task GetOccupancyAsync()
+        async Task GetOccupancyAsync()
         {
             var room = Hotel.Rooms.First();
-            var occupancy = await _bookingService.GetOccupancyInformationAsync(room.RoomId, _until);
+            var occupancy = await bookingService.GetOccupancyInformationAsync(room.RoomId, until);
             var ocuppancyIfSunny = occupancy.OcuppancyIfSunny;
 
-            string toast = string.Empty;
+            var toast = string.Empty;
 
             if (ocuppancyIfSunny <= (100 / 3))
             {

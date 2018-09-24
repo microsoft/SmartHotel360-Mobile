@@ -1,63 +1,55 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
+using MvvmHelpers;
 using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Core.Validations
 {
     public class ValidatableObject<T> : BindableObject, IValidity
     {
-        private readonly List<IValidationRule<T>> _validations;
-        private readonly ObservableCollection<string> _errors;
-        private T _value;
-        private bool _isValid;
+        T mainValue;
+        bool isValid;
 
-        public List<IValidationRule<T>> Validations => _validations;
+        public List<IValidationRule<T>> Validations { get; }
 
-        public ObservableCollection<string> Errors => _errors;
+        public ObservableRangeCollection<string> Errors { get; }
 
         public T Value
         {
-            get
-            {
-                return _value;
-            }
+            get => mainValue;
 
             set
             {
-                _value = value;
+                mainValue = value;
                 OnPropertyChanged();
             }
         }
 
         public bool IsValid
         {
-            get
-            {
-                return _isValid;
-            }
+            get => isValid;
 
             set
             {
-                _isValid = value;
-                _errors.Clear();
+                isValid = value;
+                Errors.Clear();
                 OnPropertyChanged();
             }
         }
 
         public ValidatableObject()
         {
-            _isValid = true;
-            _errors = new ObservableCollection<string>();
-            _validations = new List<IValidationRule<T>>();
+            isValid = true;
+            Errors = new ObservableRangeCollection<string>();
+            Validations = new List<IValidationRule<T>>();
         }
 
         public bool Validate()
         {
             Errors.Clear();
 
-            IEnumerable<string> errors = _validations.Where(v => !v.Check(Value))
-                                                     .Select(v => v.ValidationMessage);
+            var errors = Validations.Where(v => !v.Check(Value))                        
+                .Select(v => v.ValidationMessage);
 
             foreach (var error in errors)
             {
@@ -66,7 +58,7 @@ namespace SmartHotel.Clients.Core.Validations
 
             IsValid = !Errors.Any();
 
-            return this.IsValid;
+            return IsValid;
         }
     }
 }

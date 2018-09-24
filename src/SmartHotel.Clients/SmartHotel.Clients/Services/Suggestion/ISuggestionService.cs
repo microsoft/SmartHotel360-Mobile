@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using MvvmHelpers;
 
 namespace SmartHotel.Clients.Core.Services.Suggestion
 {
     public interface ISuggestionService
     {
-        Task<ObservableCollection<Models.Suggestion>> GetSuggestionsAsync(double latitude, double longitude);
+        Task<ObservableRangeCollection<Models.Suggestion>> GetSuggestionsAsync(double latitude, double longitude);
     }
 }

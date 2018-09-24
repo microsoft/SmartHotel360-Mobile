@@ -10,7 +10,7 @@ namespace SmartHotel.Clients.iOS.Renderers
     {
         public override UITableViewCell GetCell(Cell item, UITableViewCell reusableCell, UITableView tv)
         {
-            UITableViewCell cell = base.GetCell(item, reusableCell, tv);
+            var cell = base.GetCell(item, reusableCell, tv);
 
             if (cell != null)
             {

@@ -32,7 +32,7 @@ namespace SmartHotel.Clients.Droid.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName.Equals(nameof(ExtendedEntry.LineColorToApply)))
+            if (e.PropertyName.Equals(nameof(ExtendedEntry.LineColor)))
             {
                 UpdateLineColor();
             }
@@ -40,7 +40,7 @@ namespace SmartHotel.Clients.Droid.Renderers
 
         private void UpdateLineColor()
         {
-            Control?.Background?.SetColorFilter(ExtendedEntryElement.LineColorToApply.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
+            Control?.Background?.SetColorFilter(ExtendedEntryElement.LineColor.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
         }
     }
 }

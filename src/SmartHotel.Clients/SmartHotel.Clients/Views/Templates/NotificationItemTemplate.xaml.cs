@@ -10,8 +10,8 @@ namespace SmartHotel.Clients.Core.Views.Templates
 
         public ICommand TapCommand
         {
-            get { return (ICommand)GetValue(TapCommandProperty); }
-            set { SetValue(TapCommandProperty, value); }
+            get => (ICommand)GetValue(TapCommandProperty);
+            set => SetValue(TapCommandProperty, value);
         }
 
         public NotificationItemTemplate()

@@ -12,14 +12,14 @@ namespace SmartHotel.Clients.UWP.Renderers
 {
     public class ButtonFrameRenderer : FrameRenderer
     {
-        private const int ShadowWidth = 1;
-        private SpriteVisual _spriteVisual;
+        const int shadowWidth = 1;
+        SpriteVisual spriteVisual;
 
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Frame> e)
         {
             if (e.NewElement != null)
             {
-                if (_spriteVisual == null)
+                if (spriteVisual == null)
                 {
                     AddShadowChild();
                 }
@@ -30,24 +30,24 @@ namespace SmartHotel.Clients.UWP.Renderers
 
         protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
         {
-            _spriteVisual.Size = new Vector2((float)finalSize.Width + ShadowWidth, (float)finalSize.Height + ShadowWidth);
+            spriteVisual.Size = new Vector2((float)finalSize.Width + shadowWidth, (float)finalSize.Height + shadowWidth);
 
             return base.ArrangeOverride(finalSize);
         }
 
-        private void AddShadowChild()
+        void AddShadowChild()
         {
             var canvas = new Canvas();
             var compositor = ElementCompositionPreview.GetElementVisual(canvas).Compositor;
-            _spriteVisual = compositor.CreateSpriteVisual();
+            spriteVisual = compositor.CreateSpriteVisual();
 
             var dropShadow = compositor.CreateDropShadow();
-            dropShadow.Offset = new Vector3(-ShadowWidth, -ShadowWidth, 0);
+            dropShadow.Offset = new Vector3(-shadowWidth, -shadowWidth, 0);
             dropShadow.Color = Colors.Black;
             dropShadow.Opacity = 0.6f;
-            _spriteVisual.Shadow = dropShadow;
+            spriteVisual.Shadow = dropShadow;
 
-            ElementCompositionPreview.SetElementChildVisual(canvas, _spriteVisual);
+            ElementCompositionPreview.SetElementChildVisual(canvas, spriteVisual);
 
             Children.Add(canvas);
         }

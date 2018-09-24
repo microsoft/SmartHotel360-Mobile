@@ -9,7 +9,7 @@ namespace SmartHotel.Clients.Core.Services.Notification
 {
     public class NotificationService : INotificationService
     {
-        private readonly IRequestService _requestService;
+        readonly IRequestService _requestService;
 
         public NotificationService(IRequestService requestService)
         {
@@ -18,18 +18,15 @@ namespace SmartHotel.Clients.Core.Services.Notification
 
         public Task<IEnumerable<Models.Notification>> GetNotificationsAsync(int seq, string token)
         {
-            UriBuilder builder = new UriBuilder(AppSettings.NotificationsEndpoint);
+            var builder = new UriBuilder(AppSettings.NotificationsEndpoint);
             builder.AppendToPath("notifications");
             builder.Query = $"seq={seq.ToString(CultureInfo.InvariantCulture)}";
 
-            string uri = builder.ToString();
+            var uri = builder.ToString();
 
             return _requestService.GetAsync<IEnumerable<Models.Notification>>(uri, token);
         }
 
-        public Task DeleteNotificationAsync(Models.Notification notification)
-        {
-            return Task.FromResult(false);
-        }
+        public Task DeleteNotificationAsync(Models.Notification notification) => Task.FromResult(false);
     }
 }

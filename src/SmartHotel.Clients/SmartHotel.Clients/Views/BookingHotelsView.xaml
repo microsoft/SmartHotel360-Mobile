@@ -24,7 +24,7 @@
                 <Setter Property="VerticalOptions" 
                         Value="Start" />
             </Style>
-            
+
             <Style x:Key="SeparatorStyle" 
                    TargetType="Grid">
                 <Setter Property="BackgroundColor" 
@@ -34,7 +34,7 @@
                 <Setter Property="HeightRequest" 
                         Value="1" />
             </Style>
-            
+
             <Style x:Key="FilterIconStyle" 
                    TargetType="Grid">
                 <Setter Property="HorizontalOptions" 

@@ -18,7 +18,7 @@
                 <xamanimation:TranslateToAnimation TranslateY="600" Duration="0" />
                 <xamanimation:TranslateToAnimation TranslateY="0" Easing="SpringOut" Duration="800" />
             </xamanimation:StoryBoard>
-            
+
             <xamanimation:StoryBoard 
                 x:Key="AmbientAnimation"    
                 Target="{x:Reference AmbientPanel}">
@@ -27,7 +27,7 @@
                 <xamanimation:FadeToAnimation Opacity="1" Duration="150" />
                 <xamanimation:TranslateToAnimation TranslateX="0" Easing="SpringOut" Duration="200" />
             </xamanimation:StoryBoard>
-            
+
             <xamanimation:StoryBoard 
                 x:Key="NeedAnimation"    
                 Target="{x:Reference NeedPanel}">
@@ -36,7 +36,7 @@
                 <xamanimation:FadeToAnimation Opacity="1" Duration="150" />
                 <xamanimation:TranslateToAnimation TranslateX="0" Easing="SpringOut" Duration="200" />
             </xamanimation:StoryBoard>
-            
+
             <xamanimation:StoryBoard 
                 x:Key="FindAnimation"    
                 Target="{x:Reference FindPanel}">
@@ -45,7 +45,7 @@
                 <xamanimation:FadeToAnimation Opacity="1" Duration="150" />
                 <xamanimation:TranslateToAnimation TranslateX="0" Easing="SpringOut" Duration="200" />
             </xamanimation:StoryBoard>
-            
+
             <Style x:Key="TabTextStyle" 
                    TargetType="Label"
                    BasedOn="{StaticResource PoppinsRegularLabelStyle}">

@@ -1,5 +1,5 @@
-﻿using Android.Views.InputMethods;
-using Plugin.CurrentActivity;
+﻿using Android.App;
+using Android.Views.InputMethods;
 using SmartHotel.Clients.Core.Services.DismissKeyboard;
 using SmartHotel.Clients.Droid.Services.DismissKeyboard;
 
@@ -10,10 +10,10 @@ namespace SmartHotel.Clients.Droid.Services.DismissKeyboard
     {
         public void DismissKeyboard()
         {
-            InputMethodManager inputMethodManager = InputMethodManager.FromContext(CrossCurrentActivity.Current.Activity.ApplicationContext);
+            var inputMethodManager = InputMethodManager.FromContext(Android.App.Application.Context);
 
             inputMethodManager.HideSoftInputFromWindow(
-                CrossCurrentActivity.Current.Activity.Window.DecorView.WindowToken, HideSoftInputFlags.NotAlways);
+                ((Activity)Xamarin.Forms.Forms.Context).Window.DecorView.WindowToken, HideSoftInputFlags.NotAlways);
         }
     }
 }

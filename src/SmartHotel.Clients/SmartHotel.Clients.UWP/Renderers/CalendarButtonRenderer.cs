@@ -40,12 +40,11 @@ namespace SmartHotel.Clients.UWP.Renderers
             }
         }
 
-        private async Task DrawBackgroundImage()
+        async Task DrawBackgroundImage()
         {
-            var sourceButton = this.Element as CalendarButton;
             var targetButton = this.Control;
 
-            if (sourceButton == null || targetButton == null) return;
+            if (!(this.Element is CalendarButton sourceButton) || targetButton == null) return;
 
             if (sourceButton.BackgroundImage != null)
             {
@@ -109,15 +108,15 @@ namespace SmartHotel.Clients.UWP.Renderers
             }
         }
 
-        private Task<Image> GetCurrentImage()
+        Task<Image> GetCurrentImage()
         {
-            var sourceButton = this.Element as CalendarButton;
+            var sourceButton = Element as CalendarButton;
             if (sourceButton == null) return null;
 
             return GetImageAsync(sourceButton.BackgroundImage);
         }
 
-        private static IImageSourceHandler GetHandler(Xamarin.Forms.ImageSource source)
+        static IImageSourceHandler GetHandler(Xamarin.Forms.ImageSource source)
         {
             IImageSourceHandler returnValue = null;
             if (source is Xamarin.Forms.UriImageSource)
@@ -141,7 +140,7 @@ namespace SmartHotel.Clients.UWP.Renderers
         /// <param name="source">The <see cref="ImageSource" /> to load the image from.</param>
         /// <param name="currentImage">The current image.</param>
         /// <returns>A properly sized image.</returns>
-        private static async Task<Image> GetImageAsync(Xamarin.Forms.ImageSource source)
+        static async Task<Image> GetImageAsync(Xamarin.Forms.ImageSource source)
         {
             var image = new Image();
             var handler = GetHandler(source);

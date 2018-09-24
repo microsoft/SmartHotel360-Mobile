@@ -33,15 +33,9 @@ namespace SmartHotel.Clients.Core.Services.Dialog
             UserDialogs.Instance.Toast(toastConfig);
         }
 
-        public Task<bool> ShowConfirmAsync(string message, string title, string okLabel, string cancelLabel)
-        {
-            return UserDialogs.Instance.ConfirmAsync(message, title, okLabel, cancelLabel);
-        }
+        public Task<bool> ShowConfirmAsync(string message, string title, string okLabel, string cancelLabel) => UserDialogs.Instance.ConfirmAsync(message, title, okLabel, cancelLabel);
 
-        public Task<string> SelectActionAsync(string message, string title, IEnumerable<string> options)
-        {
-            return SelectActionAsync(message, title, "Cancel", options);
-        }
+        public Task<string> SelectActionAsync(string message, string title, IEnumerable<string> options) => SelectActionAsync(message, title, "Cancel", options);
 
         public async Task<string> SelectActionAsync(string message, string title, string cancelLabel, IEnumerable<string> options)
         {
@@ -57,7 +51,7 @@ namespace SmartHotel.Clients.Core.Services.Dialog
                     throw new ArgumentException("No options provided", nameof(options));
                 }
 
-                string result =
+                var result =
                     await UserDialogs.Instance.ActionSheetAsync(message, cancelLabel, null, buttons: options.ToArray());
 
                 return options.Contains(result)
