@@ -15,22 +15,18 @@ namespace SmartHotel.Clients.Core.Behaviors
                 null,
                 PropertyChanged);
 
-        private static void PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        static void PropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var listView = bindable as ListView;
-
-            if (listView != null)
+            if (bindable is ListView listView)
             {
                 listView.ItemTapped -= ListViewOnItemTapped;
                 listView.ItemTapped += ListViewOnItemTapped;
             }
         }
 
-        private static void ListViewOnItemTapped(object sender, ItemTappedEventArgs e)
+        static void ListViewOnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var list = sender as ListView;
-
-            if (list != null && list.IsEnabled && !list.IsRefreshing)
+            if (sender is ListView list && list.IsEnabled && !list.IsRefreshing)
             {
                 list.SelectedItem = null;
                 var command = GetItemTappedCommand(list);
@@ -41,14 +37,8 @@ namespace SmartHotel.Clients.Core.Behaviors
             }
         }
 
-        public static ICommand GetItemTappedCommand(BindableObject bindableObject)
-        {
-            return (ICommand)bindableObject.GetValue(ItemTappedCommandProperty);
-        }
+        public static ICommand GetItemTappedCommand(BindableObject bindableObject) => (ICommand)bindableObject.GetValue(ItemTappedCommandProperty);
 
-        public static void SetItemTappedCommand(BindableObject bindableObject, object value)
-        {
-            bindableObject.SetValue(ItemTappedCommandProperty, value);
-        }
+        public static void SetItemTappedCommand(BindableObject bindableObject, object value) => bindableObject.SetValue(ItemTappedCommandProperty, value);
     }
 }

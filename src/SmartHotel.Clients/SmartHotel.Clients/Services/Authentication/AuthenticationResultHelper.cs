@@ -10,7 +10,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
     {
         public static Models.User GetUserFromResult(AuthenticationResult ar)
         {
-            JObject data = ParseIdToken(ar.IdToken);
+            var data = ParseIdToken(ar.IdToken);
 
             var user = new Models.User
             {
@@ -24,7 +24,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
             return user;
         }
 
-        private static JObject ParseIdToken(string idToken)
+        static JObject ParseIdToken(string idToken)
         {
             // Get the piece with actual user info
             idToken = idToken.Split('.')[1];
@@ -32,7 +32,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
             return JObject.Parse(idToken);
         }
 
-        private static string Base64UrlDecode(string s)
+        static string Base64UrlDecode(string s)
         {
             s = s.Replace('-', '+').Replace('_', '/');
             s = s.PadRight(s.Length + (4 - s.Length % 4) % 4, '=');
@@ -42,13 +42,13 @@ namespace SmartHotel.Clients.Core.Services.Authentication
             return decoded;
         }
 
-        private static string GetTokenValue(JObject data, string key)
+        static string GetTokenValue(JObject data, string key)
         {
-            string value = string.Empty;
+            var value = string.Empty;
 
             try
             {
-                JToken token = data[key];
+                var token = data[key];
 
                 value = token.HasValues
                     ? token.First.ToString()

@@ -26,16 +26,16 @@ namespace SmartHotel.Clients.Core.Controls
 		/// </summary>
 		/// <value>The color of the weekdays text.</value>
 		public Color WeekdaysTextColor
-		{
-			get { return (Color)GetValue(WeekdaysTextColorProperty); }
-			set { SetValue(WeekdaysTextColorProperty, value); }
-		}
+        {
+            get => (Color)GetValue(WeekdaysTextColorProperty);
+            set => SetValue(WeekdaysTextColorProperty, value);
+        }
 
-		#endregion
+        #endregion
 
-		#region WeekdaysBackgroundColor
+        #region WeekdaysBackgroundColor
 
-		public static readonly BindableProperty WeekdaysBackgroundColorProperty =
+        public static readonly BindableProperty WeekdaysBackgroundColorProperty =
 			BindableProperty.Create(nameof(WeekdaysBackgroundColor), typeof(Color), typeof(Calendar), Color.Transparent,
                 propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeWeekdaysBackgroundColor((Color)newValue, (Color)oldValue));
 
@@ -50,16 +50,16 @@ namespace SmartHotel.Clients.Core.Controls
 		/// </summary>
 		/// <value>The color of the weekdays background.</value>
 		public Color WeekdaysBackgroundColor
-		{
-			get { return (Color)GetValue(WeekdaysBackgroundColorProperty); }
-			set { SetValue(WeekdaysBackgroundColorProperty, value); }
-		}
+        {
+            get => (Color)GetValue(WeekdaysBackgroundColorProperty);
+            set => SetValue(WeekdaysBackgroundColorProperty, value);
+        }
 
-		#endregion
+        #endregion
 
-		#region WeekdaysFontSize
+        #region WeekdaysFontSize
 
-		public static readonly BindableProperty WeekdaysFontSizeProperty =
+        public static readonly BindableProperty WeekdaysFontSizeProperty =
 			BindableProperty.Create(nameof(WeekdaysFontSize), typeof(double), typeof(Calendar), 18.0,
                 propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeWeekdaysFontSize((double)newValue, (double)oldValue));
 
@@ -74,16 +74,16 @@ namespace SmartHotel.Clients.Core.Controls
 		/// </summary>
 		/// <value>The size of the weekdays font.</value>
 		public double WeekdaysFontSize
-		{
-			get { return (double)GetValue(WeekdaysFontSizeProperty); }
-			set { SetValue(WeekdaysFontSizeProperty, value); }
-		}
+        {
+            get => (double)GetValue(WeekdaysFontSizeProperty);
+            set => SetValue(WeekdaysFontSizeProperty, value);
+        }
 
-		#endregion
+        #endregion
 
-		#region WeekdaysFontFamily
+        #region WeekdaysFontFamily
 
-		public static readonly BindableProperty WeekdaysFontFamilyProperty =
+        public static readonly BindableProperty WeekdaysFontFamilyProperty =
             BindableProperty.Create(nameof(WeekdaysFontFamily), typeof(string), typeof(Calendar), default(string),							
                 propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeWeekdaysFontFamily((string)newValue, (string)oldValue));
 
@@ -97,16 +97,16 @@ namespace SmartHotel.Clients.Core.Controls
 		/// Gets or sets the font family of the weekday labels.
 		/// </summary>
 		public string WeekdaysFontFamily
-		{
-			get { return GetValue(WeekdaysFontFamilyProperty) as string; }
-			set { SetValue(WeekdaysFontFamilyProperty, value); }
-		}
+        {
+            get => GetValue(WeekdaysFontFamilyProperty) as string;
+            set => SetValue(WeekdaysFontFamilyProperty, value);
+        }
 
-		#endregion
+        #endregion
 
-		#region WeekdaysFormat
+        #region WeekdaysFormat
 
-		public static readonly BindableProperty WeekdaysFormatProperty =
+        public static readonly BindableProperty WeekdaysFormatProperty =
 			BindableProperty.Create(nameof(WeekdaysFormat), typeof(string), typeof(Calendar), "ddd",								
                 propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeWeekdays());
 
@@ -115,15 +115,15 @@ namespace SmartHotel.Clients.Core.Controls
 		/// </summary>
 		/// <value>The weekdays format.</value>
 		public string WeekdaysFormat
-		{
-			get { return GetValue(WeekdaysFormatProperty) as string; }
-			set { SetValue(WeekdaysFormatProperty, value); }
-		}
-		#endregion
+        {
+            get => GetValue(WeekdaysFormatProperty) as string;
+            set => SetValue(WeekdaysFormatProperty, value);
+        }
+        #endregion
 
-		#region WeekdaysFontAttributes
+        #region WeekdaysFontAttributes
 
-		public static readonly BindableProperty WeekdaysFontAttributesProperty =
+        public static readonly BindableProperty WeekdaysFontAttributesProperty =
 			BindableProperty.Create(nameof(WeekdaysFontAttributes), typeof(FontAttributes), typeof(Calendar), FontAttributes.None,		
                 propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ChangeWeekdaysFontAttributes((FontAttributes)newValue, (FontAttributes)oldValue));
 
@@ -137,16 +137,16 @@ namespace SmartHotel.Clients.Core.Controls
 		/// Gets or sets the font attributes of the weekday labels.
 		/// </summary>
 		public FontAttributes WeekdaysFontAttributes
-		{
-			get { return (FontAttributes)GetValue(WeekdaysFontAttributesProperty); }
-			set { SetValue(WeekdaysFontAttributesProperty, value); }
-		}
+        {
+            get => (FontAttributes)GetValue(WeekdaysFontAttributesProperty);
+            set => SetValue(WeekdaysFontAttributesProperty, value);
+        }
 
-		#endregion
+        #endregion
 
-		#region WeekdaysShow
+        #region WeekdaysShow
 
-		public static readonly BindableProperty WeekdaysShowProperty =
+        public static readonly BindableProperty WeekdaysShowProperty =
 			BindableProperty.Create(nameof(WeekdaysShow), typeof(bool), typeof(Calendar), true,
 				propertyChanged: (bindable, oldValue, newValue) => (bindable as Calendar).ShowHideElements());
 
@@ -155,21 +155,21 @@ namespace SmartHotel.Clients.Core.Controls
 		/// </summary>
 		/// <value>The weekdays show.</value>
 		public bool WeekdaysShow
-		{
-			get { return (bool)GetValue(WeekdaysShowProperty); }
-			set { SetValue(WeekdaysShowProperty, value); }
-		}
+        {
+            get => (bool)GetValue(WeekdaysShowProperty);
+            set => SetValue(WeekdaysShowProperty, value);
+        }
 
-		#endregion
+        #endregion
 
-		protected void ChangeWeekdays()
+        protected void ChangeWeekdays()
 		{
 			if (!WeekdaysShow) return;
 			var start = CalendarStartDate(StartDate);
-			for (int i = 0; i < dayLabels.Count; i++)
+			for (var i = 0; i < dayLabels.Count; i++)
             {
                 var day = start.ToString(WeekdaysFormat);
-                string showDay = char.ToUpper(day.First()) + day.Substring(1).ToLower();
+                var showDay = char.ToUpper(day.First()) + day.Substring(1).ToLower();
                 dayLabels[i].Text = showDay;
                 start = start.AddDays(1);
             }

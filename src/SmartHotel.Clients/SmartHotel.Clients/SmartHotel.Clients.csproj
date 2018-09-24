@@ -9,12 +9,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UI Test|AnyCPU'">
     <DefineConstants>TRACE;IS_UI_TEST;</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Converters\CountToBoolConverter.cs" />
-    <Compile Remove="Views\Templates\SuggestionSearchItemTemplate.xaml.cs" />
+    <None Remove="Resources\GreetingMessage.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Remove="Views\Templates\SuggestionSearchItemTemplate.xaml" />
+    <EmbeddedResource Include="Resources\GreetingMessage.txt" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
@@ -30,17 +32,17 @@
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.9.0" />
     <PackageReference Include="Microsoft.Identity.Client" Version="1.0.304142221-alpha" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.3.0" />
     <PackageReference Include="Splat" Version="5.0.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
-    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="0.10.0-preview" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.3.840" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.3.840" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
-    <PackageReference Include="Xamanimation" Version="1.1.0" />
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
-    <PackageReference Include="Xamarin.Forms.Maps" Version="3.1.0.697729" />
+    <PackageReference Include="Xamanimation" Version="1.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="3.2.0.839982" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">
@@ -48,28 +50,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Views\ExtendedSplashView.xaml.cs">
-      <DependentUpon>ExtendedSplashView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Templates\UwpNotificationItemTemplate.xaml.cs">
-      <DependentUpon>UwpNotificationItemTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\UwpHomeView.xaml.cs">
-      <DependentUpon>UwpHomeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Templates\UwpSuggestionItemTemplate.xaml.cs">
-      <DependentUpon>UwpSuggestionItemTemplate.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="App.xaml">
-      <Generator></Generator>
-    </None>
   </ItemGroup>
 </Project>

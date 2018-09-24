@@ -13,14 +13,11 @@ namespace SmartHotel.Clients.Core.Controls
 
         public object RemoteSettings
         {
-            get { return GetValue(RemoteSettingsProperty); }
-            set { SetValue(RemoteSettingsProperty, value); }
+            get => GetValue(RemoteSettingsProperty);
+            set => SetValue(RemoteSettingsProperty, value);
         }
 
-        public RemoteSettingsControl()
-        {
-            InitializeComponent();
-        }
+        public RemoteSettingsControl() => InitializeComponent();
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -32,7 +29,7 @@ namespace SmartHotel.Clients.Core.Controls
             }
         }
 
-        private void RemoteSettingsUpdated()
+        void RemoteSettingsUpdated()
         {
             View container = null;
 
@@ -44,7 +41,7 @@ namespace SmartHotel.Clients.Core.Controls
             Content = container;
         }
 
-        private Layout GenerateControlsForObject(object o)
+        Layout GenerateControlsForObject(object o)
         {
             var container = CreateContainer();
 
@@ -73,7 +70,7 @@ namespace SmartHotel.Clients.Core.Controls
             return container;
         }
 
-        private View AddSectionTitle(string name)
+        View AddSectionTitle(string name)
         {
             var container = CreateContainer();
             var label = new Label
@@ -86,7 +83,7 @@ namespace SmartHotel.Clients.Core.Controls
             return container;
         }
 
-        private View AddPropertyValue(PropertyInfo property, object o)
+        View AddPropertyValue(PropertyInfo property, object o)
         {
             var container = CreateContainer();
             var pValue = property.GetValue(o);
@@ -110,22 +107,13 @@ namespace SmartHotel.Clients.Core.Controls
             return container;
         }
 
-        private StackLayout CreateContainer()
+        StackLayout CreateContainer() => new StackLayout
         {
-            return new StackLayout
-            {
-                Padding = new Thickness(10, 5),
-            };
-        }
+            Padding = new Thickness(10, 5),
+        };
 
-        private static bool IsSimpleType(Type type)
-        {
-            return type.GetTypeInfo().IsPrimitive || typeof(string) == type;
-        }
+        static bool IsSimpleType(Type type) => type.GetTypeInfo().IsPrimitive || typeof(string) == type;
 
-        private Style GetStyle(string key)
-        {
-            return Resources[key] as Style;
-        }
+        Style GetStyle(string key) => Resources[key] as Style;
     }
 }

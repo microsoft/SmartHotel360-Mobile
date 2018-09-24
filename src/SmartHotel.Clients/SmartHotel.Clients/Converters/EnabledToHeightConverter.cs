@@ -8,19 +8,14 @@ namespace SmartHotel.Clients.Core.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool)
+            if (value is bool isEnabled)
             {
-                var isEnabled = (bool)value;
-
                 return isEnabled ? 60 : 0;
             }
 
             return 0;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

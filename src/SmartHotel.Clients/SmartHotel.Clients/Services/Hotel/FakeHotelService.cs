@@ -10,7 +10,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
 {
     public class FakeHotelService : IHotelService
     {
-        private static List<City> Cities = new List<City>
+        static readonly List<City> cities = new List<City>
         {
             new City
             {
@@ -32,7 +32,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Models.Hotel> Hotels = new List<Models.Hotel>
+        static List<Models.Hotel> hotels = new List<Models.Hotel>
         {
             new Models.Hotel
             {
@@ -42,7 +42,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
                 Picture = Device.RuntimePlatform == Device.UWP ? "Assets/img_1.png" : "img_1",
                 City = "Barcelona, Spain",
                 PricePerNight = 76,
-                Price = 76, 
+                Price = 76,
                 Rating = 3,
                 Latitude = 47.612081510010654,
                 Longitude = -122.330555830464,
@@ -108,7 +108,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Review> Reviews = new List<Review>
+        static List<Review> reviews = new List<Review>
         {
             new Review
             {
@@ -139,7 +139,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Service> HotelServices = new List<Service>
+        static List<Service> hotelServices = new List<Service>
         {
             new Service
             {
@@ -158,7 +158,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             }
         };
 
-        private static List<Service> RoomServices = new List<Service>
+        static List<Service> roomServices = new List<Service>
         {
             new Service
             {
@@ -181,35 +181,35 @@ namespace SmartHotel.Clients.Core.Services.Hotel
         {
             await Task.Delay(500);
 
-            return Cities;
+            return cities;
         }
 
         public async Task<Models.Hotel> GetHotelByIdAsync(int id)
         {
             await Task.Delay(500);
 
-            return Hotels.FirstOrDefault(h => h.Id == id);
+            return hotels.FirstOrDefault(h => h.Id == id);
         }
 
         public async Task<IEnumerable<Models.Hotel>> GetMostVisitedAsync()
         {
             await Task.Delay(500);
 
-            return Hotels;
+            return hotels;
         }
 
         public async Task<IEnumerable<Review>> GetReviewsAsync(int id)
         {
             await Task.Delay(500);
 
-            return Reviews.Where(r => r.HotelId == id).ToObservableCollection();
+            return reviews.Where(r => r.HotelId == id).ToObservableRangeCollection();
         }
 
         public async Task<IEnumerable<Models.Hotel>> SearchAsync(int cityId)
         {
             await Task.Delay(500);
 
-            return Hotels
+            return hotels
                 .Where(h => h.CityId == cityId);
         }
 
@@ -217,23 +217,23 @@ namespace SmartHotel.Clients.Core.Services.Hotel
         {
             await Task.Delay(500);
 
-            return Hotels
+            return hotels
                 .Where(h => h.CityId == cityId && h.Rating == rating && h.PricePerNight >= minPrice && h.PricePerNight < maxPrice)
-                .ToObservableCollection();
+                .ToObservableRangeCollection();
         }
 
         public async Task<IEnumerable<Service>> GetHotelServicesAsync()
         {
             await Task.Delay(500);
 
-            return HotelServices;
+            return hotelServices;
         }
 
         public async Task<IEnumerable<Service>> GetRoomServicesAsync()
         {
             await Task.Delay(500);
 
-            return RoomServices;
+            return roomServices;
         }
     }
 }

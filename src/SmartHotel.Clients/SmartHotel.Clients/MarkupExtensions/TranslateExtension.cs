@@ -19,7 +19,7 @@ namespace SmartHotel.Clients.Core.MarkupExtensions
 
             var assembly = typeof(TranslateExtension).GetTypeInfo().Assembly;
             var assemblyName = assembly.GetName();
-            ResourceManager resourceManager = new ResourceManager($"{assemblyName.Name}.Resources", assembly);
+            var resourceManager = new ResourceManager($"{assemblyName.Name}.Resources", assembly);
 
             return resourceManager.GetString(Text, CultureInfo.CurrentCulture);
         }

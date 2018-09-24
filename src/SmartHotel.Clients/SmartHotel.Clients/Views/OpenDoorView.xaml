@@ -13,7 +13,7 @@
                    TargetType="StackLayout">
                 <Setter Property="Margin" Value="24, 48" />
             </Style>
-            
+
             <Style x:Key="OpenDoorTextStyle" 
                    TargetType="Label"
                    BasedOn="{StaticResource FiraSansRegularLabelStyle}">
@@ -25,7 +25,7 @@
             </Style>
 
             <Color x:Key="OpenDoorBackgroundColor">#F3F3F3</Color>
-           
+
             <Style x:Key="OpenDoorPanelStyle" 
                    TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="{StaticResource OpenDoorBackgroundColor}" />
@@ -33,7 +33,7 @@
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="Margin" Value="24, 0, 24, 24" />
             </Style>
-            
+
         </ResourceDictionary>
     </pages:PopupPage.Resources>
     <pages:PopupPage.Animation>

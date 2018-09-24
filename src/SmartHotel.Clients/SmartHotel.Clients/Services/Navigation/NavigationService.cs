@@ -12,25 +12,22 @@ namespace SmartHotel.Clients.Core.Services.Navigation
 {
     public partial class NavigationService : INavigationService
     {
-        private readonly IAuthenticationService _authenticationService;
-        protected readonly Dictionary<Type, Type> _mappings;
+        readonly IAuthenticationService authenticationService;
+        protected readonly Dictionary<Type, Type> mappings;
 
-        protected Application CurrentApplication
-        {
-            get { return Application.Current; }
-        }
+        protected Application CurrentApplication => Application.Current;
 
         public NavigationService(IAuthenticationService authenticationService)
         {
-            _authenticationService = authenticationService;
-            _mappings = new Dictionary<Type, Type>();
+            this.authenticationService = authenticationService;
+            mappings = new Dictionary<Type, Type>();
 
             CreatePageViewModelMappings();
         }
 
         public async Task InitializeAsync()
         {
-            if (await _authenticationService.UserIsAuthenticatedAndValidAsync())
+            if (await authenticationService.UserIsAuthenticatedAndValidAsync())
             {
                 await NavigateToAsync<MainViewModel>();
             }
@@ -40,25 +37,13 @@ namespace SmartHotel.Clients.Core.Services.Navigation
             }
         }
 
-        public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
-        {
-            return InternalNavigateToAsync(typeof(TViewModel), null);
-        }
+        public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase => InternalNavigateToAsync(typeof(TViewModel), null);
 
-        public Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase
-        {
-            return InternalNavigateToAsync(typeof(TViewModel), parameter);
-        }
+        public Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase => InternalNavigateToAsync(typeof(TViewModel), parameter);
 
-        public Task NavigateToAsync(Type viewModelType)
-        {
-            return InternalNavigateToAsync(viewModelType, null);
-        }
+        public Task NavigateToAsync(Type viewModelType) => InternalNavigateToAsync(viewModelType, null);
 
-        public Task NavigateToAsync(Type viewModelType, object parameter)
-        {
-            return InternalNavigateToAsync(viewModelType, parameter);
-        }
+        public Task NavigateToAsync(Type viewModelType, object parameter) => InternalNavigateToAsync(viewModelType, parameter);
 
         public async Task NavigateBackAsync()
         {
@@ -75,9 +60,7 @@ namespace SmartHotel.Clients.Core.Services.Navigation
 
         public virtual Task RemoveLastFromBackStackAsync()
         {
-            var mainPage = CurrentApplication.MainPage as MainView;
-
-            if (mainPage != null)
+            if (CurrentApplication.MainPage is MainView mainPage)
             {
                 mainPage.Detail.Navigation.RemovePage(
                     mainPage.Detail.Navigation.NavigationStack[mainPage.Detail.Navigation.NavigationStack.Count - 2]);
@@ -88,7 +71,7 @@ namespace SmartHotel.Clients.Core.Services.Navigation
 
         protected virtual async Task InternalNavigateToAsync(Type viewModelType, object parameter)
         {
-            Page page = CreateAndBindPage(viewModelType, parameter);
+            var page = CreateAndBindPage(viewModelType, parameter);
 
             if (page is MainView)
             {
@@ -101,9 +84,8 @@ namespace SmartHotel.Clients.Core.Services.Navigation
             else if (CurrentApplication.MainPage is MainView)
             {
                 var mainPage = CurrentApplication.MainPage as MainView;
-                var navigationPage = mainPage.Detail as CustomNavigationPage;
 
-                if (navigationPage != null)
+                if (mainPage.Detail is CustomNavigationPage navigationPage)
                 {
                     var currentPage = navigationPage.CurrentPage;
 
@@ -122,9 +104,7 @@ namespace SmartHotel.Clients.Core.Services.Navigation
             }
             else
             {
-                var navigationPage = CurrentApplication.MainPage as CustomNavigationPage;
-
-                if (navigationPage != null)
+                if (CurrentApplication.MainPage is CustomNavigationPage navigationPage)
                 {
                     await navigationPage.PushAsync(page);
                 }
@@ -139,54 +119,54 @@ namespace SmartHotel.Clients.Core.Services.Navigation
 
         protected Type GetPageTypeForViewModel(Type viewModelType)
         {
-            if (!_mappings.ContainsKey(viewModelType))
+            if (!mappings.ContainsKey(viewModelType))
             {
                 throw new KeyNotFoundException($"No map for ${viewModelType} was found on navigation mappings");
             }
 
-            return _mappings[viewModelType];
+            return mappings[viewModelType];
         }
 
         protected Page CreateAndBindPage(Type viewModelType, object parameter)
         {
-            Type pageType = GetPageTypeForViewModel(viewModelType);
+            var pageType = GetPageTypeForViewModel(viewModelType);
 
             if (pageType == null)
             {
                 throw new Exception($"Mapping type for {viewModelType} is not a page");
             }
 
-            Page page = Activator.CreateInstance(pageType) as Page;
-            ViewModelBase viewModel = Locator.Instance.Resolve(viewModelType) as ViewModelBase;
+            var page = Activator.CreateInstance(pageType) as Page;
+            var viewModel = Locator.Instance.Resolve(viewModelType) as ViewModelBase;
             page.BindingContext = viewModel;
 
             return page;
         }
 
-        private void CreatePageViewModelMappings()
+        void CreatePageViewModelMappings()
         {
-            _mappings.Add(typeof(BookingCalendarViewModel), typeof(BookingCalendarView));
-            _mappings.Add(typeof(BookingHotelViewModel), typeof(BookingHotelView));
-            _mappings.Add(typeof(BookingHotelsViewModel), typeof(BookingHotelsView));
-            _mappings.Add(typeof(BookingViewModel), typeof(BookingView));
-            _mappings.Add(typeof(CheckoutViewModel), typeof(CheckoutView));
-            _mappings.Add(typeof(LoginViewModel), typeof(LoginView));
-            _mappings.Add(typeof(MainViewModel), typeof(MainView));
-            _mappings.Add(typeof(MyRoomViewModel), typeof(MyRoomView));
-            _mappings.Add(typeof(NotificationsViewModel), typeof(NotificationsView));
-            _mappings.Add(typeof(OpenDoorViewModel), typeof(OpenDoorView));
-            _mappings.Add(typeof(SettingsViewModel<RemoteSettings>), typeof(SettingsView));
-            _mappings.Add(typeof(ExtendedSplashViewModel), typeof(ExtendedSplashView));
+            mappings.Add(typeof(BookingCalendarViewModel), typeof(BookingCalendarView));
+            mappings.Add(typeof(BookingHotelViewModel), typeof(BookingHotelView));
+            mappings.Add(typeof(BookingHotelsViewModel), typeof(BookingHotelsView));
+            mappings.Add(typeof(BookingViewModel), typeof(BookingView));
+            mappings.Add(typeof(CheckoutViewModel), typeof(CheckoutView));
+            mappings.Add(typeof(LoginViewModel), typeof(LoginView));
+            mappings.Add(typeof(MainViewModel), typeof(MainView));
+            mappings.Add(typeof(MyRoomViewModel), typeof(MyRoomView));
+            mappings.Add(typeof(NotificationsViewModel), typeof(NotificationsView));
+            mappings.Add(typeof(OpenDoorViewModel), typeof(OpenDoorView));
+            mappings.Add(typeof(SettingsViewModel<RemoteSettings>), typeof(SettingsView));
+            mappings.Add(typeof(ExtendedSplashViewModel), typeof(ExtendedSplashView));
 
             if (Device.Idiom == TargetIdiom.Desktop)
             {
-                _mappings.Add(typeof(HomeViewModel), typeof(UwpHomeView));
-                _mappings.Add(typeof(SuggestionsViewModel), typeof(UwpSuggestionsView));
+                mappings.Add(typeof(HomeViewModel), typeof(UwpHomeView));
+                mappings.Add(typeof(SuggestionsViewModel), typeof(UwpSuggestionsView));
             }
             else
             {
-                _mappings.Add(typeof(HomeViewModel), typeof(HomeView));
-                _mappings.Add(typeof(SuggestionsViewModel), typeof(SuggestionsView));
+                mappings.Add(typeof(HomeViewModel), typeof(HomeView));
+                mappings.Add(typeof(SuggestionsViewModel), typeof(SuggestionsView));
             }
         }
     }

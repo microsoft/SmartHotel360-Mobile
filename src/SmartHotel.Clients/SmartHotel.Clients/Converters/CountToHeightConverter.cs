@@ -6,7 +6,7 @@ namespace SmartHotel.Clients.Core.Converters
 {
     public class CountToHeightConverter : IValueConverter
     {
-        private const int RowHeight = 200;
+        const int rowHeight = 200;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -14,15 +14,12 @@ namespace SmartHotel.Clients.Core.Converters
             {
                 var count = System.Convert.ToInt32(value);
 
-                return (RowHeight * count);
+                return (rowHeight * count);
             }
 
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

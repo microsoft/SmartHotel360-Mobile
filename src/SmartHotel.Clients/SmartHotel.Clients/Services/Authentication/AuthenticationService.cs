@@ -7,15 +7,15 @@ namespace SmartHotel.Clients.Core.Services.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IBrowserCookiesService _browserCookiesService;
-        private readonly IAvatarUrlProvider _avatarProvider;
+        readonly IBrowserCookiesService browserCookiesService;
+        readonly IAvatarUrlProvider avatarProvider;
 
         public AuthenticationService(
             IBrowserCookiesService browserCookiesService,
             IAvatarUrlProvider avatarProvider)
         {
-            _browserCookiesService = browserCookiesService;
-            _avatarProvider = avatarProvider;
+            this.browserCookiesService = browserCookiesService;
+            this.avatarProvider = avatarProvider;
         }
 
         public bool IsAuthenticated => AppSettings.User != null;
@@ -29,7 +29,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
                 Email = email,
                 Name = email,
                 LastName = string.Empty,
-                AvatarUrl = _avatarProvider.GetAvatarUrl(email),
+                AvatarUrl = avatarProvider.GetAvatarUrl(email),
                 Token = email,
                 LoggedInWithMicrosoftAccount = false
             };
@@ -41,7 +41,7 @@ namespace SmartHotel.Clients.Core.Services.Authentication
 
         public async Task<bool> LoginWithMicrosoftAsync()
         {
-            bool succeeded = false;
+            var succeeded = false;
 
             try
             {
@@ -54,8 +54,8 @@ namespace SmartHotel.Clients.Core.Services.Authentication
                   $"{AppSettings.B2cAuthority}{AppSettings.B2cTenant}",
                   AppSettings.B2cPolicy);
 
-                Models.User user = AuthenticationResultHelper.GetUserFromResult(result);
-                user.AvatarUrl = _avatarProvider.GetAvatarUrl(user.Email);
+                var user = AuthenticationResultHelper.GetUserFromResult(result);
+                user.AvatarUrl = avatarProvider.GetAvatarUrl(user.Email);
                 user.LoggedInWithMicrosoftAccount = true;
                 AppSettings.User = user;
 
@@ -85,12 +85,12 @@ namespace SmartHotel.Clients.Core.Services.Authentication
             }
             else
             {
-                bool refreshSucceded = false;
+                var refreshSucceded = false;
 
                 try
                 {
                     var tokenCache = App.AuthenticationClient.UserTokenCache;
-                    AuthenticationResult ar = await App.AuthenticationClient.AcquireTokenSilentAsync(
+                    var ar = await App.AuthenticationClient.AcquireTokenSilentAsync(
                         new string[] { AppSettings.B2cClientId },
                         AuthenticatedUser.Id,
                         $"{AppSettings.B2cAuthority}{AppSettings.B2cTenant}",
@@ -112,13 +112,13 @@ namespace SmartHotel.Clients.Core.Services.Authentication
         public async Task LogoutAsync()
         {
             AppSettings.RemoveUserData();
-            await _browserCookiesService.ClearCookiesAsync();
+            await browserCookiesService.ClearCookiesAsync();
         }
 
-        private void SaveAuthenticationResult(AuthenticationResult result)
+        void SaveAuthenticationResult(AuthenticationResult result)
         {
-            Models.User user = AuthenticationResultHelper.GetUserFromResult(result);
-            user.AvatarUrl = _avatarProvider.GetAvatarUrl(user.Email);
+            var user = AuthenticationResultHelper.GetUserFromResult(result);
+            user.AvatarUrl = avatarProvider.GetAvatarUrl(user.Email);
             AppSettings.User = user;
         }
     }

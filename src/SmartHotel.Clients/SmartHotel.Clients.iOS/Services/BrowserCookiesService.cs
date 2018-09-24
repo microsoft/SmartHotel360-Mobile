@@ -8,9 +8,9 @@ namespace SmartHotel.Clients.iOS.Services
     {
         public Task ClearCookiesAsync()
         {
-            NSHttpCookieStorage storage = NSHttpCookieStorage.SharedStorage;
+            var storage = NSHttpCookieStorage.SharedStorage;
 
-            foreach (NSHttpCookie cookie in storage.Cookies)
+            foreach (var cookie in storage.Cookies)
             {
                 storage.DeleteCookie(cookie);
             }

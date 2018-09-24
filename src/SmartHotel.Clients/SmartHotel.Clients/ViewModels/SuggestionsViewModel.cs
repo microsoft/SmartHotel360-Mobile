@@ -1,9 +1,10 @@
-﻿using SmartHotel.Clients.Core.Models;
-using SmartHotel.Clients.Core.Services.Location;
+﻿using MvvmHelpers;
+using SmartHotel.Clients.Core.Exceptions;
+using SmartHotel.Clients.Core.Models;
+using SmartHotel.Clients.Core.Services.Geolocator;
 using SmartHotel.Clients.Core.Services.Suggestion;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,38 +13,30 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class SuggestionsViewModel : ViewModelBase
     {
-        private ObservableCollection<CustomPin> _customPins;
-        private ObservableCollection<Suggestion> _suggestions;
+        ObservableRangeCollection<CustomPin> customPins;
+        ObservableRangeCollection<Suggestion> suggestions;
 
-        private readonly ISuggestionService _suggestionService;
-        private readonly ILocationService _locationService;
+        readonly ISuggestionService suggestionService;
+        readonly ILocationService locationService;
 
         public SuggestionsViewModel(
-            ISuggestionService suggestionService, 
+            ISuggestionService suggestionService,
             ILocationService locationService)
         {
-            _suggestionService = suggestionService;
-            _locationService = locationService;
+            this.suggestionService = suggestionService;
+            this.locationService = locationService;
         }
 
-        public ObservableCollection<CustomPin> CustomPins
+        public ObservableRangeCollection<CustomPin> CustomPins
         {
-            get { return _customPins; }
-            set
-            {
-                _customPins = value;
-                OnPropertyChanged();
-            }
+            get => customPins;
+            set => SetProperty(ref customPins, value);
         }
 
-        public ObservableCollection<Suggestion> Suggestions
+        public ObservableRangeCollection<Suggestion> Suggestions
         {
-            get { return _suggestions; }
-            set
-            {
-                _suggestions = value;
-                OnPropertyChanged();
-            }
+            get => suggestions;
+            set => SetProperty(ref suggestions, value);
         }
 
         public override async Task InitializeAsync(object navigationData)
@@ -52,9 +45,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             {
                 IsBusy = true;
 
-                var location = await _locationService.GetPositionAsync();
-                Suggestions = await _suggestionService.GetSuggestionsAsync(location.Latitude, location.Longitude);
-                CustomPins = new ObservableCollection<CustomPin>();
+                var location = await locationService.GetPositionAsync();
+                Suggestions = await suggestionService.GetSuggestionsAsync(location.Latitude, location.Longitude);
+                CustomPins = new ObservableRangeCollection<CustomPin>();
 
                 foreach (var suggestion in Suggestions)
                 {
@@ -72,11 +65,16 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 if (!string.IsNullOrEmpty(httpEx.Message))
                 {
-                    await DialogService.ShowAlertAsync( 
+                    await DialogService.ShowAlertAsync(
                         string.Format(Resources.HttpRequestExceptionMessage, httpEx.Message),
                         Resources.HttpRequestExceptionTitle,
                         Resources.DialogOk);
                 }
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Suggestions] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {

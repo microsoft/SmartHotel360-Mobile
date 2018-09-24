@@ -17,7 +17,8 @@
             <Color x:Key="OrangeColor">#BC4C1B</Color>
             <Color x:Key="LightOrangeColor">#D87E56</Color>
             <Color x:Key="WhiteColor">#FFFFFF</Color>
-            <Color x:Key="ValidationErrorColor">#FF204F</Color>
+            <Color x:Key="FocusLineColor">#D87E56</Color>
+            <Color x:Key="InvalidLineColor">#FF204F</Color>
 
             <!-- CONVERTERS -->
             <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
@@ -74,10 +75,6 @@
                         Value="Bold" />
                 <Setter Property="Opacity"
                         Value="0.6" />
-                <Setter Property="FocusLineColor"
-                        Value="{StaticResource LightOrangeColor}" />
-                <Setter Property="InvalidLineColor"
-                        Value="{StaticResource ValidationErrorColor}" />
                 <Style.Triggers>
                     <Trigger TargetType="Entry"
                              Property="IsFocused" 
@@ -151,12 +148,35 @@
                         FontSize="{StaticResource MidMediumSize}"
                         TextColor="{StaticResource WhiteColor}" />
                     <ctrls:ExtendedEntry
-                        Grid.Row="2"    
+                        Grid.Row="2"
+                        x:Name="RemoteJsonEntry"
                         Placeholder="{extensions:Translate RemoteJson}"  
                         FontSize="{StaticResource MidMediumSize}"
                         Text="{Binding SettingsFileUrl.Value, Mode=TwoWay}"
                         TextColor="{StaticResource BlackTextColor}"
-                        BackgroundColor="{StaticResource WhiteColor}" />
+                        BackgroundColor="{StaticResource WhiteColor}" >
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="UniqueStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="LineColor" Value="{Binding Path=TextColor, Source={Reference RemoteJsonEntry}}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Focused">
+                                    <VisualState.Setters>
+                                        <Setter Property="LineColor" Value="{StaticResource FocusLineColor}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Invalid">
+                                    <VisualState.Setters>
+                                        <Setter Property="LineColor" Value="{StaticResource InvalidLineColor}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                    </ctrls:ExtendedEntry>
                     <ctrls:ButtonFrame>
                         <Button  
                             Text="{extensions:Translate LoadJson}"  

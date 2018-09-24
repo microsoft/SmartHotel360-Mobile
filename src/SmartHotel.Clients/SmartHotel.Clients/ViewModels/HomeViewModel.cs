@@ -1,11 +1,13 @@
-﻿using SmartHotel.Clients.Core.Models;
+﻿using MvvmHelpers;
+using SmartHotel.Clients.Core.Exceptions;
+using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Services.Booking;
 using SmartHotel.Clients.Core.Services.Chart;
+using SmartHotel.Clients.Core.Services.File;
 using SmartHotel.Clients.Core.Services.Notification;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -15,71 +17,59 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class HomeViewModel : ViewModelBase, IHandleViewAppearing, IHandleViewDisappearing
     {
-        private bool _hasBooking;
-        private Microcharts.Chart _temperatureChart;
-        private Microcharts.Chart _greenChart;
-        private ObservableCollection<Notification> _notifications;
+        bool hasBooking;
+        Microcharts.Chart temperatureChart;
+        Microcharts.Chart greenChart;
+        ObservableRangeCollection<Notification> notifications;
 
-        private readonly INotificationService _notificationService;
-        private readonly IChartService _chartService;
-        private readonly IBookingService _bookingService;
-        private readonly IAuthenticationService _authenticationService;
+        readonly INotificationService notificationService;
+        readonly IChartService chartService;
+        readonly IBookingService bookingService;
+        readonly IAuthenticationService authenticationService;
+        readonly IFileService fileService;
 
         public HomeViewModel(
             INotificationService notificationService,
             IChartService chartService,
             IBookingService bookingService,
-            IAuthenticationService authenticationService)
+            IAuthenticationService authenticationService,
+            IFileService fileService)
         {
-            _notificationService = notificationService;
-            _chartService = chartService;
-            _bookingService = bookingService;
-            _authenticationService = authenticationService;
-            _notifications = new ObservableCollection<Notification>();
+            this.notificationService = notificationService;
+            this.chartService = chartService;
+            this.bookingService = bookingService;
+            this.authenticationService = authenticationService;
+            this.fileService = fileService;
+
+            notifications = new ObservableRangeCollection<Notification>();
         }
 
         public bool HasBooking
         {
-            get { return _hasBooking; }
-            set
-            {
-                _hasBooking = value;
-                OnPropertyChanged();
-            }
+            get => hasBooking;
+            set => SetProperty(ref hasBooking, value);
         }
 
         public Microcharts.Chart TemperatureChart
         {
-            get { return _temperatureChart; }
-
-            set
-            {
-                _temperatureChart = value;
-                OnPropertyChanged();
-            }
+            get => temperatureChart;
+            set => SetProperty(ref temperatureChart, value);
         }
 
         public Microcharts.Chart GreenChart
         {
-            get { return _greenChart; }
-
-            set
-            {
-                _greenChart = value;
-                OnPropertyChanged();
-            }
+            get => greenChart;
+            set => SetProperty(ref greenChart, value);
         }
 
-        public ObservableCollection<Notification> Notifications
+        public ObservableRangeCollection<Notification> Notifications
         {
-            get { return _notifications; }
-
-            set
-            {
-                _notifications = value;
-                OnPropertyChanged();
-            }
+            get => notifications;
+            set => SetProperty(ref notifications, value);
         }
+
+        const string greetingMessageLastShownFileName = "GreetingMessageLastShownDate.txt";        
+        const string greetingMessageEmbeddedResourceName = "SmartHotel.Clients.Core.Resources.GreetingMessage.txt";
 
         public ICommand NotificationsCommand => new AsyncCommand(OnNotificationsAsync);
 
@@ -101,12 +91,19 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 HasBooking = AppSettings.HasBooking;
 
-                TemperatureChart = await _chartService.GetTemperatureChartAsync();
-                GreenChart = await _chartService.GetGreenChartAsync();
+                TemperatureChart = await chartService.GetTemperatureChartAsync();
+                GreenChart = await chartService.GetGreenChartAsync();
 
-                var authenticatedUser = _authenticationService.AuthenticatedUser;
-                var notifications = await _notificationService.GetNotificationsAsync(3, authenticatedUser.Token);
-                Notifications = new ObservableCollection<Models.Notification>(notifications);
+                var authenticatedUser = authenticationService.AuthenticatedUser;
+                var notifications = await notificationService.GetNotificationsAsync(3, authenticatedUser.Token);
+                Notifications = new ObservableRangeCollection<Notification>(notifications);
+
+                ShowGreetingMessage();
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Home] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {
@@ -119,6 +116,30 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
+        void ShowGreetingMessage()
+        {
+            // Check the last time the greeting message was showed. That date is saved in a File.
+            // If the file does not exists, or the date in the file is in the past, don't show the greeting-
+            if (fileService.ExistsInLocalAppDataFolder(greetingMessageLastShownFileName))
+            {
+                var textFromFile = fileService.ReadStringFromLocalAppDataFolder(greetingMessageLastShownFileName);
+                long.TryParse(textFromFile, out var lastShownTicks);
+
+                if (lastShownTicks < DateTime.Now.Ticks)
+                {
+                    return;
+                }
+            }
+
+            // Show greeting message
+            var greetingMessage = fileService.ReadStringFromAssemblyEmbeddedResource(greetingMessageEmbeddedResourceName);
+            DialogService.ShowToast(greetingMessage);
+
+            // Save last shown date
+            var stringTicks = DateTime.Now.Ticks.ToString();
+            fileService.WriteStringToLocalAppDataFolder(greetingMessageLastShownFileName, stringTicks);
+        }
+
         public Task OnViewAppearingAsync(VisualElement view)
         {
             MessagingCenter.Subscribe<Booking>(this, MessengerKeys.BookingRequested, OnBookingRequested);
@@ -127,37 +148,19 @@ namespace SmartHotel.Clients.Core.ViewModels
             return Task.FromResult(true);
         }
 
-        public Task OnViewDisappearingAsync(VisualElement view)
-        {
-            return Task.FromResult(true);
-        }
+        public Task OnViewDisappearingAsync(VisualElement view) => Task.FromResult(true);
 
-        private Task OnNotificationsAsync()
-        {
-            return NavigationService.NavigateToAsync(typeof(NotificationsViewModel), Notifications);
-        }
+        Task OnNotificationsAsync() => NavigationService.NavigateToAsync(typeof(NotificationsViewModel), Notifications);
 
-        private Task OpenDoorAsync()
-        {
-            return NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
-        }
+        Task OpenDoorAsync() => NavigationService.NavigateToPopupAsync<OpenDoorViewModel>(true);
 
-        private Task BookRoomAsync()
-        {
-            return NavigationService.NavigateToAsync<BookingViewModel>();
-        }
+        Task BookRoomAsync() => NavigationService.NavigateToAsync<BookingViewModel>();
 
-        private Task SuggestionsAsync()
-        {
-            return NavigationService.NavigateToAsync<SuggestionsViewModel>();
-        }
+        Task SuggestionsAsync() => NavigationService.NavigateToAsync<SuggestionsViewModel>();
 
-        private Task BookConferenceAsync()
-        {
-            return NavigationService.NavigateToAsync<BookingViewModel>();
-        }
+        Task BookConferenceAsync() => NavigationService.NavigateToAsync<BookingViewModel>();
 
-        private Task GoMyRoomAsync()
+        Task GoMyRoomAsync()
         {
             if (HasBooking)
             {
@@ -166,7 +169,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             return Task.FromResult(true);
         }
 
-        private void OnBookingRequested(Booking booking)
+        void OnBookingRequested(Booking booking)
         {
             if (booking == null)
             {
@@ -176,9 +179,6 @@ namespace SmartHotel.Clients.Core.ViewModels
             HasBooking = true;
         }
 
-        private void OnCheckoutRequested(object args)
-        {
-            HasBooking = false;
-        }
+        void OnCheckoutRequested(object args) => HasBooking = false;
     }
 }

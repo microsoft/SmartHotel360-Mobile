@@ -77,7 +77,9 @@ Xamarin.Forms enables you to build native UIs for iOS, Android, macOS, Linux, an
 - Styles
 - Phone and Tablet Layout
 - Localization
-- New backends!
+- CSS
+- VisualStateManager
+- FlexLayout
 - Xamarin UITests
 - [Xamarin.Forms Native Forms](https://blog.xamarin.com/unleashed-embedding-xamarin-forms-in-xamarin-native/)
 - [Xamarin Live Player](https://www.xamarin.com/live)
@@ -117,7 +119,8 @@ There is a detailed step-by-step demo script in the [demoscripts](https://github
 
 This project uses some third-party assets with a license that requires attribution:
 
-- [Xamarin.Plugins](https://github.com/jamesmontemagno/Xamarin.Plugins): by James Montemagno
+- [Xamarin.Essentials](https://github.com/xamarin/Essentials)
+- [MVVM Helpers](https://github.com/jamesmontemagno/mvvm-helpers): by James Montemagno
 - [FFImageLoading](https://github.com/daniel-luberda/FFImageLoading): by Daniel Luberda
 - [ACR User Dialogs](https://github.com/aritchie/userdialogs): by Allan Ritchie
 - [Microcharts](https://github.com/aloisdeniel/Microcharts): by Aloïs Deniel

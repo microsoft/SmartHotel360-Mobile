@@ -1,7 +1,7 @@
-﻿using SmartHotel.Clients.Core.ViewModels.Base;
+﻿using MvvmHelpers;
+using SmartHotel.Clients.Core.ViewModels.Base;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,17 +11,17 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class BookingCalendarViewModel : ViewModelBase
     {
-        private Models.City _city;
-        private ObservableCollection<DateTime> _dates;
-        private DateTime _from;
-        private DateTime _until;
-        private bool _isNextEnabled;
+        Models.City city;
+        ObservableRangeCollection<DateTime> dates;
+        DateTime from;
+        DateTime until;
+        bool isNextEnabled;
 
         public BookingCalendarViewModel()
         {
             var today = DateTime.Today;
 
-            _dates = new ObservableCollection<DateTime>
+            dates = new ObservableRangeCollection<DateTime>
             {
                 today
             };
@@ -31,52 +31,32 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public Models.City City
         {
-            get { return _city; }
-            set
-            {
-                _city = value;
-                OnPropertyChanged();
-            }
+            get => city;
+            set => SetProperty(ref city, value);
         }
 
-        public ObservableCollection<DateTime> Dates
+        public ObservableRangeCollection<DateTime> Dates
         {
-            get { return _dates; }
-            set
-            {
-                _dates = value;
-                OnPropertyChanged();
-            }
+            get => dates;
+            set => SetProperty(ref dates, value);
         }
 
         public DateTime From
         {
-            get { return _from; }
-            set
-            {
-                _from = value;
-                OnPropertyChanged();
-            }
+            get => from;
+            set => SetProperty(ref from, value);
         }
 
         public DateTime Until
         {
-            get { return _until; }
-            set
-            {
-                _until = value;
-                OnPropertyChanged();
-            }
+            get => until;
+            set => SetProperty(ref until, value);
         }
 
         public bool IsNextEnabled
         {
-            get { return _isNextEnabled; }
-            set
-            {
-                _isNextEnabled = value;
-                OnPropertyChanged();
-            }
+            get => isNextEnabled;
+            set => SetProperty(ref isNextEnabled, value);
         }
 
         public ICommand SelectedDateCommand => new Command((d) => SelectedDate(d));
@@ -93,7 +73,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             return base.InitializeAsync(navigationData);
         }
 
-        private void SelectedDate(object date)
+        void SelectedDate(object date)
         {
             if (date == null)
                 return;
@@ -106,7 +86,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private Task NextAsync()
+        Task NextAsync()
         {
             var navigationParameter = new Dictionary<string, object>
             {

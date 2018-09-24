@@ -9,11 +9,9 @@ namespace SmartHotel.Clients.Core.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is NotificationType)
+            if (value is NotificationType notificationType)
             {
-                var notificationType = (NotificationType)value;
-
-                switch(notificationType)
+                switch (notificationType)
                 {
                     case NotificationType.BeGreen:
                         return "Be Green";
@@ -29,9 +27,6 @@ namespace SmartHotel.Clients.Core.Converters
             return string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

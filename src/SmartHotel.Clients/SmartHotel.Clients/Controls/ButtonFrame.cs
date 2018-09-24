@@ -5,10 +5,7 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class ButtonFrame : Frame
     {
-        public ButtonFrame()
-        {
-            HasShadow = true;
-        }
+        public ButtonFrame() => HasShadow = true;
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -20,7 +17,7 @@ namespace SmartHotel.Clients.Core.Controls
             }
         }
 
-        private void ContentUpdated()
+        void ContentUpdated()
         {
             if (Device.RuntimePlatform != Device.UWP)
             {

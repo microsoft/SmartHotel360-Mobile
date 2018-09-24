@@ -7,10 +7,7 @@ namespace SmartHotel.Clients.Core.Controls
 {
     public class TemperatureChart : Chart
     {
-        public TemperatureChart()
-        {
-            BackgroundColor = SKColor.Parse("#F6F1E9");
-        }
+        public TemperatureChart() => BackgroundColor = SKColor.Parse("#F6F1E9");
 
         public float CaptionMargin { get; set; } = 12;
 
@@ -18,11 +15,11 @@ namespace SmartHotel.Clients.Core.Controls
 
         public float StartAngle { get; set; } = -180;
 
-        private float AbsoluteMinimum => Entries.Select(x => x.Value).Concat(new[] { MaxValue, MinValue, InternalMinValue ?? 0 }).Min(x => Math.Abs(x));
+        float AbsoluteMinimum => Entries.Select(x => x.Value).Concat(new[] { MaxValue, MinValue, InternalMinValue ?? 0 }).Min(x => Math.Abs(x));
 
-        private float AbsoluteMaximum => Entries.Select(x => x.Value).Concat(new[] { MaxValue, MinValue, InternalMinValue ?? 0 }).Max(x => Math.Abs(x));
+        float AbsoluteMaximum => Entries.Select(x => x.Value).Concat(new[] { MaxValue, MinValue, InternalMinValue ?? 0 }).Max(x => Math.Abs(x));
 
-        private float ValueRange => AbsoluteMaximum - AbsoluteMinimum;
+        float ValueRange => AbsoluteMaximum - AbsoluteMinimum;
 
         public override void DrawContent(SKCanvas canvas, int width, int height)
         {
@@ -52,7 +49,7 @@ namespace SmartHotel.Clients.Core.Controls
                 IsAntialias = true
             })
             {
-                using (SKPath path = new SKPath())
+                using (var path = new SKPath())
                 {
                     var sweepAngle = 180 * (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
                     path.AddArc(SKRect.Create(cx - radius, cy - radius, 2 * radius, 2 * radius), StartAngle, sweepAngle);
@@ -61,7 +58,7 @@ namespace SmartHotel.Clients.Core.Controls
             }
         }
 
-        private void DrawCaption(SKCanvas canvas, int cx, int cy, float radius)
+        void DrawCaption(SKCanvas canvas, int cx, int cy, float radius)
         {
             var minimum = 0;
             var medium = Math.Round(Entries.Max(e => e.Value) / 2);

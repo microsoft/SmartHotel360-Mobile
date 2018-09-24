@@ -10,9 +10,7 @@ namespace SmartHotel.Clients.Droid.Effects
     {
         protected override void OnAttached()
         {
-            var label = Control as TextView;
-
-            if (label != null)
+            if (Control is TextView label)
             {
                 label.PaintFlags |= Android.Graphics.PaintFlags.UnderlineText;
             }

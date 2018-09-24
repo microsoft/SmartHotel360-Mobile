@@ -5,9 +5,9 @@ namespace SmartHotel.Clients.Core.Views
 {
     public partial class BookingHotelView : ContentPage
     {
-        private const int ParallaxSpeed = 4;
+        const int parallaxSpeed = 4;
 
-        private double _lastScroll;
+        double lastScroll;
 
         public BookingHotelView()
         {
@@ -38,31 +38,31 @@ namespace SmartHotel.Clients.Core.Views
             ParallaxScroll.Scrolled -= OnParallaxScrollScrolled;
         }
 
-        private void OnParallaxScrollScrolled(object sender, ScrolledEventArgs e)
+        void OnParallaxScrollScrolled(object sender, ScrolledEventArgs e)
         {
             double translation = 0;
 
-            if (_lastScroll == 0)
+            if (lastScroll == 0)
             {
-                _lastScroll = e.ScrollY;
+                lastScroll = e.ScrollY;
             }
 
-            if (_lastScroll < e.ScrollY)
+            if (lastScroll < e.ScrollY)
             {
-                translation = 0 - ((e.ScrollY / ParallaxSpeed));
+                translation = 0 - ((e.ScrollY / parallaxSpeed));
 
                 if (translation > 0) translation = 0;
             }
             else
             {
-                translation = 0 + ((e.ScrollY / ParallaxSpeed));
+                translation = 0 + ((e.ScrollY / parallaxSpeed));
 
                 if (translation > 0) translation = 0;
             }
 
             SubHeaderView.FadeTo(translation < -40 ? 0 : 1);
    
-            _lastScroll = e.ScrollY;
+            lastScroll = e.ScrollY;
         }
     }
 }

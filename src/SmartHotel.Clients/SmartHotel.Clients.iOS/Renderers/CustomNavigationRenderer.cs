@@ -27,7 +27,7 @@ namespace SmartHotel.Clients.iOS.Renderers
             base.Dispose(disposing);
         }
 
-        private void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
+        void HandlePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == NavigationPage.BarTextColorProperty.PropertyName || e.PropertyName == Xamarin.Forms.PlatformConfiguration.iOSSpecific.NavigationPage.StatusBarTextColorModeProperty.PropertyName)
                 UpdateStatusBarStyle();

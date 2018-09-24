@@ -1,4 +1,5 @@
-﻿using SmartHotel.Clients.Core.Services.Analytic;
+﻿using SmartHotel.Clients.Core.Exceptions;
+using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Services.DismissKeyboard;
 using SmartHotel.Clients.Core.Services.Hotel;
 using SmartHotel.Clients.Core.ViewModels.Base;
@@ -15,57 +16,54 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class BookingViewModel : ViewModelBase
     {
-        private readonly IAnalyticService _analyticService;
-        private readonly IHotelService _hotelService;
+        readonly IAnalyticService analyticService;
+        readonly IHotelService hotelService;
+        readonly IDismissKeyboardService dismissKeyboardService;
 
-        private string _search;
-        private IEnumerable<Models.City> _cities;
-        private IEnumerable<string> _suggestions;
-        private string _suggestion;
-        private bool _isNextEnabled;
+        string search;
+        IEnumerable<Models.City> cities;
+        IEnumerable<string> suggestions;
+        string suggestion;
+        bool isNextEnabled;
 
         public BookingViewModel(
             IAnalyticService analyticService,
             IHotelService hotelService)
         {
-            _analyticService = analyticService;
-            _hotelService = hotelService;
+            this.analyticService = analyticService;
+            this.hotelService = hotelService;
+            dismissKeyboardService = DependencyService.Get<IDismissKeyboardService>();
 
-            _cities = new List<Models.City>();
-            _suggestions = new List<string>();
+            cities = new List<Models.City>();
+            suggestions = new List<string>();
         }
 
         public string Search
         {
-            get { return _search; }
+            get => search;
             set
             {
-                _search = value;
-                FilterAsync(_search);
+                search = value;
+                FilterAsync(search);
                 OnPropertyChanged();
             }
         }
 
         public IEnumerable<string> Suggestions
         {
-            get { return _suggestions; }
-            set
-            {
-                _suggestions = value;
-                OnPropertyChanged();
-            }
+            get => suggestions;
+            set => SetProperty(ref suggestions, value);
         }
 
         public string Suggestion
         {
-            get { return _suggestion; }
+            get => suggestion;
             set
             {
-                _suggestion = value;
-                
-                IsNextEnabled = string.IsNullOrEmpty(_suggestion) ? false : true;
+                suggestion = value;
 
-                var dismissKeyboardService = DependencyService.Get<IDismissKeyboardService>();
+                IsNextEnabled = string.IsNullOrEmpty(suggestion) ? false : true;
+
                 dismissKeyboardService.DismissKeyboard();
 
                 OnPropertyChanged();
@@ -74,12 +72,8 @@ namespace SmartHotel.Clients.Core.ViewModels
 
         public bool IsNextEnabled
         {
-            get { return _isNextEnabled; }
-            set
-            {
-                _isNextEnabled = value;
-                OnPropertyChanged();
-            }
+            get => isNextEnabled;
+            set => SetProperty(ref isNextEnabled, value);
         }
 
         public ICommand NextCommand => new AsyncCommand(NextAsync);
@@ -90,9 +84,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             {
                 IsBusy = true;
 
-                _cities = await _hotelService.GetCitiesAsync();
+                cities = await hotelService.GetCitiesAsync();
 
-                Suggestions = new List<string>(_cities.Select(c => c.ToString()));
+                Suggestions = new List<string>(cities.Select(c => c.ToString()));
             }
             catch (HttpRequestException httpEx)
             {
@@ -105,6 +99,11 @@ namespace SmartHotel.Clients.Core.ViewModels
                         Resources.HttpRequestExceptionTitle,
                         Resources.DialogOk);
                 }
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Booking Where Step] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {
@@ -121,17 +120,17 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async void FilterAsync(string search)
+        async void FilterAsync(string search)
         {
             try
             {
                 IsBusy = true;
 
                 Suggestions = new List<string>(
-                    _cities.Select(c => c.ToString())
+                    cities.Select(c => c.ToString())
                            .Where(c => c.ToLowerInvariant().Contains(search.ToLowerInvariant())));
 
-                _analyticService.TrackEvent("Filter", new Dictionary<string, string>
+                analyticService.TrackEvent("Filter", new Dictionary<string, string>
                 {
                     { "Search", search }
                 });
@@ -147,9 +146,9 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private Task NextAsync()
+        Task NextAsync()
         {
-            var city = _cities.FirstOrDefault(c => c.ToString().Equals(Suggestion));
+            var city = cities.FirstOrDefault(c => c.ToString().Equals(Suggestion));
 
             if (city != null)
             {

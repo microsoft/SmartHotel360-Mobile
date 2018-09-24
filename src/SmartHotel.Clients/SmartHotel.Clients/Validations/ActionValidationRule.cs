@@ -4,7 +4,7 @@ namespace SmartHotel.Clients.Core.Validations
 {
     public class ActionValidationRule<T> : IValidationRule<T>
     {
-        private readonly Func<T, bool> _predicate;
+        readonly Func<T, bool> _predicate;
 
         public string ValidationMessage { get; set; }
 
@@ -14,9 +14,6 @@ namespace SmartHotel.Clients.Core.Validations
             ValidationMessage = validationMessage;
         }
 
-        public bool Check(T value)
-        {
-            return _predicate.Invoke(value);
-        }
+        public bool Check(T value) => _predicate.Invoke(value);
     }
 }

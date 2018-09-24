@@ -1,69 +1,51 @@
 ﻿using System.Threading.Tasks;
 using SmartHotel.Clients.Core.Services.Hotel;
 using SmartHotel.Clients.Core.ViewModels.Base;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Net.Http;
 using System.Diagnostics;
+using MvvmHelpers;
 using SmartHotel.Clients.Core.Extensions;
+using SmartHotel.Clients.Core.Exceptions;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
     public class BookingHotelsViewModel : ViewModelBase
     {
-        private ObservableCollection<Models.Hotel> _hotels;
-        private Models.City _city;
-        private DateTime _from;
-        private DateTime _until;
+        ObservableRangeCollection<Models.Hotel> hotels;
+        Models.City city;
+        DateTime from;
+        DateTime until;
 
-        private readonly IHotelService _hotelService;
+        readonly IHotelService hotelService;
 
-        public BookingHotelsViewModel(IHotelService hotelService)
-        {
-            _hotelService = hotelService;
-        }
+        public BookingHotelsViewModel(IHotelService hotelService) => this.hotelService = hotelService;
 
         public Models.City City
         {
-            get { return _city; }
-            set
-            {
-                _city = value;
-                OnPropertyChanged();
-            }
+            get => city;
+            set => SetProperty(ref city, value);
         }
 
         public DateTime From
         {
-            get { return _from; }
-            set
-            {
-                _from = value;
-                OnPropertyChanged();
-            }
+            get => from;
+            set => SetProperty(ref from, value);
         }
 
         public DateTime Until
         {
-            get { return _until; }
-            set
-            {
-                _until = value;
-                OnPropertyChanged();
-            }
+            get => until;
+            set => SetProperty(ref until, value);
         }
 
-        public ObservableCollection<Models.Hotel> Hotels
+        public ObservableRangeCollection<Models.Hotel> Hotels
         {
-            get { return _hotels; }
-            set
-            {
-                _hotels = value;
-                OnPropertyChanged();
-            }
+            get => hotels;
+            set => SetProperty(ref hotels, value);
         }
 
         public ICommand HotelSelectedCommand => new Command<Models.Hotel>(OnSelectHotelAsync);
@@ -82,8 +64,8 @@ namespace SmartHotel.Clients.Core.ViewModels
             {
                 IsBusy = true;
 
-                var hotels = await _hotelService.SearchAsync(City.Id);
-                Hotels = hotels.ToObservableCollection();
+                var hotels = await hotelService.SearchAsync(City.Id);
+                Hotels = hotels.ToObservableRangeCollection();
             }
             catch (HttpRequestException httpEx)
             {
@@ -96,6 +78,11 @@ namespace SmartHotel.Clients.Core.ViewModels
                         Resources.HttpRequestExceptionTitle,
                         Resources.DialogOk);
                 }
+            }
+            catch (ConnectivityException cex)
+            {
+                Debug.WriteLine($"[Booking Hotels Step] Connectivity Error: {cex}");
+                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
             }
             catch (Exception ex)
             {
@@ -112,7 +99,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        private async void OnSelectHotelAsync(Models.Hotel item)
+        async void OnSelectHotelAsync(Models.Hotel item)
         {
             if (item != null)
             {

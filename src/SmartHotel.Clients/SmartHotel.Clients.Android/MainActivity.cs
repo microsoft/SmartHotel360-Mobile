@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
@@ -7,8 +6,6 @@ using Android.Util;
 using Android.Views;
 using CarouselView.FormsPlugin.Android;
 using Microsoft.Identity.Client;
-using Plugin.CurrentActivity;
-using Plugin.Permissions;
 using Rg.Plugins.Popup;
 using Rg.Plugins.Popup.Services;
 using SmartHotel.Clients.Core;
@@ -39,25 +36,24 @@ namespace SmartHotel.Clients.Droid
 
             Forms.Init(this, bundle);
             CarouselViewRenderer.Init();
-            UserDialogs.Init(this);
             Renderers.Calendar.Init();
             Xamarin.FormsMaps.Init(this, bundle);
+            Xamarin.Essentials.Platform.Init(this, bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
-            Rg.Plugins.Popup.Popup.Init(this, bundle);
+            Popup.Init(this, bundle);
+            Acr.UserDialogs.UserDialogs.Init(this);
 
             InitMessageCenterSubscriptions();
             RegisterPlatformDependencies();
             LoadApplication(new App());
-
-            CrossCurrentActivity.Current.Init(this, bundle);
-
+            
             App.AuthenticationClient.PlatformParameters = new PlatformParameters(this);
 
             MakeStatusBarTranslucent(false);
             InitNFCService();
         }
 
-        private void InitNFCService()
+        void InitNFCService()
         {
             StartService(new Intent(this, typeof(CardService)));
             DisableNFCService();
@@ -66,9 +62,10 @@ namespace SmartHotel.Clients.Droid
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
-            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-        
+
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -76,17 +73,11 @@ namespace SmartHotel.Clients.Droid
               requestCode, resultCode, data);
         }
 
-        private void InitMessageCenterSubscriptions()
-        {
-            MessagingCenter.Instance.Subscribe<StatusBarHelper, bool>(this, StatusBarHelper.TranslucentStatusChangeMessage, OnTranslucentStatusRequest);
-        }
+        void InitMessageCenterSubscriptions() => MessagingCenter.Instance.Subscribe<StatusBarHelper, bool>(this, StatusBarHelper.TranslucentStatusChangeMessage, OnTranslucentStatusRequest);
 
-        private void OnTranslucentStatusRequest(StatusBarHelper helper, bool makeTranslucent)
-        {
-            MakeStatusBarTranslucent(makeTranslucent);
-        }
+        void OnTranslucentStatusRequest(StatusBarHelper helper, bool makeTranslucent) => MakeStatusBarTranslucent(makeTranslucent);
 
-        private void MakeStatusBarTranslucent(bool makeTranslucent)
+        void MakeStatusBarTranslucent(bool makeTranslucent)
         {
             if (makeTranslucent)
             {
@@ -115,23 +106,20 @@ namespace SmartHotel.Clients.Droid
             }
         }
 
-        private static void RegisterPlatformDependencies()
-        {
-            Locator.Instance.Register<IBrowserCookiesService, BrowserCookiesService>();
-        }
+        static void RegisterPlatformDependencies() => Locator.Instance.Register<IBrowserCookiesService, BrowserCookiesService>();
 
-        private void DisableNFCService()
+        void DisableNFCService()
         {
-            PackageManager pm = this.PackageManager;
+            var pm = PackageManager;
             pm.SetComponentEnabledSetting(
                 new ComponentName(this, CardService.ServiceName),
                 ComponentEnabledState.Disabled,
                 ComponentEnableOption.DontKillApp);
         }
 
-        private void EnableNFCService(string message = "")
+        void EnableNFCService(string message = "")
         {
-            PackageManager pm = this.PackageManager;
+            var pm = PackageManager;
             pm.SetComponentEnabledSetting(
                 new ComponentName(this, CardService.ServiceName),
                 ComponentEnabledState.Enabled,

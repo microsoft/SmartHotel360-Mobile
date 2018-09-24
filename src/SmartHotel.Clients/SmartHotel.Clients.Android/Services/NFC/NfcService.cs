@@ -1,5 +1,5 @@
-﻿using Android.Nfc;
-using Plugin.CurrentActivity;
+﻿using Android.App;
+using Android.Nfc;
 using SmartHotel.Clients.Core.Services.NFC;
 using SmartHotel.Clients.Droid.Services.NFC;
 
@@ -8,19 +8,19 @@ namespace SmartHotel.Clients.Droid.Services.NFC
 {
     public class NfcService : INfcService
     {
-        private NfcAdapter _nfcDevice;
+        NfcAdapter nfcDevice;
 
         public NfcService()
         {
-            var activity = CrossCurrentActivity.Current.Activity;
-            _nfcDevice = NfcAdapter.GetDefaultAdapter(activity);
+            var activity = ((Activity)Xamarin.Forms.Forms.Context);
+            nfcDevice = NfcAdapter.GetDefaultAdapter(activity);
         }
 
         public bool IsAvailable
         {
             get
             {
-                return _nfcDevice?.IsEnabled == true && _nfcDevice.IsNdefPushEnabled;
+                return nfcDevice?.IsEnabled == true && nfcDevice.IsNdefPushEnabled;
             }
         }
     }

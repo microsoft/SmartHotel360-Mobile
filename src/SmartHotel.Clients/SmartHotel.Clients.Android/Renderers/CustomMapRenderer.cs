@@ -17,17 +17,17 @@ namespace SmartHotel.Clients.Droid.Renderers
 {
     public class CustomMapRenderer : MapRenderer
     {
-        private const int EventResource = Resource.Drawable.pushpin_01;
-        private const int RestaurantResource = Resource.Drawable.pushpin_02;
+        const int eventResource = Resource.Drawable.pushpin_01;
+        const int restaurantResource = Resource.Drawable.pushpin_02;
 
-        private BitmapDescriptor _pinIcon;
-        private List<CustomMarkerOptions> _tempMarkers;
-        private bool _isDrawnDone;
+        BitmapDescriptor pinIcon;
+        List<CustomMarkerOptions> tempMarkers;
+        bool isDrawnDone;
 
         public CustomMapRenderer(Context context) : base(context)
         {
-            _tempMarkers = new List<CustomMarkerOptions>();
-            _pinIcon = BitmapDescriptorFactory.FromResource(EventResource);
+            tempMarkers = new List<CustomMarkerOptions>();
+            pinIcon = BitmapDescriptorFactory.FromResource(eventResource);
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -37,7 +37,7 @@ namespace SmartHotel.Clients.Droid.Renderers
             var androidMapView = (MapView)Control;
             var formsMap = (CustomMap)sender;
 
-            if(e.PropertyName.Equals("CustomPins") && !_isDrawnDone)
+            if(e.PropertyName.Equals("CustomPins") && !isDrawnDone)
             {
                 ClearPushPins(androidMapView);
 
@@ -47,7 +47,7 @@ namespace SmartHotel.Clients.Droid.Renderers
 
                 PositionMap();
 
-                _isDrawnDone = true;
+                isDrawnDone = true;
             }
         } 
 
@@ -57,16 +57,13 @@ namespace SmartHotel.Clients.Droid.Renderers
 
             if (changed)
             {
-                _isDrawnDone = false;
+                isDrawnDone = false;
             }
         }
 
-        private void ClearPushPins(MapView mapView)
-        {
-            NativeMap.Clear();
-        }
+        void ClearPushPins(MapView mapView) => NativeMap.Clear();
 
-        private void AddPushPins(MapView mapView, IEnumerable<CustomPin> pins)
+        void AddPushPins(MapView mapView, IEnumerable<CustomPin> pins)
         {
             foreach (var formsPin in pins)
             {
@@ -79,12 +76,12 @@ namespace SmartHotel.Clients.Droid.Renderers
                 switch (formsPin.Type)
                 {
                     case SuggestionType.Event:
-                        _pinIcon = BitmapDescriptorFactory.FromResource(EventResource);
-                        markerWithIcon.SetIcon(_pinIcon);
+                        pinIcon = BitmapDescriptorFactory.FromResource(eventResource);
+                        markerWithIcon.SetIcon(pinIcon);
                         break;
                     case SuggestionType.Restaurant:
-                        _pinIcon = BitmapDescriptorFactory.FromResource(RestaurantResource);
-                        markerWithIcon.SetIcon(_pinIcon);
+                        pinIcon = BitmapDescriptorFactory.FromResource(restaurantResource);
+                        markerWithIcon.SetIcon(pinIcon);
                         break;
                     default:
                         markerWithIcon.SetIcon(BitmapDescriptorFactory.DefaultMarker());
@@ -93,7 +90,7 @@ namespace SmartHotel.Clients.Droid.Renderers
 
                 NativeMap.AddMarker(markerWithIcon);
 
-                _tempMarkers.Add(new CustomMarkerOptions
+                tempMarkers.Add(new CustomMarkerOptions
                 {
                     Id = formsPin.Id,
                     MarkerOptions = markerWithIcon
@@ -101,9 +98,9 @@ namespace SmartHotel.Clients.Droid.Renderers
             }
         }
 
-        private void PositionMap()
+        void PositionMap()
         {
-            var myMap = this.Element as CustomMap;
+            var myMap = Element as CustomMap;
             var formsPins = myMap.CustomPins;
 
             if (formsPins == null || formsPins.Count() == 0)

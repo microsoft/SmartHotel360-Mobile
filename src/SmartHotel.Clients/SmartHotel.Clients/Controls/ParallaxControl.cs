@@ -14,8 +14,8 @@ namespace SmartHotel.Clients.Core.Controls
 
         public View ParallaxView
         {
-            get { return (View)GetValue(ParallaxViewProperty); }
-            set { SetValue(ParallaxViewProperty, value); }
+            get => (View)GetValue(ParallaxViewProperty);
+            set => SetValue(ParallaxViewProperty, value);
         }
 
         double height;
@@ -38,7 +38,7 @@ namespace SmartHotel.Clients.Core.Controls
             }
             else if (Device.RuntimePlatform == "iOS")
             {
-                double newHeight = height + (ScrollY * -1);
+                var newHeight = height + (ScrollY * -1);
                 ParallaxView.Scale = newHeight / height;
                 ParallaxView.TranslationY = -(ScrollY / 2);
             }

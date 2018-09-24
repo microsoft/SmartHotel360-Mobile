@@ -5,34 +5,28 @@ namespace SmartHotel.Clients.Core.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private MenuViewModel _menuViewModel;
+        MenuViewModel menuViewModel;
 
         public MainViewModel(MenuViewModel menuViewModel)
         {
-            _menuViewModel = menuViewModel;
+            this.menuViewModel = menuViewModel;
         }
 
         public MenuViewModel MenuViewModel
         {
-            get
-            {
-                return _menuViewModel;
-            }
+            get => menuViewModel;
 
             set
             {
-                _menuViewModel = value;
+                menuViewModel = value;
                 OnPropertyChanged();
             }
         }
 
-        public override Task InitializeAsync(object navigationData)
-        {
-            return Task.WhenAll
+        public override Task InitializeAsync(object navigationData) => Task.WhenAll
                 (
-                    _menuViewModel.InitializeAsync(navigationData),
+                    menuViewModel.InitializeAsync(navigationData),
                     NavigationService.NavigateToAsync<HomeViewModel>()
                 );
-        }
     }
 }

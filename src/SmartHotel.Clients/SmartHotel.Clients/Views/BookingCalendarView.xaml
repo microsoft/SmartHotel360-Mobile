@@ -77,7 +77,7 @@
             </Style>
 
             <Color x:Key="SelectedDateColor">#48989D</Color>
-            
+
             <Style x:Key="DateRangeFrameStyle" 
                    TargetType="Frame">
                 <Setter Property="Margin"
@@ -102,7 +102,7 @@
                     </OnPlatform>
                 </Setter>
             </Style>
-            
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Triggers>
