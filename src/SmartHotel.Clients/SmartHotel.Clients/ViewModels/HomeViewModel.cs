@@ -173,7 +173,8 @@ namespace SmartHotel.Clients.Core.ViewModels
                 MaxValue = light.Maximum.RawValue
             };
 
-            var currentChartValue = new Entry(light.Value.RawValue) { Color = SKColor.Parse("#174A51") };
+            var lightValue = Math.Round(light.Value.RawValue);
+            var currentChartValue = new Entry((float) lightValue) { Color = SKColor.Parse("#174A51") };
             var maxChartValue = new Entry(light.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
 
 	        chartData.CurrentValueEntry = currentChartValue;

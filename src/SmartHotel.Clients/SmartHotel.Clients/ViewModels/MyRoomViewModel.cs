@@ -71,7 +71,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	        get => desiredAmbientLight;
 			set
 			{
-	            bool changed = SetProperty(ref desiredAmbientLight, value);
+	            bool changed = SetProperty(ref desiredAmbientLight, Math.Round(value));
 	            if ( changed && IsRoomDevicesLive() )
 	            {
 		            delayedLightChangedTimer.Stop();
@@ -97,7 +97,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	        get => desiredTemperature;
 			set
 			{
-	            bool changed = SetProperty(ref desiredTemperature, value);
+	            bool changed = SetProperty(ref desiredTemperature, Math.Round(value));
 
 	            if ( changed && IsRoomDevicesLive() )
 	            {
