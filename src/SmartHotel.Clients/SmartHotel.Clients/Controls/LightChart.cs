@@ -9,14 +9,13 @@ namespace SmartHotel.Clients.Core.Controls
     {
         public LightChart() : base()
         {
-            LineSize = 14;
+            LineSize = 21;
             LabelTextSize = 16f;
         }
 
         public override void DrawContent(SKCanvas canvas, int width, int height)
         {
             var relativeScaleWidth = width / 465.0f;
-            var relativeScaleHeight = height / 270.0f;
             var strokeWidth = relativeScaleWidth * LineSize;
 
             var radius = (width) / 2;
@@ -38,27 +37,24 @@ namespace SmartHotel.Clients.Core.Controls
                 IsAntialias = true
             })
             {
-                using (var path = new SKPath())
-                {
-                    var percent = (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
-                    path.AddRoundedRect(SKRect.Create(cx - radius - strokeWidth, cy / 2f - strokeWidth, (2 * radius) * percent, 2), 0.05f, 0.05f);
-
-                    canvas.DrawPath(path, paint);
-                }
+                var percent = (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
+                var x = cx - radius - strokeWidth;
+                var y = cy / 2f - strokeWidth;
+                canvas.DrawLine(x, y, x + (2 * radius) * percent, y, paint);
             }
         }
 
         protected override void DrawCaption(SKCanvas canvas, int cx, int cy, float radius, float relativeScaleWidth,
             float strokeWidth)
         {
-	        if (CurrentValueEntry != null)
-	        {
-		        canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{CurrentValueEntry.Value}%", SKColor.Parse("#283748"),
-			        LabelTextSize * relativeScaleWidth,
-			        new SKPoint(cx - CaptionMargin, cy / 2f + LabelTextSize / 2f), SKTextAlign.Center);
-	        }
+            if (CurrentValueEntry != null)
+            {
+                canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{CurrentValueEntry.Value}%", SKColor.Parse("#283748"),
+                    LabelTextSize * relativeScaleWidth,
+                    new SKPoint(cx - CaptionMargin, cy / 2f + LabelTextSize / 2f), SKTextAlign.Center);
+            }
 
-	        // uncomment to add Desired value
+            // uncomment to add Desired value
             //var desiredValue = values.Skip(1).Take(1).FirstOrDefault();
             //canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"Desired: {desiredValue?.Value}%", SKColor.Parse("#378D93"), LabelTextSize * relativeScaleWidth,
             //    new SKPoint(cx - CaptionMargin, cy / 2f + 3 * strokeWidth * 1.45f), SKTextAlign.Center);
