@@ -54,7 +54,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 			SensorDataChanged?.Invoke( this, EventArgs.Empty );
 		}
 
-        public bool UseFakes => string.IsNullOrEmpty(_roomDevicesApiEndpoint);
+        public bool UseFakes => string.IsNullOrWhiteSpace(_roomDevicesApiEndpoint);
 
         public bool IsPollingData => _sensorDataPollingTimer != null && _sensorDataPollingTimer.IsRunning;
 
