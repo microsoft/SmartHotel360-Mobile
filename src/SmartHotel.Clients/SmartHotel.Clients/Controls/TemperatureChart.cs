@@ -36,7 +36,7 @@ namespace SmartHotel.Clients.Core.Controls
             var strokeWidth = relativeScaleWidth * LineSize;
 
             var radius = (width) * 2.0f / 4f;
-            int cx = (int)(radius);
+            var cx = (int)(radius);
             var cy = Convert.ToInt32((height / 2.0f) + radius / 3.7f); 
             var radiusSpace = radius - 4 * strokeWidth; 
 

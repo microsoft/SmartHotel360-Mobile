@@ -16,10 +16,10 @@ namespace SmartHotel.Clients.Core.Controls
         public override void DrawContent(SKCanvas canvas, int width, int height)
         {
             var relativeScaleWidth = width / 465.0f;
-            var strokeWidth = relativeScaleWidth * LineSize;
+            var strokeWidth = relativeScaleWidth  * LineSize;
 
             var radius = (width) / 2;
-            int cx = (int)(radius + strokeWidth);
+            var cx = (int)(radius + strokeWidth);
             var cy = Convert.ToInt32(height);
             var radiusSpace = radius - 4 * strokeWidth;
 

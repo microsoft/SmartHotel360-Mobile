@@ -105,7 +105,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
         {
             RoomSensorBase sensor = new T();
             if (_currentSensorDataBySensorDataType.TryGetValue(sensor.SensorDataType,
-                out DeviceSensorData sensorData))
+                out var sensorData))
             {
                 var currentTemp = float.Parse(sensorData.SensorReading);
                 var desiredTemp = float.Parse(sensorData.DesiredValue);
@@ -132,7 +132,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
         private async Task<IEnumerable<DeviceSensorData>> GetRoomSensorData(string token, string roomId)
         {
-            UriBuilder builder = new UriBuilder(_roomDevicesApiEndpoint);
+            var builder = new UriBuilder(_roomDevicesApiEndpoint);
             builder.AppendToPath($"Devices/room/{roomId}");
             var uri = builder.ToString();
 
