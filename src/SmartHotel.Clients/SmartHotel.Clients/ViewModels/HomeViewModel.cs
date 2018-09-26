@@ -136,6 +136,14 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             var roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync();
             var roomLight = await roomDevicesDataService.GetRoomAmbientLightAsync();
+
+            if (roomTemperature == null || roomLight == null)
+            {
+                roomDevicesDataService.StopCheckingRoomSensorData();
+                await DialogService.ShowAlertAsync("Please ensure that the IoT Demo backend setup is complete and restart.",
+                    "Unable to get room sensor information", "OK");
+                return;
+            }
             TemperatureChart = CreateTemperatureChart(roomTemperature);
             LightChart = CreateLightChart(roomLight);
         }
