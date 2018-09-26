@@ -71,7 +71,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	        get => desiredAmbientLight;
 			set
 			{
-	            bool changed = SetProperty(ref desiredAmbientLight, Math.Round(value));
+	            var changed = SetProperty(ref desiredAmbientLight, Math.Round(value));
 	            if ( changed && IsRoomDevicesLive() )
 	            {
 		            delayedLightChangedTimer.Stop();
@@ -97,7 +97,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 	        get => desiredTemperature;
 			set
 			{
-	            bool changed = SetProperty(ref desiredTemperature, Math.Round(value));
+	            var changed = SetProperty(ref desiredTemperature, Math.Round(value));
 
 	            if ( changed && IsRoomDevicesLive() )
 	            {
@@ -198,10 +198,18 @@ namespace SmartHotel.Clients.Core.ViewModels
 
 	    async Task GetRoomSensorData( bool isInitializing = false )
 	    {
-		    RoomTemperature roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync();
-		    CurrentTemperature = roomTemperature.Value.RawValue;
+		    var roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync();
+	        var roomAmbientLight = await roomDevicesDataService.GetRoomAmbientLightAsync();
 
-		    RoomAmbientLight roomAmbientLight = await roomDevicesDataService.GetRoomAmbientLightAsync();
+	        if (roomTemperature == null || roomAmbientLight == null)
+	        {
+	            roomDevicesDataService.StopCheckingRoomSensorData();
+                await DialogService.ShowAlertAsync("Please ensure that the IoT Demo backend setup is complete and restart.",
+	                "Unable to get room sensor information", "OK");
+	            return;
+	        }
+
+		    CurrentTemperature = roomTemperature.Value.RawValue;
 		    CurrentAmbientLight = roomAmbientLight.Value.RawValue;
 
 		    if ( isInitializing )
@@ -242,20 +250,20 @@ namespace SmartHotel.Clients.Core.ViewModels
             return isInitialized && UseRealRoomDevices;
         }
 
-        async Task UpdateRoomLight(double desiredAmbientLight)
+        async Task UpdateRoomLight(double newDesiredAmbientLight)
         {
 	        delayedLightChangedTimer.Stop();
 
-            Debug.WriteLine($"UpdateRoomLight: {desiredAmbientLight}");
-            await roomDevicesDataService.UpdateDesiredAsync((float)desiredAmbientLight / 100f, SensorDataType.Light);
+            Debug.WriteLine($"UpdateRoomLight: {newDesiredAmbientLight}");
+            await roomDevicesDataService.UpdateDesiredAsync((float)newDesiredAmbientLight / 100f, SensorDataType.Light);
         }
 
-        async Task UpdateRoomTemperature(double desiredTemperature)
+        async Task UpdateRoomTemperature(double newDesiredTemperature)
         {
 	        delayedTemperatureChangedTimer.Stop();
 
-			Debug.WriteLine($"UpdateRoomTemperature: {desiredTemperature}");
-            await roomDevicesDataService.UpdateDesiredAsync((float)desiredTemperature, SensorDataType.Temperature);
+			Debug.WriteLine($"UpdateRoomTemperature: {newDesiredTemperature}");
+            await roomDevicesDataService.UpdateDesiredAsync((float)newDesiredTemperature, SensorDataType.Temperature);
         }
 
         void SetAmbient()
