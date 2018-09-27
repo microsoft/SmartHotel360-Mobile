@@ -14,9 +14,9 @@ namespace SmartHotel.Clients.Maintenance.Forms.ViewModels
         public const string TaskMarkedAsResolvedMessage = "TaskMarkedAsResolvedMessage";
         public const string GoBackToTasksMessage = "GoBackToTasksMessage";
 
-        private bool _popup;
-        private Models.Task _task;
-        private readonly ITasksService _tasksService;
+        bool _popup;
+        Models.Task _task;
+        readonly ITasksService _tasksService;
 
         public DetailViewModel(ITasksService tasksService)
         {
@@ -25,7 +25,7 @@ namespace SmartHotel.Clients.Maintenance.Forms.ViewModels
 
         public bool Popup
         {
-            get { return _popup; }
+            get => _popup;
             set
             {
                 _popup = value;
@@ -35,7 +35,7 @@ namespace SmartHotel.Clients.Maintenance.Forms.ViewModels
 
         public Models.Task Task
         {
-            get { return _task; }
+            get => _task;
             set
             {
                 _task = value;
@@ -52,7 +52,7 @@ namespace SmartHotel.Clients.Maintenance.Forms.ViewModels
 
         public ICommand BackToTasksCommand => new Command(BackToTasks);
 
-        private async void CloseTask()
+        async void CloseTask()
         {
             try
             {
@@ -72,9 +72,6 @@ namespace SmartHotel.Clients.Maintenance.Forms.ViewModels
             }
         }
 
-        private void BackToTasks(object obj)
-        {
-            MessagingCenter.Send(this, GoBackToTasksMessage);
-        }
+        void BackToTasks(object obj) => MessagingCenter.Send(this, GoBackToTasksMessage);
     }
 }

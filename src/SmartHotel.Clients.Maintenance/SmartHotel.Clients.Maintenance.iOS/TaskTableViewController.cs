@@ -1,13 +1,11 @@
-﻿using CoreGraphics;
-using SmartHotel.Clients.Core.Services.Dialog;
-using SmartHotel.Clients.Core.ViewModels;
-using SmartHotel.Clients.Core.Views;
-using SmartHotel.Clients.Maintenance.Models;
-using SmartHotel.Clients.Maintenance.Services.Settings;
-using SmartHotel.Clients.Maintenance.Services.Tasks;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using CoreGraphics;
+using SmartHotel.Clients.Core.Models;
+using SmartHotel.Clients.Core.Services.Dialog;
+using SmartHotel.Clients.Maintenance.Services.Settings;
+using SmartHotel.Clients.Maintenance.Services.Tasks;
 using UIKit;
 using Xamarin.Forms;
 
@@ -15,10 +13,10 @@ namespace SmartHotel.Clients.Maintenance.iOS
 {
     public partial class TaskTableViewController : UITableViewController
     {
-        private LoadingOverlayView _loading;
-        private UITapGestureRecognizer _titleTapGestureRecognizer;
-        private readonly IDialogService _dialogService;
-        private readonly ITasksService _tasksService;
+        LoadingOverlayView _loading;
+        UITapGestureRecognizer _titleTapGestureRecognizer;
+        readonly IDialogService _dialogService;
+        readonly ITasksService _tasksService;
 
         public TaskTableViewController (IntPtr handle) : base (handle)
         {
@@ -60,7 +58,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
             NavigationController.NavigationBar.RemoveGestureRecognizer(_titleTapGestureRecognizer);
         }
 
-        private async System.Threading.Tasks.Task LoadTasksAsync()
+        async System.Threading.Tasks.Task LoadTasksAsync()
         {
             try
             {
@@ -76,7 +74,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
 
                 NavigationItemHelper.UpdateBadgeCounter(
                     NavigationItem,
-                    tasks.Where(r => !r.Resolved).Count());
+                    tasks.Count(r => !r.Resolved));
             }
             catch (Exception ex)
             {
@@ -91,7 +89,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
 
         private UIView GetViewForHeader()
         {
-            UIView view = new UIView()
+            var view = new UIView()
             {
                 Frame = new CGRect(0, 0, 0, 84.0f),
                 BackgroundColor = UIColor.FromRGB(248, 248, 248)
@@ -120,7 +118,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
             return view;
         }
 
-        private void OnTitleTapped()
+        void OnTitleTapped()
         {
             var settingsViewModel = new SettingsViewModel<RemoteSettings>(
                     new SettingsService());

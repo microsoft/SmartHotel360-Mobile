@@ -14,15 +14,11 @@ namespace SmartHotel.Clients.Core.Validations
 
         public bool Check(string value)
         {
-            ValidationContext ctx = new ValidationContext(this);
-            List<ValidationResult> results = new List<ValidationResult>();
+            var ctx = new ValidationContext(this);
+            var results = new List<ValidationResult>();
 
-            if (!Validator.TryValidateValue(value, ctx, results, new[] { new DataTypeAttribute(DataType.Url) } ))
-            {
-                return false;
-            }
-
-            return results.TrueForAll(r => r == ValidationResult.Success);
+            return Validator.TryValidateValue(value, ctx, results, new[] { new DataTypeAttribute(DataType.Url) })
+                            && results.TrueForAll(r => r == ValidationResult.Success);
         }
     }
 }

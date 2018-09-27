@@ -8,8 +8,8 @@ namespace SmartHotel.Clients.Maintenance.Forms.Views
 {
     public partial class DetailView : ContentPage
     {
-        private DetailViewModel _detailViewModel;
-        private Task _task;
+        DetailViewModel _detailViewModel;
+        Task _task;
 
         public DetailView(Task task)
         {

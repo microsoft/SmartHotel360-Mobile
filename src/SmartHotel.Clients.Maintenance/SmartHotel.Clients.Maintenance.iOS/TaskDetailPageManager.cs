@@ -9,10 +9,10 @@ namespace SmartHotel.Clients.Maintenance.iOS
 {
     internal class TaskDetailPageManager : IDisposable
     {
-        private readonly UIViewController _parentController;
-        private readonly UINavigationController _navigationController;
-        private UIViewController _detailViewController;
-        private int _currentBadgeCount;
+        readonly UIViewControler _parentController;
+        readonly UINavigationController _navigationController;
+        UIViewController _detailViewController;
+        int _currentBadgeCount;
 
         public TaskDetailPageManager(UIViewController parentController)
         {
@@ -40,7 +40,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
             MessagingCenter.Unsubscribe<DetailViewModel>(this, DetailViewModel.GoBackToTasksMessage);
         }
 
-        private void OnTaskMarkedAsResolved(DetailViewModel vm)
+        void OnTaskMarkedAsResolved(DetailViewModel vm)
         {
             _currentBadgeCount--;
 
@@ -52,9 +52,6 @@ namespace SmartHotel.Clients.Maintenance.iOS
                 _currentBadgeCount);
         }
 
-        private void OnGoBackToTasks(DetailViewModel vm)
-        {
-            _navigationController.PopViewController(true);
-        }
+        private void OnGoBackToTasks(DetailViewModel vm) => _navigationController.PopViewController(true);
     }
 }

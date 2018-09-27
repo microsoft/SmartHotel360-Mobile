@@ -1,4 +1,4 @@
-﻿namespace SmartHotel.Clients.Maintenance.Models
+﻿namespace SmartHotel.Clients.Core.Models
 {
     public class RemoteSettings
     {

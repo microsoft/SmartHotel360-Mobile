@@ -6,23 +6,8 @@ namespace SmartHotel.Clients.Maintenance.Forms.Converters
 {
     public class TaskStatusToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is bool)
-            {
-                var resolved = (bool)value;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value is bool resolved ? !resolved ? "Pending" : "Resolved" : string.Empty;
 
-                if (!resolved)
-                    return "Pending";
-                else
-                    return "Resolved";
-            }
-            return string.Empty;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

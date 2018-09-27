@@ -6,23 +6,8 @@ namespace SmartHotel.Clients.Maintenance.Forms.Converters
 {
     public class TaskStatusToImageConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is bool)
-            {
-                var resolved = (bool)value;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value is bool resolved ? !resolved ? "pending-status.png" : "resolved-status.png" : string.Empty;
 
-                if (!resolved)
-                    return "pending-status.png";
-                else
-                    return "resolved-status.png";
-            }
-            return string.Empty;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

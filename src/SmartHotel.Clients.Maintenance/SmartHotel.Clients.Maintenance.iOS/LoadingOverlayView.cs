@@ -6,8 +6,8 @@ namespace SmartHotel.Clients.Maintenance.iOS
 {
     public class LoadingOverlayView : UIView
     {
-        private UIActivityIndicatorView _activitySpinner;
-        private UILabel _loadingLabel;
+         UIActivityIndicatorView _activitySpinner;
+         UILabel _loadingLabel;
 
         public LoadingOverlayView(CGRect frame) : base(frame)
         {
