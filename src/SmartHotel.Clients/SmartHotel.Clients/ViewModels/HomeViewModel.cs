@@ -11,15 +11,21 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microcharts;
+using SkiaSharp;
+using SmartHotel.Clients.Core.Controls;
+using SmartHotel.Clients.Core.Services.IoT;
 using Xamarin.Forms;
+using Entry = Microcharts.Entry;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
     public class HomeViewModel : ViewModelBase, IHandleViewAppearing, IHandleViewDisappearing
     {
         bool hasBooking;
-        Microcharts.Chart temperatureChart;
-        Microcharts.Chart greenChart;
+        Chart temperatureChart;
+        Chart lightChart;
+        Chart greenChart;
         ObservableRangeCollection<Notification> notifications;
 
         readonly INotificationService notificationService;
@@ -27,19 +33,22 @@ namespace SmartHotel.Clients.Core.ViewModels
         readonly IBookingService bookingService;
         readonly IAuthenticationService authenticationService;
         readonly IFileService fileService;
+		readonly IRoomDevicesDataService roomDevicesDataService;
 
         public HomeViewModel(
             INotificationService notificationService,
             IChartService chartService,
             IBookingService bookingService,
             IAuthenticationService authenticationService,
-            IFileService fileService)
+            IFileService fileService,
+            IRoomDevicesDataService roomDevicesDataService)
         {
             this.notificationService = notificationService;
             this.chartService = chartService;
             this.bookingService = bookingService;
             this.authenticationService = authenticationService;
             this.fileService = fileService;
+            this.roomDevicesDataService = roomDevicesDataService;
 
             notifications = new ObservableRangeCollection<Notification>();
         }
@@ -54,6 +63,12 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             get => temperatureChart;
             set => SetProperty(ref temperatureChart, value);
+        }
+
+        public Microcharts.Chart LightChart
+        {
+            get => lightChart;
+			set => SetProperty(ref lightChart, value);
         }
 
         public Microcharts.Chart GreenChart
@@ -91,7 +106,8 @@ namespace SmartHotel.Clients.Core.ViewModels
 
                 HasBooking = AppSettings.HasBooking;
 
-                TemperatureChart = await chartService.GetTemperatureChartAsync();
+                await GetTemperatureAndLight();
+
                 GreenChart = await chartService.GetGreenChartAsync();
 
                 var authenticatedUser = authenticationService.AuthenticatedUser;
@@ -114,6 +130,66 @@ namespace SmartHotel.Clients.Core.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private async Task GetTemperatureAndLight()
+        {
+            var roomTemperature = await roomDevicesDataService.GetRoomTemperatureAsync();
+            var roomLight = await roomDevicesDataService.GetRoomAmbientLightAsync();
+
+            if (roomTemperature == null || roomLight == null)
+            {
+                roomDevicesDataService.StopCheckingRoomSensorData();
+                await DialogService.ShowAlertAsync("Please ensure that the IoT Demo backend setup is complete and restart.",
+                    "Unable to get room sensor information", "OK");
+                return;
+            }
+            TemperatureChart = CreateTemperatureChart(roomTemperature);
+            LightChart = CreateLightChart(roomLight);
+        }
+
+        Chart CreateTemperatureChart(RoomTemperature roomTemperature)
+        {
+            var chartData = new TemperatureChart
+            {
+                MinValue = roomTemperature.Minimum.RawValue,
+                MaxValue = roomTemperature.Maximum.RawValue
+            };
+
+            var currentChartValue = new Entry(roomTemperature.Value.RawValue) { Color = SKColor.Parse("#174A51") };
+            var desiredChartValue = new Entry(roomTemperature.Desired.RawValue) { Color = SKColor.Parse("#378D93") };
+            var maxChartValue = new Entry(roomTemperature.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
+
+	        chartData.CurrentValueEntry = currentChartValue;
+	        chartData.DesiredValueEntry = desiredChartValue;
+
+            if (roomTemperature.Value.RawValue > roomTemperature.Desired.RawValue)
+                chartData.Entries = new[] { maxChartValue, currentChartValue, desiredChartValue  };
+            else if (roomTemperature.Value.RawValue < roomTemperature.Desired.RawValue)
+                chartData.Entries = new[] { maxChartValue, desiredChartValue, currentChartValue };
+            else
+                chartData.Entries = new[] { maxChartValue, desiredChartValue, currentChartValue  };
+
+            return chartData;
+        }
+
+        Chart CreateLightChart(RoomAmbientLight light)
+        {
+            var chartData = new LightChart()
+            {
+                MinValue = light.Minimum.RawValue,
+                MaxValue = light.Maximum.RawValue
+            };
+
+            var lightValue = Math.Round(light.Value.RawValue);
+            var currentChartValue = new Entry((float) lightValue) { Color = SKColor.Parse("#174A51") };
+            var maxChartValue = new Entry(light.Maximum.RawValue) { Color = SKColor.Parse("#D4D4D4") };
+
+	        chartData.CurrentValueEntry = currentChartValue;
+
+            chartData.Entries = new[] { maxChartValue, currentChartValue };
+
+            return chartData;
         }
 
         void ShowGreetingMessage()
@@ -144,11 +220,20 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             MessagingCenter.Subscribe<Booking>(this, MessengerKeys.BookingRequested, OnBookingRequested);
             MessagingCenter.Subscribe<CheckoutViewModel>(this, MessengerKeys.CheckoutRequested, OnCheckoutRequested);
+			
+	        roomDevicesDataService.SensorDataChanged += RoomDevicesDataServiceSensorDataChanged;
+            roomDevicesDataService.StartCheckingRoomSensorData();
 
             return Task.FromResult(true);
         }
 
-        public Task OnViewDisappearingAsync(VisualElement view) => Task.FromResult(true);
+	    public Task OnViewDisappearingAsync(VisualElement view)
+        {
+	        roomDevicesDataService.SensorDataChanged -= RoomDevicesDataServiceSensorDataChanged;
+            roomDevicesDataService.StopCheckingRoomSensorData();
+
+            return Task.FromResult(true);
+        }
 
         Task OnNotificationsAsync() => NavigationService.NavigateToAsync(typeof(NotificationsViewModel), Notifications);
 
@@ -180,5 +265,10 @@ namespace SmartHotel.Clients.Core.ViewModels
         }
 
         void OnCheckoutRequested(object args) => HasBooking = false;
+
+	    private async void RoomDevicesDataServiceSensorDataChanged(object sender, EventArgs e)
+	    {
+		    await GetTemperatureAndLight();
+	    }
     }
 }

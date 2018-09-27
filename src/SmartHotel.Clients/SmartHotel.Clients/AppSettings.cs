@@ -4,7 +4,7 @@ using SmartHotel.Clients.Core.Utils;
 
 namespace SmartHotel.Clients.Core
 {
-    public static class AppSettings
+	public static class AppSettings
     {
         //IF YOU DEPLOY YOUR OWN ENDPOINT REPLACE THE VALUEW BELOW
 
@@ -21,6 +21,7 @@ namespace SmartHotel.Clients.Core
 
         // Endpoints
         const string defaultImagesBaseUri = "https://sh360publicimg.blob.core.windows.net";
+        const string defaultRoomDevicesEndpoint = "";
 
         // Maps
         const string defaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
@@ -37,6 +38,12 @@ namespace SmartHotel.Clients.Core
 
         // Booking 
         const bool defaultHasBooking = false;
+
+		// Room Devices
+	    const string defaultRoomId = "";
+        const string defaultThermostatDeviceId = "Room11Thermostat";
+        const string defaultLightDeviceId = "Room11Light";
+
 
         // Fakes
         const bool defaultUseFakes = false;
@@ -99,6 +106,12 @@ namespace SmartHotel.Clients.Core
         {
             get => Preferences.Get(nameof(ImagesBaseUri), defaultImagesBaseUri);
             set => Preferences.Set(nameof(ImagesBaseUri), value);
+        }
+
+        public static string RoomDevicesEndpoint
+        {
+            get => Preferences.Get(nameof(RoomDevicesEndpoint), defaultRoomDevicesEndpoint);
+            set => Preferences.Set(nameof(RoomDevicesEndpoint), value);
         }
 
         public static string SkypeBotId
@@ -164,5 +177,23 @@ namespace SmartHotel.Clients.Core
         }
 
         public static void RemoveUserData() => Preferences.Remove(nameof(User));
+		
+		public static string RoomId
+	    {
+		    get => Preferences.Get(nameof(RoomId), defaultRoomId);
+		    set => Preferences.Set(nameof(RoomId), value);
+	    }
+
+        public static string ThermostatDeviceId
+        {
+            get => Preferences.Get(nameof(ThermostatDeviceId), defaultThermostatDeviceId);
+            set => Preferences.Set(nameof(ThermostatDeviceId), value);
+        }
+
+        public static string LightDeviceId
+        {
+            get => Preferences.Get(nameof(LightDeviceId), defaultLightDeviceId);
+            set => Preferences.Set(nameof(LightDeviceId), value);
+        }
     }
 }
