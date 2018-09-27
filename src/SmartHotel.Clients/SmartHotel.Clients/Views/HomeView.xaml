@@ -337,15 +337,19 @@
                         Grid.Column="1"
                         BackgroundColor="{StaticResource ChartBackgroundColor}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-						<microcharts:ChartView Chart="{Binding LightChart}"
-											   Margin="16, 36, 16, 6" />
+
                         <Label     
-                            Grid.Row="0"
                             Text="{extensions:Translate AmbientLight}"
                             Style="{StaticResource ChartTextStyle}"/>
+                        
+                        <microcharts:ChartView Grid.Row="0" 
+                                               Chart="{Binding LightChart}"
+											   Margin="16, 36, 16, 0" 
+						                       />
+
                         <ffimageloading:CachedImage     
                             Grid.Row="1"
                             Aspect="AspectFit"
