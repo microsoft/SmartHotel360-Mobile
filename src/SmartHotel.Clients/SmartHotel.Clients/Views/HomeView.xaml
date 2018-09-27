@@ -341,14 +341,15 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Label     
-                            Text="{extensions:Translate AmbientLight}"
-                            Style="{StaticResource ChartTextStyle}"/>
-                        
                         <microcharts:ChartView Grid.Row="0" 
                                                Chart="{Binding LightChart}"
 											   Margin="16, 36, 16, 0" 
 						                       />
+                        
+                        <Label     
+                            Text="{extensions:Translate AmbientLight}"
+                            Style="{StaticResource ChartTextStyle}"/>
+                                               
 
                         <ffimageloading:CachedImage     
                             Grid.Row="1"
