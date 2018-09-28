@@ -4,6 +4,8 @@ using System.Linq;
 using CoreGraphics;
 using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Dialog;
+using SmartHotel.Clients.Core.ViewModels;
+using SmartHotel.Clients.Core.Views;
 using SmartHotel.Clients.Maintenance.Services.Settings;
 using SmartHotel.Clients.Maintenance.Services.Tasks;
 using UIKit;
@@ -87,7 +89,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
             }
         }
 
-        private UIView GetViewForHeader()
+        UIView GetViewForHeader()
         {
             var view = new UIView()
             {
@@ -120,12 +122,13 @@ namespace SmartHotel.Clients.Maintenance.iOS
 
         void OnTitleTapped()
         {
-            var settingsViewModel = new SettingsViewModel<RemoteSettings>(
-                    new SettingsService());
+            var settingsViewModel = new SettingsViewModel<RemoteSettings>(new SettingsService());
+
             var settingsView = new SettingsView
             {
                 BindingContext = settingsViewModel
             };
+
             settingsView.Appearing += async (o, e) =>
             {
                 await settingsViewModel.InitializeAsync(null);

@@ -1,17 +1,16 @@
-﻿using SmartHotel.Clients.Maintenance.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
+using SmartHotel.Clients.Maintenance.Models;
 using UIKit;
 
 namespace SmartHotel.Clients.Maintenance.iOS
 {
     public class TaskTableDelegate : UITableViewDelegate
     {
-        private UITableViewController _parentController;
-        private List<Task> _tasks;
-        private readonly TaskDetailPageManager _detailManager;
+        readonly UITableViewController _parentController;
+        List<Task> _tasks;
+        readonly TaskDetailPageManager _detailManager;
 
         public TaskTableDelegate(UITableViewController parentController, IEnumerable<Task> tasks)
         {
@@ -26,7 +25,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
 
             var item = _tasks[indexPath.Row];
 
-            _detailManager.ShowFormsDetailPage(item, _tasks.Where(r => !r.Resolved).Count());
+            _detailManager.ShowFormsDetailPage(item, _tasks.Count(r => !r.Resolved));
         }
 
         protected override void Dispose(bool disposing)

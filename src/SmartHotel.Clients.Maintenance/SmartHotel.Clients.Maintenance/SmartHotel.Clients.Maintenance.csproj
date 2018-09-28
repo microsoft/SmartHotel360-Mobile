@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-win+net45+wp8+win81+wpa8;portable-net45+win8</AssetTargetFallback>
-    <AssemblyName>SmartHotel.Clients.Core</AssemblyName>
-    <RootNamespace>SmartHotel.Clients.Core</RootNamespace>
+    <AssemblyName>SmartHotel.Clients.Maintenance</AssemblyName>
+    <RootNamespace>SmartHotel.Clients.Maintenance</RootNamespace>
     <Configurations>Debug;Release;UI Test;UI-Test</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UI Test|AnyCPU'">

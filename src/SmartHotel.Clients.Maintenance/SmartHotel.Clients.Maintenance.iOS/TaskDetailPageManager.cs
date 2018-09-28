@@ -1,15 +1,14 @@
-﻿using SmartHotel.Clients.Maintenance.Forms.ViewModels;
+﻿using System;
+using SmartHotel.Clients.Maintenance.Forms.ViewModels;
 using SmartHotel.Clients.Maintenance.Forms.Views;
-using SmartHotel.Clients.Maintenance.Models;
-using System;
 using UIKit;
 using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Maintenance.iOS
 {
-    internal class TaskDetailPageManager : IDisposable
+    class TaskDetailPageManager : IDisposable
     {
-        readonly UIViewControler _parentController;
+        readonly UIViewController _parentController;
         readonly UINavigationController _navigationController;
         UIViewController _detailViewController;
         int _currentBadgeCount;
@@ -52,6 +51,6 @@ namespace SmartHotel.Clients.Maintenance.iOS
                 _currentBadgeCount);
         }
 
-        private void OnGoBackToTasks(DetailViewModel vm) => _navigationController.PopViewController(true);
+        void OnGoBackToTasks(DetailViewModel vm) => _navigationController.PopViewController(true);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Foundation;
 using SmartHotel.Clients.Maintenance.Models;
 using UIKit;
@@ -10,19 +9,13 @@ namespace SmartHotel.Clients.Maintenance.iOS
     // The data source for a UITableView. 
     public class TaskTableDataSource : UITableViewDataSource
     {
-        public TaskTableDataSource(IEnumerable<Task> tasks)
-        {
-            LoadData(tasks);
-        }
+        public TaskTableDataSource(IEnumerable<Task> tasks) => LoadData(tasks);
 
         public List<Task> Items = new List<Task>();
 
-        public string CellID
-        {
-            get { return "TaskCell"; }
-        }
+        public string CellID => "TaskCell";
 
-        private void LoadData(IEnumerable<Task> tasks)
+        void LoadData(IEnumerable<Task> tasks)
         {
             foreach(var t in tasks)
             {
@@ -40,14 +33,8 @@ namespace SmartHotel.Clients.Maintenance.iOS
             return cell;
         }
 
-        public override nint NumberOfSections(UITableView tableView)
-        {
-            return 1;
-        }
+        public override nint NumberOfSections(UITableView tableView) => 1;
 
-        public override nint RowsInSection(UITableView tableView, nint section)
-        {
-            return Items.Count;
-        }
+        public override nint RowsInSection(UITableView tableView, nint section) => Items.Count;
     }
 }
