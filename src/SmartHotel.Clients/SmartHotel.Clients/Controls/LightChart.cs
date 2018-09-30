@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Microcharts;
 using SkiaSharp;
@@ -16,6 +17,7 @@ namespace SmartHotel.Clients.Core.Controls
         public override void DrawContent(SKCanvas canvas, int width, int height)
         {
             var relativeScaleWidth = width / 465.0f;
+            var relativeScaleHeight = height / 270.0f;
             var strokeWidth = relativeScaleWidth  * LineSize;
 
             var radius = (width) / 2;
@@ -39,7 +41,7 @@ namespace SmartHotel.Clients.Core.Controls
             {
                 var percent = (Math.Abs(entry.Value) - AbsoluteMinimum) / ValueRange;
                 var x = cx - radius - strokeWidth;
-                var y = cy / 2f - strokeWidth;
+                var y = cy / 2f - strokeWidth + LabelTextSize;
                 canvas.DrawLine(x, y, x + (2 * radius) * percent, y, paint);
             }
         }
@@ -51,7 +53,7 @@ namespace SmartHotel.Clients.Core.Controls
             {
                 canvas.DrawCaptionLabels(string.Empty, SKColor.Empty, $"{CurrentValueEntry.Value}%", SKColor.Parse("#283748"),
                     LabelTextSize * relativeScaleWidth,
-                    new SKPoint(cx - CaptionMargin, cy / 2f + LabelTextSize / 2f), SKTextAlign.Center);
+                    new SKPoint(cx - CaptionMargin, cy / 2f + LabelTextSize), SKTextAlign.Center);
             }
 
             // uncomment to add Desired value
