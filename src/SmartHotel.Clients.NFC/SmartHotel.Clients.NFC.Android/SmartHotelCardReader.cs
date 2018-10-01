@@ -7,30 +7,30 @@ namespace SmartHotel.Clients.NFC.Droid
 {
     public class SmartHotelCardReader : Java.Lang.Object, NfcAdapter.IReaderCallback
     {
-        private static readonly string TAG = "LoyaltyCardReader";
+        static readonly string TAG = "LoyaltyCardReader";
 
         // AID for our loyalty card service.
-        private static readonly string SAMPLE_LOYALTY_CARD_AID = "F222222222";
+        static readonly string SAMPLE_LOYALTY_CARD_AID = "F222222222";
 
         // ISO-DEP command HEADER for selecting an AID.
         // Format: [Class | Instruction | Parameter 1 | Parameter 2]
-        private static readonly string SELECT_APDU_HEADER = "00A40400";
+        static readonly string SELECT_APDU_HEADER = "00A40400";
 
         // "OK" status word sent in response to SELECT AID command (0x9000)
-        private static readonly byte[] SELECT_OK_SW = { (byte)0x90, (byte)0x00 };
+        static readonly byte[] SELECT_OK_SW = { (byte)0x90, (byte)0x00 };
 
         // Weak reference to prevent retain loop. _messageCallback is responsible for exiting
         // foreground mode before it becomes invalid (e.g. during onPause() or onStop()).
-        private WeakReference<MessageCallback> _messageCallback;
+        WeakReference<IMessageCallback> messageCallback;
 
-        public interface MessageCallback
+        public interface IMessageCallback
         {
             void OnMessageRecieved(string account);
         }
 
-        public SmartHotelCardReader(WeakReference<MessageCallback> messageCallback)
+        public SmartHotelCardReader(WeakReference<IMessageCallback> messageCallback)
         {
-            _messageCallback = messageCallback;
+            this.messageCallback = messageCallback;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace SmartHotel.Clients.NFC.Droid
         public void OnTagDiscovered(Tag tag)
         {
             Log.Info(TAG, "New tag discovered");
-            IsoDep isoDep = IsoDep.Get(tag);
+            var isoDep = IsoDep.Get(tag);
             if (isoDep != null)
             {
                 try
@@ -52,22 +52,22 @@ namespace SmartHotel.Clients.NFC.Droid
                     // Build SELECT AID command for our loyalty card service.
                     // This command tells the remote device which service we wish to communicate with.
                     Log.Info(TAG, "Requesting remote AID: " + SAMPLE_LOYALTY_CARD_AID);
-                    byte[] command = BuildSelectApdu(SAMPLE_LOYALTY_CARD_AID);
+                    var command = BuildSelectApdu(SAMPLE_LOYALTY_CARD_AID);
 
                     // Send command to remote device
                     Log.Info(TAG, "Sending: " + ByteArrayToHexString(command));
-                    byte[] result = isoDep.Transceive(command);
+                    var result = isoDep.Transceive(command);
 
                     // If AID is successfully selected, 0x9000 is returned as the status word (last 2
                     // bytes of the result) by convention. Everything before the status word is
                     // optional payload, which is used here to hold the account number.
-                    int resultLength = result.Length;
+                    var resultLength = result.Length;
                     byte[] statusWord = { result[resultLength - 2], result[resultLength - 1] };
-                    byte[] payload = new byte[resultLength - 2];
+                    var payload = new byte[resultLength - 2];
                     Array.Copy(result, payload, resultLength - 2);
-                    bool arrayEquals = SELECT_OK_SW.Length == statusWord.Length;
+                    var arrayEquals = SELECT_OK_SW.Length == statusWord.Length;
 
-                    for (int i = 0; i < SELECT_OK_SW.Length && i < statusWord.Length && arrayEquals; i++)
+                    for (var i = 0; i < SELECT_OK_SW.Length && i < statusWord.Length && arrayEquals; i++)
                     {
                         arrayEquals = (SELECT_OK_SW[i] == statusWord[i]);
                         if (!arrayEquals)
@@ -76,11 +76,11 @@ namespace SmartHotel.Clients.NFC.Droid
                     if (arrayEquals)
                     {
                         // The remote NFC device will immediately respond with its stored account number
-                        string accountNumber = System.Text.Encoding.UTF8.GetString(payload);
+                        var accountNumber = System.Text.Encoding.UTF8.GetString(payload);
                         Log.Info(TAG, "Received: " + accountNumber);
 
                         // Inform CardReaderFragment of received account number
-                        if (_messageCallback.TryGetTarget(out MessageCallback accountCallback))
+                        if (messageCallback.TryGetTarget(out var accountCallback))
                         {
                             accountCallback.OnMessageRecieved(accountNumber);
                         }
@@ -112,9 +112,9 @@ namespace SmartHotel.Clients.NFC.Droid
         /// <returns>String, containing hexadecimal representation.</returns>
         public static string ByteArrayToHexString(byte[] bytes)
         {
-            String s = string.Empty;
+            var s = string.Empty;
 
-            for (int i = 0; i < bytes.Length; i++)
+            for (var i = 0; i < bytes.Length; i++)
             {
                 s += bytes[i].ToString("X2");
             }
@@ -126,17 +126,17 @@ namespace SmartHotel.Clients.NFC.Droid
         /// </summary>   
         /// <param name="s">String containing hexadecimal characters to convert</param>
         /// <returns>Byte array generated from input</returns>
-        private static byte[] HexStringToByteArray(string s)
+        static byte[] HexStringToByteArray(string s)
         {
-            int len = s.Length;
+            var len = s.Length;
 
             if (len % 2 == 1)
             {
                 throw new ArgumentException("Hex string must have even number of characters");
             }
 
-            byte[] data = new byte[len / 2]; //Allocate 1 byte per 2 hex characters
-            for (int i = 0; i < len; i += 2)
+            var data = new byte[len / 2]; //Allocate 1 byte per 2 hex characters
+            for (var i = 0; i < len; i += 2)
             {
                 ushort val, val2;
 

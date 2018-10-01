@@ -13,20 +13,20 @@ namespace SmartHotel.Clients.NFC.Controls
 
         public override void DrawContent(SKCanvas canvas, int width, int height)
         {
-            this.DrawCaption(canvas, width, height);
+            DrawCaption(canvas, width, height);
             using (new SKAutoCanvasRestore(canvas))
             {
                 canvas.Translate(width / 2, height / 2);
-                var sumValue = this.Entries.Sum(x => Math.Abs(x.Value));
+                var sumValue = Entries.Sum(x => Math.Abs(x.Value));
                 var radius = (Math.Min(width, height) - (2 * Margin)) / 2;
 
                 var start = 0.0f;
-                for (int i = 0; i < this.Entries.Count(); i++)
+                for (var i = 0; i < Entries.Count(); i++)
                 {
-                    var entry = this.Entries.ElementAt(i);
+                    var entry = Entries.ElementAt(i);
                     var end = start + (Math.Abs(entry.Value) / sumValue);
 
-                    var path = RadialHelpers.CreateSectorPath(start, end, radius, radius - this.HoleRadius);
+                    var path = RadialHelpers.CreateSectorPath(start, end, radius, radius - HoleRadius);
                     using (var paint = new SKPaint
                     {
                         Style = SKPaintStyle.Fill,
@@ -42,33 +42,33 @@ namespace SmartHotel.Clients.NFC.Controls
             }
         }
 
-        private void DrawCaption(SKCanvas canvas, int width, int height)
+        void DrawCaption(SKCanvas canvas, int width, int height)
         {
-            var sumValue = this.Entries.Sum(x => Math.Abs(x.Value));
+            var sumValue = Entries.Sum(x => Math.Abs(x.Value));
             var rightValues = new List<Entry>();
             var leftValues = new List<Entry>();
 
-            int i = 0;
+            var i = 0;
             var current = 0.0f;
-            while (i < this.Entries.Count() && (current < sumValue / 2))
+            while (i < Entries.Count() && (current < sumValue / 2))
             {
-                var entry = this.Entries.ElementAt(i);
+                var entry = Entries.ElementAt(i);
                 rightValues.Add(entry);
                 current += Math.Abs(entry.Value);
                 i++;
             }
 
-            while (i < this.Entries.Count())
+            while (i < Entries.Count())
             {
-                var entry = this.Entries.ElementAt(i);
+                var entry = Entries.ElementAt(i);
                 leftValues.Add(entry);
                 i++;
             }
 
             leftValues.Reverse();
 
-            this.DrawCaptionElements(canvas, width, height, rightValues, false);
-            this.DrawCaptionElements(canvas, width, height, leftValues, true);
+            DrawCaptionElements(canvas, width, height, rightValues, false);
+            DrawCaptionElements(canvas, width, height, leftValues, true);
         }
     }
 }

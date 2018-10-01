@@ -5,10 +5,7 @@ namespace SmartHotel.Clients.NFC.Controls
 {
     public class CustomFrame : Frame
     {
-        public CustomFrame()
-        {
-            HasShadow = true;
-        }
+        public CustomFrame() => HasShadow = true;
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -20,7 +17,7 @@ namespace SmartHotel.Clients.NFC.Controls
             }
         }
 
-        private void ContentUpdated()
+        void ContentUpdated()
         {
             if (Device.RuntimePlatform != Device.UWP)
             {

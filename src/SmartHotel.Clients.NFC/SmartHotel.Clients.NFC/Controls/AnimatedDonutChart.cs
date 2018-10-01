@@ -9,10 +9,10 @@ namespace SmartHotel.Clients.NFC.Controls
 {
     public class AnimatedDonutChart : ContentView
     {
-        private static Color _disabledColor = Color.FromHex("#D3D3D3");
+        static Color disabledColor = Color.FromHex("#D3D3D3");
 
-        private float _currentValue;
-        private ChartView _chart;
+        float currentValue;
+        ChartView chart;
 
         public static readonly BindableProperty PercentageProperty =
           BindableProperty.Create(propertyName: nameof(Percentage),
@@ -24,22 +24,22 @@ namespace SmartHotel.Clients.NFC.Controls
 
         public double Percentage
         {
-            get { return (double)GetValue(PercentageProperty); }
-            set { SetValue(PercentageProperty, value); }
+            get => (double)GetValue(PercentageProperty);
+            set => SetValue(PercentageProperty, value);
         }
 
         public static readonly BindableProperty DefaultColorProperty =
           BindableProperty.Create(propertyName: nameof(DefaultColor),
               returnType: typeof(Color),
               declaringType: typeof(AnimatedDonutChart),
-              defaultValue: _disabledColor,
+              defaultValue: disabledColor,
               defaultBindingMode: BindingMode.OneWay,
               propertyChanged: OnEntryPropertyChanged);
 
         public Color DefaultColor
         {
-            get { return (Color)GetValue(DefaultColorProperty); }
-            set { SetValue(DefaultColorProperty, value); }
+            get => (Color)GetValue(DefaultColorProperty);
+            set => SetValue(DefaultColorProperty, value);
         }
 
         public static readonly BindableProperty ValueColorProperty =
@@ -52,8 +52,8 @@ namespace SmartHotel.Clients.NFC.Controls
 
         public Color ValueColor
         {
-            get { return (Color)GetValue(ValueColorProperty); }
-            set { SetValue(ValueColorProperty, value); }
+            get => (Color)GetValue(ValueColorProperty);
+            set => SetValue(ValueColorProperty, value);
         }
 
         public static readonly BindableProperty SpeedProperty =
@@ -66,8 +66,8 @@ namespace SmartHotel.Clients.NFC.Controls
 
         public float Speed
         {
-            get { return (float)GetValue(SpeedProperty); }
-            set { SetValue(SpeedProperty, value); }
+            get => (float)GetValue(SpeedProperty);
+            set => SetValue(SpeedProperty, value);
         }
 
         public static readonly BindableProperty StrokeHeightProperty =
@@ -80,8 +80,8 @@ namespace SmartHotel.Clients.NFC.Controls
 
         public int StrokeHeight
         {
-            get { return (int)GetValue(StrokeHeightProperty); }
-            set { SetValue(StrokeHeightProperty, value); }
+            get => (int)GetValue(StrokeHeightProperty);
+            set => SetValue(StrokeHeightProperty, value);
         }
 
         public static readonly BindableProperty EnabledProperty =
@@ -94,33 +94,33 @@ namespace SmartHotel.Clients.NFC.Controls
 
         public bool Enabled
         {
-            get { return (bool)GetValue(EnabledProperty); }
-            set { SetValue(EnabledProperty, value); }
+            get => (bool)GetValue(EnabledProperty);
+            set => SetValue(EnabledProperty, value);
         }
 
         public AnimatedDonutChart() : base()
         {
-            _currentValue = 0;
+            currentValue = 0;
 
-            _chart = new ChartView()
+            chart = new ChartView()
             {
                 BackgroundColor = Color.Transparent,
-                Chart = this.CreateChart(_currentValue, Height)
+                Chart = CreateChart(currentValue, Height)
             };
 
-            _chart.PaintSurface += OnPaintCanvas;
+            chart.PaintSurface += OnPaintCanvas;
 
-            Content = _chart;
+            Content = chart;
         }
 
-        private async void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
+        async void OnPaintCanvas(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (this.Percentage > 0)
+            if (Percentage > 0)
             {
-                if (this._currentValue <= Percentage)
+                if (currentValue <= Percentage)
                 {
-                    ((ChartView)sender).Chart = CreateChart(_currentValue, Height);
-                    _currentValue += Speed;
+                    ((ChartView)sender).Chart = CreateChart(currentValue, Height);
+                    currentValue += Speed;
                 }
                 else
                 {
@@ -129,32 +129,32 @@ namespace SmartHotel.Clients.NFC.Controls
             }
             else
             {
-                ((ChartView)sender).Chart = CreateChart(_currentValue, Height);
+                ((ChartView)sender).Chart = CreateChart(currentValue, Height);
             }
 
             await Task.Delay(TimeSpan.FromSeconds(1.0 / 30));
             ((ChartView)sender).InvalidateSurface();
         }
 
-        private static void OnEntryPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        static void OnEntryPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            (bindable as AnimatedDonutChart)._currentValue = 0;
-            (bindable as AnimatedDonutChart)._chart.PaintSurface -= (bindable as AnimatedDonutChart).OnPaintCanvas;
-            (bindable as AnimatedDonutChart)._chart.PaintSurface += (bindable as AnimatedDonutChart).OnPaintCanvas;
-            (bindable as AnimatedDonutChart)._chart.InvalidateSurface();
+            (bindable as AnimatedDonutChart).currentValue = 0;
+            (bindable as AnimatedDonutChart).chart.PaintSurface -= (bindable as AnimatedDonutChart).OnPaintCanvas;
+            (bindable as AnimatedDonutChart).chart.PaintSurface += (bindable as AnimatedDonutChart).OnPaintCanvas;
+            (bindable as AnimatedDonutChart).chart.InvalidateSurface();
         }
 
-        private Chart CreateChart(float i, double height)
+        Chart CreateChart(float i, double height)
         {
             var entries = new[]
             {
                 new Microcharts.Entry(i)
                 {
-                    Color = this.Enabled? this.ValueColor.ToSKColor() : _disabledColor.ToSKColor()
+                    Color = Enabled? ValueColor.ToSKColor() : disabledColor.ToSKColor()
                 },
                 new Microcharts.Entry(100 - i)
                 {
-                    Color = this.Enabled? this.DefaultColor.ToSKColor() : _disabledColor.ToSKColor()
+                    Color = Enabled? DefaultColor.ToSKColor() : disabledColor.ToSKColor()
                 }
             };
 
@@ -162,7 +162,7 @@ namespace SmartHotel.Clients.NFC.Controls
             {
                 Entries = entries,
                 BackgroundColor = Color.Transparent.ToSKColor(),
-                HoleRadius = this.StrokeHeight
+                HoleRadius = StrokeHeight
             };
         }
     }

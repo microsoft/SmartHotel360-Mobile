@@ -31,9 +31,6 @@
     <PackageReference Include="Xamarin.Essentials" Version="0.10.0-preview" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Services\Settings\BaseSettingsLoader.cs">
       <Link>Services\Settings\BaseSettingsLoader.cs</Link>
     </Compile>
@@ -52,10 +49,5 @@
     <Compile Include="..\..\SmartHotel.Clients\SmartHotel.Clients\Exceptions\ConnectivityException.cs">
       <Link>Exceptions\ConnectivityException.cs</Link>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Services\Dialog\" />
-    <Folder Include="Exceptions\" />
   </ItemGroup>
 </Project>

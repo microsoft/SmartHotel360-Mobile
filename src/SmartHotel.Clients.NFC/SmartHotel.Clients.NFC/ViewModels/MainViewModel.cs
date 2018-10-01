@@ -11,10 +11,10 @@ namespace SmartHotel.Clients.NFC.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private int _percentage;
-        private string _title;
-        private string _subTitle;
-        private string _avatar;
+        int percentage;
+        string title;
+        string subTitle;
+        string avatar;
 
         public MainViewModel()
         {
@@ -27,47 +27,47 @@ namespace SmartHotel.Clients.NFC.ViewModels
 
         public int Percentage
         {
-            get { return _percentage; }
+            get => percentage;
             set
             {
-                _percentage = value;
+                percentage = value;
                 OnPropertyChanged();
             }
         }
 
         public string Title
         {
-            get { return _title; }
+            get => title;
             set
             {
-                _title = value;
+                title = value;
                 OnPropertyChanged();
             }
         }
 
         public string SubTitle
         {
-            get { return _subTitle; }
+            get => subTitle;
             set
             {
-                _subTitle = value;
+                subTitle = value;
                 OnPropertyChanged();
             }
         }
 
         public string Avatar
         {
-            get { return _avatar; }
+            get => avatar;
             set
             {
-                _avatar = value;
+                avatar = value;
                 OnPropertyChanged();
             }
         }
 
         public ICommand ResetCommand => new Command(Reset);
 
-        private void StartNFCService(string message)
+        void StartNFCService(string message)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace SmartHotel.Clients.NFC.ViewModels
             }
         }
 
-        private void Reset()
+        void Reset()
         {
             Title = Resources.NfcMayus;
             SubTitle = Resources.GetPhone;
@@ -99,7 +99,7 @@ namespace SmartHotel.Clients.NFC.ViewModels
             Percentage = 0;
         }
 
-        private void Error()
+        void Error()
         {
             Title = Resources.HelloMayus;
             SubTitle = "James Montemagno";

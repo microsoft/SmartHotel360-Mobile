@@ -13,13 +13,13 @@ namespace SmartHotel.Clients.NFC.ViewModels.Base
             OnPropertyChanged(name);
         }
 
-        private MemberInfo GetMemberInfo(Expression expression)
+        MemberInfo GetMemberInfo(Expression expression)
         {
             MemberExpression operand;
-            LambdaExpression lambdaExpression = (LambdaExpression)expression;
+            var lambdaExpression = (LambdaExpression)expression;
             if (lambdaExpression.Body as UnaryExpression != null)
             {
-                UnaryExpression body = (UnaryExpression)lambdaExpression.Body;
+                var body = (UnaryExpression)lambdaExpression.Body;
                 operand = (MemberExpression)body.Operand;
             }
             else
