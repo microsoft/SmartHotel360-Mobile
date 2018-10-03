@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using SmartHotel.Clients.Core.Models;
 using SmartHotel.Clients.Core.Services.Settings;
-using SmartHotel.Clients.Maintenance.Models;
 using Task = System.Threading.Tasks.Task;
 
 namespace SmartHotel.Clients.Maintenance.Services.Settings
@@ -11,7 +11,7 @@ namespace SmartHotel.Clients.Maintenance.Services.Settings
 
         public Task<RemoteSettings> LoadSettingsAsync()
         {
-            RemoteSettings settings = new RemoteSettings();
+            var settings = new RemoteSettings();
             settings.Urls.Tasks = AppSettings.TasksEndpoint;
 
             return Task.FromResult(settings);

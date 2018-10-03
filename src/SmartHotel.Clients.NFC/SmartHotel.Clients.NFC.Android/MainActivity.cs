@@ -23,7 +23,7 @@ namespace SmartHotel.Clients.NFC.Droid
         Theme = "@style/MainTheme",
         MainLauncher = false,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, SmartHotelCardReader.MessageCallback
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, SmartHotelCardReader.IMessageCallback
     {
         // Recommend NfcAdapter flags for reading from other Android devices. Indicates that this
         // activity is interested in NFC-A devices (including other Android devices), and that the
@@ -31,10 +31,7 @@ namespace SmartHotel.Clients.NFC.Droid
         public NfcReaderFlags READER_FLAGS = NfcReaderFlags.NfcA | NfcReaderFlags.SkipNdefCheck;
         public SmartHotelCardReader _smartHotelCardReader;
 
-        public string TAG
-        {
-            get { return "CardReader"; }
-        }
+        public string TAG => "CardReader";
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -48,15 +45,15 @@ namespace SmartHotel.Clients.NFC.Droid
             base.OnCreate(bundle);
 
             Forms.Init(this, bundle);
-            CachedImageRenderer.Init(false);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(false);
             LoadApplication(new App());
 
-            _smartHotelCardReader = new SmartHotelCardReader(new WeakReference<SmartHotelCardReader.MessageCallback>(this));
+            _smartHotelCardReader = new SmartHotelCardReader(new WeakReference<SmartHotelCardReader.IMessageCallback>(this));
 
             // Disable Android Beam and register our card reader callback
             EnableReaderMode();
 
-            this.Window.SetFlags(WindowManagerFlags.KeepScreenOn, WindowManagerFlags.KeepScreenOn);
+            Window.SetFlags(WindowManagerFlags.KeepScreenOn, WindowManagerFlags.KeepScreenOn);
         }
 
         protected override void OnPause()
@@ -84,38 +81,34 @@ namespace SmartHotel.Clients.NFC.Droid
             base.OnTrimMemory(level);
         }
 
-        private void EnableReaderMode()
+        void EnableReaderMode()
         {
             Log.Info(TAG, "Enabling reader mode");
 
             Activity activity = this;
-            NfcAdapter nfc = NfcAdapter.GetDefaultAdapter(activity);
+            var nfc = NfcAdapter.GetDefaultAdapter(activity);
             if (nfc != null)
             {
                 nfc.EnableReaderMode(activity, _smartHotelCardReader, READER_FLAGS, null);
             }
         }
 
-        private void DisableReaderMode()
+        void DisableReaderMode()
         {
             Log.Info(TAG, "Enabling reader mode");
 
             Activity activity = this;
-            NfcAdapter nfc = NfcAdapter.GetDefaultAdapter(activity);
+            var nfc = NfcAdapter.GetDefaultAdapter(activity);
             if (nfc != null)
             {
                 nfc.DisableReaderMode(activity);
             }
         }
 
-
-        public void OnMessageRecieved(string message)
+        public void OnMessageRecieved(string message) => RunOnUiThread(() =>
         {
-            RunOnUiThread(() =>
-            {
-                Log.Info(TAG, message);
-                MessagingCenter.Send(message, MessengerKeys.SendNFCToken);
-            });
-        }
+            Log.Info(TAG, message);
+            MessagingCenter.Send(message, MessengerKeys.SendNFCToken);
+        });
     }
 }

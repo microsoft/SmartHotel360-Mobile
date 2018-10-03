@@ -1,10 +1,9 @@
-﻿using FFImageLoading.Forms.Touch;
-using Foundation;
-using UIKit;
+﻿using Foundation;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+using UIKit;
 
 namespace SmartHotel.Clients.Maintenance.iOS
 {
@@ -26,7 +25,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
                    typeof(Analytics), typeof(Crashes), typeof(Distribute));
 
             Xamarin.Forms.Forms.Init();
-            CachedImageRenderer.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
             UITableViewCell.Appearance.BackgroundColor = UIColor.Clear;
 

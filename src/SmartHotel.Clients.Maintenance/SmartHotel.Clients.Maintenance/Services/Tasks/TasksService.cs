@@ -28,14 +28,14 @@ namespace SmartHotel.Clients.Maintenance.Services.Tasks
         }
         public async Task<IEnumerable<Models.Task>> GetTasksAsync()
         {
-            UriBuilder builder = new UriBuilder(AppSettings.TasksEndpoint);
+            var builder = new UriBuilder(AppSettings.TasksEndpoint);
             builder.AppendToPath("tasks");
 
-            string uri = builder.ToString();
+            var uri = builder.ToString();
 
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await httpClient.GetAsync(uri);
+            var response = await httpClient.GetAsync(uri);
             var serialized = await response.Content.ReadAsStringAsync();
 
             var result = await Task.Run(() => 
@@ -46,14 +46,14 @@ namespace SmartHotel.Clients.Maintenance.Services.Tasks
 
         public async Task MarkTaskAsResolvedAsync(int taskId)
         {
-            UriBuilder builder = new UriBuilder(AppSettings.TasksEndpoint);
+            var builder = new UriBuilder(AppSettings.TasksEndpoint);
             builder.AppendToPath($"tasks/resolved/{taskId}");
 
             string uri = builder.ToString();
 
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await httpClient.PutAsync(uri, null);
+            var response = await httpClient.PutAsync(uri, null);
         }
     }
 }

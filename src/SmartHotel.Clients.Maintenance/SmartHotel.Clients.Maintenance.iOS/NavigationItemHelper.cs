@@ -2,7 +2,7 @@
 
 namespace SmartHotel.Clients.Maintenance.iOS
 {
-    internal static class NavigationItemHelper
+    static class NavigationItemHelper
     {
         public static void UpdateBadgeCounter(UINavigationItem navigationItem, int numberOfPendingTasks)
         {

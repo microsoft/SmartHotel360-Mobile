@@ -3,11 +3,12 @@
     using System;
     using SkiaSharp;
 
-    internal static class RadialHelpers
+    static class RadialHelpers
     {
         public const float PI = (float)Math.PI;
-        private const float UprightAngle = PI / 2f;
-        private const float TotalAngle = 2f * PI;
+
+        const float uprightAngle = PI / 2f;
+        const float totalAngle = 2f * PI;
 
         public static SKPoint GetCirclePoint(float r, float angle)
         {
@@ -34,8 +35,8 @@
             }
 
             // Calculate the angles
-            var startAngle = (TotalAngle * start) - UprightAngle;
-            var endAngle = (TotalAngle * end) - UprightAngle;
+            var startAngle = (totalAngle * start) - uprightAngle;
+            var endAngle = (totalAngle * end) - uprightAngle;
             var large = endAngle - startAngle > PI ? SKPathArcSize.Large : SKPathArcSize.Small;
             var sectorCenterAngle = ((endAngle - startAngle) / 2f) + startAngle;
 
@@ -43,8 +44,8 @@
             var cectorCenterRadius = ((outerRadius - innerRadius) / 2f) + innerRadius;
 
             // Calculate the angle for the margins
-            var offsetR = outerRadius == 0 ? 0 : ((margin / (TotalAngle * outerRadius)) * TotalAngle);
-            var offsetr = innerRadius == 0 ? 0 : ((margin / (TotalAngle * innerRadius)) * TotalAngle);
+            var offsetR = outerRadius == 0 ? 0 : ((margin / (totalAngle * outerRadius)) * totalAngle);
+            var offsetr = innerRadius == 0 ? 0 : ((margin / (totalAngle * innerRadius)) * totalAngle);
 
             // Get the points
             var a = GetCirclePoint(outerRadius, startAngle + offsetR);

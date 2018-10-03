@@ -8,9 +8,9 @@ namespace SmartHotel.Clients.Maintenance.iOS
     public partial class TaskTableViewCell : UITableViewCell
     {
         internal static nfloat CellHeight = 90f;
-        private UIView _whiteRoundedView;
-        private nfloat _spacing = 8;
-        private nfloat _shadowSize = 1f;
+        UIView _whiteRoundedView;
+        nfloat _spacing = 8;
+        nfloat _shadowSize = 1f;
 
         public TaskTableViewCell(IntPtr handle) : base(handle)
         {
@@ -80,7 +80,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
                 CellHeight - _spacing * 1f - 2 * _shadowSize);
         }
 
-        private string GetSubtitle(int taskType)
+        string GetSubtitle(int taskType)
         {
             switch (taskType)
             {
@@ -99,7 +99,7 @@ namespace SmartHotel.Clients.Maintenance.iOS
             }
         }
 
-        private string GetImage(int taskType)
+        string GetImage(int taskType)
         {
             switch (taskType)
             {

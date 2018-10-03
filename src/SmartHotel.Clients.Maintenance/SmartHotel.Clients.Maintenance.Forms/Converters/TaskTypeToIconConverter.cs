@@ -8,10 +8,8 @@ namespace SmartHotel.Clients.Maintenance.Forms.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is int)
+            if (value is int taskType)
             {
-                var taskType = (int)value;
-
                 switch (taskType)
                 {
                     case 1:
@@ -33,9 +31,6 @@ namespace SmartHotel.Clients.Maintenance.Forms.Converters
             return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 }

@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace SmartHotel.Clients.Maintenance.Models
+﻿namespace SmartHotel.Clients.Maintenance.Models
 {
     public class Task
     {

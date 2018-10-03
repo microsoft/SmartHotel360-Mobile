@@ -29,7 +29,7 @@ namespace SmartHotel.Clients.NFC.Droid
             InvokeMainActivity();
         }
 
-        private void InvokeMainActivity()
+        void InvokeMainActivity()
         {
             var mainActivityIntent = new Intent(this, typeof(MainActivity));
             StartActivity(mainActivityIntent);
