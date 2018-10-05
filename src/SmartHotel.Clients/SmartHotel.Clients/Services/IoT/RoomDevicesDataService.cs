@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using SmartHotel.Clients.Core.Extensions;
 using SmartHotel.Clients.Core.Helpers;
@@ -22,6 +23,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
         private readonly ConcurrentDictionary<SensorDataType, DeviceSensorData>
             _currentSensorDataBySensorDataType = new ConcurrentDictionary<SensorDataType, DeviceSensorData>();
+        private readonly List<DeviceDesiredData> _desiredData = new List<DeviceDesiredData>();
 
         private readonly string _thermostatDeviceId;
         private readonly string _lightDeviceId;
@@ -73,8 +75,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 				return (RoomTemperature)storedValue;
 			}
 
-			var roomData = await GetRoomSensorData( _authenticationService.AuthenticatedUser.Token, _roomId );
-			ProcessRoomData( roomData );
+            await GetLatestData();
 
 			return (RoomTemperature)GetStoredSensorData<RoomTemperature>();
         }
@@ -94,8 +95,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
                 return (RoomAmbientLight)storedValue;
             }
 
-            var roomData = await GetRoomSensorData(_authenticationService.AuthenticatedUser.Token, _roomId);
-            ProcessRoomData(roomData);
+            await GetLatestData();
 
             return (RoomAmbientLight)GetStoredSensorData<RoomAmbientLight>();
         }
@@ -107,8 +107,10 @@ namespace SmartHotel.Clients.Core.Services.IoT
             if (_currentSensorDataBySensorDataType.TryGetValue(sensor.SensorDataType,
                 out var sensorData))
             {
+                var desired = _desiredData.FirstOrDefault(d => d.RoomId == sensorData.RoomId && d.SensorId == sensorData.SensorId);
+
                 var currentTemp = float.Parse(sensorData.SensorReading);
-                var desiredTemp = float.Parse(sensorData.DesiredValue);
+                var desiredTemp = float.Parse(desired != null ? desired.DesiredValue : sensorData.SensorReading);
 
                 if (typeof(T) == typeof(RoomTemperature))
                     return new RoomTemperature(new SensorValue(currentTemp), new SensorValue(desiredTemp));
@@ -120,7 +122,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
             return null;
         }
 
-        private void ProcessRoomData(IEnumerable<DeviceSensorData> data)
+        private void ProcessRoomData(IEnumerable<DeviceSensorData> data, IEnumerable<DeviceDesiredData> desired)
         {
             foreach (var rawSensor in data)
             {
@@ -128,6 +130,11 @@ namespace SmartHotel.Clients.Core.Services.IoT
                     _currentSensorDataBySensorDataType.AddOrUpdate(dataType, rawSensor, (key, oldValue) => rawSensor);
             }
 
+            if (desired != null && desired.ToList().Count > 0)
+            {
+                _desiredData.Clear();
+                _desiredData.AddRange(desired);
+            }
         }
 
         private async Task<IEnumerable<DeviceSensorData>> GetRoomSensorData(string token, string roomId)
@@ -139,9 +146,20 @@ namespace SmartHotel.Clients.Core.Services.IoT
             return await _requestService.GetAsync<IEnumerable<DeviceSensorData>>(uri, token);
         }
 
+        private async Task<IEnumerable<DeviceDesiredData>> GetRoomDesiredData(string token, string roomId)
+        {
+            var builder = new UriBuilder(_roomDevicesApiEndpoint);
+            builder.AppendToPath($"Devices/desired/{roomId}");
+            var uri = builder.ToString();
+
+            return await _requestService.GetAsync<IEnumerable<DeviceDesiredData>>(uri, token);
+        }
 
         public async Task UpdateDesiredAsync(float desiredTemperature, SensorDataType sensorDataType)
         {
+            if (!_currentSensorDataBySensorDataType.TryGetValue(sensorDataType, out var deviceData))
+                return;
+
             var builder = new UriBuilder(_roomDevicesApiEndpoint);
             builder.AppendToPath("Devices");
             var uri = builder.ToString();
@@ -164,6 +182,8 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
             var request = new DeviceRequest
             {
+                RoomId = deviceData.RoomId,
+                SensorId = deviceData.SensorId,
                 DeviceId = deviceId,
                 MethodName = methodName,
                 Value = desiredTemperature.ToString(CultureInfo.InvariantCulture)
@@ -171,8 +191,6 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
             await _requestService.PostAsync(uri, request, _authenticationService.AuthenticatedUser.Token);
         }
-
-
 
         public void StartCheckingRoomSensorData()
         {
@@ -215,7 +233,8 @@ namespace SmartHotel.Clients.Core.Services.IoT
         private async Task GetLatestData()
         {
             var roomData = await GetRoomSensorData(_authenticationService.AuthenticatedUser.Token, _roomId);
-            ProcessRoomData(roomData);
+            var desiredData = await GetRoomDesiredData(_authenticationService.AuthenticatedUser.Token, _roomId);
+            ProcessRoomData(roomData, desiredData);
         }
     }
 }

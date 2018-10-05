@@ -29,6 +29,10 @@ namespace SmartHotel.Clients.Core.Models
     [DataContract(Name = "deviceSensorData")]
     public class DeviceRequest
     {
+        [DataMember(Name = "roomId")]
+        public string RoomId { get; set; }
+        [DataMember(Name = "sensorId")]
+        public string SensorId { get; set; }
         [DataMember(Name = "deviceId")]
         public string DeviceId { get; set; }
         [DataMember(Name = "methodName")]
