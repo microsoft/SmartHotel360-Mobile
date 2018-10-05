@@ -211,16 +211,16 @@ namespace SmartHotel.Clients.Core.ViewModels
 
 		    CurrentTemperature = roomTemperature.Value.RawValue;
 		    CurrentAmbientLight = roomAmbientLight.Value.RawValue;
+            DesiredTemperature = roomTemperature.Desired.RawValue;
+            DesiredAmbientLight = roomAmbientLight.Desired.RawValue;
 
-		    if ( isInitializing )
+            if ( isInitializing )
 		    {
 			    TemperatureMaximum = roomTemperature.Maximum.RawValue;
 			    TemperatureMinimum = roomTemperature.Minimum.RawValue;
-			    DesiredTemperature = roomTemperature.Desired.RawValue;
 
 			    AmbientLightMaximum = roomAmbientLight.Maximum.RawValue;
 			    AmbientLightMinimum = roomAmbientLight.Minimum.RawValue;
-			    DesiredAmbientLight = roomAmbientLight.Desired.RawValue;
 		    }
 	    }
 
