@@ -221,16 +221,22 @@ namespace SmartHotel.Clients.Core.ViewModels
             MessagingCenter.Subscribe<Booking>(this, MessengerKeys.BookingRequested, OnBookingRequested);
             MessagingCenter.Subscribe<CheckoutViewModel>(this, MessengerKeys.CheckoutRequested, OnCheckoutRequested);
 			
-	        roomDevicesDataService.SensorDataChanged += RoomDevicesDataServiceSensorDataChanged;
-            roomDevicesDataService.StartCheckingRoomSensorData();
+            if ( HasBooking )
+            {
+                roomDevicesDataService.SensorDataChanged += RoomDevicesDataServiceSensorDataChanged;
+                roomDevicesDataService.StartCheckingRoomSensorData();
+            }
 
             return Task.FromResult(true);
         }
 
 	    public Task OnViewDisappearingAsync(VisualElement view)
         {
-	        roomDevicesDataService.SensorDataChanged -= RoomDevicesDataServiceSensorDataChanged;
-            roomDevicesDataService.StopCheckingRoomSensorData();
+            if (HasBooking)
+            {
+                roomDevicesDataService.SensorDataChanged -= RoomDevicesDataServiceSensorDataChanged;
+                roomDevicesDataService.StopCheckingRoomSensorData();
+            }
 
             return Task.FromResult(true);
         }
