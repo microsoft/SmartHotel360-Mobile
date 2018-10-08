@@ -24,6 +24,7 @@
     <PackageReference Include="Splat" Version="5.0.2" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="0.10.0-preview" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.3.840" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.3.840" />
     <PackageReference Include="Xamanimation" Version="1.2.0" />
