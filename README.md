@@ -8,6 +8,7 @@ We are happy to announce the release of SmartHotel360. This release intends to s
 For this reference app scenario, we built several consumer and line-of-business apps and an Azure backend. You can find all SmartHotel360 repos in the following locations:
 
 * [SmartHotel360 ](https://github.com/Microsoft/SmartHotel360)
+* [IoT Demo](https://github.com/Microsoft/SmartHotel360-IoT)
 * [Backend Services (optimized for Kubernetes)](https://github.com/Microsoft/SmartHotel360-AKS-DevSpaces-Demo)
 * [Public Website](https://github.com/Microsoft/SmartHotel360-public-web)
 * [Pet Checker Serverless Function](https://github.com/Microsoft/SmartHotel360-PetCheckerFunction)
@@ -117,10 +118,10 @@ There is a detailed step-by-step demo script in the [demoscripts](https://github
 
 ## IoT Demo - Coming Soon
 
-1. In order to have live data working and enable room controls you must setup the [IoT Demo Backend](https://Point to IoT Demo Backend Github/README.md)
-2. Get Room Devices Api endpoint (setup via step #1) and change the value of DefaultRoomDevicesEndpoint in AppSettings.cs
-3. Get the Id of Room 11 (setup via step #1) and change the value of DefaultRoomId in AppSettings.cs
-4. Ensure that the property DefaultUseFakes = false in AppSettings.cs
+1. In order to have live data working and enable room controls you must setup the [IoT Demo Backend](https://github.com/Microsoft/SmartHotel360-IoT)
+2. Get `roomDevicesApiEndpoint` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomDevicesEndpoint` in AppSettings.cs.
+3. Get `room11SpaceId` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomId` in AppSettings.cs.
+4. Ensure that the property `defaultUseFakes` = false in AppSettings.cs
 
 ## Licenses
 
