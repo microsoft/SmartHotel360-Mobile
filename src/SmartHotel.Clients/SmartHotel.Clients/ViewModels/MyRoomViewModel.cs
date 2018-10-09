@@ -30,6 +30,7 @@ namespace SmartHotel.Clients.Core.ViewModels
         bool need;
         bool find;
         bool noDisturb;
+        bool updatingDesiredValuesFromService;
 
 	    bool isInitialized;
 	    readonly TimeSpan sliderInertia = TimeSpan.FromSeconds( 1 );
@@ -72,7 +73,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 			set
 			{
 	            var changed = SetProperty(ref desiredAmbientLight, Math.Round(value));
-	            if ( changed && IsRoomDevicesLive() )
+	            if ( changed && !updatingDesiredValuesFromService && IsRoomDevicesLive() )
 	            {
 		            delayedLightChangedTimer.Stop();
 		            delayedLightChangedTimer.Start();
@@ -99,7 +100,7 @@ namespace SmartHotel.Clients.Core.ViewModels
 			{
 	            var changed = SetProperty(ref desiredTemperature, Math.Round(value));
 
-	            if ( changed && IsRoomDevicesLive() )
+	            if ( changed && !updatingDesiredValuesFromService && IsRoomDevicesLive() )
 	            {
 		            delayedTemperatureChangedTimer.Stop();
 		            delayedTemperatureChangedTimer.Start();
@@ -211,8 +212,17 @@ namespace SmartHotel.Clients.Core.ViewModels
 
 		    CurrentTemperature = roomTemperature.Value.RawValue;
 		    CurrentAmbientLight = roomAmbientLight.Value.RawValue;
-            DesiredTemperature = roomTemperature.Desired.RawValue;
-            DesiredAmbientLight = roomAmbientLight.Desired.RawValue;
+	        updatingDesiredValuesFromService = true;
+	        if (!delayedTemperatureChangedTimer.IsRunning || isInitializing)
+	        {
+	            DesiredTemperature = roomTemperature.Desired.RawValue;
+	        }
+
+	        if (!delayedLightChangedTimer.IsRunning || isInitializing)
+	        {
+	            DesiredAmbientLight = roomAmbientLight.Desired.RawValue;
+	        }
+	        updatingDesiredValuesFromService = false;
 
             if ( isInitializing )
 		    {
@@ -334,10 +344,12 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             IsEcoMode = false;
 
+            updatingDesiredValuesFromService = true;
             DesiredAmbientLight = 100;
             DesiredTemperature = 70;
             MusicVolume = 45;
             WindowBlinds = 80;
+            updatingDesiredValuesFromService = false;
 
             if (showToast)
             {
@@ -349,10 +361,12 @@ namespace SmartHotel.Clients.Core.ViewModels
         {
             IsEcoMode = true;
 
+            updatingDesiredValuesFromService = true;
             DesiredAmbientLight = 0;
             DesiredTemperature = 60;
             MusicVolume = 40;
             WindowBlinds = 50;
+            updatingDesiredValuesFromService = false;
 
             if (showToast)
             {
