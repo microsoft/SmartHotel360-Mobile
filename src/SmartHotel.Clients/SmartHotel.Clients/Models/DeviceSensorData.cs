@@ -20,8 +20,6 @@ namespace SmartHotel.Clients.Core.Models
 	    public string SensorReading { get; set; }
 	    [DataMember(Name = "sensorDataType")]
 	    public string SensorDataType { get; set; }
-	    [DataMember(Name = "DesiredValue")]
-	    public string DesiredValue { get; set; }
 	    [DataMember(Name = "EventTimestamp")]
 	    public DateTime EventTimestamp { get; set; }
     }
@@ -29,6 +27,10 @@ namespace SmartHotel.Clients.Core.Models
     [DataContract(Name = "deviceSensorData")]
     public class DeviceRequest
     {
+        [DataMember(Name = "roomId")]
+        public string RoomId { get; set; }
+        [DataMember(Name = "sensorId")]
+        public string SensorId { get; set; }
         [DataMember(Name = "deviceId")]
         public string DeviceId { get; set; }
         [DataMember(Name = "methodName")]

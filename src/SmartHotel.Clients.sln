@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHotel.Clients.Android", "SmartHotel.Clients\SmartHotel.Clients.Android\SmartHotel.Clients.Android.csproj", "{7E4A172B-1268-49C2-87BE-E563700BB22C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHotel.Clients", "SmartHotel.Clients\SmartHotel.Clients\SmartHotel.Clients.csproj", "{7ADA23CF-CB3D-4898-822F-915E251ED8F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartHotel.Clients", "SmartHotel.Clients\SmartHotel.Clients\SmartHotel.Clients.csproj", "{7ADA23CF-CB3D-4898-822F-915E251ED8F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHotel.Clients.UWP", "SmartHotel.Clients\SmartHotel.Clients.UWP\SmartHotel.Clients.UWP.csproj", "{0D0C7A31-009A-4A19-9663-0F99791FAAC5}"
 EndProject
