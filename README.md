@@ -118,7 +118,7 @@ To change the endpoints you can modifiy the AppSettings.cs file in the SmartHote
 ## Demo Scripts
 There is a detailed step-by-step demo script in the [demoscripts](https://github.com/Microsoft/SmartHotel360-mobile-desktop-apps/tree/master/DemoScripts) folder of this repo that you can use in your own presentations.
 
-## IoT Demo - Coming Soon
+## IoT Demo
 
 1. In order to have live data working and enable room controls you must setup the [IoT Demo Backend](https://github.com/Microsoft/SmartHotel360-IoT)
 2. Get `roomDevicesApiEndpoint` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomDevicesEndpoint` in AppSettings.cs.
