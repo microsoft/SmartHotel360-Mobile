@@ -21,11 +21,11 @@ For this reference app scenario, we built several consumer and line-of-business 
 
 You can also download the mobile apps connected to our public endpoints in your devices following these links:
 
-* [SmartHotel360 Android Client App](https://aka.ms/smarthotel360android) [![Build status](https://build.appcenter.ms/v0.1/apps/3dfdc914-1b68-46aa-83c0-d89aa1a8c728/branches/master/badge)](https://appcenter.ms)
-* [SmartHotel360 iOS Client App](https://aka.ms/smarthotel360ios) [![Build status](https://build.appcenter.ms/v0.1/apps/27f92278-1c34-40c3-815c-adb5d6355165/branches/master/badge)](https://appcenter.ms)
-* [SmartHotel360 UWP Client App](https://aka.ms/smarthotel360uwp) [![Build status](https://build.appcenter.ms/v0.1/apps/2a0e7f37-0864-47c2-b053-756affd51f99/branches/master/badge)](https://appcenter.ms)
-* [SmartHotel360 NFC Android App](https://aka.ms/smarthotel360nfc) [![Build status](https://build.appcenter.ms/v0.1/apps/9f75cc13-cc2e-4350-baaa-6913c6116848/branches/master/badge)](https://appcenter.ms)
-* [SmartHotel360 iOS Maintenance App](https://aka.ms/smarthotel360maintenance) [![Build status](https://build.appcenter.ms/v0.1/apps/e9e59729-c5a3-49ff-a92a-5ae9c3b5fb72/branches/master/badge)](https://appcenter.ms)
+* [![Build status](https://build.appcenter.ms/v0.1/apps/3dfdc914-1b68-46aa-83c0-d89aa1a8c728/branches/master/badge)](https://appcenter.ms)[SmartHotel360 Android Client App](https://aka.ms/smarthotel360android) 
+* [![Build status](https://build.appcenter.ms/v0.1/apps/27f92278-1c34-40c3-815c-adb5d6355165/branches/master/badge)](https://appcenter.ms)[SmartHotel360 iOS Client App](https://aka.ms/smarthotel360ios)
+* [![Build status](https://build.appcenter.ms/v0.1/apps/2a0e7f37-0864-47c2-b053-756affd51f99/branches/master/badge)](https://appcenter.ms)[SmartHotel360 UWP Client App](https://aka.ms/smarthotel360uwp) 
+* [![Build status](https://build.appcenter.ms/v0.1/apps/9f75cc13-cc2e-4350-baaa-6913c6116848/branches/master/badge)](https://appcenter.ms)[SmartHotel360 NFC Android App](https://aka.ms/smarthotel360nfc) 
+* [![Build status](https://build.appcenter.ms/v0.1/apps/e9e59729-c5a3-49ff-a92a-5ae9c3b5fb72/branches/master/badge)](https://appcenter.ms)[SmartHotel360 iOS Maintenance App](https://aka.ms/smarthotel360maintenance)
 
 **Note:** This document is about the apps using **Xamarin**.
 
@@ -92,22 +92,22 @@ Xamarin.Forms enables you to build native UIs for iOS, Android, macOS, Linux, an
 
 **SmartHotel360 Mobile Apps**
 
-<img src="images/home.png" Width="210" /> <img src="images/menu.png" Width="210" /> <img src="images/suggestions.png" Width="210" /> <img src="images/myroom.png" Width="210" />
+<img src="Images/home.png" Width="210" /> <img src="Images/menu.png" Width="210" /> <img src="Images/suggestions.png" Width="210" /> <img src="Images/myroom.png" Width="210" />
 
-<img src="images/home-desktop.png" Width="420" /> <img src="images/suggestions-desktop.png" Width="420" />
+<img src="Images/home-desktop.png" Width="420" /> <img src="Images/suggestions-desktop.png" Width="420" />
 
 **SmartHotel360 Maintenance**
 
-<img src="images/maintenance.png" Width="210" />
+<img src="Images/maintenance.png" Width="210" />
 
 **SmartHotel360 NFC**
 
-<img src="images/nfc.png" Width="210" />
+<img src="Images/nfc.png" Width="210" />
 
 ## Sample endpoints
 You can find the list of the sample endpoints in the following link: (http://sh360services-public.eastus2.cloudapp.azure.com/configuration-api/cfg/public-http).
 To change the endpoints you can modifiy the AppSettings.cs file in the SmartHotel.Clients project under the Shared Code folder:
-<img src="images/SampleEndpoints.png" Width="840"> 
+<img src="Images/SampleEndpoints.png" Width="840"> 
 
 ## Requirements
 
@@ -116,7 +116,7 @@ To change the endpoints you can modifiy the AppSettings.cs file in the SmartHote
 * Bing Maps Key - [Getting a Bing Maps Key](https://msdn.microsoft.com/en-us/library/ff428642.aspx)
 
 ## Demo Scripts
-There is a detailed step-by-step demo script in the [demoscripts](https://github.com/Microsoft/SmartHotel360-mobile-desktop-apps/tree/master/DemoScripts) folder of this repo that you can use in your own presentations.
+There is a detailed step-by-step demo script in the [demoscripts](https://github.com/Microsoft/SmartHotel360-mobile/tree/master/Documents) folder of this repo that you can use in your own presentations.
 
 ## IoT Demo
 
