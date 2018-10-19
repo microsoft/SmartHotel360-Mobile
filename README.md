@@ -8,16 +8,12 @@ We are happy to announce the release of SmartHotel360. This release intends to s
 For this reference app scenario, we built several consumer and line-of-business apps and an Azure backend. You can find all SmartHotel360 repos in the following locations:
 
 * [SmartHotel360 ](https://github.com/Microsoft/SmartHotel360)
-* [IoT Demo](https://github.com/Microsoft/SmartHotel360-IoT)
-* [Backend Services (optimized for Kubernetes)](https://github.com/Microsoft/SmartHotel360-AKS-DevSpaces-Demo)
-* [Public Website](https://github.com/Microsoft/SmartHotel360-public-web)
-* [Pet Checker Serverless Function](https://github.com/Microsoft/SmartHotel360-PetCheckerFunction)
-* [Mobile Apps](https://github.com/Microsoft/SmartHotel360-mobile-desktop-apps)
-* [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-Sentiment-Analysis-App)
-* [Migrating Internal apps to Azure](https://github.com/Microsoft/SmartHotel360-internal-booking-apps)
-* [Original Backend Services](https://github.com/Microsoft/SmartHotel360-Azure-backend)
-* [Application Modernization](https://github.com/Microsoft/SmartHotel360-AppModernization)
-* [How Containers Enable Local Development](https://github.com/microsoft/SmartHotel360-ContainersForLocalDev)
+* [IoT](https://github.com/Microsoft/SmartHotel360-IoT)
+* [Backend](https://github.com/Microsoft/SmartHotel360-Backend)
+* [Website](https://github.com/Microsoft/SmartHotel360-Website)
+* [Mobile](https://github.com/Microsoft/SmartHotel360-Mobile)
+* [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-SentimentAnalysis)
+* [Registration](https://github.com/Microsoft/SmartHotel360-Registration)
 
 You can also download the mobile apps connected to our public endpoints in your devices following these links:
 
