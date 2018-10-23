@@ -20,11 +20,11 @@ namespace SmartHotel.Clients.Core
         static string defaultSettingsFileUrl;
 
         // Endpoints
-        const string defaultImagesBaseUri = "https://sh360publicimg.blob.core.windows.net";
+        const string defaultImagesBaseUri = "https://sh360imgdev.blob.core.windows.net";
         const string defaultRoomDevicesEndpoint = "";
 
         // Maps
-        const string defaultBingMapsApiKey = "9D6ZuqeGpcfZ9PVYR1BQ~ofsY_N_KDywcNM-Y0Io5aA~AvqaBtSnHxFfX7flAqux2Q6eYSIreLwDxnswabgPlEOXmoEXXt6u1O6In0hqICy8";
+        const string defaultBingMapsApiKey = "AkSuJ-YtW4VDvIzErxK3ke2ILQD1muWwS2KN2QvhqHobx4YBEIYqkEVBLyx1LYby";
         public const string DefaultFallbackMapsLocation = "40.762246,-73.986943";
 
         // Bots
@@ -50,11 +50,11 @@ namespace SmartHotel.Clients.Core
 
         static AppSettings()
         {           
-            defaultBookingEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/bookings";
-            defaultHotelsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/hotels-api";
-            defaultSuggestionsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/suggestions-api";
-            defaultNotificationsEndpoint = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/notifications-api";
-            defaultSettingsFileUrl = "http://myapp.b967f3ac20524797b96a.eastus.aksapp.io/configuration-api/cfg/public";
+            defaultBookingEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/bookings";
+            defaultHotelsEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/hotels-api";
+            defaultSuggestionsEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/suggestions-api";
+            defaultNotificationsEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/notifications-api";
+            defaultSettingsFileUrl = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/configuration-api/cfg/aks";
 		}
 
         // Azure B2C settings
