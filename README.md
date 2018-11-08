@@ -118,7 +118,7 @@ There is a detailed step-by-step demo script in the [demoscripts](https://github
 
 1. In order to have live data working and enable room controls you must setup the [IoT Demo Backend](https://github.com/Microsoft/SmartHotel360-IoT)
 2. Get `roomDevicesApiEndpoint` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomDevicesEndpoint` in AppSettings.cs.
-3. Get `room11SpaceId` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomId` in AppSettings.cs.
+3. Get `mobileRoomSpaceId` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomId` in AppSettings.cs.
 4. Ensure that the property `defaultUseFakes` = false in AppSettings.cs
 
 ## Licenses
