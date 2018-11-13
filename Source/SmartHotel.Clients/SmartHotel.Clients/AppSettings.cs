@@ -41,9 +41,6 @@ namespace SmartHotel.Clients.Core
 
 		// Room Devices
 	    const string defaultRoomId = "";
-        const string defaultThermostatDeviceId = "Room11Thermostat";
-        const string defaultLightDeviceId = "Room11Light";
-
 
         // Fakes
         const bool defaultUseFakes = false;
