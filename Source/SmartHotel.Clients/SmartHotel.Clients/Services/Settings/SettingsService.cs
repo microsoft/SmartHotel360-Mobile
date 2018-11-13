@@ -26,8 +26,6 @@ namespace SmartHotel.Clients.Core.Services.Settings
             settings.Others.FallbackMapsLocation = AppSettings.FallbackMapsLocation;
             settings.Bot.SkypeId = AppSettings.SkypeBotId;
 	        settings.RoomDevices.RoomId = AppSettings.RoomId;
-            settings.RoomDevices.ThermostatDeviceId = AppSettings.ThermostatDeviceId;
-            settings.RoomDevices.LightDeviceId = AppSettings.LightDeviceId;
 
             return Task.FromResult(settings);
         }
@@ -50,8 +48,6 @@ namespace SmartHotel.Clients.Core.Services.Settings
             AppSettings.FallbackMapsLocation = remote.Others.FallbackMapsLocation;
             AppSettings.SkypeBotId = remote.Bot.SkypeId;
 	        AppSettings.RoomId = remote.RoomDevices.RoomId;
-            AppSettings.ThermostatDeviceId = remote.RoomDevices.ThermostatDeviceId;
-            AppSettings.LightDeviceId = remote.RoomDevices.LightDeviceId;
 
             return Task.FromResult(false);
         }

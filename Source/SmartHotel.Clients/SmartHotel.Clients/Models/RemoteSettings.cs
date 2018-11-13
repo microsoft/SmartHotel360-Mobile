@@ -82,8 +82,6 @@ namespace SmartHotel.Clients.Core.Models
 	    public class RoomDevicesData
 	    {
 			public string RoomId { get; set; }
-            public string ThermostatDeviceId { get; set; }
-            public string LightDeviceId { get; set; }
         }
     }
 }

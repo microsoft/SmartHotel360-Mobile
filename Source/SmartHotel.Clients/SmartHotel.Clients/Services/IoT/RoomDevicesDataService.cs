@@ -25,8 +25,6 @@ namespace SmartHotel.Clients.Core.Services.IoT
             _currentSensorDataBySensorDataType = new ConcurrentDictionary<SensorDataType, DeviceSensorData>();
         private readonly List<DeviceDesiredData> _desiredData = new List<DeviceDesiredData>();
 
-        private readonly string _thermostatDeviceId;
-        private readonly string _lightDeviceId;
         private readonly string _roomId;
 
 	    private int _startPollingRequestCount = 0;
@@ -44,8 +42,6 @@ namespace SmartHotel.Clients.Core.Services.IoT
                     throw new Exception($"{nameof(AppSettings)}.{nameof(AppSettings.RoomId)} must be specified.");
                 }
                 _roomId = AppSettings.RoomId;
-                _thermostatDeviceId = AppSettings.ThermostatDeviceId;
-                _lightDeviceId = AppSettings.LightDeviceId;
 
             }
         }
@@ -157,7 +153,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
 
         public async Task UpdateDesiredAsync(float desiredTemperature, SensorDataType sensorDataType)
         {
-            if (!_currentSensorDataBySensorDataType.TryGetValue(sensorDataType, out var deviceData))
+            if (!_currentSensorDataBySensorDataType.TryGetValue(sensorDataType, out DeviceSensorData deviceData))
                 return;
 
             var builder = new UriBuilder(_roomDevicesApiEndpoint);
@@ -165,16 +161,13 @@ namespace SmartHotel.Clients.Core.Services.IoT
             var uri = builder.ToString();
 
             string methodName;
-            string deviceId;
             switch (sensorDataType)
             {
                 case SensorDataType.Temperature:
                     methodName = "SetDesiredTemperature";
-                    deviceId = _thermostatDeviceId;
                     break;
                 case SensorDataType.Light:
                     methodName = "SetDesiredAmbientLight";
-                    deviceId = _lightDeviceId;
                     break;
                 default:
                     throw new NotSupportedException(sensorDataType.ToString());
@@ -184,7 +177,7 @@ namespace SmartHotel.Clients.Core.Services.IoT
             {
                 RoomId = deviceData.RoomId,
                 SensorId = deviceData.SensorId,
-                DeviceId = deviceId,
+                DeviceId = deviceData.IoTHubDeviceId,
                 MethodName = methodName,
                 Value = desiredTemperature.ToString(CultureInfo.InvariantCulture)
             };
