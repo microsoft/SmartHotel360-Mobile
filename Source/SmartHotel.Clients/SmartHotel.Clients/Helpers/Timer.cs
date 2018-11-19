@@ -41,7 +41,7 @@ namespace SmartHotel.Clients.Core.Helpers
 
 	    public void Stop()
 	    {
-		    Interlocked.Exchange(ref _cancellation, null).Cancel();
+		    Interlocked.Exchange(ref _cancellation, null)?.Cancel();
 	    }
     }
 }
