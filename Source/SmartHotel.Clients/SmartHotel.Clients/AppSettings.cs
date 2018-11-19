@@ -180,17 +180,5 @@ namespace SmartHotel.Clients.Core
 		    get => Preferences.Get(nameof(RoomId), defaultRoomId);
 		    set => Preferences.Set(nameof(RoomId), value);
 	    }
-
-        public static string ThermostatDeviceId
-        {
-            get => Preferences.Get(nameof(ThermostatDeviceId), defaultThermostatDeviceId);
-            set => Preferences.Set(nameof(ThermostatDeviceId), value);
-        }
-
-        public static string LightDeviceId
-        {
-            get => Preferences.Get(nameof(LightDeviceId), defaultLightDeviceId);
-            set => Preferences.Set(nameof(LightDeviceId), value);
-        }
     }
 }
