@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SmartHotel.Clients.Core.Models
 {
@@ -20,8 +16,10 @@ namespace SmartHotel.Clients.Core.Models
 	    public string SensorReading { get; set; }
 	    [DataMember(Name = "sensorDataType")]
 	    public string SensorDataType { get; set; }
-	    [DataMember(Name = "EventTimestamp")]
+	    [DataMember(Name = "eventTimestamp")]
 	    public DateTime EventTimestamp { get; set; }
+	    [DataMember( Name = "iotHubDeviceId" )]
+	    public string IoTHubDeviceId { get; set; }
     }
 
     [DataContract(Name = "deviceSensorData")]

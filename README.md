@@ -7,7 +7,7 @@ We are happy to announce the release of SmartHotel360. This release intends to s
 # SmartHotel360 Repos
 For this reference app scenario, we built several consumer and line-of-business apps and an Azure backend. You can find all SmartHotel360 repos in the following locations:
 
-* [SmartHotel360 ](https://github.com/Microsoft/SmartHotel360)
+* [SmartHotel360](https://github.com/Microsoft/SmartHotel360)
 * [IoT](https://github.com/Microsoft/SmartHotel360-IoT)
 * [Backend](https://github.com/Microsoft/SmartHotel360-Backend)
 * [Website](https://github.com/Microsoft/SmartHotel360-Website)
@@ -118,7 +118,7 @@ There is a detailed step-by-step demo script in the [demoscripts](https://github
 
 1. In order to have live data working and enable room controls you must setup the [IoT Demo Backend](https://github.com/Microsoft/SmartHotel360-IoT)
 2. Get `roomDevicesApiEndpoint` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomDevicesEndpoint` in AppSettings.cs.
-3. Get `room11SpaceId` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomId` in AppSettings.cs.
+3. Get `demoRoomSpaceId` from the `userSettings.json` file, generated when setting up the IoT Demo in #1, and change the value of `defaultRoomId` in AppSettings.cs.
 4. Ensure that the property `defaultUseFakes` = false in AppSettings.cs
 
 ## Licenses

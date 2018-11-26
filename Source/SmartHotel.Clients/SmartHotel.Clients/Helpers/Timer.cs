@@ -13,7 +13,7 @@ namespace SmartHotel.Clients.Core.Helpers
 
 	    private CancellationTokenSource _cancellation;
 
-        public bool IsRunning => !_cancellation.IsCancellationRequested;
+        public bool IsRunning => _cancellation != null && !_cancellation.IsCancellationRequested;
 
 	    public Timer(TimeSpan timespan, Action callback, bool isRecurring = false)
 	    {
@@ -25,6 +25,11 @@ namespace SmartHotel.Clients.Core.Helpers
 
 	    public void Start()
 	    {
+		    if (_cancellation == null)
+		    {
+			    Interlocked.Exchange(ref _cancellation, new CancellationTokenSource());
+		    }
+
 		    CancellationTokenSource cts = _cancellation; // safe copy
 		    Device.StartTimer(_timespan,
 			    () => {
@@ -36,7 +41,7 @@ namespace SmartHotel.Clients.Core.Helpers
 
 	    public void Stop()
 	    {
-		    Interlocked.Exchange(ref _cancellation, new CancellationTokenSource()).Cancel();
+		    Interlocked.Exchange(ref _cancellation, null)?.Cancel();
 	    }
     }
 }
