@@ -13,6 +13,7 @@ namespace SmartHotel.Clients.Droid.Renderers
     public class CustomNavigationPageRenderer : NavigationPageRenderer
     {
         IPageController PageController => Element as IPageController;
+        CustomNavigationPage CustomNavigationPage => Element as CustomNavigationPage;
 
         public CustomNavigationPageRenderer(Context context) : base(context)
         {
@@ -21,7 +22,9 @@ namespace SmartHotel.Clients.Droid.Renderers
 
         protected override void OnLayout(bool changed, int l, int t, int r, int b)
         {
+            CustomNavigationPage.IgnoreLayoutChange = true;
             base.OnLayout(changed, l, t, r, b);
+            CustomNavigationPage.IgnoreLayoutChange = false;
 
             var containerHeight = b - t;
 

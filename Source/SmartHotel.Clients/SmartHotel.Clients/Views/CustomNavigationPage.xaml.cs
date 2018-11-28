@@ -22,5 +22,13 @@ namespace SmartHotel.Clients.Core.Views
                 ? Color.White
                 : color;
         }
+
+        public bool IgnoreLayoutChange { get; set; } = false;
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            if (!IgnoreLayoutChange)
+                base.OnSizeAllocated(width, height);
+        }
     }
 }
