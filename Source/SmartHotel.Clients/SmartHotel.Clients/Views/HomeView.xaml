@@ -452,6 +452,7 @@
                 </Grid>
             </Grid>
             <ActivityIndicator 
+                AutomationId="activityindicator"
                 Color="{StaticResource AccentColor}"
                 IsRunning="{Binding IsBusy}" 
                 IsVisible="{Binding IsBusy}" />

@@ -1,11 +1,10 @@
-﻿using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
+﻿using System;
+using System.Linq;
 
 namespace SmartHotel.Clients.UITests.Pages
 {
     public class HomePage : BasePage
     {
-        readonly Query navigationMenuButton;
-
         protected override PlatformQuery Trait => new PlatformQuery
         {
             Android = x => x.Marked("home"),
@@ -14,23 +13,21 @@ namespace SmartHotel.Clients.UITests.Pages
 
         public HomePage()
         {
-            if (OnAndroid)
-            {
-                navigationMenuButton = x => x.Marked("OK");
-            }
+            App.WaitForNoElement(x => x.Marked("activityindicator"));
         }
 
         public HomePage OpenNavigationMenu()
         {
-            if (OnAndroid)
-            {
-                App.Tap(navigationMenuButton);
-                App.Screenshot("Navigation Menu Open");
-            }
-            if (OniOS)
-            {
-                App.SwipeLeftToRight();
-            }
+            var deviceScreenRect = App.Query().FirstOrDefault().Rect;
+
+            int fromX = 0;
+            int fromY = Convert.ToInt32(deviceScreenRect.Height * 0.4);
+            int toX = Convert.ToInt32(deviceScreenRect.Width * 0.6);
+            int toY = Convert.ToInt32(deviceScreenRect.Height * 0.6);
+
+            App.DragCoordinates(fromX, fromY, toX, toY);
+
+            App.Screenshot("Navigation Menu Open");
 
             return this;
         }
