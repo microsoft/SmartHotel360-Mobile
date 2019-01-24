@@ -44,4 +44,4 @@ echo "#### Starting UI Test project build..."
 msbuild $UITestProject /t:build /p:Configuration=Release
 
 echo "#### Starting test run..."
-appcenter test run uitest --app $APPCENTER_PROJECT_NAME --devices $DEVICES --app-path $APPCENTER_OUTPUT_DIRECTORY/com.microsoft.smarthotel.ipa  --test-series "master" --locale "en_US" --build-dir $APPCENTER_SOURCE_DIRECTORY/Source/SmartHotel.Clients.UITests/bin/Release --uitest-tools-dir $UI_TEST_TOOLS_DIR --token $TOKEN --async
+appcenter test run uitest --app $APPCENTER_PROJECT_NAME --devices $DEVICES --app-path $APPCENTER_OUTPUT_DIRECTORY/SmartHotel.Clients.iOS.ipa  --test-series "master" --locale "en_US" --build-dir $APPCENTER_SOURCE_DIRECTORY/Source/SmartHotel.Clients.UITests/bin/Release --uitest-tools-dir $UI_TEST_TOOLS_DIR --token $TOKEN --async
