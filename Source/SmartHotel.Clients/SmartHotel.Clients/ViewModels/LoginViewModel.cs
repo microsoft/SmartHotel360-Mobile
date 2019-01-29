@@ -96,7 +96,7 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
             catch(ConnectivityException)
             {
-                await DialogService.ShowAlertAsync("There is no Internet conection, try again later.", "Error", "Ok");
+                await DialogService.ShowAlertAsync("There is no Internet connection, try again later.", "Error", "Ok");
             }
             catch(Exception)
             {
