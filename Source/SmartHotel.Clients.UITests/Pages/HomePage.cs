@@ -21,7 +21,7 @@ namespace SmartHotel.Clients.UITests.Pages
             var deviceScreenRect = App.Query().FirstOrDefault().Rect;
 
             int fromX = 0;
-            int fromY = Convert.ToInt32(deviceScreenRect.Height * 0.4);
+            int fromY = Convert.ToInt32(deviceScreenRect.Height * 0.6);
             int toX = Convert.ToInt32(deviceScreenRect.Width * 0.6);
             int toY = Convert.ToInt32(deviceScreenRect.Height * 0.6);
 
