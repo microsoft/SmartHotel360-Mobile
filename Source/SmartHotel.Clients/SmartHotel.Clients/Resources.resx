@@ -321,4 +321,7 @@
   <data name="DeactivateEcoMode" xml:space="preserve">
     <value>Deactivate Eco Mode</value>
   </data>
+  <data name="IoTError_DataType" xml:space="preserve">
+    <value>Unable to update desired {0}.</value>
+  </data>
 </root>

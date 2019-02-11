@@ -10,7 +10,6 @@
 
 namespace SmartHotel.Clients.Core {
     using System;
-    using System.Reflection;
     
     
     /// <summary>
@@ -40,7 +39,7 @@ namespace SmartHotel.Clients.Core {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartHotel.Clients.Core.Resources", typeof(Resources).GetTypeInfo().Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartHotel.Clients.Core.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -391,6 +390,15 @@ namespace SmartHotel.Clients.Core {
         internal static string Information {
             get {
                 return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to update desired {0}..
+        /// </summary>
+        internal static string IoTError_DataType {
+            get {
+                return ResourceManager.GetString("IoTError_DataType", resourceCulture);
             }
         }
         
