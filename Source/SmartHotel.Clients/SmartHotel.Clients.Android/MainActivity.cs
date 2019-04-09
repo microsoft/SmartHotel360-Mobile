@@ -4,7 +4,6 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Util;
 using Android.Views;
-using CarouselView.FormsPlugin.Android;
 using Microsoft.Identity.Client;
 using Rg.Plugins.Popup;
 using Rg.Plugins.Popup.Services;
@@ -16,6 +15,7 @@ using SmartHotel.Clients.Droid.Services.Authentication;
 using SmartHotel.Clients.Droid.Services.CardEmulation;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using CarouselViewRenderer = CarouselView.FormsPlugin.Android.CarouselViewRenderer;
 
 namespace SmartHotel.Clients.Droid
 {
