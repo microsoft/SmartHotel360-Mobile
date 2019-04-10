@@ -39,7 +39,7 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.5.880-pre" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.5.880-pre" />
-    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.4.168" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
     <PackageReference Include="Xamanimation" Version="1.2.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="3.6.0.293080" />

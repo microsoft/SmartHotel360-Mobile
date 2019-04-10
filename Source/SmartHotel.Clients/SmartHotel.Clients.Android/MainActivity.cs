@@ -13,6 +13,7 @@ using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.ViewModels.Base;
 using SmartHotel.Clients.Droid.Services.Authentication;
 using SmartHotel.Clients.Droid.Services.CardEmulation;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using CarouselViewRenderer = CarouselView.FormsPlugin.Android.CarouselViewRenderer;
@@ -128,7 +129,8 @@ namespace SmartHotel.Clients.Droid
 
         public override void OnBackPressed()
         {
-            if (Popup.SendBackPressed(base.OnBackPressed))
+            if (Popup.SendBackPressed(base.OnBackPressed) && 
+                PopupNavigation.Instance.PopupStack.Any())
             {
                 PopupNavigation.Instance.PopAllAsync(true);
             }

@@ -8,6 +8,7 @@ using SmartHotel.Clients.Core.Services.Authentication;
 using SmartHotel.Clients.Core.Services.Analytic;
 using SmartHotel.Clients.Core.Models;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace SmartHotel.Clients.Core.ViewModels
 {
@@ -53,6 +54,16 @@ namespace SmartHotel.Clients.Core.ViewModels
             }
         }
 
-        Task ClosePopupAsync() => PopupNavigation.Instance.PopAllAsync(true);
+        Task ClosePopupAsync()
+        {
+            if (PopupNavigation.Instance.PopupStack.Any())
+            {
+                return PopupNavigation.Instance.PopAllAsync(true);
+            }
+            else
+            {
+                return Task.CompletedTask;
+            }
+        }
     }
 }
