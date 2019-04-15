@@ -15,8 +15,8 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             new City
             {
                 Id = 1,
-                Name = "Barcelona",
-                Country = "Spain",
+                Name = "Seattle",
+                Country = "United States",
             },
             new City
             {
@@ -27,8 +27,8 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             new City
             {
                 Id = 3,
-                Name = "Seattle",
-                Country = "United States"
+                Name = "Barcelona",
+                Country = "Spain"
             }
         };
 
@@ -37,7 +37,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             new Models.Hotel
             {
                 Id = 1,
-                CityId = 1,
+                CityId = 3,
                 Name = "Secret Camp Hotel",
                 Picture = Device.RuntimePlatform == Device.UWP ? "Assets/img_1.png" : "img_1",
                 City = "Barcelona, Spain",
@@ -85,7 +85,7 @@ namespace SmartHotel.Clients.Core.Services.Hotel
             new Models.Hotel
             {
                 Id = 3,
-                CityId = 3,
+                CityId = 1,
                 Name = "Elite Hotel",
                 Picture = Device.RuntimePlatform == Device.UWP ? "Assets/img_3.png" : "img_3",
                 City = "Seattle, United States",
