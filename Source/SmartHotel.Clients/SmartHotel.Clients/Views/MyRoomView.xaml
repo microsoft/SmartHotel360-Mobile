@@ -1,173 +1,138 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
+<ContentPage
+    x:Class="SmartHotel.Clients.Core.Views.MyRoomView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="SmartHotel.Clients.Core.Views.MyRoomView"    
-    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core" 
-    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation" 
-    xmlns:utils="clr-namespace:SmartHotel.Clients.Core.Utils;assembly=SmartHotel.Clients.Core"    
+    xmlns:controls="clr-namespace:SmartHotel.Clients.Core.Controls;assembly=SmartHotel.Clients.Core"
     xmlns:extensions="clr-namespace:SmartHotel.Clients.Core.MarkupExtensions"
-    Title="503"
+    xmlns:utils="clr-namespace:SmartHotel.Clients.Core.Utils;assembly=SmartHotel.Clients.Core"
+    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+    Title="101"
     utils:NavigationBarAttachedProperty.TextColor="{StaticResource WhiteColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
 
-            <xamanimation:StoryBoard 
-                x:Key="FloatingActionButtonInitialAnimation"         
-                Target="{x:Reference FloatingActionButton}">
+            <xamanimation:StoryBoard x:Key="FloatingActionButtonInitialAnimation" Target="{x:Reference FloatingActionButton}">
                 <xamanimation:TranslateToAnimation TranslateY="600" Duration="0" />
-                <xamanimation:TranslateToAnimation TranslateY="0" Easing="SpringOut" Duration="800" />
+                <xamanimation:TranslateToAnimation
+                    Easing="SpringOut"
+                    TranslateY="0"
+                    Duration="800" />
             </xamanimation:StoryBoard>
 
-            <xamanimation:StoryBoard 
-                x:Key="AmbientAnimation"    
-                Target="{x:Reference AmbientPanel}">
-                <xamanimation:FadeToAnimation  Opacity="0" Duration="0" />
+            <xamanimation:StoryBoard x:Key="AmbientAnimation" Target="{x:Reference AmbientPanel}">
+                <xamanimation:FadeToAnimation Opacity="0" Duration="0" />
                 <xamanimation:TranslateToAnimation TranslateX="600" Duration="0" />
                 <xamanimation:FadeToAnimation Opacity="1" Duration="150" />
-                <xamanimation:TranslateToAnimation TranslateX="0" Easing="SpringOut" Duration="200" />
+                <xamanimation:TranslateToAnimation
+                    Easing="SpringOut"
+                    TranslateX="0"
+                    Duration="200" />
             </xamanimation:StoryBoard>
 
-            <xamanimation:StoryBoard 
-                x:Key="NeedAnimation"    
-                Target="{x:Reference NeedPanel}">
-                <xamanimation:FadeToAnimation  Opacity="0" Duration="0" />
+            <xamanimation:StoryBoard x:Key="NeedAnimation" Target="{x:Reference NeedPanel}">
+                <xamanimation:FadeToAnimation Opacity="0" Duration="0" />
                 <xamanimation:TranslateToAnimation TranslateX="600" Duration="0" />
                 <xamanimation:FadeToAnimation Opacity="1" Duration="150" />
-                <xamanimation:TranslateToAnimation TranslateX="0" Easing="SpringOut" Duration="200" />
+                <xamanimation:TranslateToAnimation
+                    Easing="SpringOut"
+                    TranslateX="0"
+                    Duration="200" />
             </xamanimation:StoryBoard>
 
-            <xamanimation:StoryBoard 
-                x:Key="FindAnimation"    
-                Target="{x:Reference FindPanel}">
-                <xamanimation:FadeToAnimation  Opacity="0" Duration="0" />
+            <xamanimation:StoryBoard x:Key="FindAnimation" Target="{x:Reference FindPanel}">
+                <xamanimation:FadeToAnimation Opacity="0" Duration="0" />
                 <xamanimation:TranslateToAnimation TranslateX="600" Duration="0" />
                 <xamanimation:FadeToAnimation Opacity="1" Duration="150" />
-                <xamanimation:TranslateToAnimation TranslateX="0" Easing="SpringOut" Duration="200" />
+                <xamanimation:TranslateToAnimation
+                    Easing="SpringOut"
+                    TranslateX="0"
+                    Duration="200" />
             </xamanimation:StoryBoard>
 
-            <Style x:Key="TabTextStyle" 
-                   TargetType="Label"
-                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
-                <Setter Property="TextColor" 
-                        Value="{StaticResource BlackTextColor}" />
-                <Setter Property="FontSize" 
-                        Value="{StaticResource MidMediumSize}" />
-                <Setter Property="HorizontalTextAlignment" 
-                        Value="Center" />
-                <Setter Property="HorizontalOptions" 
-                        Value="Center" />
-                <Setter Property="VerticalOptions" 
-                        Value="Center" />
-                <Setter Property="Margin" 
-                        Value="8, 0" />
+            <Style
+                x:Key="TabTextStyle"
+                BasedOn="{StaticResource PoppinsRegularLabelStyle}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlackTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MidMediumSize}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="8, 0" />
             </Style>
 
-            <Style x:Key="AmbientTextStyle" 
-                   TargetType="Label"
-                   BasedOn="{StaticResource TabTextStyle}">
-                <Setter Property="HorizontalTextAlignment" 
-                        Value="Start" />
-                <Setter Property="HorizontalOptions" 
-                        Value="Start" />
-                <Setter Property="Margin" 
-                        Value="12, 2, 0, 0" />
+            <Style
+                x:Key="AmbientTextStyle"
+                BasedOn="{StaticResource TabTextStyle}"
+                TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="12, 2, 0, 0" />
             </Style>
 
-	        <Style x:Key="CurrentValueTextStyle"
-	               TargetType="Label"
-	               BasedOn="{StaticResource TabTextStyle}">
-		        <Setter Property="HorizontalTextAlignment"
-		                Value="Start" />
-		        <Setter Property="HorizontalOptions"
-		                Value="Start" />
-		        <Setter Property="Margin"
-		                Value="2, 2, 0, 0" />
-	        </Style>
+            <Style
+                x:Key="CurrentValueTextStyle"
+                BasedOn="{StaticResource TabTextStyle}"
+                TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="2, 2, 0, 0" />
+            </Style>
 
             <Style TargetType="controls:CustomSlider">
-                <Setter Property="HorizontalOptions" 
-                        Value="Center" />
-                <Setter Property="Margin" 
-                        Value="12, 0" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="12, 0" />
             </Style>
 
             <Color x:Key="AccentMyRoomColor">#378D93</Color>
             <Color x:Key="TabSeparatorColor">#F4F5F5</Color>
 
-            <Style x:Key="TabSeparatorStyle" 
-                   TargetType="Label">
-                <Setter Property="BackgroundColor" 
-                        Value="{StaticResource TabSeparatorColor}" />
-                <Setter Property="HeightRequest" 
-                        Value="1" />
-                <Setter Property="VerticalOptions" 
-                        Value="End" />
+            <Style x:Key="TabSeparatorStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource TabSeparatorColor}" />
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="VerticalOptions" Value="End" />
             </Style>
 
-            <Style x:Key="SelectedTabStyle" 
-                   TargetType="Label">
-                <Setter Property="BackgroundColor" 
-                        Value="{StaticResource AccentMyRoomColor}" />
-                <Setter Property="HeightRequest" 
-                        Value="2" />
-                <Setter Property="VerticalOptions" 
-                        Value="End" />
-                <Setter Property="Margin" 
-                        Value="12, 1" />
+            <Style x:Key="SelectedTabStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentMyRoomColor}" />
+                <Setter Property="HeightRequest" Value="2" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="12, 1" />
             </Style>
 
-            <Style x:Key="CheckoutPanelStyle" 
-                   TargetType="Grid">
-                <Setter Property="HeightRequest" 
-                        Value="60" />
-                <Setter Property="VerticalOptions" 
-                        Value="End" />
-                <Setter Property="Margin" 
-                        Value="12, 0" />
+            <Style x:Key="CheckoutPanelStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Margin" Value="12, 0" />
             </Style>
 
-            <Style x:Key="DisturbTextStyle" 
-                   TargetType="Label"
-                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
-                <Setter Property="TextColor" 
-                        Value="{StaticResource WhiteColor}" />
-                <Setter Property="VerticalOptions" 
-                        Value="Center" />
-                <Setter Property="Margin" 
-                        Value="2, 0" />
+            <Style
+                x:Key="DisturbTextStyle"
+                BasedOn="{StaticResource PoppinsRegularLabelStyle}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="2, 0" />
             </Style>
 
-            <Style x:Key="DisturbToggleButtonStyle" 
-                   TargetType="controls:ToggleButton">
-                <Setter Property="Animate" 
-                        Value="false" />
-                <Setter Property="VerticalOptions" 
-                        Value="Center" />
-                <Setter Property="HorizontalOptions" 
-                        Value="Start" />
-                <Setter Property="HeightRequest" 
-                        Value="30" />
+            <Style x:Key="DisturbToggleButtonStyle" TargetType="controls:ToggleButton">
+                <Setter Property="Animate" Value="false" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="HeightRequest" Value="30" />
             </Style>
 
-            <Style x:Key="CheckoutImageStyle" 
-                   TargetType="Image">
-                <Setter Property="HorizontalOptions" 
-                        Value="End" />
-                <Setter Property="VerticalOptions" 
-                        Value="Center" />
-                <Setter Property="Margin" 
-                        Value="6, 12" />
-                <Setter Property="HeightRequest" 
-                        Value="30" />
+            <Style x:Key="CheckoutImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="6, 12" />
+                <Setter Property="HeightRequest" Value="30" />
             </Style>
 
-            <Style x:Key="BotImageStyle" 
-                   TargetType="Image">
-                <Setter Property="HorizontalOptions" 
-                        Value="End" />
-                <Setter Property="VerticalOptions" 
-                        Value="End" />
+            <Style x:Key="BotImageStyle" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="End" />
                 <Setter Property="Margin">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="Thickness">
@@ -186,23 +151,19 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="EcoTextStyle" 
-                   TargetType="Label"
-                   BasedOn="{StaticResource PoppinsRegularLabelStyle}">
-                <Setter Property="TextColor" 
-                        Value="{StaticResource WhiteColor}" />
-                <Setter Property="HorizontalOptions" 
-                        Value="Center" />
-                <Setter Property="VerticalOptions" 
-                        Value="Center" />
+            <Style
+                x:Key="EcoTextStyle"
+                BasedOn="{StaticResource PoppinsRegularLabelStyle}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem 
-            Text="Open door"
-            Command="{Binding OpenDoorCommand}">
+        <ToolbarItem Command="{Binding OpenDoorCommand}" Text="Open door">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="Android, iOS" Value="ic_card" />
@@ -213,30 +174,23 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Triggers>
         <EventTrigger Event="Appearing">
-            <xamanimation:BeginAnimation   
-                Animation="{StaticResource FloatingActionButtonInitialAnimation}" />
+            <xamanimation:BeginAnimation Animation="{StaticResource FloatingActionButtonInitialAnimation}" />
         </EventTrigger>
     </ContentPage.Triggers>
     <ContentPage.Content>
-        <Grid
-            RowSpacing="0">
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <controls:iOSStatusBarBackground 
-                Grid.Row="0"/>
-            <Grid 
-                Grid.Row="1">
-                <Grid
-                    RowSpacing="0">
+            <controls:iOSStatusBarBackground Grid.Row="0" />
+            <Grid Grid.Row="1">
+                <Grid RowSpacing="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3.2*" />
                         <RowDefinition Height="6.8*" />
                     </Grid.RowDefinitions>
-                    <Image 
-                        Grid.Row="0"
-                        Aspect="AspectFill">
+                    <Image Grid.Row="0" Aspect="AspectFill">
                         <Image.Source>
                             <OnPlatform x:TypeArguments="ImageSource">
                                 <On Platform="Android, iOS" Value="hero_image_room" />
@@ -244,20 +198,18 @@
                             </OnPlatform>
                         </Image.Source>
                     </Image>
-                    <Grid 
-                        Grid.Row="0"
-                        BackgroundColor="#293849"
-                        Opacity="0.6"/>
                     <Grid
                         Grid.Row="0"
-                        Style="{StaticResource CheckoutPanelStyle}">
+                        BackgroundColor="#293849"
+                        Opacity="0.6" />
+                    <Grid Grid.Row="0" Style="{StaticResource CheckoutPanelStyle}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="48" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <controls:ToggleButton 
+                        <controls:ToggleButton
                             Grid.Column="0"
                             Checked="{Binding NoDisturb, Mode=TwoWay}"
                             Style="{StaticResource DisturbToggleButtonStyle}">
@@ -274,16 +226,13 @@
                                 </OnPlatform>
                             </controls:ToggleButton.UnCheckedImage>
                         </controls:ToggleButton>
-                        <Label 
+                        <Label
                             Grid.Column="1"
-                            Text="Do not disturb"
-                            Style="{StaticResource DisturbTextStyle}"/>
-                        <Image 
-                            Grid.Column="2" 
-                            Style="{StaticResource CheckoutImageStyle}">
+                            Style="{StaticResource DisturbTextStyle}"
+                            Text="Do not disturb" />
+                        <Image Grid.Column="2" Style="{StaticResource CheckoutImageStyle}">
                             <Image.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding CheckoutCommand}" />
+                                <TapGestureRecognizer Command="{Binding CheckoutCommand}" />
                             </Image.GestureRecognizers>
                             <Image.Source>
                                 <OnPlatform x:TypeArguments="ImageSource">
@@ -292,20 +241,17 @@
                                 </OnPlatform>
                             </Image.Source>
                         </Image>
-                        <Label 
+                        <Label
                             Grid.Column="3"
-                            Text="{extensions:Translate Checkout}"  
                             HorizontalOptions="End"
-                            Style="{StaticResource DisturbTextStyle}">
+                            Style="{StaticResource DisturbTextStyle}"
+                            Text="{extensions:Translate Checkout}">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding CheckoutCommand}" />
+                                <TapGestureRecognizer Command="{Binding CheckoutCommand}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </Grid>
-                    <Grid 
-                        Grid.Row="1" 
-                        BackgroundColor="{StaticResource WhiteColor}">
+                    <Grid Grid.Row="1" BackgroundColor="{StaticResource WhiteColor}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -315,111 +261,92 @@
                             <RowDefinition Height="62" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Label Style="{StaticResource TabTextStyle}" Text="{extensions:Translate AmbientSettings}">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Ambient}"
+                                        TargetType="Label"
+                                        Value="true">
+                                        <Setter Property="TextColor" Value="{StaticResource AccentMyRoomColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Grid Style="{StaticResource TabSeparatorStyle}" />
+                            <Grid IsVisible="{Binding Ambient}" Style="{StaticResource SelectedTabStyle}" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AmbientCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Label Style="{StaticResource TabTextStyle}" Text="What do you need">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Need}"
+                                        TargetType="Label"
+                                        Value="true">
+                                        <Setter Property="TextColor" Value="{StaticResource AccentMyRoomColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Grid Style="{StaticResource TabSeparatorStyle}" />
+                            <Grid IsVisible="{Binding Need}" Style="{StaticResource SelectedTabStyle}" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NeedCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <Grid Grid.Row="0" Grid.Column="2">
+                            <Label Style="{StaticResource TabTextStyle}" Text="{extensions:Translate FindRoom}">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Find}"
+                                        TargetType="Label"
+                                        Value="true">
+                                        <Setter Property="TextColor" Value="{StaticResource AccentMyRoomColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Grid Style="{StaticResource TabSeparatorStyle}" />
+                            <Grid IsVisible="{Binding Find}" Style="{StaticResource SelectedTabStyle}" />
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding FindCommand}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
                         <Grid
+                            Grid.Row="1"
                             Grid.Column="0"
-                            Grid.Row="0">
-                            <Label   
-                                Text="{extensions:Translate AmbientSettings}"  
-                                Style="{StaticResource TabTextStyle}">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding Ambient}" Value="true" >
-                                        <Setter Property="TextColor" Value="{StaticResource AccentMyRoomColor}" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                            <Grid 
-                                Style="{StaticResource TabSeparatorStyle}"/>
-                            <Grid   
-                                IsVisible="{Binding Ambient}"
-                                Style="{StaticResource SelectedTabStyle}"/>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding AmbientCommand}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                        <Grid
-                            Grid.Column="1"  
-                            Grid.Row="0">
-                            <Label
-                                Text="What do you need" 
-                                Style="{StaticResource TabTextStyle}">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding Need}" Value="true" >
-                                        <Setter Property="TextColor" Value="{StaticResource AccentMyRoomColor}" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                            <Grid 
-                                Style="{StaticResource TabSeparatorStyle}"/>
-                            <Grid  
-                                IsVisible="{Binding Need}"
-                                Style="{StaticResource SelectedTabStyle}"/>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                Command="{Binding NeedCommand}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                        <Grid
-                            Grid.Column="2"
-                            Grid.Row="0">
-                            <Label   
-                                Text="{extensions:Translate FindRoom}"  
-                                Style="{StaticResource TabTextStyle}">
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding Find}" Value="true" >
-                                        <Setter Property="TextColor" Value="{StaticResource AccentMyRoomColor}" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                            <Grid 
-                                Style="{StaticResource TabSeparatorStyle}"/>
+                            Grid.ColumnSpan="3">
                             <Grid
-                                IsVisible="{Binding Find}"
-                                Style="{StaticResource SelectedTabStyle}"/>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    Command="{Binding FindCommand}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
-                        <Grid
-                            Grid.Column="0"
-                            Grid.ColumnSpan="3"
-                            Grid.Row="1">
-                            <Grid  
                                 x:Name="AmbientPanel"
                                 IsVisible="{Binding Ambient}"
                                 Opacity="0">
                                 <Grid.Triggers>
                                     <Trigger TargetType="Grid" Property="Grid.IsVisible" Value="True">
                                         <Trigger.EnterActions>
-                                            <xamanimation:BeginAnimation
-                                                Animation="{StaticResource AmbientAnimation}" />
+                                            <xamanimation:BeginAnimation Animation="{StaticResource AmbientAnimation}" />
                                         </Trigger.EnterActions>
                                     </Trigger>
                                 </Grid.Triggers>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
-									<RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="50" />
                                 </Grid.RowDefinitions>
-                                <ScrollView
-                                    Grid.Row="0">
-                                    <StackLayout 
+                                <ScrollView Grid.Row="0">
+                                    <StackLayout
                                         Grid.Row="0"
-                                        Spacing="0"
-                                        Padding="10">
-	                                    <StackLayout Orientation="Horizontal">
-		                                    <Label Text="{extensions:Translate AmbientLight, StringFormat='{0}:'}"
-		                                           Style="{StaticResource AmbientTextStyle}"/>
-		                                    <Label Text="{Binding CurrentAmbientLight, Converter={StaticResource AmbientLightValueConverter}}"
-		                                           Style="{StaticResource CurrentValueTextStyle}"/>
-	                                    </StackLayout>
+                                        Padding="10"
+                                        Spacing="0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Style="{StaticResource AmbientTextStyle}" Text="{extensions:Translate AmbientLight, StringFormat='{0}:'}" />
+                                            <Label Style="{StaticResource CurrentValueTextStyle}" Text="{Binding CurrentAmbientLight, Converter={StaticResource AmbientLightValueConverter}}" />
+                                        </StackLayout>
                                         <controls:CustomSlider
                                             x:Name="AmbientLightSlider"
+                                            DisplayConverter="{StaticResource AmbientLightValueConverter}"
                                             Maximum="{Binding AmbientLightMaximum}"
                                             Minimum="{Binding AmbientLightMinimum}"
-                                            Value="{Binding DesiredAmbientLight, Mode=TwoWay}"
-                                            DisplayConverter="{StaticResource AmbientLightValueConverter}">
+                                            Value="{Binding DesiredAmbientLight, Mode=TwoWay}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="bg_slider_01" />
@@ -432,28 +359,26 @@
                                                     <On Platform="UWP" Value="Assets/thumb_slider.png" />
                                                 </OnPlatform>
                                             </controls:CustomSlider.ThumbImage>
-											<VisualStateManager.VisualStateGroups>
-												<VisualStateGroup x:Name="CommonStates">
-													<VisualState x:Name="Disabled">
-														<VisualState.Setters>
-															<Setter Property="Opacity" Value="0.3"/>
-														</VisualState.Setters>
-													</VisualState>
-												</VisualStateGroup>
-											</VisualStateManager.VisualStateGroups>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Disabled">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Opacity" Value="0.3" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
                                         </controls:CustomSlider>
-	                                    <StackLayout Orientation="Horizontal">
-		                                    <Label Text="{extensions:Translate Temperature, StringFormat='{0}:'}"
-		                                           Style="{StaticResource AmbientTextStyle}"/>
-		                                    <Label Text="{Binding CurrentTemperature, Converter={StaticResource TemperatureValueConverter}}"
-		                                           Style="{StaticResource CurrentValueTextStyle}"/>
-	                                    </StackLayout>
-										<controls:CustomSlider
-											x:Name="TemperatureSlider"
-											Maximum="{Binding TemperatureMaximum}"
-											Minimum="{Binding TemperatureMinimum}"
-                                            Value="{Binding DesiredTemperature, Mode=TwoWay}"
-                                            DisplayConverter="{StaticResource TemperatureValueConverter}">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Style="{StaticResource AmbientTextStyle}" Text="{extensions:Translate Temperature, StringFormat='{0}:'}" />
+                                            <Label Style="{StaticResource CurrentValueTextStyle}" Text="{Binding CurrentTemperature, Converter={StaticResource TemperatureValueConverter}}" />
+                                        </StackLayout>
+                                        <controls:CustomSlider
+                                            x:Name="TemperatureSlider"
+                                            DisplayConverter="{StaticResource TemperatureValueConverter}"
+                                            Maximum="{Binding TemperatureMaximum}"
+                                            Minimum="{Binding TemperatureMinimum}"
+                                            Value="{Binding DesiredTemperature, Mode=TwoWay}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="bg_slider_02" />
@@ -466,24 +391,25 @@
                                                     <On Platform="UWP" Value="Assets/thumb_slider.png" />
                                                 </OnPlatform>
                                             </controls:CustomSlider.ThumbImage>
-											<VisualStateManager.VisualStateGroups>
-												<VisualStateGroup x:Name="CommonStates">
-													<VisualState x:Name="Disabled">
-														<VisualState.Setters>
-															<Setter Property="Opacity"
-															        Value="0.3"/>
-														</VisualState.Setters>
-													</VisualState>
-												</VisualStateGroup>
-											</VisualStateManager.VisualStateGroups>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Disabled">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Opacity" Value="0.3" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
                                         </controls:CustomSlider>
-										<Label IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
-											   Text="{extensions:Translate MusicVolume}"  
-											   Style="{StaticResource AmbientTextStyle}"/>
-										<controls:CustomSlider IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
-															   Maximum="100"
-															   Minimum="0"
-															   Value="{Binding MusicVolume, Mode=TwoWay}">
+                                        <Label
+                                            IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
+                                            Style="{StaticResource AmbientTextStyle}"
+                                            Text="{extensions:Translate MusicVolume}" />
+                                        <controls:CustomSlider
+                                            IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
+                                            Maximum="100"
+                                            Minimum="0"
+                                            Value="{Binding MusicVolume, Mode=TwoWay}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="bg_slider_03" />
@@ -497,13 +423,15 @@
                                                 </OnPlatform>
                                             </controls:CustomSlider.ThumbImage>
                                         </controls:CustomSlider>
-										<Label IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
-											   Text="{extensions:Translate WindowBlinds}"  
-                                               Style="{StaticResource AmbientTextStyle}"/>
-										<controls:CustomSlider IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
-															   Maximum="100"
-															   Minimum="0"
-															   Value="{Binding WindowBlinds, Mode=TwoWay}">
+                                        <Label
+                                            IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
+                                            Style="{StaticResource AmbientTextStyle}"
+                                            Text="{extensions:Translate WindowBlinds}" />
+                                        <controls:CustomSlider
+                                            IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
+                                            Maximum="100"
+                                            Minimum="0"
+                                            Value="{Binding WindowBlinds, Mode=TwoWay}">
                                             <controls:CustomSlider.BackgroundImage>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="bg_slider_04" />
@@ -519,33 +447,23 @@
                                         </controls:CustomSlider>
                                     </StackLayout>
                                 </ScrollView>
-	                            <Label Text="Enable room controls by configuring the Room Devices Endpoint"
-									   WidthRequest="275"
-									   Style="{StaticResource TabTextStyle}"
-									   HorizontalTextAlignment="Center"
-									   HorizontalOptions="Center"
-	                                   Grid.Row="1"
-									   IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"/>
-								<Grid   
+                                <Label
+                                    Grid.Row="1"
+                                    HorizontalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    IsVisible="{Binding UseRealRoomDevices, Converter={StaticResource InverseBoolConverter}}"
+                                    Style="{StaticResource TabTextStyle}"
+                                    Text="Enable room controls by configuring the Room Devices Endpoint"
+                                    WidthRequest="275" />
+                                <Grid
                                     Grid.Row="2"
-                                    BackgroundColor="{StaticResource GreenColor}" 
+                                    BackgroundColor="{StaticResource GreenColor}"
                                     IsVisible="{Binding IsEcoMode, Converter={StaticResource InverseBoolConverter}}">
-									<VisualStateManager.VisualStateGroups>
-										<VisualStateGroup x:Name="CommonStates">
-											<VisualState x:Name="Disabled">
-												<VisualState.Setters>
-													<Setter Property="Opacity"
-													        Value="0.3" />
-												</VisualState.Setters>
-											</VisualState>
-										</VisualStateGroup>
-									</VisualStateManager.VisualStateGroups>
-									<StackLayout
-                                        Orientation="Horizontal"
-                                        HorizontalOptions="Center">
-                                        <Image
-                                            Aspect="AspectFit"
-                                            Margin="12">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding EcoModeCommand}" />
+                                    </Grid.GestureRecognizers>
+                                    <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                                        <Image Margin="12" Aspect="AspectFit">
                                             <Image.Source>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="ic_be_green.png" />
@@ -553,35 +471,27 @@
                                                 </OnPlatform>
                                             </Image.Source>
                                         </Image>
-                                        <Label  
-                                            Text="{extensions:Translate ActivateEcoMode}"  
-                                            Style="{StaticResource EcoTextStyle}"/>
+                                        <Label Style="{StaticResource EcoTextStyle}" Text="{extensions:Translate ActivateEcoMode}" />
                                     </StackLayout>
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding EcoModeCommand}" />
-                                    </Grid.GestureRecognizers>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Disabled">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Opacity" Value="0.3" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
                                 </Grid>
-                                <Grid   
+                                <Grid
                                     Grid.Row="2"
                                     BackgroundColor="{StaticResource DarkGrayColor}"
-									  IsVisible="{Binding IsEcoMode}">
-	                                <VisualStateManager.VisualStateGroups>
-		                                <VisualStateGroup x:Name="CommonStates">
-			                                <VisualState x:Name="Disabled">
-				                                <VisualState.Setters>
-					                                <Setter Property="Opacity"
-					                                        Value="0.3" />
-				                                </VisualState.Setters>
-			                                </VisualState>
-		                                </VisualStateGroup>
-	                                </VisualStateManager.VisualStateGroups>
-									<StackLayout
-                                        Orientation="Horizontal"
-                                        HorizontalOptions="Center">
-                                        <Image
-                                            Aspect="AspectFit"
-                                            Margin="12">
+                                    IsVisible="{Binding IsEcoMode}">
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding EcoModeCommand}" />
+                                    </Grid.GestureRecognizers>
+                                    <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                                        <Image Margin="12" Aspect="AspectFit">
                                             <Image.Source>
                                                 <OnPlatform x:TypeArguments="ImageSource">
                                                     <On Platform="Android, iOS" Value="ic_be_green.png" />
@@ -589,28 +499,30 @@
                                                 </OnPlatform>
                                             </Image.Source>
                                         </Image>
-                                        <Label  
-                                            Text="{extensions:Translate DeactivateEcoMode}"  
-                                            Style="{StaticResource EcoTextStyle}"/>
+                                        <Label Style="{StaticResource EcoTextStyle}" Text="{extensions:Translate DeactivateEcoMode}" />
                                     </StackLayout>
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding EcoModeCommand}" />
-                                    </Grid.GestureRecognizers>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Disabled">
+                                                <VisualState.Setters>
+                                                    <Setter Property="Opacity" Value="0.3" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
                                 </Grid>
                             </Grid>
                             <Grid
                                 x:Name="NeedPanel"
-                                Margin="0, 5, 0, 0"
-                                IsVisible="{Binding Need}"
+                                Margin="0,5,0,0"
                                 HorizontalOptions="Fill"
-                                VerticalOptions="Start"
-                                Opacity="0">
+                                IsVisible="{Binding Need}"
+                                Opacity="0"
+                                VerticalOptions="Start">
                                 <Grid.Triggers>
                                     <Trigger TargetType="Grid" Property="Grid.IsVisible" Value="True">
                                         <Trigger.EnterActions>
-                                            <xamanimation:BeginAnimation
-                                                Animation="{StaticResource NeedAnimation}" />
+                                            <xamanimation:BeginAnimation Animation="{StaticResource NeedAnimation}" />
                                         </Trigger.EnterActions>
                                     </Trigger>
                                 </Grid.Triggers>
@@ -625,13 +537,17 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <controls:ToggleButton 
+                                <controls:ToggleButton
+                                    Grid.Row="0"
                                     Grid.Column="1"
-                                    Grid.Row="0"   
-                                    Checked="False"
-                                    Animate="True">
+                                    Animate="True"
+                                    Checked="False">
                                     <controls:ToggleButton.WidthRequest>
-                                        <OnIdiom x:TypeArguments="x:Double" Desktop="150" Phone="110" Tablet="150" />
+                                        <OnIdiom
+                                            x:TypeArguments="x:Double"
+                                            Desktop="150"
+                                            Phone="110"
+                                            Tablet="150" />
                                     </controls:ToggleButton.WidthRequest>
                                     <controls:ToggleButton.CheckedImage>
                                         <OnPlatform x:TypeArguments="ImageSource">
@@ -646,13 +562,17 @@
                                         </OnPlatform>
                                     </controls:ToggleButton.UnCheckedImage>
                                 </controls:ToggleButton>
-                                <controls:ToggleButton  
+                                <controls:ToggleButton
+                                    Grid.Row="0"
                                     Grid.Column="2"
-                                    Grid.Row="0" 
-                                    Checked="False"
-                                    Animate="True">
+                                    Animate="True"
+                                    Checked="False">
                                     <controls:ToggleButton.WidthRequest>
-                                        <OnIdiom x:TypeArguments="x:Double" Desktop="150" Phone="110" Tablet="150" />
+                                        <OnIdiom
+                                            x:TypeArguments="x:Double"
+                                            Desktop="150"
+                                            Phone="110"
+                                            Tablet="150" />
                                     </controls:ToggleButton.WidthRequest>
                                     <controls:ToggleButton.CheckedImage>
                                         <OnPlatform x:TypeArguments="ImageSource">
@@ -667,13 +587,17 @@
                                         </OnPlatform>
                                     </controls:ToggleButton.UnCheckedImage>
                                 </controls:ToggleButton>
-                                <controls:ToggleButton 
+                                <controls:ToggleButton
+                                    Grid.Row="0"
                                     Grid.Column="3"
-                                    Grid.Row="0"  
-                                    Checked="False"
-                                    Animate="True">
+                                    Animate="True"
+                                    Checked="False">
                                     <controls:ToggleButton.WidthRequest>
-                                        <OnIdiom x:TypeArguments="x:Double" Desktop="150" Phone="110" Tablet="150" />
+                                        <OnIdiom
+                                            x:TypeArguments="x:Double"
+                                            Desktop="150"
+                                            Phone="110"
+                                            Tablet="150" />
                                     </controls:ToggleButton.WidthRequest>
                                     <controls:ToggleButton.CheckedImage>
                                         <OnPlatform x:TypeArguments="ImageSource">
@@ -688,14 +612,18 @@
                                         </OnPlatform>
                                     </controls:ToggleButton.UnCheckedImage>
                                 </controls:ToggleButton>
-                                <controls:ToggleButton  
+                                <controls:ToggleButton
                                     x:Name="Toggle"
+                                    Grid.Row="1"
                                     Grid.Column="1"
-                                    Grid.Row="1"      
-                                    Checked="False"
-                                    Animate="True">
+                                    Animate="True"
+                                    Checked="False">
                                     <controls:ToggleButton.WidthRequest>
-                                        <OnIdiom x:TypeArguments="x:Double" Desktop="150" Phone="110" Tablet="150" />
+                                        <OnIdiom
+                                            x:TypeArguments="x:Double"
+                                            Desktop="150"
+                                            Phone="110"
+                                            Tablet="150" />
                                     </controls:ToggleButton.WidthRequest>
                                     <controls:ToggleButton.CheckedImage>
                                         <OnPlatform x:TypeArguments="ImageSource">
@@ -716,8 +644,7 @@
                                 IsVisible="{Binding Need}"
                                 Style="{StaticResource BotImageStyle}">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding OpenBotCommand}" />
+                                    <TapGestureRecognizer Command="{Binding OpenBotCommand}" />
                                 </Image.GestureRecognizers>
                                 <Image.Source>
                                     <OnPlatform x:TypeArguments="ImageSource">
@@ -726,27 +653,33 @@
                                     </OnPlatform>
                                 </Image.Source>
                             </Image>
-                            <Grid 
+                            <Grid
                                 x:Name="FindPanel"
                                 IsVisible="{Binding Find}"
                                 Opacity="0">
                                 <Grid.Triggers>
                                     <Trigger TargetType="Grid" Property="Grid.IsVisible" Value="True">
                                         <Trigger.EnterActions>
-                                            <xamanimation:BeginAnimation
-                                                Animation="{StaticResource FindAnimation}" />
+                                            <xamanimation:BeginAnimation Animation="{StaticResource FindAnimation}" />
                                         </Trigger.EnterActions>
                                     </Trigger>
                                 </Grid.Triggers>
-                                <Image
-                                    Aspect="AspectFill">
+                                <Image Aspect="AspectFill">
                                     <Image.Source>
                                         <OnIdiom x:TypeArguments="ImageSource">
                                             <OnIdiom.Phone>
-                                                <OnPlatform x:TypeArguments="ImageSource" iOS="map" Android="map" WinPhone="Assets/map.png" />
+                                                <OnPlatform
+                                                    x:TypeArguments="ImageSource"
+                                                    Android="map"
+                                                    WinPhone="Assets/map.png"
+                                                    iOS="map" />
                                             </OnIdiom.Phone>
                                             <OnIdiom.Desktop>
-                                                <OnPlatform x:TypeArguments="ImageSource" iOS="map" Android="map" WinPhone="Assets/map_desktop.png" />
+                                                <OnPlatform
+                                                    x:TypeArguments="ImageSource"
+                                                    Android="map"
+                                                    WinPhone="Assets/map_desktop.png"
+                                                    iOS="map" />
                                             </OnIdiom.Desktop>
                                         </OnIdiom>
                                     </Image.Source>
@@ -755,10 +688,10 @@
                         </Grid>
                     </Grid>
                 </Grid>
-                <ActivityIndicator 
-                    Color="{StaticResource AccentColor}"
-                    IsRunning="{Binding IsBusy}" 
-                    IsVisible="{Binding IsBusy}" />
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="{StaticResource AccentColor}" />
             </Grid>
         </Grid>
     </ContentPage.Content>

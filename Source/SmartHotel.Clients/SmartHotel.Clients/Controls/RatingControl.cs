@@ -1,5 +1,4 @@
-﻿using FFImageLoading.Forms;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace SmartHotel.Clients.Core.Controls
