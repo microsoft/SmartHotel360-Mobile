@@ -68,7 +68,7 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;ENABLE_TEST_CLOUD;</DefineConstants>
   </PropertyGroup>
