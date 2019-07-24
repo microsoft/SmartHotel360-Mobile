@@ -26,7 +26,8 @@ namespace SmartHotel.Clients.UITests
         {
             new LogInPage()
                 .EnterCredentials(string.Empty, string.Empty)
-                .SignIn();   
+                .SignIn()
+                .CheckThereIsNoNavigation();
         }
 
         [Test]

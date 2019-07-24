@@ -19,7 +19,6 @@ namespace SmartHotel.Clients.UITests.Pages
             emailField = x => x.Marked("username");
             passwordField = x => x.Marked("password");
             signInButton = x => x.Marked("signin");
-
         }
 
         public LogInPage EnterCredentials(string username, string password)
@@ -38,9 +37,18 @@ namespace SmartHotel.Clients.UITests.Pages
             return this;
         }
 
-        public void SignIn()
+        public LogInPage SignIn()
         {
             App.Tap(signInButton);
+
+            return this;
+        }
+
+        public void CheckThereIsNoNavigation()
+        {
+            App.WaitForElement(emailField);
+            App.WaitForElement(passwordField);
+            App.WaitForElement(signInButton);
         }
     }
 }
