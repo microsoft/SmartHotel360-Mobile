@@ -45,13 +45,15 @@ namespace SmartHotel.Clients.Core
         // Fakes
         const bool defaultUseFakes = false;
 
+        const string root = "https://backend.smarthotel360.com/";
+
         static AppSettings()
-        {           
-            defaultBookingEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/bookings";
-            defaultHotelsEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/hotels-api";
-            defaultSuggestionsEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/suggestions-api";
-            defaultNotificationsEndpoint = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/notifications-api";
-            defaultSettingsFileUrl = "http://sh360production.2c3abf6edd44497688b2.westus.aksapp.io/configuration-api/cfg/aks";
+        {
+            defaultBookingEndpoint = $"{root}bookings";
+            defaultHotelsEndpoint = $"{root}hotels-api";
+            defaultSuggestionsEndpoint = $"{root}suggestions-api";
+            defaultNotificationsEndpoint = $"{root}notifications-api";
+            defaultSettingsFileUrl = $"{root}configuration-api/cfg/aks";
 		}
 
         // Azure B2C settings
