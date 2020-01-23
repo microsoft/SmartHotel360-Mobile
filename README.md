@@ -1,3 +1,7 @@
+# **The project SmartHotel360 have been retired, we have archived it. It is no longer maintained. You still can fork the repository.**
+
+## For the latest sample references visit: https://aka.ms/tailwindtraders & https://aka.ms/rpsls 
+
 # SmartHotel360
 
 During our **Connect(); 2017** event this year we presented beautiful app demos using Xamarin.
@@ -15,14 +19,6 @@ For this reference app scenario, we built several consumer and line-of-business 
 - [Mobile](https://github.com/Microsoft/SmartHotel360-Mobile)
 - [Sentiment Analysis](https://github.com/Microsoft/SmartHotel360-SentimentAnalysis)
 - [Registration](https://github.com/Microsoft/SmartHotel360-Registration)
-
-You can also download the mobile apps connected to our public endpoints in your devices following these links:
-
-* [![Build status](https://build.appcenter.ms/v0.1/apps/3dfdc914-1b68-46aa-83c0-d89aa1a8c728/branches/master/badge)](https://appcenter.ms) [SmartHotel360 Android Client App](https://aka.ms/smarthotel360android) 
-* [![Build status](https://build.appcenter.ms/v0.1/apps/27f92278-1c34-40c3-815c-adb5d6355165/branches/master/badge)](https://appcenter.ms) [SmartHotel360 iOS Client App](https://install.appcenter.ms/orgs/appcenterdemos/apps/smarthotel360ios/distribution_groups/public)
-* [![Build status](https://build.appcenter.ms/v0.1/apps/2a0e7f37-0864-47c2-b053-756affd51f99/branches/master/badge)](https://appcenter.ms) [SmartHotel360 UWP Client App](https://aka.ms/smarthotel360uwp) 
-* [![Build status](https://build.appcenter.ms/v0.1/apps/9f75cc13-cc2e-4350-baaa-6913c6116848/branches/master/badge)](https://appcenter.ms) [SmartHotel360 NFC Android App](https://aka.ms/smarthotel360nfc) 
-* [![Build status](https://build.appcenter.ms/v0.1/apps/e9e59729-c5a3-49ff-a92a-5ae9c3b5fb72/branches/master/badge)](https://appcenter.ms) [SmartHotel360 iOS Maintenance App](https://aka.ms/smarthotel360maintenance)
 
 **Note:** This document is about the apps using **Xamarin**.
 
