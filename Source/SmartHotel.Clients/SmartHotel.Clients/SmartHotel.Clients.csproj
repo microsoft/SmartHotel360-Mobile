@@ -5,13 +5,10 @@
     <AssemblyName>SmartHotel.Clients.Core</AssemblyName>
     <RootNamespace>SmartHotel.Clients.Core</RootNamespace>
     <Configurations>Debug;Release;UI Test;UI-Test</Configurations>
+    <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UI Test|AnyCPU'">
     <DefineConstants>TRACE;IS_UI_TEST;</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugType>Full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\GreetingMessage.txt" />
